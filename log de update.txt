@@ -1,0 +1,8 @@
+01/11 - 23h46 (Gabriel) -----
+- Novo dashboard
+	- Alterado posts, agora são exibidos dinâmicamente
+	- Adicionado sessão
+	- Adicionado botão deslogar que mata sessão e redireciona para index.html
+- Index alterado pra .jsp
+- Verificação de sessão na index, caso tenha sessão redireciona para o dashboard
+----------------------------- 
