@@ -71,7 +71,7 @@
                         <form name="form-cadastrar" class="col s11 z-depth-3 grey lighten-4 div-form" id="form-cadastrar" action="Cadastrar" method="POST">
                             <div id="form-cadastro">
                                 <div class="row row-titulo">
-                                    <h3 class="indigo-text">Cadastrar</h3>
+                                    <h3 class="indigo-text">Cadastro</h3>
                                 </div>
 
                                 <div class="row">
