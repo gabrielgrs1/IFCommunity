@@ -6,3 +6,9 @@
 - Index alterado pra .jsp
 - Verificação de sessão na index, caso tenha sessão redireciona para o dashboard
 ----------------------------- 
+
+02/11 - 08h22 (Gabriel) -----
+- Atualizado CSS (Só a parte Gabriel)
+- Criada funcionalidade criar novo usuário (Apenas front-end)
+- 
+----------------------------- 
