@@ -1,22 +1,27 @@
 function trocaTela(botao, formularioOut, formularioIn, formularioIn2, formularioLimpa) {
-    function limpaFormulario(formulario) {
-        $(formulario).each(function () {
-            this.reset();
-        });
-    }
+    // function limpaFormulario(formulario) {
+    //     for (var index = 0; index < formulario.lenght; index++) {
+    //         $(formulario[index]).text('');
+            
+    //     }
+        
+    //     $(formulario).each(function () {
+    //         $(formulario).reset();
+    //     });
+    // }
 
     $(botao).click(
             function (e) {
                 e.preventDefault();
-                $(formularioOut).fadeToggle(300);
+                $(formularioOut).fadeOut(300);
 
                 setTimeout(function () {
-                    $(formularioIn).fadeToggle(300);
-                    $(formularioIn2).fadeToggle(300);
+                    $(formularioIn).fadeIn(300);
+                    $(formularioIn2).fadeIn(300);
                 },
-                        300
-                        );
-                limpaFormulario(formularioLimpa);
+                300
+                );
+                // limpaFormulario(formularioLimpa);
             }
     );
 }
