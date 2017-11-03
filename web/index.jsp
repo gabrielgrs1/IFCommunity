@@ -78,6 +78,7 @@
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='nome' id='nome' maxlength="60" required/>
                                         <label for='nome'>Nome</label>
+                                        <span id="erro-nome"></span>
                                     </div>
 
                                     <div class='input-field col s12'>

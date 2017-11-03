@@ -116,6 +116,16 @@ h4 {
     margin-bottom: 0;
 }
 
+#body-login #erro-nome {
+    font-size: 12px;
+    color: red;
+    font-weight: 800;
+    float: left;
+    position: absolute;
+    left: 6px;
+    top: 58px;
+}
+
 
 /*-----------------------------------------------------*/
 
