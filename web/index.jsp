@@ -77,13 +77,15 @@
                                 <div class="row">
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='nome' id='nome' maxlength="60" required/>
-                                        <label for='nome'>Nome</label>
-                                        <span id="erro-nome"></span>
+                                        <label id="nome-cadastro" for='nome'>Nome</label>
+                                        <span id="erro-nome" class="erro-span"></span>
                                     </div>
 
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='tel' name='telefone' id='telefone' maxlength="18" required/>
-                                        <label for='telefone'>Telefone</label>
+                                        <input class='validate' type='text' name='telefone' id='telefone' maxlength="18" required/>
+                                        <label id="telefone-cadastro" for='telefone'>Telefone</label>
+                                        <span id="erro-telefone" class="erro-span"></span>
+
                                     </div>
                                     <div class='input-field col s9'>
                                         <input class='validate' type='text' name='matricula' id='matricula' maxlength="15" required/>

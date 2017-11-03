@@ -116,12 +116,15 @@ h4 {
     margin-bottom: 0;
 }
 
-#body-login #erro-nome {
+#body-login .erro-span {
     font-size: 12px;
     color: red;
     font-weight: 800;
     float: left;
     position: absolute;
+}
+
+#erro-nome {
     left: 6px;
     top: 58px;
 }
