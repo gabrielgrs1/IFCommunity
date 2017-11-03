@@ -29,7 +29,7 @@
     <body id="body-login">
         <div class="container">
             <div class="row">
-                <div class="col s6">
+                <div id="div-titulo" class="col s6">
                     <h2 id="titulo1">Compartilhe códigos na comunidade IF</h2>
                     <h4 id="titulo2">Plataforma desenvolvida para compartilhar códigos de todos as discilpinas</h4>
                 </div>
@@ -142,8 +142,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <!-- Import Login JS -->
         <script src="js/login.js"></script>
-
-
     </body>
-
 </html>
