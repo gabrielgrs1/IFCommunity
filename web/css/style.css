@@ -19,6 +19,14 @@
     }
 }
 
+@media screen and (min-height: 700px) {
+    #body-login .container {
+        margin: 11% auto;
+    }
+}
+
+
+
 body {
     margin: 0;
     padding: 0;
