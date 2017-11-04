@@ -1,0 +1,1 @@
+Colocar a pasta mysql no diretório C:\xampp
