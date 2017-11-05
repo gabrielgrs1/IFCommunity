@@ -23,7 +23,9 @@
         display: none !important;
     }
 
-    #body-login #form-login, #body-login #form-cadastrar {
+    #body-login #form-login, 
+    #body-login #form-cadastrar, 
+    #body-login #form-esqueci-senha {
         width: 200%;
         margin: 15% auto;
     }
