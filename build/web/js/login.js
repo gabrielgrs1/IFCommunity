@@ -70,8 +70,9 @@ trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro", null);
 mensagemDeErro("#nome", "#erro-nome", /[^a-z$]/gi, "É permitido apenas letras");
 //mensagemDeErro("#telefone", "#erro-telefone", /[^0\d{2}9?\d{4}-?\d{4}]/, "Insira no formato 099 9 XXXX-XXXX");
 
-//Mostar a senha dos dois campos de senha
-mostrarSenha("#senha", "#mostrar-senha-login");
+//Mostar a senha dos inputs de senha
+mostrarSenha("#senha-login", "#mostrar-senha-login");
+mostrarSenha("#senha-cadastro", "#mostrar-senha-cadastro");
 
 //Mostrar mensagem de email enviado
 mostrarMensagemOnClick("#btn-esqueci-senha-submit", "#texto-enviado-email");

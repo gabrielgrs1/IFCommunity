@@ -53,9 +53,9 @@
 
                             <div class="row">
                                 <div class='input-field col s12'>
-                                    <input class='validate' type='password' name='senha' id='senha' />
+                                    <input class='validate' type='password' name='senha' id='senha-login' />
                                     <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
-                                    <label for='senha'>Senha</label>
+                                    <label for='senha-login'>Senha</label>
                                 </div>
 
                                 <label class="esqueci-minha-senha">
@@ -115,6 +115,7 @@
                                     <div class='input-field col s9'>
                                         <input class='validate' type='text' name='matricula' id='matricula' maxlength="15" required/>
                                         <label for='matricula'>Matrícula</label>
+                                        <span id="erro-matricula" class="erro-matricula"></span>
                                     </div>
                                     <div class='input-field col s3'>
                                         <input class='validate' type='number' name='periodo' id='periodo'
@@ -139,15 +140,18 @@
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='login-cadastro' id='login-cadastro' maxlength="20" required/>
                                         <label for='login-cadastro'>Usuário</label>
+                                        <span id="erro-usuario" class="erro-usuario"></span>
                                     </div>
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='password' name='senha' id='senha' maxlength="25" required/>
-                                        <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
-                                        <label for='senha'>Senha</label>
+                                        <input class='validate' type='password' name='senha' id='senha-cadastro' maxlength="25" required/>
+                                        <button type="button" id="mostrar-senha-cadastro" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
+                                        <label for='senha-cadastro'>Senha</label>
+                                        <span id="erro-senha" class="erro-senha"></span>
                                     </div>
                                     <div class='input-field col s12'>
                                         <input class='validate' type='email' name='email' id='email' maxlength="60" required/>
                                         <label for='email'>Email</label>
+                                        <span id="erro-email" class="erro-email"></span>
                                     </div>
                                 </div>
 
