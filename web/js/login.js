@@ -51,12 +51,12 @@ function mensagemDeErro(campo, span, regexp, mensagem) {
         if (this.value.match(regexp)) {
             $(this).val(this.value.replace(regexp, ''));
             $(span).text(mensagem);
-            $(span).css("display", "none");
+            $(span).hide();
             $(span).fadeIn(1000);
 
             setTimeout(function () {
-                $(span).fadeOut(2000);
-            }, 8000);
+                $(span).fadeOut(1000);
+            }, 7000);
 
         } else {
             $(span).text("");
@@ -86,8 +86,23 @@ function mostrarMensagemOnClick(botao, div) {
     });
 }
 
+//Função que mostra mensagem de erro
+function erroLogin() {
+    $('#login').val($('#login-hidden').text());
+    if ($('#erro-hiden').text() === 'Usuário incorreto!') {
+        console.log("teste usuário");
+        $('#erro-login').text($('#erro-hiden').text());
+        $('#erro-login').show();
+    } else if ($('#erro-hiden').text() === 'Senha incorreta!') {
+        console.log("teste senha");
+        $('#erro-senha-login').text($('#erro-hiden').text());
+        $('#erro-senha-login').show();
+    }
+}
+
 //Call functions
 mascarasDosInputs();
+erroLogin();
 
 //Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");

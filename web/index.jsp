@@ -3,6 +3,7 @@
      Created on : 01/11/2017, 23:35:32
      Author     : Gabriel Silva
 --%>
+<%@page import="java.util.ArrayList"%>
 <%
     String nomeUsuario = (String) request.getSession().getAttribute("nome");
     if (nomeUsuario != null) {
@@ -10,6 +11,7 @@
     }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
     <!-- USAR O .JSP E RENOMEAR ESSE INDEX QUANDO FOR EXECUTAR O PROJETO-->
@@ -27,6 +29,20 @@
 
 
     <body id="body-login">
+        <div class="campo-erro">
+            <%
+                List<String> erro = (List<String>) request.getAttribute("erros");
+                String login = (String) request.getAttribute("login");
+                for (String e : erro) {
+                    out.print("<span id='erro-hiden'>");
+                    out.print(e);
+                    out.print("</span>");
+                    out.print("<span id='login-hidden'>");
+                    out.print(login);
+                    out.print("</span>");
+                }
+            %>
+        </div>
         <div class="container">
             <div class="row">
                 <div id="div-titulo" class="col s6">
@@ -47,6 +63,8 @@
                                 <div class='input-field col s12'>
                                     <input class='validate' type='text' name='login' id='login' />
                                     <label for='login'>Login ou email</label>
+                                    <span id="erro-login" class="erro-span"></span>
+
                                 </div>
                             </div>
 
@@ -55,6 +73,7 @@
                                     <input class='validate' type='password' name='senha' id='senha-login' />
                                     <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                     <label for='senha-login'>Senha</label>
+                                    <span id="erro-senha-login" class="erro-span"></span>
                                 </div>
 
                                 <label class="esqueci-minha-senha">

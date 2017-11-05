@@ -157,7 +157,8 @@ h4 {
 #body-login #form-cadastro-2,
 #body-login #form-esqueci-senha,
 #body-login #erro-cadastro-proximo, 
-#body-login #erro-cadastro-final {
+#body-login #erro-cadastro-final,
+#body-login .campo-erro {
     display: none;
 }
 
