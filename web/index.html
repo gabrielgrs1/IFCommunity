@@ -13,7 +13,6 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
 
-
     <body id="body-login">
         <div class="container">
             <div class="row">
@@ -94,15 +93,15 @@
                                     </div>
 
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='text' name='telefone' id='telefone' maxlength="18" required/>
+                                        <input class='validate telefone-mask' type='text' name='telefone' id='telefone' maxlength="18" required/>
                                         <label id="telefone-cadastro" for='telefone'>Telefone</label>
                                         <span id="erro-telefone" class="erro-span"></span>
 
                                     </div>
                                     <div class='input-field col s9'>
-                                        <input class='validate' type='text' name='matricula' id='matricula' maxlength="15" required/>
+                                        <input class='validate matricula-mask' type='text' name='matricula' id='matricula' maxlength="14" required/>
                                         <label for='matricula'>Matrícula</label>
-                                        <span id="erro-matricula" class="erro-matricula"></span>
+                                        <span id="erro-matricula" class="erro-span"></span>
                                     </div>
                                     <div class='input-field col s3'>
                                         <input class='validate' type='number' name='periodo' id='periodo'
@@ -127,18 +126,18 @@
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='login-cadastro' id='login-cadastro' maxlength="20" required/>
                                         <label for='login-cadastro'>Usuário</label>
-                                        <span id="erro-usuario" class="erro-usuario"></span>
+                                        <span id="erro-usuario" class="erro-span"></span>
                                     </div>
                                     <div class='input-field col s12'>
                                         <input class='validate' type='password' name='senha' id='senha-cadastro' maxlength="25" required/>
                                         <button type="button" id="mostrar-senha-cadastro" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                         <label for='senha-cadastro'>Senha</label>
-                                        <span id="erro-senha" class="erro-senha"></span>
+                                        <span id="erro-senha" class="erro-span"></span>
                                     </div>
                                     <div class='input-field col s12'>
                                         <input class='validate' type='email' name='email' id='email' maxlength="60" required/>
                                         <label for='email'>Email</label>
-                                        <span id="erro-email" class="erro-email"></span>
+                                        <span id="erro-email" class="erro-span"></span>
                                     </div>
                                 </div>
 
@@ -157,6 +156,8 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <!-- Import Materialize JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <!-- Import jQuery Mask JS -->
+        <script src="js/jquery.mask.min.js"></script>
         <!-- Import Login JS -->
         <script src="js/login.js"></script>
     </body>

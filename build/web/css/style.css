@@ -169,12 +169,9 @@ h4 {
     color: red;
     font-weight: 800;
     float: left;
+    left: 2%;
+    top: 74%;
     position: absolute;
-}
-
-#body-login #erro-nome {
-    left: 6px;
-    top: 58px;
 }
 
 #body-login .btn-mostrar-senha {

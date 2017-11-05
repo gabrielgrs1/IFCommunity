@@ -1,3 +1,10 @@
+//Função que coloca mascaras nos inputs
+function mascarasDosInputs() {
+    $('.telefone-mask').mask('(000) 0 0000-0000');
+    $('.matricula-mask').mask('00000000000-0');
+}
+;
+
 
 //Função para exibir animações nos formulários
 function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
@@ -22,11 +29,13 @@ function mensagemDeErro(campo, span, regexp, mensagem) {
         if (this.value.match(regexp)) {
             $(this).val(this.value.replace(regexp, ''));
             $(span).text(mensagem);
+            $(span).css("display", "none");
+            $(span).fadeIn(1000);
 
+            setTimeout(function () {
+                $(span).fadeOut(2000);
+            }, 8000);
 
-            setInterval(function () {
-                $(span).fadeToggle(200);
-            }, 500);
         } else {
             $(span).text("");
         }
@@ -55,20 +64,25 @@ function mostrarMensagemOnClick(botao, div) {
 }
 
 //Call functions
-//
-//Tela esqueci minha senha
+
+//Chama função que insere mascara para os inputs
+mascarasDosInputs();
+
+//Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
 trocaTela("#btn-voltar-login", "#form-esqueci-senha", "#form-login", null);
 
-//Telas de cadastro
+//Chama função que troca de telas de cadastro
 trocaTela("#btn-criar-conta", "#form-login", "#form-cadastrar", "#form-cadastro");
 trocaTela("#btn-voltar", "#form-cadastrar", "#form-login", null);
 trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro", null);
 
-//Mensagem de erro campo nome cadastro
+//Chama função que exibe mensagem de erro embaixo dos campos
 mensagemDeErro("#nome", "#erro-nome", /[^a-z$]/gi, "É permitido apenas letras");
-//mensagemDeErro("#telefone", "#erro-telefone", /[^0\d{2}9?\d{4}-?\d{4}]/, "Insira no formato 099 9 XXXX-XXXX");
+mensagemDeErro("#matricula", "#erro-matricula", /[^\d{12}\-]/g, "É permitido apenas números");
+mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");
+;
 
 //Mostar a senha dos inputs de senha
 mostrarSenha("#senha-login", "#mostrar-senha-login");
