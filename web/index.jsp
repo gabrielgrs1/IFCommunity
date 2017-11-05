@@ -31,16 +31,22 @@
     <body id="body-login">
         <div class="campo-erro">
             <%
-                List<String> erro = (List<String>) request.getAttribute("erros");
+                String erro = (String) request.getAttribute("erros");
                 String login = (String) request.getAttribute("login");
-                for (String e : erro) {
+                System.out.println(login);
+                if (erro != null) {
                     out.print("<span id='erro-hiden'>");
-                    out.print(e);
+                    out.print(erro);
                     out.print("</span>");
+                }
+
+                if (login != null) {
                     out.print("<span id='login-hidden'>");
                     out.print(login);
                     out.print("</span>");
                 }
+
+
             %>
         </div>
         <div class="container">
