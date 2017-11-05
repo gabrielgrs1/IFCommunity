@@ -125,25 +125,25 @@
 
                                 <div class="row">
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='text' name='nome' id='nome' maxlength="60" required/>
+                                        <input class='validate' type='text' name='nome' id='nome' minlength="6" maxlength="60" required/>
                                         <label id="nome-cadastro" for='nome'>Nome</label>
                                         <span id="erro-nome" class="erro-span"></span>
                                     </div>
 
                                     <div class='input-field col s12'>
-                                        <input class='validate telefone-mask' type='text' name='telefone' id='telefone' maxlength="18" required/>
+                                        <input class='validate telefone-mask' type='text' name='telefone' minlength="17" id='telefone' maxlength="18" required/>
                                         <label id="telefone-cadastro" for='telefone'>Telefone</label>
                                         <span id="erro-telefone" class="erro-span"></span>
 
                                     </div>
                                     <div class='input-field col s9'>
-                                        <input class='validate matricula-mask' type='text' name='matricula' id='matricula' maxlength="14" required/>
+                                        <input class='validate matricula-mask' type='text' name='matricula' id='matricula' minlength="13"  maxlength="14" required/>
                                         <label for='matricula'>Matrícula</label>
                                         <span id="erro-matricula" class="erro-span"></span>
                                     </div>
                                     <div class='input-field col s3'>
                                         <input class='validate' type='number' name='periodo' id='periodo'
-                                               maxlength="1"   max='5' value='0' required/>
+                                               maxlength="2"  min="1" max='12' value='1' required/>
                                         <label for='periodo'>Período</label>
                                     </div>
                                 </div>
@@ -162,12 +162,12 @@
 
                                 <div class="row">
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='text' name='login-cadastro' id='login-cadastro' maxlength="20" required/>
+                                        <input class='validate' type='text' name='login-cadastro' id='login-cadastro' minlength="6" maxlength="20" required/>
                                         <label for='login-cadastro'>Usuário</label>
                                         <span id="erro-usuario" class="erro-span"></span>
                                     </div>
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='password' name='senha' id='senha-cadastro' maxlength="25" required/>
+                                        <input class='validate' type='password' name='senha' id='senha-cadastro' minlength="8" maxlength="25" required/>
                                         <button type="button" id="mostrar-senha-cadastro" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                         <label for='senha-cadastro'>Senha</label>
                                         <span id="erro-senha" class="erro-span"></span>

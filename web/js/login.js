@@ -125,7 +125,7 @@ trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 
 //Chama função que exibe mensagem de erro embaixo dos campos
-mensagemDeErro("#nome", "#erro-nome", /[^a-z$]/gi, "É permitido apenas letras");
+mensagemDeErro("#nome", "#erro-nome", /[^a-z\s$]/gi, "É permitido apenas letras");
 mensagemDeErro("#matricula", "#erro-matricula", /[^\d{12}\-]/g, "É permitido apenas números");
 mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");
 ;
