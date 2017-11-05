@@ -90,13 +90,23 @@ function mostrarMensagemOnClick(botao, div) {
 function erroLogin() {
     $('#login').val($('#login-hidden').text());
     if ($('#erro-hiden').text() === 'Usuário incorreto!') {
-        console.log("teste usuário");
+        $('#login').focus();
         $('#erro-login').text($('#erro-hiden').text());
         $('#erro-login').show();
+        $('#login').on('input', function () {
+            setInterval(function () {
+                $('#erro-login').fadeOut(2000);
+            }, 2000);
+        });
     } else if ($('#erro-hiden').text() === 'Senha incorreta!') {
-        console.log("teste senha");
+        $('#senha-login').focus();
         $('#erro-senha-login').text($('#erro-hiden').text());
         $('#erro-senha-login').show();
+        $('#senha-login').on('input', function () {
+            setInterval(function () {
+                $('#erro-senha-login').fadeOut(2000);
+            }, 2000);
+        });
     }
 }
 
