@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Aluno;
 import dao.AlunoDAO;
+import java.util.ArrayList;
 
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
@@ -20,19 +21,31 @@ public class Login extends HttpServlet {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
-        Aluno conta = null;
+        String erros = "";
         try {
-            conta = AlunoDAO.login(login, senha);
+            erros = AlunoDAO.verificaLoginSenha(login, senha);
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        Aluno conta = null;
+        if (erros == "") {
+            try {
+                conta = AlunoDAO.login(login, senha);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        request.setAttribute("erros", erros);
+        request.setAttribute("login", login);
 
         if (conta != null) {
             request.getSession().setAttribute("id", conta.getId());
             request.getSession().setAttribute("nome", conta.getLogin());
             response.sendRedirect("dashboard.jsp");
         } else {
-            request.getRequestDispatcher("index.jsp?erro=1").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

@@ -2,8 +2,7 @@
 function mascarasDosInputs() {
     $('.telefone-mask').mask('(000) 0 0000-0000');
     $('.matricula-mask').mask('00000000000-0');
-}
-;
+};
 
 
 //Função para exibir animações nos formulários
@@ -31,17 +30,17 @@ function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
     });
 
     $(botao).click(
-            function (e) {
-                e.preventDefault();
-                $(formularioOut).fadeOut(300);
+        function (e) {
+            e.preventDefault();
+            $(formularioOut).fadeOut(300);
 
-                setTimeout(function () {
+            setTimeout(function () {
                     $(formularioIn).fadeIn(300);
                     $(formularioIn2).fadeIn(300);
                 },
-                        300
-                        );
-            }
+                300
+            );
+        }
     );
 }
 
@@ -51,12 +50,12 @@ function mensagemDeErro(campo, span, regexp, mensagem) {
         if (this.value.match(regexp)) {
             $(this).val(this.value.replace(regexp, ''));
             $(span).text(mensagem);
-            $(span).css("display", "none");
+            $(span).hide();
             $(span).fadeIn(1000);
 
             setTimeout(function () {
-                $(span).fadeOut(2000);
-            }, 8000);
+                $(span).fadeOut(1000);
+            }, 7000);
 
         } else {
             $(span).text("");
@@ -81,13 +80,37 @@ function mostrarMensagemOnClick(botao, div) {
         $(div).text("Email enviado com sucesso, consulte sua caixa de email");
         setTimeout(function () {
             $(div).fadeOut(2000);
-        }
-        , 4000);
+        }, 4000);
     });
+}
+
+//Função que mostra mensagem de erro
+function erroLogin() {
+    $('#login').val($('#login-hidden').text());
+    if ($('#erro-hiden').text() === 'Usuário incorreto!') {
+        $('#login').focus();
+        $('#erro-login').text($('#erro-hiden').text());
+        $('#erro-login').show();
+        $('#login').on('input', function () {
+            setInterval(function () {
+                $('#erro-login').fadeOut(2000);
+            }, 2000);
+        });
+    } else if ($('#erro-hiden').text() === 'Senha incorreta!') {
+        $('#senha-login').focus();
+        $('#erro-senha-login').text($('#erro-hiden').text());
+        $('#erro-senha-login').show();
+        $('#senha-login').on('input', function () {
+            setInterval(function () {
+                $('#erro-senha-login').fadeOut(2000);
+            }, 2000);
+        });
+    }
 }
 
 //Call functions
 mascarasDosInputs();
+erroLogin();
 
 //Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
@@ -100,10 +123,9 @@ trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 
 //Chama função que exibe mensagem de erro embaixo dos campos
-mensagemDeErro("#nome", "#erro-nome", /[^a-z$]/gi, "É permitido apenas letras");
+mensagemDeErro("#nome", "#erro-nome", /[^a-z\s$]/gi, "É permitido apenas letras");
 mensagemDeErro("#matricula", "#erro-matricula", /[^\d{12}\-]/g, "É permitido apenas números");
-mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");
-;
+mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");;
 
 //Mostar a senha dos inputs de senha
 mostrarSenha("#senha-login", "#mostrar-senha-login");

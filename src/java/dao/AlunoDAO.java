@@ -116,6 +116,51 @@ public class AlunoDAO {
         return aluno;
     }
 
+    public static String verificaLoginSenha(String login, String senha) throws SQLException {
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+        String erros = "";
+
+        /* Comando SQL que será enviado ao banco */
+        String sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ?";
+
+        /* Prepara a consulta e passa os parametros */
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, login);
+
+        /* Executa a query e armazena o resultado na variavel rs */
+        rs = pstm.executeQuery();
+
+        /* Instancia um novo aluno para dar de retorno da função */
+        if (!rs.next()) {
+            erros = "Usuário incorreto!";
+        }
+
+        if (erros.isEmpty()) {
+            /* Comando SQL que será enviado ao banco */
+            sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ? AND SENHA = ?";
+
+            /* Prepara a consulta e passa os parametros */
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, login);
+            pstm.setString(2, senha);
+
+            /* Executa a query e armazena o resultado na variavel rs */
+            rs = pstm.executeQuery();
+
+            /* Instancia um novo aluno para dar de retorno da função */
+            if (!rs.next()) {
+                erros = "Senha incorreta!";
+            }
+        }
+
+        /* Fecha a conexão */
+        con.close();
+
+        return erros;
+    }
+
     public static void main(String[] args) throws SQLException {
         /*int rs = cadastro("Administrador", "(034) 99894-8551", "01858618657-1", "2", "admin", "admin", "gabriel_guilherme2006@hotmail.com");
         System.out.println("Foram alterados: " + rs + " registros");*/
