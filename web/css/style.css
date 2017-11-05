@@ -152,7 +152,8 @@ h4 {
 
 #body-login #form-cadastrar,
 #body-login #form-cadastro,
-#body-login #form-cadastro-2 {
+#body-login #form-cadastro-2,
+#body-login #form-esqueci-senha {
     display: none;
 }
 
@@ -186,6 +187,15 @@ h4 {
     left: 87%;
 }
 
+#body-login #form-esqueci-senha h3{
+    letter-spacing: 0;
+}
+
+#body-login #texto-enviado-email {
+    color: green;
+    font-size: 0.8em;
+    font-weight: bold;
+}
 /*-----------------------------------------------------*/
 
 /*-----------------------------------------------------*/

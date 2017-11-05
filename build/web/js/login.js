@@ -44,13 +44,34 @@ function mostrarSenha(inputSenha, botaoMostrar) {
     });
 }
 
+function mostrarMensagemOnClick(botao, div) {
+    $(botao).click(function () {
+        $(div).text("Email enviado com sucesso, consulte sua caixa de email");
+        setTimeout(function () {
+            $(div).fadeOut(2000);
+        }
+        , 4000);
+    });
+}
+
 //Call functions
+//
+//Tela esqueci minha senha
+trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
+trocaTela("#btn-voltar-login", "#form-esqueci-senha", "#form-login", null);
+
+//Telas de cadastro
 trocaTela("#btn-criar-conta", "#form-login", "#form-cadastrar", "#form-cadastro");
 trocaTela("#btn-voltar", "#form-cadastrar", "#form-login", null);
 trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro", null);
 
+//Mensagem de erro campo nome cadastro
 mensagemDeErro("#nome", "#erro-nome", /[^a-z$]/gi, "É permitido apenas letras");
 //mensagemDeErro("#telefone", "#erro-telefone", /[^0\d{2}9?\d{4}-?\d{4}]/, "Insira no formato 099 9 XXXX-XXXX");
 
+//Mostar a senha dos dois campos de senha
 mostrarSenha("#senha", "#mostrar-senha-login");
+
+//Mostrar mensagem de email enviado
+mostrarMensagemOnClick("#btn-esqueci-senha-submit", "#texto-enviado-email");
