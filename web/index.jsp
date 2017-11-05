@@ -151,6 +151,8 @@
                                         <input class='validate' type='email' name='email' id='email' maxlength="60" required/>
                                         <label for='email'>Email</label>
                                         <span id="erro-email" class="erro-span"></span>
+                                        <span id="erro-cadastro-proximo" class="erro-span">Preencha todos os campos da tela anterior corretamente!</span>
+                                        <span id="erro-cadastro-final" class="erro-span">Preencha todos os campos corretamente!</span>
                                     </div>
                                 </div>
 

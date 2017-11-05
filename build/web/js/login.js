@@ -8,6 +8,28 @@ function mascarasDosInputs() {
 
 //Função para exibir animações nos formulários
 function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
+
+    var telaAnteriorValidada = false;
+    $("#btn-cadastrar").click(function () {
+        if ($('#nome').val() === '' || $('#telefone').val() === '' || $('#matricula').val() === '') {
+            $('#erro-cadastro-proximo').show();
+            telaAnteriorValidada = false;
+        }
+    });
+
+    $("#btn-cadastrar-proximo").click(function () {
+        if ($('#nome').val() !== '' && $('#telefone').val() !== '' && $('#matricula').val() !== '') {
+            $('#erro-cadastro-proximo').hide();
+            telaAnteriorValidada = true;
+        }
+    });
+
+    $("#btn-cadastrar").click(function () {
+        if (($('#login-cadastro').val() === '' && $('#senha-cadastro').val() === '' && $('#email').val() === '') && telaAnteriorValidada) {
+            $('#erro-cadastro-final').show();
+        }
+    });
+
     $(botao).click(
             function (e) {
                 e.preventDefault();
@@ -53,6 +75,7 @@ function mostrarSenha(inputSenha, botaoMostrar) {
     });
 }
 
+//Função que mostra mensagem de sucesso quando email é enviado
 function mostrarMensagemOnClick(botao, div) {
     $(botao).click(function () {
         $(div).text("Email enviado com sucesso, consulte sua caixa de email");
@@ -64,19 +87,17 @@ function mostrarMensagemOnClick(botao, div) {
 }
 
 //Call functions
-
-//Chama função que insere mascara para os inputs
 mascarasDosInputs();
 
 //Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
-trocaTela("#btn-voltar-login", "#form-esqueci-senha", "#form-login", null);
+trocaTela("#btn-voltar-login", "#form-esqueci-senha", "#form-login");
 
 //Chama função que troca de telas de cadastro
 trocaTela("#btn-criar-conta", "#form-login", "#form-cadastrar", "#form-cadastro");
-trocaTela("#btn-voltar", "#form-cadastrar", "#form-login", null);
+trocaTela("#btn-voltar", "#form-cadastrar", "#form-login");
 trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
-trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro", null);
+trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 
 //Chama função que exibe mensagem de erro embaixo dos campos
 mensagemDeErro("#nome", "#erro-nome", /[^a-z$]/gi, "É permitido apenas letras");
