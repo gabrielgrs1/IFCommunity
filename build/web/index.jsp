@@ -10,9 +10,10 @@
     }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-
+    <!-- USAR O .JSP E RENOMEAR ESSE INDEX QUANDO FOR EXECUTAR O PROJETO-->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,7 @@
     <body id="body-login">
         <div class="container">
             <div class="row">
-                <div class="col s6">
+                <div id="div-titulo" class="col s6">
                     <h2 id="titulo1">Compartilhe códigos na comunidade IF</h2>
                     <h4 id="titulo2">Plataforma desenvolvida para compartilhar códigos de todos as discilpinas</h4>
                 </div>
@@ -53,6 +54,7 @@
                             <div class="row">
                                 <div class='input-field col s12'>
                                     <input class='validate' type='password' name='senha' id='senha' />
+                                    <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                     <label for='senha'>Senha</label>
                                 </div>
 
@@ -71,7 +73,7 @@
                         <form name="form-cadastrar" class="col s11 z-depth-3 grey lighten-4 div-form" id="form-cadastrar" action="Cadastrar" method="POST">
                             <div id="form-cadastro">
                                 <div class="row row-titulo">
-                                    <h3 class="indigo-text">Cadastrar</h3>
+                                    <h3 class="indigo-text">Cadastro</h3>
                                 </div>
 
                                 <div class="row">
@@ -117,6 +119,7 @@
                                     </div>
                                     <div class='input-field col s12'>
                                         <input class='validate' type='password' name='senha' id='senha' maxlength="25" required/>
+                                        <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                         <label for='senha'>Senha</label>
                                     </div>
                                     <div class='input-field col s12'>
@@ -142,8 +145,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <!-- Import Login JS -->
         <script src="js/login.js"></script>
-
-
     </body>
-
 </html>
+
+

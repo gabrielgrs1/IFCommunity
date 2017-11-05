@@ -10,9 +10,10 @@
     }
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-
+    <!-- USAR O .JSP E RENOMEAR ESSE INDEX QUANDO FOR EXECUTAR O PROJETO-->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,6 +54,7 @@
                             <div class="row">
                                 <div class='input-field col s12'>
                                     <input class='validate' type='password' name='senha' id='senha' />
+                                    <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                     <label for='senha'>Senha</label>
                                 </div>
 
@@ -117,6 +119,7 @@
                                     </div>
                                     <div class='input-field col s12'>
                                         <input class='validate' type='password' name='senha' id='senha' maxlength="25" required/>
+                                        <button type="button" id="mostrar-senha-login" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                         <label for='senha'>Senha</label>
                                     </div>
                                     <div class='input-field col s12'>
@@ -144,3 +147,5 @@
         <script src="js/login.js"></script>
     </body>
 </html>
+
+
