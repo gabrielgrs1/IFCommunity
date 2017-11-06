@@ -166,7 +166,6 @@ public class AlunoDAO {
         /* Executa a query e armazena o resultado na variavel rs */
         rs = pstm.executeQuery();
 
-        /* Instancia um novo aluno para dar de retorno da função */
         if (!rs.next()) {
             erros = "Usuário incorreto!";
         }

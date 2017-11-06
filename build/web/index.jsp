@@ -69,7 +69,7 @@
                         <form name="form-login" class="col s11 z-depth-3 grey lighten-4 div-form" id="form-login" action="Login" method="POST">
                             <div class="row">
                                 <h3 class="indigo-text">IFCommunity</h3>
-                                <div class="input-field col s12">
+                                <div class="input-field col s12" id="div-erro-cadastro-span">
                                     <span id="erro-cadsatro-span" class="erro-span"></span>
                                 </div>
                                 

@@ -41,7 +41,8 @@
             <header class="avatar">
                 <div class="container">
                 </div>
-                <%                    out.print("<h2>");
+                <%
+                    out.print("<h2>");
                     out.print(nome);
                     out.print("</h2>");
                 %>
@@ -55,6 +56,11 @@
                 </li>
                 <div class="minhas-materias-adicionadas">
                     <ul class="lista-materias">
+                        <%
+                            out.print("<li>");
+                            
+                            out.print("</li>");
+                        %>
                     </ul>
                 </div>
                 <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Adicionar matérias</span></li>
@@ -64,7 +70,11 @@
 
         <main class="site-content">
             <section class="postagens perfil section-aparece">
-                <div class="sc-edprofile">
+                <center>
+                    <h1>COMENTEI A EDIÇÃO DE PERFIL PRA EDITARMOS DEPOIS</h1>
+                    <h3>ACHO UMA BOA COLOCAR A PÁGINA INICIAL QUANDO O USUARIO LOGAR PELA PRIMEIRA VEZ A TELA DE CADASTRAR MATÉRIAS</h3>
+                </center>
+                <!--<div class="sc-edprofile">
                     <h1>Edit Profile Form</h1>
                     <div class="sc-container" align="center">
 
@@ -153,7 +163,7 @@
                         <input class="col-5" type="submit" value="Registrar" />
                         <input class="col-5" type="reset" value="Limpar" />
                         <div style="height: 1em;"></div>
-                    </div>
+                    </div>-->
                 </div>
             </section>
 

@@ -111,9 +111,14 @@ function erroLogin() {
 
 //Função que mostra mensagem de erro no cadastro
 function erroCadastro() {
-    console.log($('#erros-cadastro-hidden').text());
-    $('#erro-cadsatro-span').text($('#erros-cadastro-hidden').text() + " Tente logar com seu usuário ou efetuar novo cadastro!");
-    $('#erro-cadastro-span').show();
+    if ($('#erros-cadastro-hidden').text() !== "null") {
+        $('#erro-cadsatro-span').text($('#erros-cadastro-hidden').text() + " Tente logar com seu usuário ou efetuar novo cadastro!");
+        $('#erro-cadastro-span').show();
+    } else {
+        console.log('teste');
+       $('#erro-cadsatro-span').remove(); 
+       $('#div-erro-cadastro-span').remove();
+    }
 }
 //Call functions
 mascarasDosInputs();
