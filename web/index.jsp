@@ -34,6 +34,7 @@
             <%                
                 String erro = (String) request.getAttribute("erros");
                 String login = (String) request.getAttribute("login");
+                String errosCadastro = (String) request.getAttribute("erros-cadastro");
                 System.out.println(login);
                 if (erro != null) {
                     out.print("<span id='erro-hiden'>");
@@ -44,6 +45,12 @@
                 if (login != null) {
                     out.print("<span id='login-hidden'>");
                     out.print(login);
+                    out.print("</span>");
+                }
+                
+                if (errosCadastro != "") {
+                    out.print("<span id='erros-cadastro-hidden'>");
+                    out.print(errosCadastro);
                     out.print("</span>");
                 }
             %>
@@ -62,6 +69,10 @@
                         <form name="form-login" class="col s11 z-depth-3 grey lighten-4 div-form" id="form-login" action="Login" method="POST">
                             <div class="row">
                                 <h3 class="indigo-text">IFCommunity</h3>
+                                <div class="input-field col s12">
+                                    <span id="erro-cadsatro-span" class="erro-span"></span>
+                                </div>
+                                
                             </div>
 
                             <div class="row">
@@ -69,7 +80,6 @@
                                     <input class='validate' type='text' name='login' id='login' />
                                     <label for='login'>Login ou email</label>
                                     <span id="erro-login" class="erro-span"></span>
-
                                 </div>
                             </div>
 

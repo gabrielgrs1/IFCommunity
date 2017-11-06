@@ -2,7 +2,8 @@
 function mascarasDosInputs() {
     $('.telefone-mask').mask('(000) 0 0000-0000');
     $('.matricula-mask').mask('00000000000-0');
-};
+}
+;
 
 
 //Função para exibir animações nos formulários
@@ -30,17 +31,17 @@ function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
     });
 
     $(botao).click(
-        function (e) {
-            e.preventDefault();
-            $(formularioOut).fadeOut(300);
+            function (e) {
+                e.preventDefault();
+                $(formularioOut).fadeOut(300);
 
-            setTimeout(function () {
+                setTimeout(function () {
                     $(formularioIn).fadeIn(300);
                     $(formularioIn2).fadeIn(300);
                 },
-                300
-            );
-        }
+                        300
+                        );
+            }
     );
 }
 
@@ -84,7 +85,7 @@ function mostrarMensagemOnClick(botao, div) {
     });
 }
 
-//Função que mostra mensagem de erro
+//Função que mostra mensagem de erro no login
 function erroLogin() {
     $('#login').val($('#login-hidden').text());
     if ($('#erro-hiden').text() === 'Usuário incorreto!') {
@@ -108,9 +109,16 @@ function erroLogin() {
     }
 }
 
+//Função que mostra mensagem de erro no cadastro
+function erroCadastro() {
+    console.log($('#erros-cadastro-hidden').text());
+    $('#erro-cadsatro-span').text($('#erros-cadastro-hidden').text() + " Tente logar com seu usuário ou efetuar novo cadastro!");
+    $('#erro-cadastro-span').show();
+}
 //Call functions
 mascarasDosInputs();
 erroLogin();
+erroCadastro();
 
 //Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
@@ -125,7 +133,8 @@ trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 //Chama função que exibe mensagem de erro embaixo dos campos
 mensagemDeErro("#nome", "#erro-nome", /[^a-z\s$]/gi, "É permitido apenas letras");
 mensagemDeErro("#matricula", "#erro-matricula", /[^\d{12}\-]/g, "É permitido apenas números");
-mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");;
+mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");
+;
 
 //Mostar a senha dos inputs de senha
 mostrarSenha("#senha-login", "#mostrar-senha-login");

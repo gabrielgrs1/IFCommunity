@@ -43,8 +43,12 @@ public class Cadastrar extends HttpServlet {
                 senha = request.getParameter("senha"),
                 email = request.getParameter("email");
         Aluno conta = null;
+        String erros = "";
         try {
-            conta = AlunoDAO.cadastro(nome, telefone, matricula, periodo, login, senha, email);
+            erros = AlunoDAO.podeCadastrar(nome, telefone, matricula, periodo, login, senha, email);
+            if (erros.equals("")) {
+                conta = AlunoDAO.cadastro(nome, telefone, matricula, periodo, login, senha, email);
+            } 
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,11 +57,9 @@ public class Cadastrar extends HttpServlet {
             request.getSession().setAttribute("login", conta.getLogin());
             request.getSession().setAttribute("nome", conta.getNome());
             response.sendRedirect("dashboard.jsp");
-
-            //request.setAttribute("conta", conta);
-            //request.getRequestDispatcher("dashboard.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("index.jsp?erro=1").forward(request, response);
+            request.setAttribute("erros-cadastro", erros);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
@@ -101,4 +103,3 @@ public class Cadastrar extends HttpServlet {
     }// </editor-fold>
 
 }
-

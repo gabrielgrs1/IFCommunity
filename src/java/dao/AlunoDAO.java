@@ -10,6 +10,45 @@ import model.Aluno;
 
 public class AlunoDAO {
 
+    public static String podeCadastrar(String nome, String telefone, String matricula, String periodo, String login, String senha, String email) throws SQLException {
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+        String erros = "";
+
+        // Verifica se o login já não está cadastrado.
+        String sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ?";
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, login);
+        rs = pstm.executeQuery();
+        if (rs.next()) {
+            erros = "Login já cadastrado! ";
+        }
+
+        // Verifica se o email já não está cadastrado.
+        sql = "SELECT * FROM TB_USUARIO WHERE EMAIL = ?";
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, email);
+        rs = pstm.executeQuery();
+        if (rs.next()) {
+            erros += "Email já cadastrado! ";
+        }
+
+        // Verifica se o email já não está cadastrado.
+        sql = "SELECT * FROM TB_ALUNO WHERE MATRICULA = ?";
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, matricula);
+        rs = pstm.executeQuery();
+        if (rs.next()) {
+            erros += "Matricula já cadastrada!";
+        }
+
+        // Fecha conexao con.close(); 
+        con.close();
+
+        return erros;
+    }
+
     public AlunoDAO() {
     }
 
@@ -20,62 +59,53 @@ public class AlunoDAO {
         int result = 0;
         Connection con = ConnectionFactory.getConnection();
 
-        // Verifica se já não tem um usuário no banco.
-        String sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ?";
+        //Insere na tabela aluno
+        String sql = "INSERT INTO TB_ALUNO (NOME, PERIODO, MATRICULA, TELEFONE) VALUES (?, ?, ?, ?)";
+
+        // Prepara o comando com o preparestat pstm =
         pstm = con.prepareStatement(sql);
-        pstm.setString(1, login);
-        rs = pstm.executeQuery();
 
-        if (!rs.next()) {
+        // Passa os parametros da consulta pra cada ? dentro da String sql
+        pstm.setString(1, nome);
+        pstm.setString(2, periodo);
+        pstm.setString(3, matricula);
+        pstm.setString(4, telefone);
 
-            //Insere na tabela aluno
-            sql = "INSERT INTO TB_ALUNO (NOME, PERIODO, MATRICULA, TELEFONE) VALUES ( ?, ?, ?, ?)";
+        // Executa o comando retornando no result a quantidade de linhas afetadas int
+        result = pstm.executeUpdate();
 
-            // Prepara o comando com o preparestat pstm =
-            pstm = con.prepareStatement(sql);
+        sql = "SELECT * FROM TB_ALUNO WHERE NOME = ?";
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, nome);
+        ResultSet idTabelaAluno = pstm.executeQuery();
 
-            // Passa os parametros da consulta pra cada ? dentro da String sql
-            pstm.setString(1, nome);
-            pstm.setString(2, periodo);
-            pstm.setString(3, matricula);
-            pstm.setString(4, telefone);
+        int idTabela = 0;
+        if (idTabelaAluno.next()) {
+            idTabela = idTabelaAluno.getInt("ID");
+        }
 
-            // Executa o comando retornando no result a quantidade de linhas afetadas int
-            result = pstm.executeUpdate();
+        //Insere na tabela usuário
+        sql = "INSERT INTO TB_USUARIO (ID_ALUNO, USUARIO, SENHA, EMAIL, PERMISSAO) VALUES (?,?, ?, ?, ?)";
 
-            sql = "SELECT * FROM TB_ALUNO WHERE NOME = ?";
-            pstm = con.prepareStatement(sql);
-            pstm.setString(1, nome);
-            ResultSet idTabelaAluno = pstm.executeQuery();
+        // Prepara o comando com o preparestat pstm =
+        pstm = con.prepareStatement(sql);
 
-            int idTabela = 0;
-            if (idTabelaAluno.next()) {
-                idTabela = idTabelaAluno.getInt("ID");
-            }
+        // Passa os parametros da consulta pra cada ? dentro da String sql
+        pstm.setInt(1, idTabela);
+        pstm.setString(2, login);
+        pstm.setString(3, senha);
+        pstm.setString(4, email);
+        pstm.setInt(5, 0);
 
-            //Insere na tabela usuário
-            sql = "INSERT INTO TB_USUARIO (ID_ALUNO, USUARIO, SENHA, EMAIL, PERMISSAO) VALUES (?,?, ?, ?, ?)";
+        // Executa o comando retornando no result a quantidade de linhas afetadas int
+        result = pstm.executeUpdate();
 
-            // Prepara o comando com o preparestat pstm =
-            pstm = con.prepareStatement(sql);
-
-            // Passa os parametros da consulta pra cada ? dentro da String sql
-            pstm.setInt(1, idTabela);
-            pstm.setString(2, login);
-            pstm.setString(3, senha);
-            pstm.setString(4, email);
-            pstm.setInt(5, 0);
-
-            // Executa o comando retornando no result a quantidade de linhas afetadas int
-            result = pstm.executeUpdate();
-
-            if (result == 1) {
-                conta = new Aluno();
-                conta.setNome(nome);
-                conta.setId(idTabela);
-                conta.setLogin(login);
-                conta.setEmail(email);
-            }
+        if (result == 1) {
+            conta = new Aluno();
+            conta.setNome(nome);
+            conta.setId(idTabela);
+            conta.setLogin(login);
+            conta.setEmail(email);
         }
 
         // Fecha conexao con.close(); 
