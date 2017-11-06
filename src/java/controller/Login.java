@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Aluno;
 import dao.AlunoDAO;
-import java.util.ArrayList;
 
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
@@ -42,7 +41,13 @@ public class Login extends HttpServlet {
 
         if (conta != null) {
             request.getSession().setAttribute("id", conta.getId());
-            request.getSession().setAttribute("nome", conta.getLogin());
+            request.getSession().setAttribute("nome", conta.getNome());
+            request.getSession().setAttribute("login", conta.getLogin());
+            request.getSession().setAttribute("periodo", conta.getPeriodo());
+            request.getSession().setAttribute("telefone", conta.getTelefone());
+            request.getSession().setAttribute("permissao", conta.getPermissao());
+            request.getSession().setAttribute("materias", conta.getMaterias());
+            request.getSession().setAttribute("email", conta.getEmail());
             response.sendRedirect("dashboard.jsp");
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);

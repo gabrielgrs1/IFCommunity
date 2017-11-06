@@ -8,9 +8,16 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String nomeUsuario = (String) request.getSession().getAttribute("nome");
-    if (nomeUsuario == null) {
+    String nome = (String) request.getSession().getAttribute("nome");
+
+    if (nome == null) {
+        request.getSession().setAttribute("nome", null);
         response.sendRedirect("index.jsp");
+    } else {
+        String[] nomeSplitado = nome.split(" ");
+        if (nomeSplitado.length > 2) {
+            nome = nomeSplitado[0] + " " + nomeSplitado[1];
+        }
     }
 %>
 <!DOCTYPE html>
@@ -34,9 +41,8 @@
             <header class="avatar">
                 <div class="container">
                 </div>
-                <%
-                    out.print("<h2>");
-                    out.print(nomeUsuario);
+                <%                    out.print("<h2>");
+                    out.print(nome);
                     out.print("</h2>");
                 %>
                 <form name="form-login" class="" action="Deslogar" method="GET">

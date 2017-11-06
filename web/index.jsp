@@ -7,6 +7,7 @@
 <%
     String nomeUsuario = (String) request.getSession().getAttribute("nome");
     if (nomeUsuario != null) {
+        System.out.println(nomeUsuario);
         response.sendRedirect("dashboard.jsp");
     }
 %>
@@ -30,7 +31,7 @@
 
     <body id="body-login">
         <div class="campo-erro">
-            <%
+            <%                
                 String erro = (String) request.getAttribute("erros");
                 String login = (String) request.getAttribute("login");
                 System.out.println(login);
@@ -39,14 +40,12 @@
                     out.print(erro);
                     out.print("</span>");
                 }
-
+                
                 if (login != null) {
                     out.print("<span id='login-hidden'>");
                     out.print(login);
                     out.print("</span>");
                 }
-
-
             %>
         </div>
         <div class="container">

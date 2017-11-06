@@ -5,12 +5,11 @@ public class Aluno {
     private int id;
     private String nome;
     private String login;
-    private String senha;
     private String email;
     private int periodo;
-    private String matricula;
-    private String dataRegistro;
-    private int quantidadeDeContribuicao;
+    private int permissao;
+    private String telefone;
+    private String materias;
 
     // Construtor
     public Aluno() {
@@ -29,10 +28,6 @@ public class Aluno {
         return login;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -41,18 +36,18 @@ public class Aluno {
         return periodo;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public int getPermissao() {
+        return permissao;
     }
 
-    public String getDataRegistro() {
-        return dataRegistro;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public int getQuantidadeDeContribuicao() {
-        return quantidadeDeContribuicao;
+    public String getMaterias() {
+        return materias;
     }
-
+    
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -66,10 +61,6 @@ public class Aluno {
         this.login = login;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -78,16 +69,15 @@ public class Aluno {
         this.periodo = periodo;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setMaterias(String materias) {
+        this.materias = materias;
     }
 
-    public void setDataRegistro(String dataRegistro) {
-        this.dataRegistro = dataRegistro;
+    public void setPermissao(int permissao) {
+        this.permissao = permissao;
     }
 
-    public void setQuantidadeDeContribuicao(int quantidadeDeContribuicao) {
-        this.quantidadeDeContribuicao = quantidadeDeContribuicao;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
-
 }

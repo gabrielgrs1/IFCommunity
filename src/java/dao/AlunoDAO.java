@@ -75,7 +75,6 @@ public class AlunoDAO {
                 conta.setId(idTabela);
                 conta.setLogin(login);
                 conta.setEmail(email);
-                conta.setMatricula(matricula);
             }
         }
 
@@ -92,7 +91,7 @@ public class AlunoDAO {
         Connection con = ConnectionFactory.getConnection();
 
         /* Comando SQL que será enviado ao banco */
-        String sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ? AND SENHA = ?";
+        String sql = "SELECT * FROM TB_USUARIO INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE USUARIO = ? AND SENHA = ?";
 
         /* Prepara a consulta e passa os parametros */
         pstm = con.prepareStatement(sql);
@@ -105,9 +104,14 @@ public class AlunoDAO {
         /* Instancia um novo aluno para dar de retorno da função */
         while (rs.next()) {
             aluno = new Aluno();
-            aluno.setId(rs.getInt("ID"));
+            aluno.setId(rs.getInt("ID_ALUNO"));
             aluno.setLogin(rs.getString("USUARIO"));
             aluno.setEmail(rs.getString("EMAIL"));
+            aluno.setNome(rs.getString("NOME"));
+            aluno.setTelefone(rs.getString("TELEFONE"));
+            aluno.setPermissao(rs.getInt("PERMISSAO"));
+            aluno.setPeriodo(rs.getInt("PERIODO"));
+            aluno.setMaterias(rs.getString("MATERIAS_CADASTRADAS"));
         }
 
         /* Fecha a conexão */
