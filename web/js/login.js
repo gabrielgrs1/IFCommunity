@@ -115,7 +115,6 @@ function erroCadastro() {
         $('#erro-cadsatro-span').text($('#erros-cadastro-hidden').text() + " Tente logar com seu usuário ou efetuar novo cadastro!");
         $('#erro-cadastro-span').show();
     } else {
-        console.log('teste');
        $('#erro-cadsatro-span').remove(); 
        $('#div-erro-cadastro-span').remove();
     }
