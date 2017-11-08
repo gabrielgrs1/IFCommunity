@@ -115,15 +115,108 @@ function erroCadastro() {
         $('#erro-cadsatro-span').text($('#erros-cadastro-hidden').text() + " Tente logar com seu usuário ou efetuar novo cadastro!");
         $('#erro-cadastro-span').show();
     } else {
-        console.log('teste');
-       $('#erro-cadsatro-span').remove(); 
-       $('#div-erro-cadastro-span').remove();
+        $('#erro-cadsatro-span').remove();
+        $('#div-erro-cadastro-span').remove();
     }
 }
+
+//Função que valida a parte da matricula que é CPF
+function verificaCPF() {
+    var validado = 0;
+    function mostraErro() {
+        $('#erro-matricula').text('Matrícula informada é inválida!');
+        validado = 1;
+    }
+
+    $('#matricula').on('blur', function () {
+        var soma = 0;
+        var resto;
+        var cpf = $('#matricula').val();
+        var strCpf = cpf.split('-');
+        cpf = strCpf[0];
+
+        if (cpf.length !== 11 ||
+                cpf === "00000000000" ||
+                cpf === "11111111111" ||
+                cpf === "22222222222" ||
+                cpf === "33333333333" ||
+                cpf === "44444444444" ||
+                cpf === "55555555555" ||
+                cpf === "66666666666" ||
+                cpf === "77777777777" ||
+                cpf === "88888888888" ||
+                cpf === "99999999999") {
+            mostraErro();
+        }
+
+        for (i = 1; i <= 9; i++) {
+            soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+        }
+
+        resto = soma % 11;
+
+        if (resto === 10 || resto === 11 || resto < 2) {
+            resto = 0;
+        } else {
+            resto = 11 - resto;
+        }
+
+        if (resto !== parseInt(cpf.substring(9, 10))) {
+            mostraErro();
+        }
+
+        soma = 0;
+
+        for (i = 1; i <= 10; i++) {
+            soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+        }
+        resto = soma % 11;
+
+        if (resto === 10 || resto === 11 || resto < 2) {
+            resto = 0;
+        } else {
+            resto = 11 - resto;
+        }
+        if (resto !== parseInt(cpf.substring(10, 11))) {
+            mostraErro();
+        }
+    });
+    if (validado === 1) {
+        return false;
+    }
+
+    return true;
+}
+
+//Função que valida se tem algum erro no formulário.
+function validaFormulario(botao, spanCampo1, spanCampo2, spanCampo3) {
+    var habilitaBotao = 1;
+    function validaCampo(spanCampo) {
+        spanCampo.on('blur', function () {
+            if (spanCampo.text() !== "") {
+                habilitaBotao = 0;
+            }
+        });
+    }
+    
+    validaCampo(spanCampo1);
+    validaCampo(spanCampo2);
+    validaCampo(spanCampo3);
+    
+    if (habilitaBotao === 1){
+        botao.removeClass('disabled');
+    }
+}
+
 //Call functions
-mascarasDosInputs();
-erroLogin();
-erroCadastro();
+$(function () {
+    mascarasDosInputs();
+    erroLogin();
+    erroCadastro();
+    verificaCPF();
+    validaFormulario();
+});
+
 
 //Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
@@ -139,7 +232,6 @@ trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 mensagemDeErro("#nome", "#erro-nome", /[^a-z\s$]/gi, "É permitido apenas letras");
 mensagemDeErro("#matricula", "#erro-matricula", /[^\d{12}\-]/g, "É permitido apenas números");
 mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");
-;
 
 //Mostar a senha dos inputs de senha
 mostrarSenha("#senha-login", "#mostrar-senha-login");

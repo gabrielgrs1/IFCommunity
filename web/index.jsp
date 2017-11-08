@@ -7,7 +7,6 @@
 <%
     String nomeUsuario = (String) request.getSession().getAttribute("nome");
     if (nomeUsuario != null) {
-        System.out.println(nomeUsuario);
         response.sendRedirect("dashboard.jsp");
     }
 %>
@@ -35,7 +34,6 @@
                 String erro = (String) request.getAttribute("erros");
                 String login = (String) request.getAttribute("login");
                 String errosCadastro = (String) request.getAttribute("erros-cadastro");
-                System.out.println(login);
                 if (erro != null) {
                     out.print("<span id='erro-hiden'>");
                     out.print(erro);
@@ -158,7 +156,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <button id="btn-cadastrar-proximo" type='button' name='btn-cadastrar-proximo' class='col s12 btn btn-large waves-effect indigo'>Próximo</button>
+                                    <button id="btn-cadastrar-proximo" type='button' name='btn-cadastrar-proximo' class='col s12 btn btn-large waves-effect indigo disabled'>Próximo</button>
                                 </div>
                                 <a href="" id="btn-voltar">Voltar</a>
                             </div>
@@ -191,7 +189,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <button id="btn-cadastrar" type='submit' name='btn-cadastrar' class='col s12 btn btn-large waves-effect indigo'>Cadastrar</button>
+                                    <button id="btn-cadastrar" type='submit' name='btn-cadastrar' class='col s12 btn btn-large waves-effect indigo disabled'>Cadastrar</button>
                                 </div>
                                 <a href="" id="btn-voltar-tela-2">Voltar</a>
                             </div>
