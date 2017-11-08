@@ -51,20 +51,21 @@ $(document).ready(function () {
 
     /*    Na escolha da opção no menu substitui a pagina inicial      */
     /*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
-    $(".nav-side > ul > li").children('span').click(function () {
+    $("ul.para-scroll > li").click(function () {
         //console.log($("section").find("section-aparece"));
         //console.log("entrou");
-        console.log($(this).text());
+        console.log($(this).children("span").text());
         //fecha o menu de minhas materias
         //remove a tela que está aparecendo
         $("section").removeClass("section-aparece");
 
         //console.log($(this).text());
-        if ($(this).text() != 'Minhas matérias') {
-            console.log("entrou");
-            $('.minhasMateriasAdicionadas').slideUp();
+        if ($(this).children("span").text() !== 'Minhas matérias') {
+            console.log("entrou aqui");
+            $('.minhas-materias-adicionadas').slideUp();
         }
-        var classe = '.' + $(this).attr("id");
+        var classe = '.' + $(this).children("span").attr("id");
+        console.log(classe);
         $("section").hide();
         $(".site-content").find(classe).addClass("section-aparece");
         //Se tiver a section-aparece, ele exibe ela na tela.

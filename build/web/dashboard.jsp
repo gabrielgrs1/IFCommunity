@@ -50,7 +50,7 @@
                     <input type="submit" name="botao-deslogar" value="deslogar-teste">
                 </form>
             </header>
-            <ul class="paraScroll">
+            <ul class="para-scroll">
                 <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
                 <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span>
                 </li>
