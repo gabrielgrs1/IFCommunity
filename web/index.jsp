@@ -3,7 +3,6 @@
      Created on : 01/11/2017, 23:35:32
      Author     : Gabriel Silva
 --%>
-<%@page import="java.util.ArrayList"%>
 <%
     String nomeUsuario = (String) request.getSession().getAttribute("nome");
     if (nomeUsuario != null) {
@@ -12,21 +11,20 @@
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
-    <!-- USAR O .JSP E RENOMEAR ESSE INDEX QUANDO FOR EXECUTAR O PROJETO-->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
+        <title>IFCommunity | Login</title>
         <!-- Import Materialize CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
         <!-- Import Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
-
 
     <body id="body-login">
         <div class="campo-erro">
@@ -198,9 +196,9 @@
         </div>
 
         <!-- Import jQuery -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
         <!-- Import Materialize JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Login JS -->
