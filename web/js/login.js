@@ -1,10 +1,8 @@
 //Função que coloca mascaras nos inputs
 function mascarasDosInputs() {
-    $('.telefone-mask').mask('(000) 0 0000-0000');
+    $('.telefone-mask').mask('(009) 00009-0000');
     $('.matricula-mask').mask('00000000000-0');
-}
-;
-
+};
 
 //Função para exibir animações nos formulários
 function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
@@ -127,6 +125,11 @@ function verificaCPF() {
         $('#erro-matricula').text('Matrícula informada é inválida!');
         validado = 1;
     }
+    
+    function mostraErro2() {
+        $('#erro-matricula').text('A matrícula deve ter 12 caracteres!');
+        validado = 1;
+    }
 
     $('#matricula').on('blur', function () {
         var soma = 0;
@@ -145,8 +148,9 @@ function verificaCPF() {
                 cpf === "66666666666" ||
                 cpf === "77777777777" ||
                 cpf === "88888888888" ||
-                cpf === "99999999999") {
-            mostraErro();
+                cpf === "99999999999" && 
+                $('#matricula').val()) {
+            mostraErro2();
         }
 
         for (i = 1; i <= 9; i++) {
@@ -189,23 +193,27 @@ function verificaCPF() {
 }
 
 //Função que valida se tem algum erro no formulário.
-function validaFormulario(botao, spanCampo1, spanCampo2, spanCampo3) {
-    var habilitaBotao = 1;
-    function validaCampo(spanCampo) {
-        spanCampo.on('blur', function () {
-            if (spanCampo.text() !== "") {
-                habilitaBotao = 0;
-            }
-        });
-    }
-    
-    validaCampo(spanCampo1);
-    validaCampo(spanCampo2);
-    validaCampo(spanCampo3);
-    
-    if (habilitaBotao === 1){
-        botao.removeClass('disabled');
-    }
+function validaFormulario(formulario, botao, campo1, campo2, campo3) {
+    $(formulario).focus(function () {
+        function validaCampo(campo) {
+            $(campo).blur(function () {
+                console.log($(campo).val());
+                if ($(campo).val() === "") {
+                    return false;
+                }
+
+                return true;
+            });
+        }
+
+        validaCampo(campo1);
+        validaCampo(campo2);
+        validaCampo(campo3);
+
+        if (validaCampo(campo1) && validaCampo(campo2) && validaCampo(campo3)) {
+            $(botao).removeClass('disabled');
+        }
+    });
 }
 
 //Call functions
@@ -214,7 +222,7 @@ $(function () {
     erroLogin();
     erroCadastro();
     verificaCPF();
-    validaFormulario();
+    validaFormulario("#form-cadastro" ,"#btn-cadastrar-proximo", "#nome", "#telefone", "#matricula");
 });
 
 
