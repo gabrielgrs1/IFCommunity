@@ -2,32 +2,10 @@
 function mascarasDosInputs() {
     $('.telefone-mask').mask('(009) 00009-0000');
     $('.matricula-mask').mask('00000000000-0');
-};
+}
 
 //Função para exibir animações nos formulários
 function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
-
-    var telaAnteriorValidada = false;
-    $("#btn-cadastrar").click(function () {
-        if ($('#nome').val() === '' || $('#telefone').val() === '' || $('#matricula').val() === '') {
-            $('#erro-cadastro-proximo').show();
-            telaAnteriorValidada = false;
-        }
-    });
-
-    $("#btn-cadastrar-proximo").click(function () {
-        if ($('#nome').val() !== '' && $('#telefone').val() !== '' && $('#matricula').val() !== '') {
-            $('#erro-cadastro-proximo').hide();
-            telaAnteriorValidada = true;
-        }
-    });
-
-    $("#btn-cadastrar").click(function () {
-        if (($('#login-cadastro').val() === '' && $('#senha-cadastro').val() === '' && $('#email').val() === '') && telaAnteriorValidada) {
-            $('#erro-cadastro-final').show();
-        }
-    });
-
     $(botao).click(
             function (e) {
                 e.preventDefault();
@@ -55,10 +33,7 @@ function mensagemDeErro(campo, span, regexp, mensagem) {
             setTimeout(function () {
                 $(span).fadeOut(1000);
             }, 7000);
-
-        } else {
-            $(span).text("");
-        }
+        } 
     });
 }
 
@@ -74,11 +49,11 @@ function mostrarSenha(inputSenha, botaoMostrar) {
 }
 
 //Função que mostra mensagem de sucesso quando email é enviado
-function mostrarMensagemOnClick(botao, div) {
-    $(botao).click(function () {
-        $(div).text("Email enviado com sucesso, consulte sua caixa de email");
+function mensagemEmailEnviado() {
+    $("#btn-esqueci-senha-submit").click(function () {
+        $("#texto-enviado-email").text("Email enviado com sucesso, consulte sua caixa de email");
         setTimeout(function () {
-            $(div).fadeOut(2000);
+            $("#texto-enviado-email").fadeOut(2000);
         }, 4000);
     });
 }
@@ -113,7 +88,6 @@ function erroCadastro() {
         $('#erro-cadsatro-span').text($('#erros-cadastro-hidden').text() + " Tente logar com seu usuário ou efetuar novo cadastro!");
         $('#erro-cadastro-span').show();
     } else {
-        $('#erro-cadsatro-span').remove();
         $('#div-erro-cadastro-span').remove();
     }
 }
@@ -125,11 +99,6 @@ function verificaCPF() {
         $('#erro-matricula').text('Matrícula informada é inválida!');
         validado = 1;
     }
-    
-    function mostraErro2() {
-        $('#erro-matricula').text('A matrícula deve ter 12 caracteres!');
-        validado = 1;
-    }
 
     $('#matricula').on('blur', function () {
         var soma = 0;
@@ -138,8 +107,7 @@ function verificaCPF() {
         var strCpf = cpf.split('-');
         cpf = strCpf[0];
 
-        if (cpf.length !== 11 ||
-                cpf === "00000000000" ||
+        if (cpf === "00000000000" ||
                 cpf === "11111111111" ||
                 cpf === "22222222222" ||
                 cpf === "33333333333" ||
@@ -148,9 +116,8 @@ function verificaCPF() {
                 cpf === "66666666666" ||
                 cpf === "77777777777" ||
                 cpf === "88888888888" ||
-                cpf === "99999999999" && 
-                $('#matricula').val()) {
-            mostraErro2();
+                cpf === "99999999999") {
+            mostraErro();
         }
 
         for (i = 1; i <= 9; i++) {
@@ -192,58 +159,27 @@ function verificaCPF() {
     return true;
 }
 
-//Função que valida se tem algum erro no formulário.
-function validaFormulario(formulario, botao, campo1, campo2, campo3) {
-    $(formulario).focus(function () {
-        function validaCampo(campo) {
-            $(campo).blur(function () {
-                console.log($(campo).val());
-                if ($(campo).val() === "") {
-                    return false;
-                }
-
-                return true;
-            });
-        }
-
-        validaCampo(campo1);
-        validaCampo(campo2);
-        validaCampo(campo3);
-
-        if (validaCampo(campo1) && validaCampo(campo2) && validaCampo(campo3)) {
-            $(botao).removeClass('disabled');
-        }
-    });
-}
-
 //Call functions
 $(function () {
     mascarasDosInputs();
     erroLogin();
     erroCadastro();
     verificaCPF();
-    validaFormulario("#form-cadastro" ,"#btn-cadastrar-proximo", "#nome", "#telefone", "#matricula");
+    mensagemEmailEnviado();
 });
 
 
-//Chama função que troca de tela esqueci minha senha
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
 trocaTela("#btn-voltar-login", "#form-esqueci-senha", "#form-login");
-
-//Chama função que troca de telas de cadastro
 trocaTela("#btn-criar-conta", "#form-login", "#form-cadastrar", "#form-cadastro");
 trocaTela("#btn-voltar", "#form-cadastrar", "#form-login");
 trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 
-//Chama função que exibe mensagem de erro embaixo dos campos
 mensagemDeErro("#nome", "#erro-nome", /[^a-z\s$]/gi, "É permitido apenas letras");
 mensagemDeErro("#matricula", "#erro-matricula", /[^\d{12}\-]/g, "É permitido apenas números");
 mensagemDeErro("#telefone", "#erro-telefone", /[^\(0\d{2}\)9\s+\d{4}\-\d{4}$]/g, "É permitido apenas números");
 
-//Mostar a senha dos inputs de senha
 mostrarSenha("#senha-login", "#mostrar-senha-login");
 mostrarSenha("#senha-cadastro", "#mostrar-senha-cadastro");
 
-//Mostrar mensagem de email enviado
-mostrarMensagemOnClick("#btn-esqueci-senha-submit", "#texto-enviado-email");

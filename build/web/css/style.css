@@ -216,11 +216,11 @@ h4 {
 /*             Definições para colunas               */
 
 /*---------------------------------------------------*/
-
+/* 
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
+} */
 
 #body-principal .row::after {
     content: "";
@@ -234,11 +234,34 @@ h4 {
 
 /*---------------------------------------------------*/
 
+
+/* Correção da dashboard.jsp pra quando colocou o Materialize.css */
+
+#body-principal ul {
+    line-height: 2vmin;
+}
+
+#body-principal li, 
+#body-principal .lista-materias label {
+        width: 100%;
+}
+
+#body-principal .lista-materias label li {
+    line-height: 1.5vmin;
+}
+
+#body-principal .lista-materias label::before,
+#body-principal .lista-materias label::after {
+    display: none;
+}
+
+/* FIM DA CORREÇÃO */
+
+
 #body-principal {
     height: 100vh!important;
     font-size: 20px;
     margin: 0!important;
-    font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
     color: #fff;
     padding-left: 240px;
 }
