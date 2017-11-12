@@ -37,6 +37,7 @@
     </head>
 
     <body id="body-principal">
+
         <div class="content-header valign-wrapper">
             <h1 class="section-title">IF<span class="section-title-dois">community</span></h1>
         </div>
@@ -85,11 +86,6 @@
                                     <label for="icon_prefix">Primeiro nome</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <i class="material-icons prefix">Telefone</i>
-                                    <input id="icon_telephone" type="tel" class="validate">
-                                    <label for="icon_telephone">Telefone</label>
-                                </div>
-                                <div class="input-field col s6">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input id="icon_prefix" type="text" class="validate">
                                     <label for="icon_prefix">Sobrenome</label>
@@ -105,23 +101,30 @@
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="input-field col s6">
+                                    <i class="material-icons prefix">face</i>
                                     <select>
                                         <option value="" disabled selected>Selecione</option>
-                                        <option value="1">Option 1</option>
-                                        <option value="2">Option 2</option>
-                                        <option value="3">Option 3</option>
+                                        <option value="1">1° Período</option>
+                                        <option value="2">2° Período</option>
+                                        <option value="3">3° Período</option>
+                                        <option value="4">4° Período</option>
+                                        <option value="5">5° Período</option>
                                     </select>
-                                    <label>Sexo</label>
+                                    <label>Período</label>
                                 </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">school</i>
+                                    <input id="icon_prefix" type="number" class="validate">
+                                    <label for="icon_prefix">Matrícula</label>
+                            </div>
                             </div>
                         </form>
                     </div>
-                </div>
             </section>
 
             <section class="postagens minhas-materias">
                 <%
-                    int contPostagens = 3;
+                    int contPostagens = 10;
                     for (int i = 0; i < contPostagens; i++) {
                         out.print("<div class='content-topic'>");
                         out.print("<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h1>");
@@ -129,11 +132,13 @@
                     }
                 %>
             </section>
+        </div>
         </main>
 
         <!-- Import jQuery -->
         <script src="js/jquery-3.2.1.min.js"></script>
         <!-- Import Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>

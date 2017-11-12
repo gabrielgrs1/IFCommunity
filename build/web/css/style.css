@@ -235,6 +235,7 @@ h4 {
 
 #body-principal nav ul li {
     float: none!important;
+    color: white;
 }
 
 [type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
@@ -243,12 +244,18 @@ h4 {
 }
 
 #body-principal label {
+    font-size: 0.8em!important;
+    color: grey;
+}
+#body-principal input {
+    color: grey;
     font-size: 1em!important;
 }
 
 #body-principal site-content .postagens {
     padding: 0!important;
 }
+
 /* FIM DA CORREÇÃO */
 
 /*---------------------------------------------------*/
@@ -378,6 +385,9 @@ h4 {
 @media screen and (max-width: 900px) and (min-width: 600px) {
     #body-principal {
         padding-left: 90px;
+    }
+    #body-principal .section-title {
+        padding-top: 0px!important;
     }
     #body-principal .menu {
         width: 90px;
@@ -522,8 +532,7 @@ h4 {
     height: 100%;
 }
 
-#body-principal .menu .smartphone-menu-trigger,
-#body-principal .content-header {
+#body-principal .menu .smartphone-menu-trigger, .content-header {
     display: block;
     position: fixed;
 }
@@ -545,6 +554,7 @@ h4 {
     font-family: 'Open Sans', sans-serif;
     color: #00bfa5;
     text-align: center;
+    padding-top: 1vmin!important;
 }
 
 #body-principal .section-title h1 {
@@ -561,7 +571,6 @@ h4 {
 #body-principal .section-title,
 #body-principal .section-title-dois {
     margin: 0!important;
-    display: inline;
     position: relative!important;
 }
 
@@ -570,10 +579,16 @@ h4 {
 /*--------------Corpo do site------------------------*/
 
 /*---------------------------------------------------*/
+#body-principal {
+    height: 100%;
+    background-color: #cfd8dc;
+    background-size: cover!important;
+    background-repeat: no-repeat!important;
+    background-attachment: fixed!important;
+}
 
 #body-principal .site-content {
     z-index: 0;
-    background: #eee!important;
     height: 100%;
 }
 
@@ -619,7 +634,7 @@ h4 {
 /*---------------------------------------------------*/
 
 #body-principal .postagens {
-    padding-top: 60px;
+    padding-top: 80px;
     z-index: 0;
     display: -moz-box;
     display: -webkit-box;

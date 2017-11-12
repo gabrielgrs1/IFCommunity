@@ -74,6 +74,7 @@ $(document).ready(function () {
             $(this).show();
         }
         ;
+        trocaCorFundo();
     });
 
     /*-----------------------------------------------------------------------------*/
@@ -90,9 +91,22 @@ $(document).ready(function () {
 
     /*-----------------------------------------------------------------------------*/
 
+    /*              Plugin dos selects                          */
+
     $(document).ready(function () {
         $('select').material_select();
     });
     $('select').material_select('destroy');
 
+    /*-----------------------------------------------------------------------------*/
+
+    /*              Fundo randomico                          */
+    
+    function trocaCorFundo() {
+        var array = ["#c5cae9", "#bbdefb", "#b2dfdb", "#eeeeee", "#d7ccc8", "#cfd8dc"];
+        var colorNumber = Math.round((Math.random() * (array.length - 1)));
+        $("#body-principal").css('background-color', array[colorNumber]);
+    };
+
+    /*-----------------------------------------------------------------------------*/
 });
