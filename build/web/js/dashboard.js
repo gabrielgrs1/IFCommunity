@@ -47,7 +47,8 @@ $(document).ready(function () {
     $("section").hide();
     if ($("section").hasClass("section-aparece")) {
         $(this).show();
-    };
+    }
+    ;
 
     /*    Na escolha da opção no menu substitui a pagina inicial      */
     /*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
@@ -71,7 +72,8 @@ $(document).ready(function () {
         //Se tiver a section-aparece, ele exibe ela na tela.
         if ($("section").hasClass("section-aparece")) {
             $(this).show();
-        };
+        }
+        ;
     });
 
     /*-----------------------------------------------------------------------------*/
@@ -87,4 +89,10 @@ $(document).ready(function () {
     });
 
     /*-----------------------------------------------------------------------------*/
+
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+    $('select').material_select('destroy');
+
 });

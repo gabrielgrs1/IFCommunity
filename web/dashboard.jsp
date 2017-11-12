@@ -62,7 +62,7 @@
                     <ul class="lista-materias">
                         <%
                             out.print("<li>");
-                            
+
                             out.print("</li>");
                         %>
                     </ul>
@@ -74,100 +74,48 @@
 
         <main class="site-content">
             <section class="postagens perfil section-aparece">
-                <center>
-                    <h1>COMENTEI A EDIÇÃO DE PERFIL PRA EDITARMOS DEPOIS</h1>
-                    <h3>ACHO UMA BOA COLOCAR A PÁGINA INICIAL QUANDO O USUARIO LOGAR PELA PRIMEIRA VEZ A TELA DE CADASTRAR MATÉRIAS</h3>
-                </center>
-                <!--<div class="sc-edprofile">
+                <div class="sc-edprofile">
                     <h1>Edit Profile Form</h1>
-                    <div class="sc-container" align="center">
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Nome de usuário</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="password" required>
-                            <span class="bar"></span>
-                            <label>Senha</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Email</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Contato</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Nome</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Sobrenome</label>
-                        </div>
-
-                        <div class="group col-10">
-                            <textarea class="col-12" required></textarea>
-                            <span class="bar"></span>
-                            <label>Bio</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <select class="col-12" required>
-                                <option value="" disabled selected></option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Feminino">Feminino</option>
-                                <option value="Outro">Outro</option>
-                            </select>
-                            <label>Sexo</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Curso </label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Link para perfil Facebook</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>link para página no Twitter</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Link para perfil Google+</label>
-                        </div>
-
-                        <div class="group col-5">
-                            <input type="text" required>
-                            <span class="bar"></span>
-                            <label>Link para perfil Uri</label>
-                        </div>
-                        <div style="height: 1em;"></div>
-                        <input class="col-5" type="submit" value="Registrar" />
-                        <input class="col-5" type="reset" value="Limpar" />
-                        <div style="height: 1em;"></div>
-                    </div>-->
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="icon_prefix" type="text" class="validate">
+                                    <label for="icon_prefix">Primeiro nome</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">Telefone</i>
+                                    <input id="icon_telephone" type="tel" class="validate">
+                                    <label for="icon_telephone">Telefone</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input id="icon_prefix" type="text" class="validate">
+                                    <label for="icon_prefix">Sobrenome</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">Telefone</i>
+                                    <input id="icon_telephone" type="tel" class="validate">
+                                    <label for="icon_telephone">Celular</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <i class="material-icons prefix">mail</i>
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <select>
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </select>
+                                    <label>Sexo</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
 
