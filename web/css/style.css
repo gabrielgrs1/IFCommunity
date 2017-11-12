@@ -237,8 +237,9 @@ h4 {
 
 /* Correção da dashboard.jsp pra quando colocou o Materialize.css */
 
-#body-principal ul {
-    line-height: 2vmin;
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+    height: auto!important;
+    line-height: inherit!important;
 }
 
 #body-principal li, 
@@ -246,15 +247,28 @@ h4 {
         width: 100%;
 }
 
-#body-principal .lista-materias label li {
-    line-height: 1.5vmin;
-}
-
 #body-principal .lista-materias label::before,
 #body-principal .lista-materias label::after {
     display: none;
 }
 
+#body-principal nav {
+    line-height: inherit!important;
+}
+
+#body-principal nav ul li {
+    float: none!important;
+}
+
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+    padding-left: 0!important;
+    cursor: pointer;
+}
+
+label {
+    font-size: 1em!important;
+    color: white;
+}
 /* FIM DA CORREÇÃO */
 
 
@@ -301,7 +315,7 @@ h4 {
 
 #body-principal .menu ul {
     list-style: none;
-    padding: 2vmin 0;
+    padding: 0 0;
     margin: 0;
 }
 

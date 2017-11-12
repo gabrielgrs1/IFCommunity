@@ -216,11 +216,11 @@ h4 {
 /*             Definições para colunas               */
 
 /*---------------------------------------------------*/
-
+/* 
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
+} */
 
 #body-principal .row::after {
     content: "";
@@ -234,11 +234,48 @@ h4 {
 
 /*---------------------------------------------------*/
 
+
+/* Correção da dashboard.jsp pra quando colocou o Materialize.css */
+
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+    height: auto!important;
+    line-height: inherit!important;
+}
+
+#body-principal li, 
+#body-principal .lista-materias label {
+        width: 100%;
+}
+
+#body-principal .lista-materias label::before,
+#body-principal .lista-materias label::after {
+    display: none;
+}
+
+#body-principal nav {
+    line-height: inherit!important;
+}
+
+#body-principal nav ul li {
+    float: none!important;
+}
+
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+    padding-left: 0!important;
+    cursor: pointer;
+}
+
+label {
+    font-size: 1em!important;
+    color: white;
+}
+/* FIM DA CORREÇÃO */
+
+
 #body-principal {
     height: 100vh!important;
     font-size: 20px;
     margin: 0!important;
-    font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
     color: #fff;
     padding-left: 240px;
 }
@@ -278,7 +315,7 @@ h4 {
 
 #body-principal .menu ul {
     list-style: none;
-    padding: 2vmin 0;
+    padding: 0 0;
     margin: 0;
 }
 

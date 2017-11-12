@@ -37,7 +37,7 @@
     </head>
 
     <body id="body-principal">
-        <div class="content-header">
+        <div class="content-header valign-wrapper">
             <h1 class="section-title">IF<span class="section-title-dois">community</span></h1>
         </div>
         <nav class="nav-side menu">
