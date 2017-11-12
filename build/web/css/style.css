@@ -214,7 +214,7 @@ h4 {
 
 /* Correção da dashboard.jsp pra quando colocou o Materialize.css */
 
-#body-principal [type="radio"]:not(:checked)+label,#body-principal [type="radio"]:checked+label {
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
     height: auto!important;
     line-height: inherit!important;
 }
@@ -237,14 +237,13 @@ h4 {
     float: none!important;
 }
 
-#body-principal [type="radio"]:not(:checked)+label, #body-principal [type="radio"]:checked+label {
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
     padding-left: 0!important;
     cursor: pointer;
 }
 
 #body-principal label {
     font-size: 1em!important;
-    color: white;
 }
 
 #body-principal site-content .postagens {
@@ -648,4 +647,8 @@ h4 {
     text-align: justify!important;
     padding-left: 3vmin;
     padding-right: 3vmin;
+}
+
+#body-principal .para-scroll li span{
+    color: white;
 }

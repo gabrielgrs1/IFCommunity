@@ -45,11 +45,11 @@
             <header class="avatar">
                 <div class="container">
                 </div>
-                <%
-                    out.print("<h2>");
-                    out.print(nome);
-                    out.print("</h2>");
-                %>
+                <h2>
+                    <%
+                        out.print(nome);
+                    %>
+                </h2>
                 <form name="form-login" class="" action="Deslogar" method="GET">
                     <input type="submit" name="botao-deslogar" value="deslogar-teste">
                 </form>
