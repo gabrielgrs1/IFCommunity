@@ -130,13 +130,13 @@
 
                                 <div class="row">
                                     <div class='input-field col s12'>
-                                        <input class='validate' type='text' name='nome' id='nome' minlength="6" maxlength="60" required/>
+                                        <input class='validate' type='text' name='nome' id='nome' minlength="3" maxlength="60" required/>
                                         <label id="nome-cadastro" for='nome'>Nome</label>
                                         <span id="erro-nome" class="erro-span"></span>
                                     </div>
 
                                     <div class='input-field col s12'>
-                                        <input class='validate telefone-mask' type='text' name='telefone' minlength="17" id='telefone' maxlength="18" required/>
+                                        <input class='validate telefone-mask' type='text' name='telefone' id='telefone' maxlength="18" required/>
                                         <label id="telefone-cadastro" for='telefone'>Telefone</label>
                                         <span id="erro-telefone" class="erro-span"></span>
 
@@ -181,13 +181,11 @@
                                         <input class='validate' type='email' name='email' id='email' maxlength="60" required/>
                                         <label for='email'>Email</label>
                                         <span id="erro-email" class="erro-span"></span>
-                                        <span id="erro-cadastro-proximo" class="erro-span">Preencha todos os campos da tela anterior corretamente!</span>
-                                        <span id="erro-cadastro-final" class="erro-span">Preencha todos os campos corretamente!</span>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <button id="btn-cadastrar" type='submit' name='btn-cadastrar' class='col s12 btn btn-large waves-effect indigo disabled'>Cadastrar</button>
+                                    <button id="btn-cadastrar" type='submit' name='btn-cadastrar' class='col s12 btn btn-large waves-effect indigo'>Cadastrar</button>
                                 </div>
                                 <a href="" id="btn-voltar-tela-2">Voltar</a>
                             </div>
