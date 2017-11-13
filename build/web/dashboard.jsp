@@ -24,11 +24,20 @@
 <html>
 
     <head>
+        <script type="text/javascript" src="/js/lib/dummy.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+        <style type="text/css"></style>
+        <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+        <script src="http://codemirror.net/lib/codemirror.js"></script>
+        <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+        <script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
+        <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>IFCommunity | Dashboard</title>
         <!-- Import Materialize CSS -->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
         <!-- Import Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
@@ -36,10 +45,19 @@
         <!-- Import Codemirror -->
         <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
         <!-- Import Codemirror -->
-        <script src="http://codemirror.net/lib/codemirror.js"></script>
-        <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
-        <script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
-        <script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
+        <script type="text/javascript" src="/js/lib/dummy.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+        <style type="text/css"></style>
+        <script>
+            // tell the embed parent frame the height of the content
+            if (window.parent && window.parent.parent) {
+                window.parent.parent.postMessage(["resultsFrame", {
+                        height: document.body.getBoundingClientRect().height,
+                        slug: "TcqAf"
+                    }], "*");
+            }
+            ;
+        </script>
 
 
     </head>
@@ -163,23 +181,95 @@
             </div>
             <div class="modal-content">
 
+                <div>
 
+                    <h2>Editable</h2>
+
+                    <textarea rows="4" cols="50" name="codesnippet_editable" id="codesnippet_editable">
+// Demo code (the actual new parser character stream implementation)
+
+function StringStream(string) {
+  this.pos = 0;
+  this.string = string;
+}
+
+StringStream.prototype = {
+  done: function() {return this.pos >= this.string.length;},
+  peek: function() {return this.string.charAt(this.pos);},
+  next: function() {
+    if (this.pos &lt; this.string.length)
+      return this.string.charAt(this.pos++);
+  },
+  eat: function(match) {
+    var ch = this.string.charAt(this.pos);
+    if (typeof match == "string") var ok = ch == match;
+    else var ok = ch &amp;&amp; match.test ? match.test(ch) : match(ch);
+    if (ok) {this.pos++; return ch;}
+  },
+  eatWhile: function(match) {
+    var start = this.pos;
+    while (this.eat(match));
+    if (this.pos > start) return this.string.slice(start, this.pos);
+  },
+  backUp: function(n) {this.pos -= n;},
+  column: function() {return this.pos;},
+  eatSpace: function() {
+    var start = this.pos;
+    while (/\s/.test(this.string.charAt(this.pos))) this.pos++;
+    return this.pos - start;
+  },
+  match: function(pattern, consume, caseInsensitive) {
+    if (typeof pattern == "string") {
+      function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
+      if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
+        if (consume !== false) this.pos += str.length;
+        return true;
+      }
+    }
+    else {
+      var match = this.string.slice(this.pos).match(pattern);
+      if (match &amp;&amp; consume !== false) this.pos += match[0].length;
+      return match;
+    }
+  }
+};
+                    </textarea>
+
+                </div>
+
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                </div>
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-            </div>
-        </div>
 
 
-        <!-- Import jQuery -->
-        <script src="js/jquery-3.2.1.min.js"></script>
-        <!-- Import Materialize JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
-        <!-- Import jQuery Mask JS -->
-        <script src="js/jquery.mask.min.js"></script>
-        <!-- Import Dashboard JS -->
-        <script src="js/dashboard.js"></script>
+            <!-- Import jQuery -->
+            <script src="js/jquery-3.2.1.min.js"></script>
+            <!-- Import Materialize JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+            <script type="text/javascript" src="js/materialize.min.js"></script>
+            <!-- Import jQuery Mask JS -->
+            <script src="js/jquery.mask.min.js"></script>
+            <!-- Import Dashboard JS -->
+            <script src="js/dashboard.js"></script>
+            <script>
+            window.onload = function () {
+
+                var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
+                    mode: "javascript",
+                    theme: "default",
+                    lineNumbers: true,
+                    readOnly: true
+                });
+
+                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+                    mode: "javascript",
+                    theme: "default",
+                    lineNumbers: true
+                });
+
+            };
+            </script>
     </body>
 
 </html>

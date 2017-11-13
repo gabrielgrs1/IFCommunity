@@ -150,7 +150,9 @@ $(document).ready(function () {
     $('#textarea1').val('New Text');
     $('#textarea1').trigger('autoresize');
     /*-----------------------------------------------------------------------------*/
+    
     /*                Highlight dos escritos dos códigos                     */
+    window.onload = function () {
 
         var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
             mode: "javascript",
@@ -164,6 +166,9 @@ $(document).ready(function () {
             theme: "default",
             lineNumbers: true
         });
+
+    };
+
 
 
     /*-----------------------------------------------------------------------------*/
