@@ -62,11 +62,11 @@ $(document).ready(function () {
 
         //console.log($(this).text());
         if ($(this).children("span").text() !== 'Minhas matérias') {
-            console.log("entrou aqui");
+            //  console.log("entrou aqui");
             $('.minhas-materias-adicionadas').slideUp();
         }
         var classe = '.' + $(this).children("span").attr("id");
-        console.log(classe);
+        //console.log(classe);
         $("section").hide();
         $(".site-content").find(classe).addClass("section-aparece");
         //Se tiver a section-aparece, ele exibe ela na tela.
@@ -75,6 +75,7 @@ $(document).ready(function () {
         }
         ;
         trocaCorFundo();
+        apareceMenuMensagens($(this).children("span").text());
     });
 
     /*-----------------------------------------------------------------------------*/
@@ -101,12 +102,69 @@ $(document).ready(function () {
     /*-----------------------------------------------------------------------------*/
 
     /*              Fundo randomico                          */
-    
+
     function trocaCorFundo() {
         var array = ["#c5cae9", "#bbdefb", "#b2dfdb", "#eeeeee", "#d7ccc8", "#cfd8dc"];
         var colorNumber = Math.round((Math.random() * (array.length - 1)));
         $("#body-principal").css('background-color', array[colorNumber]);
-    };
+    }
+    ;
+
+    /*-----------------------------------------------------------------------------*/
+    /*                Sidebar de materias                     */
+
+
+    $(".menu-mensagens").hide();
+    function apareceMenuMensagens(textoDoMenu) {
+        $(".menu-mensagens").show();
+        console.log(textoDoMenu);
+        if (textoDoMenu !== 'Minhas matérias') {
+            //  console.log("entrou no hide do menu");
+            //  console.log("entrou aqui");
+            $(".menu-mensagens").hide();
+        }
+    }
+    /*-----------------------------------------------------------------------------*/
+    /*                Modal de publicação                     */
+
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+
+    $('.modal1').modal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '10%', // Ending top style attribute
+        ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+            alert("Ready");
+            console.log(modal, trigger);
+        },
+        complete: function () {
+            alert('Closed');
+        } // Callback for Modal close
+    }
+    );
+
+    $('#textarea1').val('New Text');
+    $('#textarea1').trigger('autoresize');
+    /*-----------------------------------------------------------------------------*/
+    /*                Highlight dos escritos dos códigos                     */
+
+        var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true,
+            readOnly: true
+        });
+
+        var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true
+        });
+
 
     /*-----------------------------------------------------------------------------*/
 });

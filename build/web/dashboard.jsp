@@ -33,6 +33,14 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- Import Codemirror -->
+        <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+        <!-- Import Codemirror -->
+        <script src="http://codemirror.net/lib/codemirror.js"></script>
+        <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+        <script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
+        <script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
+
 
     </head>
 
@@ -116,7 +124,7 @@
                                     <i class="material-icons prefix">school</i>
                                     <input id="icon_prefix" type="number" class="validate">
                                     <label for="icon_prefix">Matrícula</label>
-                            </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -132,13 +140,41 @@
                     }
                 %>
             </section>
-        </div>
         </main>
+
+        <!-- bar para o modal e modal logo abaixo !-->    
+
+        <div class="menu-mensagens">
+            <div class="fixed-action-btn vertical">
+                <a class="btn-floating btn-large red">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+                <ul>
+                    <li><a href="#modal1" class="btn-floating yellow darken-1 waves-effect waves-light btn modal-trigger"><i class="material-icons">format_quote</i></a></li>
+                    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-head">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-content">
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+            </div>
+        </div>
+
 
         <!-- Import jQuery -->
         <script src="js/jquery-3.2.1.min.js"></script>
         <!-- Import Materialize JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>

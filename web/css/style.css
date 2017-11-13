@@ -221,7 +221,7 @@ h4 {
 
 #body-principal li, 
 #body-principal .lista-materias label {
-        width: 100%;
+    width: 100%;
 }
 
 #body-principal .lista-materias label::before,
@@ -442,7 +442,6 @@ h4 {
         transition: all 0.15s ease-in-out;
     }
     #body-principal .menu ul li span:before {
-        content: '';
         width: 0;
         height: 0;
         position: absolute;
@@ -641,6 +640,9 @@ h4 {
     display: box;
     -webkit-box-orient: vertical;
     box-orient: vertical;
+    left: 0px;
+    padding-right: 100px!important;
+    bottom: 0px;
 }
 
 #body-principal .content-topic {
@@ -667,3 +669,36 @@ h4 {
 #body-principal .para-scroll li span{
     color: white;
 }
+
+/*---------------------------------------------------*/
+
+/*----------------Menu de postagens------------------*/
+
+/*---------------------------------------------------*/
+
+
+#body-principal .menu-mensagens {
+    right: 0px;
+    top: 0px;
+    width: 100px;
+    bottom: 0px;
+    background: #fafafa ;
+    position: fixed;
+}
+
+@media screen and (max-width: 900px) {
+    #body-principal .menu-mensagens {
+        display: none!important;
+    }
+}
+
+/*---------------------------------------------------*/
+
+/*----------------Menu de postagens------------------*/
+
+/*---------------------------------------------------*/
+
+#body-principal .modal{
+    color: #000!important;
+}
+
