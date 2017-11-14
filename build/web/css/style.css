@@ -682,6 +682,7 @@ h4 {
     -ms-flex-positive: 1;
     flex-grow: 1;
     margin: 10vmin!important;
+    margin-top: 0!important;
     padding: 2%;
 }
 
