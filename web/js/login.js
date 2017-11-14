@@ -1,6 +1,6 @@
 //Função que coloca mascaras nos inputs
 function mascarasDosInputs() {
-    $('.telefone-mask').mask('(009) 00009-0000');
+    $('.telefone-mask').mask('(00) 00009-0000');
     $('.matricula-mask').mask('00000000000-0');
 }
 
