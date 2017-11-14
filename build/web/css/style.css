@@ -133,6 +133,29 @@ h4 {
     font-size: 1.4em;
 }
 
+/* Cores do input e label caso tenha sucesso */
+#body-login .row .input-field .sucesso-label-input{
+    border-bottom: 1.3px solid #4caf50 !important;
+    -webkit-box-shadow: 0 1px 0 0 #4caf50 !important;
+    box-shadow: 0 1px 0 0 #4caf50 !important;
+}
+
+#body-login .sucesso-label-input + label {
+    color: #4caf50 !important;
+}
+
+/* Cores do input e label caso tenha erro */
+#body-login .row .input-field .erro-label-input {
+    border-bottom: 1.3px solid red !important;
+    -webkit-box-shadow: 0 1px 0 0 red !important;
+    box-shadow: 0 1px 0 0 red !important;
+}
+
+#body-login .input-field .erro-label-input + label {
+    color: red !important;
+}
+
+/* Cores do input e label caso não tenha erro nem sucesso */
 #body-login .input-field input:focus + label {
     color: #3f51b5 !important;
 }
