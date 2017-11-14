@@ -30,7 +30,7 @@ $(document).ready(function () {
                 }
             }
         });
-    }, 100);
+    }, 300);
 
     //Função que pega as matérias do usuário e armazena em um array
     function pegaMaterias(idUsuario) {
