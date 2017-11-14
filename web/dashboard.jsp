@@ -165,35 +165,33 @@
                         out.print("</div>");
                     }
                 %>
-            </section>
-        </main>
 
-        <!-- bar para o modal e modal logo abaixo !-->    
+                <!-- bar para o modal e modal logo abaixo !-->    
 
-        <div class="menu-mensagens">
-            <div class="fixed-action-btn vertical">
-                <a class="btn-floating btn-large indigo darken-3">
-                    <i class="large material-icons">code</i>
-                </a>
-                <ul>
-                    <li><a href="#modal1" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
-                    <li><a class="btn-floating grey tooltipped" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
-                </ul>
-            </div>
-        </div>
+                <div class="menu-mensagens">
+                    <div class="fixed-action-btn vertical">
+                        <a class="btn-floating btn-large indigo darken-3">
+                            <i class="large material-icons">code</i>
+                        </a>
+                        <ul>
+                            <li><a href="#modal1" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
+                            <li><a class="btn-floating grey tooltipped" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div id="modal1" class="modal modal-fixed-footer">
-            <div class="modal-head">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-            </div>
-            <div class="modal-content">
+                <div id="modal1" class="modal modal-fixed-footer">
+                    <div class="modal-head">
+                        <h4>Modal Header</h4>
+                        <p>A bunch of text</p>
+                    </div>
+                    <div class="modal-content">
 
-                <div>
+                        <div>
 
-                    <h2>Editable</h2>
+                            <h2>Editable</h2>
 
-                    <textarea rows="4" cols="50" name="codesnippet_editable" id="codesnippet_editable">
+                            <textarea rows="4" cols="50" name="codesnippet_editable" id="codesnippet_editable">
 // Demo code (the actual new parser character stream implementation)
 
 function StringStream(string) {
@@ -241,43 +239,47 @@ StringStream.prototype = {
     }
   }
 };
-                    </textarea>
+                            </textarea>
 
-                </div>
+                        </div>
 
-                <div class="modal-footer">
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-                </div>
-            </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                        </div>
+                    </div>
+            </section>
+        </main>
 
 
-            <!-- Import jQuery -->
-            <script src="js/jquery-3.2.1.min.js"></script>
-            <!-- Import Materialize JS -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-            <script type="text/javascript" src="js/materialize.min.js"></script>
-            <!-- Import jQuery Mask JS -->
-            <script src="js/jquery.mask.min.js"></script>
-            <!-- Import Dashboard JS -->
-            <script src="js/dashboard.js"></script>
-            <script>
-            window.onload = function () {
 
-                var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
-                    mode: "javascript",
-                    theme: "default",
-                    lineNumbers: true,
-                    readOnly: true
-                });
 
-                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-                    mode: "javascript",
-                    theme: "default",
-                    lineNumbers: true
-                });
+        <!-- Import jQuery -->
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <!-- Import Materialize JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!-- Import jQuery Mask JS -->
+        <script src="js/jquery.mask.min.js"></script>
+        <!-- Import Dashboard JS -->
+        <script src="js/dashboard.js"></script>
+        <script>
+        window.onload = function () {
 
-            };
-            </script>
+            var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
+                mode: "javascript",
+                theme: "default",
+                lineNumbers: true,
+                readOnly: true
+            });
+
+            var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+                mode: "javascript",
+                theme: "default",
+                lineNumbers: true
+            });
+
+        };
+        </script>
     </body>
 
 </html>

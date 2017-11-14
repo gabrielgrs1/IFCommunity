@@ -705,16 +705,6 @@ h4 {
 
 /*---------------------------------------------------*/
 
-
-#body-principal .menu-mensagens {
-    right: 0px;
-    top: 0px;
-    width: 100px;
-    bottom: 0px;
-    background: #fafafa ;
-    position: fixed;
-}
-
 @media screen and (max-width: 900px) {
     #body-principal .menu-mensagens {
         display: none!important;
