@@ -67,16 +67,13 @@
         <div class="content-header valign-wrapper">
             <h1 class="section-title">IF<span class="section-title-dois">community</span></h1>
         </div>
+        <span id="id-usuario">${id}</span>
         <nav class="nav-side menu">
             <a href="#" class="nav-toggle"></a>
             <header class="avatar">
                 <div class="container">
                 </div>
-                <h2>
-                    <%
-                        out.print(nome);
-                    %>
-                </h2>
+                <h2><%out.print(nome);%></h2>
                 <form name="form-login" class="" action="Deslogar" method="GET">
                     <input type="submit" name="botao-deslogar" value="deslogar-teste">
                 </form>
@@ -86,13 +83,7 @@
                 <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span>
                 </li>
                 <div class="minhas-materias-adicionadas">
-                    <ul class="lista-materias">
-                        <%
-                            out.print("<li>");
-
-                            out.print("</li>");
-                        %>
-                    </ul>
+                    <ul class="lista-materias"></ul>
                 </div>
                 <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Adicionar matérias</span></li>
                 <li tabindex="0" class="icon-settings"><span id="config">Configurações</span></li>

@@ -15,21 +15,45 @@ $(document).ready(function () {
 
     /*-----------------------------------------------------------------------------*/
     /*    Adiciona as materias   */
-
-    var materias = ["PPI", "Algoritimo", "Redes", "Redes"];
+    var materias = [];
+    pegaMaterias($("#id-usuario").text());
     var lista = $(".lista-materias");
     var minhasMaterias = lista.parent();
 
-
-    lista.detach().empty().each(function (i) {
-        for (var x = 0; x < materias.length; x++) {
-            console.log("entrou");
-            $(this).append('<input type="radio" name="materiasRadio" id="materias' + x + '" style="display:none!important" /><label for="materias' + x + '"><li><span>' + materias[x] + '</span></li></label>');
-            if (x == materias.length - 1) {
-                $(this).appendTo(minhasMaterias);
+    setTimeout(function () {
+        lista.detach().empty().each(function (i) {
+            for (var x = 0; x < materias.length; x++) {
+                console.log("entrou");
+                $(this).append('<input type="radio" name="materiasRadio" id="materias' + x + '" style="display:none!important" /><label for="materias' + x + '"><li><span>' + materias[x] + '</span></li></label>');
+                if (x == materias.length - 1) {
+                    $(this).appendTo(minhasMaterias);
+                }
             }
-        }
-    });
+        });
+    }, 100);
+
+    //Função que pega as matérias do usuário e armazena em um array
+    function pegaMaterias(idUsuario) {
+        $.ajax({
+            url: "RecuperaMaterias",
+            type: 'get',
+            data: {
+                idUsuario: idUsuario
+            },
+            beforeSend: function () {
+                console.log("CARREGANDO MATERIAS");
+            }
+        })
+                .done(function (materia) {
+                    console.log(materia);
+                    for (var i = 0; i < materia.length; i++) {
+                        materias.push(materia[i]);
+                    }
+                })
+                .fail(function (jqXHR, textStatus, materia) {
+                    materias.push("Você ainda não tem nenhuma matéria cadastrada!");
+                });
+    }
 
     /*-----------------------------------------------------------------------------*/
     /*    Botão para abrir menu do celular   */
@@ -150,7 +174,7 @@ $(document).ready(function () {
     $('#textarea1').val('New Text');
     $('#textarea1').trigger('autoresize');
     /*-----------------------------------------------------------------------------*/
-    
+
     /*                Highlight dos escritos dos códigos                     */
     window.onload = function () {
 

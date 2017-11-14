@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import util.ConnectionFactory;
 import model.Aluno;
 
 public class AlunoDAO {
+
+    public AlunoDAO() {
+    }
 
     public static String podeCadastrar(String nome, String telefone, String matricula, String periodo, String login, String senha, String email) throws SQLException {
         PreparedStatement pstm;
@@ -47,9 +51,6 @@ public class AlunoDAO {
         con.close();
 
         return erros;
-    }
-
-    public AlunoDAO() {
     }
 
     public static Aluno cadastro(String nome, String telefone, String matricula, String periodo, String login, String senha, String email) throws SQLException {
@@ -148,6 +149,54 @@ public class AlunoDAO {
         con.close();
 
         return aluno;
+    }
+
+    public static ArrayList<String> recuperaMateria(int id) throws SQLException {
+        String materiasId[] = new String[6];
+        ArrayList<String> materias = new ArrayList<>();
+        String materiasString = "";
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+
+        /* Comando SQL que será enviado ao banco */
+        String sql = "SELECT * FROM TB_USUARIO INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE ID_ALUNO = ?";
+
+        /* Prepara a consulta e passa os parametros */
+        pstm = con.prepareStatement(sql);
+        pstm.setInt(1, id);
+
+        /* Executa a query e armazena o resultado na variavel rs */
+        rs = pstm.executeQuery();
+
+        /* Instancia um novo aluno para dar de retorno da função */
+        while (rs.next()) {
+            materiasString = rs.getString("MATERIAS_CADASTRADAS");
+        }
+
+        materiasId = materiasString.split(",");
+
+        for (int i = 0; i < materiasId.length; i++) {
+            /* Comando SQL que será enviado ao banco */
+            sql = "SELECT * FROM TB_MATERIA WHERE ID = ?";
+
+            /* Prepara a consulta e passa os parametros */
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, Integer.parseInt(materiasId[i]));
+
+            /* Executa a query e armazena o resultado na variavel rs */
+            rs = pstm.executeQuery();
+
+            /* Instancia um novo aluno para dar de retorno da função */
+            while (rs.next()) {
+                materias.add(rs.getString("NOME_MATERIA"));
+            }
+        }
+
+        /* Fecha a conexão */
+        con.close();
+
+        return materias;
     }
 
     public static String verificaLoginSenha(String login, String senha) throws SQLException {
