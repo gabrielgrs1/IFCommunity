@@ -681,9 +681,8 @@ h4 {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    margin: 1vmin 5vmin!important;
-    -webkit-box-shadow: .5vmin .5vmin 0 rgba(0, 0, 0, .20);
-    box-shadow: .5vmin .5vmin 0 rgba(0, 0, 0, .20);
+    margin: 10vmin!important;
+    padding: 2%;
 }
 
 #body-principal .content-topic h1 {

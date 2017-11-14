@@ -141,10 +141,27 @@
 
             <section class="postagens minhas-materias">
                 <%
-                    int contPostagens = 10;
-                    for (int i = 0; i < contPostagens; i++) {
-                        out.print("<div class='content-topic'>");
-                        out.print("<h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h1>");
+                    int contPostagens = 2;
+                    for (int i = 1; i <= contPostagens; i++) {
+                        out.print("<div class='content-topic container z-depth-2'>");
+                        out.print("<row>");
+                        out.print("<div class='col s6' id='titulo-postagem" + i + "'>Titulo postagem</div>");
+                        out.print("<p id='autor" + i + "'>Autor da postagem</p>");
+
+                        out.print("<form name='form-like-btn" + i + "' class='col s3' id='form-like" + i + "' action='Like' method='POST'>");
+                        out.print("<input type='submit' class='right-align' value='Like' id='btn-like" + i + "'></input>");
+                        out.print("</form>");
+
+                        out.print("<form name='form-deslike-btn" + i + "' class='col s3' id='form-deslike" + i + "' action='Deslike' method='POST'>");
+                        out.print("<input type='submit' class='right-align' value='Deslike' id='btn-deslike" + i + "'></input>");
+                        out.print("</form>");
+                        out.print("</row>");
+
+                        out.print("<hr>");
+                        out.print("<row>");
+                        out.print("<p id='postagem" + i + "'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>");
+                        out.print("<p id='data-postagem' class='right-align'>Hora postagem</p>");
+                        out.print("</row>");
                         out.print("</div>");
                     }
                 %>
@@ -155,12 +172,12 @@
 
         <div class="menu-mensagens">
             <div class="fixed-action-btn vertical">
-                <a class="btn-floating btn-large red">
-                    <i class="large material-icons">mode_edit</i>
+                <a class="btn-floating btn-large indigo darken-3">
+                    <i class="large material-icons">code</i>
                 </a>
                 <ul>
-                    <li><a href="#modal1" class="btn-floating yellow darken-1 waves-effect waves-light btn modal-trigger"><i class="material-icons">format_quote</i></a></li>
-                    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                    <li><a href="#modal1" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
+                    <li><a class="btn-floating grey tooltipped" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
                 </ul>
             </div>
         </div>
