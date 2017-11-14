@@ -54,8 +54,14 @@ public class Cadastrar extends HttpServlet {
         }
 
         if (conta != null) {
-            request.getSession().setAttribute("login", conta.getLogin());
+            request.getSession().setAttribute("id", conta.getId());
             request.getSession().setAttribute("nome", conta.getNome());
+            request.getSession().setAttribute("login", conta.getLogin());
+            request.getSession().setAttribute("periodo", conta.getPeriodo());
+            request.getSession().setAttribute("telefone", conta.getTelefone());
+            request.getSession().setAttribute("permissao", conta.getPermissao());
+            request.getSession().setAttribute("materias", conta.getMaterias());
+            request.getSession().setAttribute("email", conta.getEmail());
             response.sendRedirect("dashboard.jsp");
         } else {
             request.setAttribute("erros-cadastro", erros);
