@@ -596,6 +596,12 @@ h4 {
     position: relative!important;
 }
 
+#body-principal #btn-deslogar{
+    border: none;
+    background: none;
+    color: red;
+}
+
 /*---------------------------------------------------*/
 
 /*--------------Corpo do site------------------------*/

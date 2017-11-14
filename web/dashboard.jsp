@@ -75,7 +75,7 @@
                 </div>
                 <h2><%out.print(nome);%></h2>
                 <form name="form-login" class="" action="Deslogar" method="GET">
-                    <input type="submit" name="botao-deslogar" value="deslogar-teste">
+                    <input type="submit" name="botao-deslogar" id="btn-deslogar" value="Logout">
                 </form>
             </header>
             <ul class="para-scroll">
