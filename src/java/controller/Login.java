@@ -48,6 +48,7 @@ public class Login extends HttpServlet {
             request.getSession().setAttribute("permissao", conta.getPermissao());
             request.getSession().setAttribute("materias", conta.getMaterias());
             request.getSession().setAttribute("email", conta.getEmail());
+            request.getSession().setMaxInactiveInterval(-1);
             response.sendRedirect("dashboard.jsp");
         } else {
             request.getRequestDispatcher("index.jsp").forward(request, response);

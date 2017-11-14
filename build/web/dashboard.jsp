@@ -93,7 +93,7 @@
         <main class="site-content">
             <section class="postagens perfil section-aparece">
                 <div class="sc-edprofile">
-                    <h1>Edit Profile Form</h1>
+                    <h1>Perfil</h1>
                     <div class="row">
                         <form class="col s12">
                             <div class="row">
@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">school</i>
-                                    <input id="icon_prefix" type="number" class="validate">
+                                    <input id="icon_prefix" type="text" class="validate">
                                     <label for="icon_prefix">Matrícula</label>
                                 </div>
                             </div>
