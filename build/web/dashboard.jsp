@@ -35,7 +35,12 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Import Codemirror -->
 
-
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="googlebot" content="noindex, nofollow">
+        <link rel="stylesheet" type="text/css" href="css/result-light.css">
+        <style type="text/css"></style>
+        <link rel="stylesheet" href="css/codemirror.css">
 
     </head>
 
@@ -151,7 +156,7 @@
                             <i class="large material-icons">code</i>
                         </a>
                         <ul>
-                            <li><a href="#modal1" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
+                            <li ><a href="#modal1" id="modal-de-escrever-codigo" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
                             <li><a class="btn-floating grey tooltipped" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
                         </ul>
                     </div>
@@ -164,66 +169,11 @@
                     </div>
                     <div class="modal-content">
 
-                        <div>
-
-                            <h2>Editable</h2>
-
-                            <textarea rows="4" cols="50" name="codesnippet_editable" id="codesnippet_editable">
-// Demo code (the actual new parser character stream implementation)
-
-function StringStream(string) {
-  this.pos = 0;
-  this.string = string;
-}
-
-StringStream.prototype = {
-  done: function() {return this.pos >= this.string.length;},
-  peek: function() {return this.string.charAt(this.pos);},
-  next: function() {
-    if (this.pos &lt; this.string.length)
-      return this.string.charAt(this.pos++);
-  },
-  eat: function(match) {
-    var ch = this.string.charAt(this.pos);
-    if (typeof match == "string") var ok = ch == match;
-    else var ok = ch &amp;&amp; match.test ? match.test(ch) : match(ch);
-    if (ok) {this.pos++; return ch;}
-  },
-  eatWhile: function(match) {
-    var start = this.pos;
-    while (this.eat(match));
-    if (this.pos > start) return this.string.slice(start, this.pos);
-  },
-  backUp: function(n) {this.pos -= n;},
-  column: function() {return this.pos;},
-  eatSpace: function() {
-    var start = this.pos;
-    while (/\s/.test(this.string.charAt(this.pos))) this.pos++;
-    return this.pos - start;
-  },
-  match: function(pattern, consume, caseInsensitive) {
-    if (typeof pattern == "string") {
-      function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
-      if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
-        if (consume !== false) this.pos += str.length;
-        return true;
-      }
-    }
-    else {
-      var match = this.string.slice(this.pos).match(pattern);
-      if (match &amp;&amp; consume !== false) this.pos += match[0].length;
-      return match;
-    }
-  }
-};
-                            </textarea>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-                        </div>
                     </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+                    </div>
+                </div>
             </section>
         </main>
 
@@ -239,6 +189,11 @@ StringStream.prototype = {
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Dashboard JS -->
         <script src="js/dashboard.js"></script>
+        <!-- Import Codemirror JS -->      
+        <script src="http://codemirror.net/lib/codemirror.js"></script>
+        <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
+        <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+        <script type="text/javascript" src="js/dummy.js"></script>
 
     </body>
 

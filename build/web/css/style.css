@@ -713,11 +713,15 @@ h4 {
 
 /*---------------------------------------------------*/
 
-/*----------------Menu de postagens------------------*/
+/*----------------Modal de postagens-----------------*/
 
 /*---------------------------------------------------*/
 
 #body-principal .modal{
     color: #000!important;
+}
+
+#body-principal .CodeMirror-linenumber {
+    width: 25px!important;
 }
 

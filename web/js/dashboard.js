@@ -1,4 +1,3 @@
-$(document).ready(function () {
     /*-----------------------------------------------------------------------------*/
     /* Adiciona a imagem */
 
@@ -54,10 +53,12 @@ $(document).ready(function () {
                     materias.push("Você ainda não tem nenhuma matéria cadastrada!");
                 });
     }
+
     /*-----------------------------------------------------------------------------*/
 
     /*           Checked img na matéria (submenu) que está selecionada         */
     /* ela tem que carregar após as matérias serem carregadas para funcionar   */
+
     setTimeout(function () {
         $("input[name='materias-radio']").click(function () {
             // alert($(this).attr('id'));
@@ -139,14 +140,15 @@ $(document).ready(function () {
     /*-----------------------------------------------------------------------------*/
     /*                Sidebar de materias                     */
 
+    /*  esconde e mostra a opção de publicação dependendo da página que está  */
 
     $(".menu-mensagens").hide();
     function apareceMenuMensagens(textoDoMenu) {
         $(".menu-mensagens").show();
         console.log(textoDoMenu);
         if (textoDoMenu !== 'Minhas matérias') {
-            //  console.log("entrou no hide do menu");
-            //  console.log("entrou aqui");
+            console.log("entrou no hide do menu");
+            console.log("entrou aqui");
             $(".menu-mensagens").hide();
         }
     }
@@ -180,6 +182,30 @@ $(document).ready(function () {
     /*                Highlight dos escritos dos códigos                     */
 
 
+    $("#modal-de-escrever-codigo").click(function () {
+        
+        // tell the embed parent frame the height of the content
+        if (window.parent && window.parent.parent) {
+            window.parent.parent.postMessage(["resultsFrame", {
+                    height: document.body.getBoundingClientRect().height,
+                    slug: "TcqAf"
+                }], "*")
+        }
 
+        console.log("entrou no click do botao pra abrir modal");
+        var textarea = document.createElement("textarea");
+        textarea.value = "";
+        textarea.setAttribute("name", "codesnippet_editable");
+        textarea.setAttribute("id", "codesnippet_editable");
+        textarea.setAttribute("rows", "4");
+        textarea.setAttribute("cols", "50");
+        $('.modal-content').append(textarea);
+
+        // Habilita o codemirror na textarea
+        var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true
+        });
+    });
     /*-----------------------------------------------------------------------------*/
-});
