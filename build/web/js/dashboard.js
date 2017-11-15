@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     /*-----------------------------------------------------------------------------*/
     /*    Adiciona as materias   */
-    var materias = [];
+    var materias = ["PPI", ];
     pegaMaterias($("#id-usuario").text());
     var lista = $(".lista-materias");
     var minhasMaterias = lista.parent();
@@ -24,7 +24,7 @@ $(document).ready(function () {
         lista.detach().empty().each(function (i) {
             for (var x = 0; x < materias.length; x++) {
                 console.log("entrou");
-                $(this).append('<input type="radio" name="materiasRadio" id="materias' + x + '" style="display:none!important" /><label for="materias' + x + '"><li><span>' + materias[x] + '</span></li></label>');
+                $(this).append('<input type="radio" name="materias-radio" id="materia' + x + '" style="display:none!important" /><label for="materia' + x + '"><li><span>' + materias[x] + '</span></li></label>');
                 if (x == materias.length - 1) {
                     $(this).appendTo(minhasMaterias);
                 }
@@ -54,6 +54,19 @@ $(document).ready(function () {
                     materias.push("Você ainda não tem nenhuma matéria cadastrada!");
                 });
     }
+    /*-----------------------------------------------------------------------------*/
+
+    /*           Checked img na matéria (submenu) que está selecionada         */
+    /* ela tem que carregar após as matérias serem carregadas para funcionar   */
+    setTimeout(function () {
+        $("input[name='materias-radio']").click(function () {
+            // alert($(this).attr('id'));
+            if ($(this).is(':checked')) {
+                $('ul label li').removeClass('fundo-checked');
+                $(this).next('label').children('li').addClass('fundo-checked');
+            }
+        });
+    }, 400);
 
     /*-----------------------------------------------------------------------------*/
     /*    Botão para abrir menu do celular   */
@@ -102,17 +115,6 @@ $(document).ready(function () {
         apareceMenuMensagens($(this).children("span").text());
     });
 
-    /*-----------------------------------------------------------------------------*/
-
-    /*           Checked img na matéria (submenu) que está selecionada         */
-
-    $("input[name='materiasRadio']").click(function () {
-        // alert($(this).attr('id'));
-        if ($(this).is(':checked')) {
-            $('ul label li').removeClass('fundo-checked');
-            $(this).next('label').children('li').addClass('fundo-checked');
-        }
-    });
 
     /*-----------------------------------------------------------------------------*/
 
@@ -176,22 +178,6 @@ $(document).ready(function () {
     /*-----------------------------------------------------------------------------*/
 
     /*                Highlight dos escritos dos códigos                     */
-    window.onload = function () {
-
-        var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
-            mode: "javascript",
-            theme: "default",
-            lineNumbers: true,
-            readOnly: true
-        });
-
-        var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-            mode: "javascript",
-            theme: "default",
-            lineNumbers: true
-        });
-
-    };
 
 
 

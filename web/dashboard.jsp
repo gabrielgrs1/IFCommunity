@@ -24,15 +24,6 @@
 <html>
 
     <head>
-        <script type="text/javascript" src="/js/lib/dummy.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-        <style type="text/css"></style>
-        <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
-        <script src="http://codemirror.net/lib/codemirror.js"></script>
-        <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
-        <script src="http://codemirror.net/addon/edit/continuecomment.js"></script>
-        <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
-
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>IFCommunity | Dashboard</title>
@@ -43,21 +34,7 @@
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Import Codemirror -->
-        <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
-        <!-- Import Codemirror -->
-        <script type="text/javascript" src="/js/lib/dummy.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-        <style type="text/css"></style>
-        <script>
-            // tell the embed parent frame the height of the content
-            if (window.parent && window.parent.parent) {
-                window.parent.parent.postMessage(["resultsFrame", {
-                        height: document.body.getBoundingClientRect().height,
-                        slug: "TcqAf"
-                    }], "*");
-            }
-            ;
-        </script>
+
 
 
     </head>
@@ -262,24 +239,7 @@ StringStream.prototype = {
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Dashboard JS -->
         <script src="js/dashboard.js"></script>
-        <script>
-        window.onload = function () {
 
-            var readOnlyCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_readonly'), {
-                mode: "javascript",
-                theme: "default",
-                lineNumbers: true,
-                readOnly: true
-            });
-
-            var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-                mode: "javascript",
-                theme: "default",
-                lineNumbers: true
-            });
-
-        };
-        </script>
     </body>
 
 </html>
