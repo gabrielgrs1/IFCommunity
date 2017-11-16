@@ -22,7 +22,7 @@ var minhasMaterias = lista.parent();
 setTimeout(function () {
     lista.detach().empty().each(function (i) {
         for (var x = 0; x < materias.length; x++) {
-            console.log("entrou");
+            // console.log("entrou");
             $(this).append('<input type="radio" name="materias-radio" id="materia' + x + '" style="display:none!important" /><label for="materia' + x + '"><li><span>' + materias[x] + '</span></li></label>');
             if (x == materias.length - 1) {
                 $(this).appendTo(minhasMaterias);
@@ -40,11 +40,11 @@ function pegaMaterias(idUsuario) {
             idUsuario: idUsuario
         },
         beforeSend: function () {
-            console.log("CARREGANDO MATERIAS");
+            // console.log("CARREGANDO MATERIAS");
         }
     })
             .done(function (materia) {
-                console.log(materia);
+                // console.log(materia);
                 for (var i = 0; i < materia.length; i++) {
                     materias.push(materia[i]);
                 }
@@ -91,20 +91,20 @@ if ($("section").hasClass("section-aparece")) {
 /*    Na escolha da opção no menu substitui a pagina inicial      */
 /*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
 $("ul.para-scroll > li").click(function () {
-    //console.log($("section").find("section-aparece"));
-    //console.log("entrou");
-    console.log($(this).children("span").text());
+    // console.log($("section").find("section-aparece"));
+    // console.log("entrou");
+    // console.log($(this).children("span").text());
     //fecha o menu de minhas materias
     //remove a tela que está aparecendo
     $("section").removeClass("section-aparece");
 
-    //console.log($(this).text());
+    // console.log($(this).text());
     if ($(this).children("span").text() !== 'Minhas matérias') {
         //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
     }
     var classe = '.' + $(this).children("span").attr("id");
-    //console.log(classe);
+    // console.log(classe);
     $("section").hide();
     $(".site-content").find(classe).addClass("section-aparece");
     //Se tiver a section-aparece, ele exibe ela na tela.
@@ -114,6 +114,7 @@ $("ul.para-scroll > li").click(function () {
     ;
     trocaCorFundo();
     apareceMenuMensagens($(this).children("span").text());
+    montaPostagens();
 });
 
 
@@ -145,10 +146,10 @@ function trocaCorFundo() {
 $(".menu-mensagens").hide();
 function apareceMenuMensagens(textoDoMenu) {
     $(".menu-mensagens").show();
-    console.log(textoDoMenu);
+    // console.log(textoDoMenu);
     if (textoDoMenu !== 'Minhas matérias') {
-        console.log("entrou no hide do menu");
-        console.log("entrou aqui");
+        //console.log("entrou no hide do menu");
+        // console.log("entrou aqui");
         $(".menu-mensagens").hide();
     }
 }
@@ -184,28 +185,126 @@ $('#textarea1').trigger('autoresize');
 
 $("#modal-de-escrever-codigo").click(function () {
 
-    // tell the embed parent frame the height of the content
+// Ajusta o tamanho do modal com o hightlight
     if (window.parent && window.parent.parent) {
         window.parent.parent.postMessage(["resultsFrame", {
                 height: document.body.getBoundingClientRect().height,
                 slug: "TcqAf"
             }], "*")
     }
-
     $('.modal-content').children().remove();
-    console.log("entrou no click do botao pra abrir modal");
-    var textarea = document.createElement("textarea");
-    textarea.setAttribute("name", "codesnippet_editable");
-    textarea.setAttribute("id", "codesnippet_editable");
-    textarea.setAttribute("rows", "4");
-    textarea.setAttribute("cols", "50");
-    $('.modal-content').append(textarea);
 
-    // Habilita o codemirror na textarea
-    var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-        mode: "javascript",
-        theme: "default",
-        lineNumbers: true
+
+    // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
+    $('#formDoModal').on('change', 'select', function (e) {
+        var val = $(e.target).val();
+        var text = $(e.target).find("option:selected").text();
+        adicionaOsTextAreaModal(text);
     });
 });
+
+function adicionaOsTextAreaModal(text) {
+
+    if (text == "Texto normal") {
+        $('.modal-content').children().remove();
+        // console.log("entrou no click do botao pra abrir modal de texto");
+        var textarea = document.createElement("textarea");
+        $('.modal-content').append(textarea);
+
+    } else {
+        $('.modal-content').children().remove();
+        // console.log("entrou no tipo diferente de texto normal");
+        var textarea = document.createElement("textarea");
+        textarea.setAttribute("name", "codesnippet_editable");
+        textarea.setAttribute("id", "codesnippet_editable");
+        textarea.setAttribute("rows", "4");
+        textarea.setAttribute("cols", "50");
+        $('.modal-content').append(textarea);
+        qualLinguagem(text);
+        // Habilita o codemirror na textarea
+        function qualLinguagem(text) {
+            // console.log("hahaha" + text);
+            if (text == "Java") {
+                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+                    mode: "java",
+                    theme: "default",
+                    lineNumbers: true
+                });
+            } else if (text == "Javascript") {
+                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+                    mode: "javascript",
+                    theme: "default",
+                    lineNumbers: true
+                });
+            } else if (text == "html") {
+                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
+                    mode: "html",
+                    theme: "default",
+                    lineNumbers: true
+                });
+            }
+        }
+    }
+}
+;
 /*-----------------------------------------------------------------------------*/
+/*                  Postagens colapsadas                   */
+function collapsible() {
+    $('.collapsible').collapsible();
+}
+
+//monta os textos das postagens as postagens
+
+function montaPostagens() {
+
+    for (var x = 0; x < 10; x++) {
+        //pegar texto
+        var loremIpsun = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+        //pegar nome de quem postou, fiz assim pra teste só
+        var nome = $('header.avatar h2').text();
+        adicionaPostagens(loremIpsun, nome)
+    }
+    collapsible();
+}
+
+
+
+//adiciona as postagens
+function adicionaPostagens(loremIpsun, nome) {
+    console.log("entrou no adiciona postagens");
+
+    var secaoDePostagens = $("main > section.minhas-materias");
+    var criaUl = document.createElement("ul");
+    var criaLi = document.createElement("li");
+    var criaDivHead = document.createElement("div");
+    var criaUlHead = document.createElement("ul");
+    var criaLiHead1 = document.createElement("li");
+    var criaLiHead2 = document.createElement("li");
+    var criaH4Titulo = document.createElement("h4");
+    var criaPNome = document.createElement("p");
+    var criaDivBody = document.createElement("div");
+    var criaSpanBody = document.createElement("span");
+
+    criaDivHead.className = "collapsible-header";
+    criaH4Titulo.className = "center";
+    criaH4Titulo.innerHTML = "Titulo da postagem";
+    criaPNome.innerHTML = nome;
+    criaPNome.className = "right-align";
+    criaUlHead.setAttribute("class", "container");
+    criaDivBody.className = "collapsible-body";
+    criaSpanBody.innerHTML = loremIpsun;
+    criaUl.className = "collapsible content-topic z-depth-2 container row";
+    criaUl.setAttribute('data-collapsible', "accordion");
+
+    criaLiHead1.append(criaH4Titulo);
+    criaLiHead2.append(criaPNome);
+    criaUlHead.append(criaLiHead1);
+    criaUlHead.append(criaLiHead2);
+    criaDivHead.append(criaUlHead);
+    criaDivBody.append(criaSpanBody);
+    criaLi.append(criaDivHead);
+    criaLi.append(criaDivBody);
+    criaUl.append(criaLi);
+
+    secaoDePostagens.prepend(criaUl);
+}

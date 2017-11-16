@@ -55,19 +55,20 @@
                 <div class="container">
                 </div>
                 <h2><%out.print(nome);%></h2>
-                <form name="form-login" class="" action="Deslogar" method="GET">
-                    <input type="submit" name="botao-deslogar" id="btn-deslogar" value="Logout">
-                </form>
             </header>
             <ul class="para-scroll">
                 <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
-                <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span>
-                </li>
+                <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span></li>
                 <div class="minhas-materias-adicionadas">
                     <ul class="lista-materias"></ul>
                 </div>
                 <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Adicionar matérias</span></li>
                 <li tabindex="0" class="icon-settings"><span id="config">Configurações</span></li>
+                <li tabindex="0" class="icon-sair">
+                    <form name="form-login" class="" action="Deslogar" method="GET">
+                        <input type="submit" name="botao-deslogar" id="btn-deslogar" value="">
+                        <span id="config">Sair</span></li>
+                </form>
             </ul>
         </nav>
 
@@ -120,32 +121,9 @@
                     </div>
             </section>
 
-            <section class="postagens minhas-materias">
-                <%
-                    int contPostagens = 2;
-                    for (int i = 1; i <= contPostagens; i++) {
-                        out.print("<div class='content-topic container z-depth-2'>");
-                        out.print("<row>");
-                        out.print("<div class='col s6' id='titulo-postagem" + i + "'>Titulo postagem</div>");
-                        out.print("<p id='autor" + i + "'>Autor da postagem</p>");
-
-                        out.print("<form name='form-like-btn" + i + "' class='col s3' id='form-like" + i + "' action='Like' method='POST'>");
-                        out.print("<input type='submit' class='right-align' value='Like' id='btn-like" + i + "'></input>");
-                        out.print("</form>");
-
-                        out.print("<form name='form-deslike-btn" + i + "' class='col s3' id='form-deslike" + i + "' action='Deslike' method='POST'>");
-                        out.print("<input type='submit' class='right-align' value='Deslike' id='btn-deslike" + i + "'></input>");
-                        out.print("</form>");
-                        out.print("</row>");
-
-                        out.print("<hr>");
-                        out.print("<row>");
-                        out.print("<p id='postagem" + i + "'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>");
-                        out.print("<p id='data-postagem' class='right-align'>Hora postagem</p>");
-                        out.print("</row>");
-                        out.print("</div>");
-                    }
-                %>
+            <section class="postagens minhas-materias row">
+                
+                 <!-- aqui vão as postagens adicionadas dinamicamente !--> 
 
                 <!-- bar para o modal e modal logo abaixo !-->    
 
@@ -162,16 +140,39 @@
                 </div>
 
                 <div id="modal1" class="modal modal-fixed-footer">
-                    <div class="modal-head">
-                        <h4>Modal Header</h4>
-                        <p>A bunch of text</p>
-                    </div>
-                    <div class="modal-content">
+                    <form id="formDoModal">
+                        <div class="modal-head center">
+                            <p>Escreva aqui a sua contribuição!</p>
+                        </div>
+                        <hr>
 
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-                    </div>
+                        <div class="row col s12">
+                            <div class="input-field col s6">
+                                <i class= "material-icons prefix small">subject</i>
+                                <input id="icon_prefix" type="text" class="validate" required="required">
+                                <label for="icon_prefix">Assunto</label>
+                            </div>
+                            <div id="qual-linguagem-modal" class="input-field col s6">
+                                <i class="material-icons prefix small">code</i>
+                                <select required="required">
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="1">Javascript</option>
+                                    <option value="2">Java</option>
+                                    <option value="3">html</option>
+                                    <option value="4">Texto normal</option>
+                                </select>
+                                <label>Linguagem</label>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-content">   
+                        </div>
+
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Submeter</a>
+                        </div>
+                    </form>
                 </div>
             </section>
         </main>
