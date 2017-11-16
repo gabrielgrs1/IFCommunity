@@ -34,8 +34,6 @@
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Import Codemirror -->
-        <meta name="robots" content="noindex, nofollow">
-        <meta name="googlebot" content="noindex, nofollow">
         <link rel="stylesheet" type="text/css" href="css/result-light.css">
         <style type="text/css"></style>
         <link rel="stylesheet" href="css/codemirror.css">
@@ -86,7 +84,7 @@
                                     <label for="icon_prefix">Sobrenome</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <i class="material-icons prefix">Telefone</i>
+                                    <i class="material-icons prefix">phone</i>
                                     <input id="icon_telephone" type="tel" class="validate">
                                     <label for="icon_telephone">Celular</label>
                                 </div>
