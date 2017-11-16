@@ -279,6 +279,21 @@ h4 {
     padding: 0!important;
 }
 
+#body-principal section.minhas-materias 
+
+#body-principal section.minhas-materias > ul.collapsible {
+    padding: 0!important;
+}
+
+#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header{
+    padding: 0!important;
+}
+
+#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container{
+    padding: 0!important;
+    margin: 0!important;
+}
+
 /* FIM DA CORREÇÃO */
 
 /*---------------------------------------------------*/
@@ -377,6 +392,10 @@ h4 {
 
 #body-principal .menu ul li.icon-settings {
     background-image: url("http://www.entypo.com/images/tools.svg");
+}
+
+#body-principal .menu ul li.icon-sair {
+    background-image: url("http://www.entypo.com/images/hand.svg");
 }
 
 #body-principal .fundo-checked {
@@ -481,6 +500,9 @@ h4 {
         -webkit-transform: translate3d(0px, -50%, 0);
         transform: translate3d(0px, -50%, 0);
     }
+    #body-principal .menu-mensagens {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -531,6 +553,9 @@ h4 {
     }
     #body-principal .nav-side.nav-open .nav-toggle:before {
         content: "\2190";
+    }
+    #body-principal .menu-mensagens {
+        display: none;
     }
 }
 
@@ -682,8 +707,8 @@ h4 {
     -ms-flex-positive: 1;
     flex-grow: 1;
     margin: 10vmin!important;
+    margin-bottom: 15px!important;
     margin-top: 0!important;
-    padding: 2%;
 }
 
 #body-principal .content-topic h1 {
@@ -691,8 +716,6 @@ h4 {
     z-index: 3;
     font-size: 0.8em;
     text-align: justify!important;
-    padding-left: 3vmin;
-    padding-right: 3vmin;
 }
 
 #body-principal .para-scroll li span{
@@ -713,11 +736,23 @@ h4 {
 
 /*---------------------------------------------------*/
 
-/*----------------Menu de postagens------------------*/
+/*----------------Modal de postagens-----------------*/
 
 /*---------------------------------------------------*/
 
 #body-principal .modal{
     color: #000!important;
+}
+
+#body-principal .modal-content{
+    padding: 0!important;
+}
+
+#body-principal .input-field, option {
+    font-size: 0.8em!important;
+}
+
+#body-principal .CodeMirror-linenumber {
+    width: 25px!important;
 }
 
