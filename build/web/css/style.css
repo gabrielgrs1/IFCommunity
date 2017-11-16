@@ -379,7 +379,7 @@ h4 {
 }
 
 #body-principal .menu ul li.icon-dashboard {
-    background-image: url("http://www.entypo.com/images/unread.svg");
+    background-image: url("http://www.entypo.com/images/add-to-list.svg");
 }
 
 #body-principal .menu ul li.icon-materias {
@@ -395,7 +395,7 @@ h4 {
 }
 
 #body-principal .menu ul li.icon-sair {
-    background-image: url("http://www.entypo.com/images/hand.svg");
+    background-image: url("http://www.entypo.com/images/log-out.svg");
 }
 
 #body-principal .fundo-checked {
@@ -624,7 +624,7 @@ h4 {
 #body-principal #btn-deslogar{
     border: none;
     background: none;
-    color: red;
+    color: white;
 }
 
 /*---------------------------------------------------*/

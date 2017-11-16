@@ -14,7 +14,7 @@ $('li.icon-materias').click(function () {
 
 /*-----------------------------------------------------------------------------*/
 /*    Adiciona as materias   */
-var materias = ["PPI"];
+var materias = [];
 pegaMaterias($("#id-usuario").text());
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
@@ -117,6 +117,25 @@ $("ul.para-scroll > li").click(function () {
     montaPostagens();
 });
 
+//Função que desloga o usuário
+function deslogar() {
+    $.ajax({
+        url: "Deslogar",
+        type: 'get'
+    })
+            .done(function () {
+                window.location.href = "index.jsp";
+            })
+            .fail(function (jqXHR, status, data) {
+                console.log("ERRO: " + status);
+            });
+}
+
+//Chama a função de deslogar quando clica dentro do item
+$("#li-deslogar").on('click', function (e) {
+    e.preventDefault();
+    deslogar();
+});
 
 /*-----------------------------------------------------------------------------*/
 

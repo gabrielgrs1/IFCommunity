@@ -34,7 +34,6 @@
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Import Codemirror -->
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="robots" content="noindex, nofollow">
         <meta name="googlebot" content="noindex, nofollow">
         <link rel="stylesheet" type="text/css" href="css/result-light.css">
@@ -64,10 +63,7 @@
                 </div>
                 <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Adicionar matérias</span></li>
                 <li tabindex="0" class="icon-settings"><span id="config">Configurações</span></li>
-                <li tabindex="0" class="icon-sair">
-                    <form name="form-login" class="" action="Deslogar" method="GET">
-                        <input type="submit" name="botao-deslogar" id="btn-deslogar" value="">
-                        <span id="config">Sair</span></li>
+                <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
                 </form>
             </ul>
         </nav>
@@ -122,8 +118,8 @@
             </section>
 
             <section class="postagens minhas-materias row">
-                
-                 <!-- aqui vão as postagens adicionadas dinamicamente !--> 
+
+                <!-- aqui vão as postagens adicionadas dinamicamente !--> 
 
                 <!-- bar para o modal e modal logo abaixo !-->    
 
