@@ -9,20 +9,11 @@ public class Usuario {
     private String email;
     private String dataRegistro;
     private int premissao;
-// construtor
+
     public Usuario() {
     }
-    /* ou assim? -_-'
-    public Usuario(int id, int idAluno, String usuario, String senha, String email, String dataRegistro, int premissao) {
-        this.id = id;
-        this.idAluno = idAluno;
-        this.usuario = usuario;
-        this.senha = senha;
-        this.email = email;
-        this.dataRegistro = dataRegistro;
-        this.premissao = premissao;
-    }*/
-// getters
+    
+// Getters
     public int getId() {
         return id;
     }
@@ -50,7 +41,8 @@ public class Usuario {
     public int getPremissao() {
         return premissao;
     }
-// setters    
+    
+// Setters    
     public void setId(int id) {
         this.id = id;
     }

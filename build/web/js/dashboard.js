@@ -272,26 +272,65 @@ function collapsible() {
     $('.collapsible').collapsible();
 }
 
-//monta os textos das postagens as postagens
+//Função que pega as postagems e armazena em um array
+var postagens = [];
+var materia;
+$(".lista-materias").parent().click(function () {
+    materia = $(".fundo-checked").children().text();
+    montaPostagens(materia);
+});
 
-function montaPostagens() {
-
-    for (var x = 0; x < 10; x++) {
-        //pegar texto
-        var loremIpsun = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
-        //pegar nome de quem postou, fiz assim pra teste só
-        var nome = $('header.avatar h2').text();
-        adicionaPostagens(loremIpsun, nome)
-    }
-    collapsible();
+function pegaPostagens(materia, dataUltimaPostagem) {
+    $.ajax({
+        url: "RecuperaPostagens",
+        type: 'get',
+        data: {
+            materia: materia,
+            dataUltimaPostagem: dataUltimaPostagem
+        },
+        beforeSend: function () {
+//            console.log("CARREGANDO POSTAGENS");
+        }
+    })
+            .done(function (postagem) {
+                postagens = [];
+                for (var i = 0; i < postagem.length; i++) {
+                    postagens.push(postagem[i]);
+                }
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                console.log("ERRO AO RECUPERAR AS POSTAGENS");
+            });
 }
 
 
+//Função que prepara o texto da postagem e chama a fução que cria e adiciona na tela
+function montaPostagens(materia) {
+    //POR ENQUANTO NÃO ESTÁ SENDO PASSADO NENHUM PARAMETRO PORQUE NÃO ESTÁ SENDO RECUPERADO ESSES VALORES AINDA
+    pegaPostagens(materia);
 
-//adiciona as postagens
-function adicionaPostagens(loremIpsun, nome) {
-    console.log("entrou no adiciona postagens");
+    for (var x = 0; x < postagens.length; x++) {
+        var textoPostagem = postagens[x]["postagens"];
+        var autorPostagem = postagens[x]["autor"];
+        var tituloPostagem = postagens[x]["titulo"];
+        var dataPostagem = postagens[x]["data"];
+        var materiaPostagem = postagens[x]["materia"];
+        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem);
+    }
 
+    if (postagens.length === 0) {
+        $(".postagens").empty();       
+        $(".postagens").prepend("<h2 class='align-center'>NÃO HÁ NENHUMA POSTAGEM NESSA MATÉRIA<h2>");
+    }
+    
+    collapsible();
+}
+
+//Função que adiciona a estrutura de postagem
+function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem) {
+    //FALTA COLOCAR DATA DA POSTAGEM E MATERIA
+
+    $(".postagens").empty();
     var secaoDePostagens = $("main > section.minhas-materias");
     var criaUl = document.createElement("ul");
     var criaLi = document.createElement("li");
@@ -306,12 +345,12 @@ function adicionaPostagens(loremIpsun, nome) {
 
     criaDivHead.className = "collapsible-header";
     criaH4Titulo.className = "center";
-    criaH4Titulo.innerHTML = "Titulo da postagem";
-    criaPNome.innerHTML = nome;
+    criaH4Titulo.innerHTML = tituloPostagem;
+    criaPNome.innerHTML = autorPostagem;
     criaPNome.className = "right-align";
     criaUlHead.setAttribute("class", "container");
     criaDivBody.className = "collapsible-body";
-    criaSpanBody.innerHTML = loremIpsun;
+    criaSpanBody.innerHTML = textoPostagem;
     criaUl.className = "collapsible content-topic z-depth-2 container row";
     criaUl.setAttribute('data-collapsible', "accordion");
 
@@ -327,3 +366,4 @@ function adicionaPostagens(loremIpsun, nome) {
 
     secaoDePostagens.prepend(criaUl);
 }
+

@@ -3,38 +3,34 @@ package model;
 public class Postagem {
 
     private int id;
-    private int idMateria;
-    private int idAluno;
+    private String materia;
+    private String autor;
+    private String titulo;
     private String postagens;
     private int like;
-    private int delikes;
+    private int deslikes;
     private String data;
-// construtor
+
     public Postagem() {
     }
-/* ou assim -_-'
-    public Postagem(int id, int idMateria, int idAluno, String postagens, int like, int delikes, String data) {
-        this.id = id;
-        this.idMateria = idMateria;
-        this.idAluno = idAluno;
-        this.postagens = postagens;
-        this.like = like;
-        this.delikes = delikes;
-        this.data = data;
-    } */
-// getters
+
+// Getters
     public int getId() {
         return id;
     }
 
-    public int getIdMateria() {
-        return idMateria;
+    public String getMateria() {
+        return materia;
     }
 
-    public int getIdAluno() {
-        return idAluno;
+    public String getAutor() {
+        return autor;
     }
-
+    
+    public String getTitulo() {
+        return titulo;
+    }
+    
     public String getPostagens() {
         return postagens;
     }
@@ -43,24 +39,29 @@ public class Postagem {
         return like;
     }
 
-    public int getDelikes() {
-        return delikes;
+    public int getDeslikes() {
+        return deslikes;
     }
 
     public String getData() {
         return data;
     }
-// setters
+
+// Setters
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
+    public void setMateria(String materia) {
+        this.materia = materia;
     }
 
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public void setPostagens(String postagens) {
@@ -71,8 +72,8 @@ public class Postagem {
         this.like = like;
     }
 
-    public void setDelikes(int delikes) {
-        this.delikes = delikes;
+    public void setDeslikes(int delikes) {
+        this.deslikes = delikes;
     }
 
     public void setData(String data) {

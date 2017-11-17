@@ -1,24 +1,17 @@
 package model;
 // classe principal
-public class Coluna {
+public class Comentario {
     
     private int id;
     private int idPostagem;
     private int idAluno;
     private String comentario;
     private String dataRegistro;
-// construtor
-    public Coluna() {
+
+    public Comentario() {
     }
-/* ou assim
-    public Coluna(int id, int idPostagem, int idAluno, String comentario, String dataRegistro) {
-        this.id = id;
-        this.idPostagem = idPostagem;
-        this.idAluno = idAluno;
-        this.comentario = comentario;
-        this.dataRegistro = dataRegistro;
-    } */
-// getters
+
+// Getters
     public int getId() {
         return id;
     }
@@ -38,7 +31,8 @@ public class Coluna {
     public String getDataRegistro() {
         return dataRegistro;
     }
-// setters
+    
+// Setters
     public void setId(int id) {
         this.id = id;
     }
