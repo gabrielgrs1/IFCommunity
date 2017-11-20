@@ -67,6 +67,7 @@
         </nav>
 
         <main class="site-content cor-fundo">
+
             <section class="postagens perfil section-aparece">
                 <div class="sc-edprofile">
                     <h1>Perfil</h1>
@@ -121,14 +122,14 @@
 
             </section>
 
-
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue-only">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
                     </div><div class="gap-patch">
                         <div class="circle"></div>
-                    </div><div class="circle-clipper right">
+                    </div>
+                    <div class="circle-clipper right">
                         <div class="circle"></div>
                     </div>
                 </div>
