@@ -31,22 +31,26 @@ $('li.icon-materias').click(function () {
 /*    Na escolha da opção no menu substitui a pagina inicial      */
 /*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
 $("ul.para-scroll > li").click(function () {
+    $("main > section.minhas-materias").empty();
     $('ul label li').removeClass('fundo-checked');
     // console.log($("section").find("section-aparece"));
-    console.log("entrou no click do li");
+    // console.log("entrou no click do li");
     // console.log($(this).children("span").text());
-    //fecha o menu de minhas materias
     //remove a tela que está aparecendo
     $("section").removeClass("section-aparece");
 
     // console.log($(this).text());
+    // 
+    //fecha o menu de minhas materias
     if ($(this).children("span").text() !== 'Minhas matérias') {
         //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
+        $('.aviso-minhas-materias').hide();
     } else {
-
+        $('.aviso-minhas-materias').show();
     }
 
+    // Aplica a classe para aparecer alguma section
     var classe = '.' + $(this).children("span").attr("id");
     // console.log(classe);
     $("section").hide();
@@ -58,7 +62,6 @@ $("ul.para-scroll > li").click(function () {
     ;
     trocaCorFundo();
     MontaCondicoesBotaoModal($(this).children("span").text());
-    montaPostagens();
 });
 
 /*-----------------------------------------------------------------------------*/
@@ -71,7 +74,7 @@ pegaMaterias($("#id-usuario").text());
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
 
-setTimeout(function () {
+function preencheAListaDeMateriasDoMenu() {
     lista.detach().empty().each(function (i) {
         for (var x = 0; x < materias.length; x++) {
             // console.log("entrou");
@@ -81,11 +84,22 @@ setTimeout(function () {
             }
         }
     });
-}, 300);
+}
+;
 
 
 //Função que pega as matérias do usuário e armazena em um array
 function pegaMaterias(idUsuario) {
+    var loading = $(".lista-materias");
+    var li = document.createElement("li");
+    var progress = document.createElement("div");
+    progress.setAttribute("class", "progress");
+    var indeterminate = document.createElement("div");
+    indeterminate.setAttribute("class", "indeterminate");
+    progress.append(indeterminate);
+    li.append(progress);
+    loading.append(li);
+
     $.ajax({
         url: "RecuperaMaterias",
         type: 'get',
@@ -97,17 +111,19 @@ function pegaMaterias(idUsuario) {
         }
     })
             .done(function (materia) {
+                loading.empty();
                 // console.log(materia);
                 for (var i = 0; i < materia.length; i++) {
                     materias.push(materia[i]);
                 }
+                preencheAListaDeMateriasDoMenu();
             })
             .fail(function (jqXHR, textStatus, materia) {
                 materias.push("Você ainda não tem nenhuma matéria cadastrada!");
             });
 }
 
-/*--------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------*/
 
 /*           Checked img na matéria (submenu) que está selecionada         */
 /* ela tem que carregar após as matérias serem carregadas para funcionar   */
@@ -149,12 +165,10 @@ $('select').material_select('destroy');
 
 function trocaCorFundo() {
     // console.log("entrou troca cor fundo");
-    var array = ["rgba(207, 216, 220, 0.6)", "rgba(187, 222, 251, 0.6)", "rgba(178, 223, 219, 0.6)", "rgba(238, 238, 238, 0.6)", "rgba(215, 204, 200, 0.6)", "rgba(207, 216, 220, 0.6)"];
+    var array = ["rgba(207, 216, 220, 0.7)", "rgba(187, 222, 251, 0.7)", "rgba(178, 223, 219, 0.7)", "rgba(238, 238, 238, 0.7)", "rgba(215, 204, 200, 0.7)", "rgba(207, 216, 220, 0.7)"];
     var colorNumber = Math.round((Math.random() * (array.length - 1)));
     $(".cor-fundo").css('background-color', array[colorNumber]);
 }
-;
-
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                Sidebar para postar os codigos, ou seja, aquele botão com <> que clica e abre o modal.                    */
 
@@ -366,14 +380,14 @@ function montaPostagens(materia) {
         var autorPostagem = postagens[x]["autor"];
         var tituloPostagem = postagens[x]["titulo"];
         var dataPostagem = postagens[x]["data"];
-        var materiaPostagem = postagens[x]["materia"];
+        var materiaPostagem = postagens[x][materia];
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem);
         collapsible();
     }
 
     if (postagens.length === 0) {
         // console.log("entrou se postagens estiver vazio");
-        // $(".minhas-materias").empty();
+        $(".minhas-materias").empty();
         $(".minhas-materias").prepend("<h2 class='align-center'>NÃO HÁ NENHUMA POSTAGEM NESSA MATÉRIA<h2>");
     }
 }
@@ -418,6 +432,49 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 
     secaoDePostagens.prepend(criaUl);
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Preencher matérias a partir do select de período na pag de gerenciar matérias
+jQuery('select[data-class=slCadPeriodo]').change(function () {
+
+    var qualPeriodo = $("#periodo-select option:selected").val();
+    console.log(qualPeriodo);
+
+    var $select = jQuery('select[data-class=slCadMateria]').empty();
+    var loading1 = $("select[data-class=slCadPeriodo]");
+    var option = document.createElement("option");
+    var progress = document.createElement("div");
+    progress.setAttribute("class", "progress");
+    var indeterminate = document.createElement("div");
+    indeterminate.setAttribute("class", "indeterminate");
+    progress.append(indeterminate);
+    option.append(progress);
+    loading1.append(option);
+
+    $.ajax({
+        url: "RecuperaMaterias",
+        type: 'get',
+        data: {
+            RecuperaMateriasPeriodo: qualPeriodo
+        },
+        beforeSend: function () {
+            // console.log("CARREGANDO MATERIAS");
+        }
+    })
+            .done(function () {
+                loading1.empty();
+                // console.log(materia);
+                jQuery.each(json.list, function (i, value) {
+                    var optionHTML = new Option(value.descricao, value.id);
+                    $select.append(optionHTML);
+                });
+            })
+            .fail(function (jqXHR, textStatus, materia) {
+                
+            });
+});
+
+
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Função que desloga o usuário
 function deslogar() {

@@ -304,6 +304,15 @@ h4 {
     position: absolute!important;
 }
 
+#body-principal .aviso-minhas-materias {
+    color: black!important;
+}
+
+#body-principal .aviso-minhas-materias  #img-code {
+    padding: 2%;
+    width: 40%;
+}
+
 /* FIM DA CORREÇÃO */
 
 /*---------------------------------------------------*/
@@ -661,7 +670,7 @@ h4 {
 #body-principal .cor-fundo {
     z-index: 2;
     height: 100%;
-    background-color: rgba(207, 216, 220, 0.6);
+    background-color: rgba(207, 216, 220, 0.7);
     background-size: cover!important;
     background-repeat: no-repeat!important;
     background-attachment: fixed!important;
@@ -682,7 +691,7 @@ h4 {
 
 /*---------------------------------------------------*/
 
-#body-principal .sc-edprofile {
+#body-principal .box-padrao {
     outline: none;
     margin: auto;
     width: 80%!important;
@@ -693,7 +702,7 @@ h4 {
     box-shadow: .5vmin .5vmin 0 rgba(0, 0, 0, .30)!important;
 }
 
-#body-principal .sc-edprofile h1 {
+#body-principal .box-padrao h3 {
     background: #03A9F4;
     padding: .1em;
     font-weight: 300;
@@ -702,7 +711,7 @@ h4 {
     margin: 0!important;
 }
 
-#body-principal div.sc-edprofile .sc-container {
+#body-principal div.box-padrao .sc-container {
     display: table;
     width: 100%;
 }

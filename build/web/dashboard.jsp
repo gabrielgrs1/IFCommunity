@@ -59,18 +59,18 @@
                 <div class="minhas-materias-adicionadas">
                     <ul class="lista-materias"></ul>
                 </div>
-                <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Adicionar matérias</span></li>
+                <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Gerenciar matérias</span></li>
                 <li tabindex="0" class="icon-settings"><span id="config">Configurações</span></li>
                 <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
-                </form>
             </ul>
         </nav>
 
         <main class="site-content cor-fundo">
 
+            <!-- Sessão do perfil !--> 
             <section class="postagens perfil section-aparece">
-                <div class="sc-edprofile">
-                    <h1>Perfil</h1>
+                <div class="box-padrao">
+                    <h3>Perfil</h3>
                     <div class="row">
                         <form class="col s12">
                             <div class="row">
@@ -112,16 +112,89 @@
                                     <label for="icon_prefix">Matrícula</label>
                                 </div>
                             </div>
+                            <div class="row center-align">
+                                <button class="btn waves-effect waves-light" type="submit" name="action">Ok, tudo certo!
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <button class="btn waves-effect red darken-3 waves-light" type="reset" name="action">Ops, limpar campos.
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
                         </form>
                     </div>
+                </div>
             </section>
 
+            <!-- Sessão de postagens !--> 
             <section class="postagens minhas-materias row">
 
                 <!-- aqui vão as postagens adicionadas dinamicamente !--> 
 
             </section>
 
+            <section class="postagens adicionar-materias row">
+                <div class="box-padrao">
+                    <h3>Gerenciar matérias</h3>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">face</i>
+
+                                <select id="periodo-select" data-class="slCadPeriodo" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="1">1° Período</option>
+                                    <option value="2">2° Período</option>
+                                    <option value="3">3° Período</option>
+                                    <option value="4">4° Período</option>
+                                    <option value="5">5° Período</option>
+                                </select>
+                                <label>Período</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">face</i>
+                                <select id="materia-select" data-class="slCadMateria">
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="1">1° Período</option>
+                                    <option value="2">2° Período</option>
+                                    <option value="3">3° Período</option>
+                                    <option value="4">4° Período</option>
+                                    <option value="5">5° Período</option>
+                                </select>
+                                <label>Matéria</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+
+            <!-- Aviso no click de minhas matérias !--> 
+            <div class="aviso-minhas-materias container box-padrao">
+                <h3>Coding section</h3>
+                <div class="page-footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col l6 s12 center-align">
+                                <h5 class="white-text">Bem vindo ao dashboard de postagens!</h5>
+                                <img id="img-code" src="https://www.happycodeclub.com/wp-content/uploads/2017/07/cropped-HappyCodeRedLogo_SmileOnlyCuout-300x300.png">
+                            </div>
+                            <div class="col l4 offset-l2 s12">
+                                <h5 class="white-text">Tips</h5>
+                                <ul>
+                                    <li>Clique em uma das matérias em que você está cadastrado no menu ao lado.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-copyright row">
+                        <div class="col s6 grey-text"></div>
+                        <div class="col s6 grey-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- aqui é o loader que exibe enquanto carrega algo !--> 
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue-only">
                     <div class="circle-clipper left">
