@@ -304,7 +304,6 @@ setTimeout(function () {
         var materia;
         materia = $(".fundo-checked").children().text();
         pegaPostagens(materia);
-        collapsible();
     });
 }, 400);
 
@@ -348,6 +347,7 @@ function montaPostagens(materia) {
         var dataPostagem = postagens[x]["data"];
         var materiaPostagem = postagens[x]["materia"];
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem);
+        collapsible();
     }
 
     if (postagens.length === 0) {
