@@ -298,6 +298,12 @@ h4 {
     position: relative!important;
 }
 
+#body-principal .preloader-wrapper {
+    left: 53%;
+    top: 40%;
+    position: absolute!important;
+}
+
 /* FIM DA CORREÇÃO */
 
 /*---------------------------------------------------*/
@@ -776,25 +782,25 @@ h4 {
 
 /* for line numbers */
 [class*="language-"] {
-	counter-reset: linenumber!important;
+    counter-reset: linenumber!important;
 }
 span.line{
-	display: inline-block!important;
-	width: 100%!important;
-	counter-increment: linenumber!important;
+    display: inline-block!important;
+    width: 100%!important;
+    counter-increment: linenumber!important;
 }
 span.line:nth-child(odd){
-	background: #f0f0f0!important;
+    background: #f0f0f0!important;
 }
 span.line:before{
-	content: counter(linenumber)!important;
-	font-size: 100%!important;
-	width: 2em!important;
-	display: inline-block!important;
-	font-weight: normal!important;
-	color: black!important;
-	border-right: 1px solid black!important;
-	margin-right: 5px!important;
-	padding-right: 5px!important;
-	text-align: right!important;
+    content: counter(linenumber)!important;
+    font-size: 100%!important;
+    width: 2em!important;
+    display: inline-block!important;
+    font-weight: normal!important;
+    color: black!important;
+    border-right: 1px solid black!important;
+    margin-right: 5px!important;
+    padding-right: 5px!important;
+    text-align: right!important;
 }

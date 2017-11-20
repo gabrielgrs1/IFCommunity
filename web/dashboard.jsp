@@ -119,8 +119,22 @@
 
                 <!-- aqui vão as postagens adicionadas dinamicamente !--> 
 
-                <!-- bar para o modal e modal logo abaixo !-->    
             </section>
+
+
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- bar para o modal e modal logo abaixo !-->  
             <div class="botao-modal">
                 <div class="fixed-action-btn vertical">
                     <a class="btn-floating btn-large indigo darken-3">
