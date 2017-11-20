@@ -60,7 +60,7 @@
                     <ul class="lista-materias"></ul>
                 </div>
                 <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Gerenciar matérias</span></li>
-                <li tabindex="0" class="icon-settings"><span id="config">Configurações</span></li>
+                <li tabindex="0" class="icon-help"><span id="ajuda">Ajuda</span></li>
                 <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
             </ul>
         </nav>

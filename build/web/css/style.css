@@ -414,8 +414,8 @@ h4 {
     background-image: url("http://www.entypo.com/images/user.svg");
 }
 
-#body-principal .menu ul li.icon-settings {
-    background-image: url("http://www.entypo.com/images/tools.svg");
+#body-principal .menu ul li.icon-help {
+    background-image: url("http://www.entypo.com/images/bug.svg");
 }
 
 #body-principal .menu ul li.icon-sair {
