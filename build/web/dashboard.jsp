@@ -34,9 +34,9 @@
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Import Codemirror -->
+        <link href="css/prism.css" rel="stylesheet" />
+
         <link rel="stylesheet" type="text/css" href="css/result-light.css">
-        <style type="text/css"></style>
-        <link rel="stylesheet" href="css/codemirror.css">
 
     </head>
 
@@ -66,7 +66,7 @@
             </ul>
         </nav>
 
-        <main class="site-content">
+        <main class="site-content cor-fundo">
             <section class="postagens perfil section-aparece">
                 <div class="sc-edprofile">
                     <h1>Perfil</h1>
@@ -120,58 +120,56 @@
                 <!-- aqui vão as postagens adicionadas dinamicamente !--> 
 
                 <!-- bar para o modal e modal logo abaixo !-->    
-
-                <div class="menu-mensagens">
-                    <div class="fixed-action-btn vertical">
-                        <a class="btn-floating btn-large indigo darken-3">
-                            <i class="large material-icons">code</i>
-                        </a>
-                        <ul>
-                            <li ><a href="#modal1" id="modal-de-escrever-codigo" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
-                            <li><a class="btn-floating grey tooltipped" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="modal1" class="modal modal-fixed-footer">
-                    <form id="formDoModal">
-                        <div class="modal-head center">
-                            <p>Escreva aqui a sua contribuição!</p>
-                        </div>
-                        <hr>
-
-                        <div class="row col s12">
-                            <div class="input-field col s6">
-                                <i class= "material-icons prefix small">subject</i>
-                                <input id="icon_prefix" type="text" class="validate" required="required">
-                                <label for="icon_prefix">Assunto</label>
-                            </div>
-                            <div id="qual-linguagem-modal" class="input-field col s6">
-                                <i class="material-icons prefix small">code</i>
-                                <select required="required">
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="1">Javascript</option>
-                                    <option value="2">Java</option>
-                                    <option value="3">html</option>
-                                    <option value="4">Texto normal</option>
-                                </select>
-                                <label>Linguagem</label>
-                            </div>
-
-                        </div>
-
-                        <div class="modal-content">   
-                        </div>
-
-                        <div class="modal-footer">
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Submeter</a>
-                        </div>
-                    </form>
-                </div>
             </section>
+            <div class="botao-modal">
+                <div class="fixed-action-btn vertical">
+                    <a class="btn-floating btn-large indigo darken-3">
+                        <i class="large material-icons">code</i>
+                    </a>
+                    <ul>
+                        <li ><a href="#modal1" id="modal-de-escrever-codigo" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
+                        <li><a class="btn-floating grey tooltipped" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="modal1" class="modal modal-fixed-footer">
+                <form id="formDoModal">
+                    <div class="modal-head center">
+                        <p>Escreva aqui a sua contribuição!</p>
+                    </div>
+                    <hr>
+
+                    <div class="row col s12">
+                        <div class="input-field col s6">
+                            <i class= "material-icons prefix small">subject</i>
+                            <input id="icon_prefix" type="text" class="validate" required="required">
+                            <label for="icon_prefix">Assunto</label>
+                        </div>
+                        <div id="qual-linguagem-modal" class="input-field col s6">
+                            <i class="material-icons prefix small">code</i>
+                            <select required="required">
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="1">Javascript</option>
+                                <option value="2">Java</option>
+                                <option value="3">html</option>
+                                <option value="4">Texto normal</option>
+                            </select>
+                            <label>Linguagem</label>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-content">   
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Submeter</a>
+                    </div>
+                </form>
+            </div>
+
         </main>
-
-
 
 
         <!-- Import jQuery -->
@@ -179,15 +177,15 @@
         <!-- Import Materialize JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!-- Import Codemirror JS -->      
+        <script src="js/prism.js"></script>
+        <script type="text/javascript" src="js/dummy.js"></script>
+        <script type="text/javascript" src="js/prism-sql.min.js"></script>
+        <script src="//unpkg.com/prismjs/components/prism-ruby.js"></script>
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Dashboard JS -->
         <script src="js/dashboard.js"></script>
-        <!-- Import Codemirror JS -->      
-        <script src="http://codemirror.net/lib/codemirror.js"></script>
-        <script src="http://codemirror.net/addon/edit/matchbrackets.js"></script>
-        <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
-        <script type="text/javascript" src="js/dummy.js"></script>
 
     </body>
 

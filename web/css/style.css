@@ -294,6 +294,10 @@ h4 {
     margin: 0!important;
 }
 
+#body-principal .modal-content {
+    position: relative!important;
+}
+
 /* FIM DA CORREÇÃO */
 
 /*---------------------------------------------------*/
@@ -311,6 +315,10 @@ h4 {
     content: "";
     clear: both;
     display: block;
+}
+
+#body-principal div {
+    /* border: 1px solid black; */
 }
 
 /*---------------------------------------------------*/
@@ -633,8 +641,20 @@ h4 {
 
 /*---------------------------------------------------*/
 #body-principal {
+    background-image: url("../img/Programming-Code-l.jpg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    background-clip: padding-box;
+    background-attachment: fixed!important;
+    z-index: 0;
+
+}
+
+#body-principal .cor-fundo {
+    z-index: 2;
     height: 100%;
-    background-color: #cfd8dc;
+    background-color: rgba(207, 216, 220, 0.6);
     background-size: cover!important;
     background-repeat: no-repeat!important;
     background-attachment: fixed!important;
@@ -729,7 +749,7 @@ h4 {
 /*---------------------------------------------------*/
 
 @media screen and (max-width: 900px) {
-    #body-principal .menu-mensagens {
+    #body-principal .botao-modal {
         display: none!important;
     }
 }
@@ -752,7 +772,28 @@ h4 {
     font-size: 0.8em!important;
 }
 
-#body-principal .CodeMirror-linenumber {
-    width: 25px!important;
-}
 
+/* for line numbers */
+[class*="language-"] {
+	counter-reset: linenumber!important;
+}
+span.line{
+	display: inline-block!important;
+	width: 100%!important;
+	counter-increment: linenumber!important;
+}
+span.line:nth-child(odd){
+	background: #f0f0f0!important;
+}
+span.line:before{
+	content: counter(linenumber)!important;
+	font-size: 100%!important;
+	width: 2em!important;
+	display: inline-block!important;
+	font-weight: normal!important;
+	color: black!important;
+	border-right: 1px solid black!important;
+	margin-right: 5px!important;
+	padding-right: 5px!important;
+	text-align: right!important;
+}

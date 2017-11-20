@@ -4,7 +4,15 @@
 $(".avatar .container").append('<img src="http://www.alemdaimaginacao.com/Obituario%20da%20Fama/Ruben_Aguirre/ruben_aguirre1.jpg" />')
 
 
-/*-----------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*    De início, mostra a página perfil apenas      */
+
+$("section").hide();
+if ($("section").hasClass("section-aparece")) {
+    $(this).show();
+}
+;
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*     DROP DOWN DAS MATERIAS     */
 
 $('.minhas-materias-adicionadas').hide();
@@ -13,7 +21,42 @@ $('li.icon-materias').click(function () {
 });
 
 /*-----------------------------------------------------------------------------*/
+/*    Na escolha da opção no menu substitui a pagina inicial      */
+
+/*    Na escolha da opção no menu substitui a pagina inicial      */
+/*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
+$("ul.para-scroll > li").click(function () {
+    // console.log($("section").find("section-aparece"));
+    // console.log("entrou no click do li");
+    // console.log($(this).children("span").text());
+    //fecha o menu de minhas materias
+    //remove a tela que está aparecendo
+    $("section").removeClass("section-aparece");
+
+    // console.log($(this).text());
+    if ($(this).children("span").text() !== 'Minhas matérias') {
+        //  console.log("entrou aqui");
+        $('.minhas-materias-adicionadas').slideUp();
+    }
+    var classe = '.' + $(this).children("span").attr("id");
+    // console.log(classe);
+    $("section").hide();
+    $(".site-content").find(classe).addClass("section-aparece");
+    //Se tiver a section-aparece, ele exibe ela na tela.
+    if ($("section").hasClass("section-aparece")) {
+        $(this).show();
+    }
+    ;
+    trocaCorFundo();
+    MontaCondicoesBotaoModal($(this).children("span").text());
+    montaPostagens();
+});
+
+/*-----------------------------------------------------------------------------*/
 /*    Adiciona as materias   */
+
+//  Estamos com variável global aqui e ainda não pensei numa solução, visto que queremos q carregue junto com a página.
+
 var materias = [];
 pegaMaterias($("#id-usuario").text());
 var lista = $(".lista-materias");
@@ -30,6 +73,7 @@ setTimeout(function () {
         }
     });
 }, 300);
+
 
 //Função que pega as matérias do usuário e armazena em um array
 function pegaMaterias(idUsuario) {
@@ -54,22 +98,27 @@ function pegaMaterias(idUsuario) {
             });
 }
 
-/*-----------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------*/
 
 /*           Checked img na matéria (submenu) que está selecionada         */
 /* ela tem que carregar após as matérias serem carregadas para funcionar   */
 
 setTimeout(function () {
     $("input[name='materias-radio']").click(function () {
+        // console.log("entrou no click do input");
         // alert($(this).attr('id'));
+        var qualMateria;
         if ($(this).is(':checked')) {
             $('ul label li').removeClass('fundo-checked');
             $(this).next('label').children('li').addClass('fundo-checked');
+            qualMateria = $(this).next('label').children('li').children("span").text();
         }
+        // console.log(qualMateria);
+        MontaCondicoesBotaoModal(qualMateria);
     });
 }, 400);
 
-/*-----------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*    Botão para abrir menu do celular   */
 
 $(".nav-side .nav-toggle").on("click", function (e) {
@@ -77,68 +126,7 @@ $(".nav-side .nav-toggle").on("click", function (e) {
     $(this).parent().toggleClass("nav-open");
 });
 
-/*-----------------------------------------------------------------------------*/
-/*    Na escolha da opção no menu substitui a pagina inicial      */
-
-/*    De início, mostra a página perfil apenas      */
-
-$("section").hide();
-if ($("section").hasClass("section-aparece")) {
-    $(this).show();
-}
-;
-
-/*    Na escolha da opção no menu substitui a pagina inicial      */
-/*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
-$("ul.para-scroll > li").click(function () {
-    // console.log($("section").find("section-aparece"));
-    // console.log("entrou");
-    // console.log($(this).children("span").text());
-    //fecha o menu de minhas materias
-    //remove a tela que está aparecendo
-    $("section").removeClass("section-aparece");
-
-    // console.log($(this).text());
-    if ($(this).children("span").text() !== 'Minhas matérias') {
-        //  console.log("entrou aqui");
-        $('.minhas-materias-adicionadas').slideUp();
-    }
-    var classe = '.' + $(this).children("span").attr("id");
-    // console.log(classe);
-    $("section").hide();
-    $(".site-content").find(classe).addClass("section-aparece");
-    //Se tiver a section-aparece, ele exibe ela na tela.
-    if ($("section").hasClass("section-aparece")) {
-        $(this).show();
-    }
-    ;
-    trocaCorFundo();
-    apareceMenuMensagens($(this).children("span").text());
-    montaPostagens();
-});
-
-//Função que desloga o usuário
-function deslogar() {
-    $.ajax({
-        url: "Deslogar",
-        type: 'get'
-    })
-            .done(function () {
-                window.location.href = "index.jsp";
-            })
-            .fail(function (jqXHR, status, data) {
-                console.log("ERRO: " + status);
-            });
-}
-
-//Chama a função de deslogar quando clica dentro do item
-$("#li-deslogar").on('click', function (e) {
-    e.preventDefault();
-    deslogar();
-});
-
-/*-----------------------------------------------------------------------------*/
-
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*              Plugin dos selects                          */
 
 $(document).ready(function () {
@@ -146,33 +134,52 @@ $(document).ready(function () {
 });
 $('select').material_select('destroy');
 
-/*-----------------------------------------------------------------------------*/
-
-/*              Fundo randomico                          */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*              Fundo com cor randomica                          */
 
 function trocaCorFundo() {
-    var array = ["#c5cae9", "#bbdefb", "#b2dfdb", "#eeeeee", "#d7ccc8", "#cfd8dc"];
+    // console.log("entrou troca cor fundo");
+    var array = ["rgba(207, 216, 220, 0.6)", "rgba(187, 222, 251, 0.6)", "rgba(178, 223, 219, 0.6)", "rgba(238, 238, 238, 0.6)", "rgba(215, 204, 200, 0.6)", "rgba(207, 216, 220, 0.6)"];
     var colorNumber = Math.round((Math.random() * (array.length - 1)));
-    $("#body-principal").css('background-color', array[colorNumber]);
+    $(".cor-fundo").css('background-color', array[colorNumber]);
 }
 ;
 
-/*-----------------------------------------------------------------------------*/
-/*                Sidebar de materias                     */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*                Sidebar para postar os codigos, ou seja, aquele botão com <> que clica e abre o modal.                    */
 
 /*  esconde e mostra a opção de publicação dependendo da página que está  */
 
-$(".menu-mensagens").hide();
-function apareceMenuMensagens(textoDoMenu) {
-    $(".menu-mensagens").show();
+// O botão de postagem não some se o click for em "minhas matérias ou em qualquer submenu do mesmo.
+
+function MontaCondicoesBotaoModal(TextoValidacao) {
+    // console.log(" entrou em MontaCondicoesBotaoModal");
+    // console.log(TextoValidacao);
+    // Esta variável TextoValidacao é uma flag, pra saber se deixa ou nao visivel o botao do modal
+    //Monta Array com "Minhas matérias e com as matérias em que o usuário está inscrito.
+    var StringQueNãoEscondemOBotaoDePublicacao = [];
+    // Clona o vetor que tem a lista de matérias cadastradas
+    StringQueNãoEscondemOBotaoDePublicacao = materias.slice(0);
+    //Agora chama a função do botão passando como argumento o array de nomes.
+    apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao);
+}
+
+$(".botao-modal").hide();
+function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao) {
+    // console.log(TextoValidacao + " 1");
+    // console.log(StringQueNãoEscondemOBotaoDePublicacao);
     // console.log(textoDoMenu);
-    if (textoDoMenu !== 'Minhas matérias') {
-        //console.log("entrou no hide do menu");
+
+    // Verifica se o array tem a String do botão clicado.
+    if (StringQueNãoEscondemOBotaoDePublicacao.includes(TextoValidacao)) {
+        // console.log("entrou no show do menu");
+        $(".botao-modal").show();
+    } else {
         // console.log("entrou aqui");
-        $(".menu-mensagens").hide();
+        $(".botao-modal").hide();
     }
 }
-/*-----------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                Modal de publicação                     */
 
 // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
@@ -187,10 +194,10 @@ $('.modal1').modal({
     endingTop: '10%', // Ending top style attribute
     ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
         alert("Ready");
-        console.log(modal, trigger);
+        // console.log(modal, trigger);
     },
     complete: function () {
-        alert('Closed');
+        //  alert('Closed');
     } // Callback for Modal close
 }
 );
@@ -208,14 +215,17 @@ $("#modal-de-escrever-codigo").click(function () {
     if (window.parent && window.parent.parent) {
         window.parent.parent.postMessage(["resultsFrame", {
                 height: document.body.getBoundingClientRect().height,
-                slug: "TcqAf"
-            }], "*")
+                slug: "2azkLnad"
+            }], "*");
     }
-    $('.modal-content').children().remove();
+    $('.modal-content').append('<pre contenteditable class="line-numbers language-markup" data-linenumber="0"><code>select * from as aa where</code></pre>');
+    //prismHighlight ();
+    Prism.fileHighlight();
 
 
     // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
     $('#formDoModal').on('change', 'select', function (e) {
+        // console.log("entrou no change");
         var val = $(e.target).val();
         var text = $(e.target).find("option:selected").text();
         adicionaOsTextAreaModal(text);
@@ -266,21 +276,41 @@ function adicionaOsTextAreaModal(text) {
     }
 }
 ;
-/*-----------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                  Postagens colapsadas                   */
 function collapsible() {
     $('.collapsible').collapsible();
 }
-
+/*---------------------------------------------------------*/
 //Função que pega as postagems e armazena em um array
+/*---------------------------------------------------------*/
+
+
+// Seguinte.
+// Mudei o fluxo pra acabar com aquelas requisições que só aconteciam da segunda vez.
+// Agora essa primeira função aqui com o SetTimeout, que tem esse setTimeout por causa da primeira requisição 
+// que trás a lista de matérias, que chama a requisição ajax.
+// 
+// Depois, a função que monta as postagens é chamada pela função ajax apenas quando a requisição acaba (.done).
+//
+// Essa função que enche o array de postagens e começa a distribuir as postagens na tela.
+
+
 var postagens = [];
-var materia;
-$(".lista-materias").parent().click(function () {
-    materia = $(".fundo-checked").children().text();
-    montaPostagens(materia);
-});
+setTimeout(function () {
+    $("input[name='materias-radio']").click(function () {
+        console.log("Fluxo 1");
+        console.log("entrou no que pega a materia para postagem");
+        var materia;
+        materia = $(".fundo-checked").children().text();
+        pegaPostagens(materia);
+        collapsible();
+    });
+}, 400);
 
 function pegaPostagens(materia, dataUltimaPostagem) {
+    console.log("Fluxo 2");
+    console.log(materia);
     $.ajax({
         url: "RecuperaPostagens",
         type: 'get',
@@ -297,18 +327,20 @@ function pegaPostagens(materia, dataUltimaPostagem) {
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }
+                montaPostagens(materia)
             })
             .fail(function (jqXHR, textStatus, postagem) {
                 console.log("ERRO AO RECUPERAR AS POSTAGENS");
             });
 }
 
-
+/*------------------------------------------------------------------------*/
 //Função que prepara o texto da postagem e chama a fução que cria e adiciona na tela
 function montaPostagens(materia) {
-    //POR ENQUANTO NÃO ESTÁ SENDO PASSADO NENHUM PARAMETRO PORQUE NÃO ESTÁ SENDO RECUPERADO ESSES VALORES AINDA
-    pegaPostagens(materia);
+    console.log("Fluxo 3");
+    $(".minhas-materias").empty();
 
+    console.log(postagens);
     for (var x = 0; x < postagens.length; x++) {
         var textoPostagem = postagens[x]["postagens"];
         var autorPostagem = postagens[x]["autor"];
@@ -319,18 +351,17 @@ function montaPostagens(materia) {
     }
 
     if (postagens.length === 0) {
-        $(".postagens").empty();       
-        $(".postagens").prepend("<h2 class='align-center'>NÃO HÁ NENHUMA POSTAGEM NESSA MATÉRIA<h2>");
+        console.log("entrou se postagens estiver vazio");
+        // $(".minhas-materias").empty();
+        $(".minhas-materias").prepend("<h2 class='align-center'>NÃO HÁ NENHUMA POSTAGEM NESSA MATÉRIA<h2>");
     }
-    
-    collapsible();
 }
 
 //Função que adiciona a estrutura de postagem
 function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem) {
     //FALTA COLOCAR DATA DA POSTAGEM E MATERIA
-
-    $(".postagens").empty();
+    console.log("Fluxo 4");
+    $("main > section.minhas-materias").empty();
     var secaoDePostagens = $("main > section.minhas-materias");
     var criaUl = document.createElement("ul");
     var criaLi = document.createElement("li");
@@ -366,4 +397,23 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 
     secaoDePostagens.prepend(criaUl);
 }
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+//Função que desloga o usuário
+function deslogar() {
+    $.ajax({
+        url: "Deslogar",
+        type: 'get'
+    })
+            .done(function () {
+                window.location.href = "index.jsp";
+            })
+            .fail(function (jqXHR, status, data) {
+                console.log("ERRO: " + status);
+            });
+}
 
+//Chama a função de deslogar quando clica dentro do item
+$("#li-deslogar").on('click', function (e) {
+    e.preventDefault();
+    deslogar();
+});
