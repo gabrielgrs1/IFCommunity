@@ -74,10 +74,28 @@ pegaMateriasComAjax($("#id-usuario").text());
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
 
+
+//  Essa função preenche o vetor matérias de acordo com o retorno do ajax que busca as mastérias cadastradas pelo usuário.
+// Caso esse vetor esteja vazio, ele retorna uma mensagem pro cara cadastrar nas materias.
 function preencheAListaDeMateriasDoMenu() {
     lista.detach().empty().each(function (i) {
+
+        if (materias.length == 0) {
+            materias.push("Você ainda não tem nenhuma matéria cadastrada!");
+        }
+
         for (var x = 0; x < materias.length; x++) {
+
+            // Isso aqui é um remédio caso ocorra, acho que não tem situação em que possa occorer, mas... É mais um cuidado.
+            // Enfim, caso o array materias chegue aqui com a mensagem de não tem matérias, ele remove essa mensage antes de gerar a lista de materias cadastradas.
+            var a = materias.indexOf("Você ainda não tem nenhuma matéria cadastrada!");
+            // console.log(a)
+            if (a == 0){
+                materias.splice(i, 0);
+            }
+
             // console.log("entrou");
+            // Aqui preenche a lista de materias com as matérias que o cara tem cadastradas.
             $(this).append('<input type="radio" name="materias-radio" id="materia' + x + '" style="display:none!important" /><label for="materia' + x + '"><li><span>' + materias[x] + '</span></li></label>');
             if (x === materias.length - 1) {
                 $(this).appendTo(minhasMaterias);
@@ -89,6 +107,10 @@ function preencheAListaDeMateriasDoMenu() {
 
 
 //Função que pega as matérias do usuário e armazena em um array
+
+// Aqui, quando ele faz a requisição das materias cadastradas, ele fica exibindo uma barrinha de loading.
+// Quando retorna com sucesso as materias, ele troca o loading pelas materias q o cara tem cadastradas.
+// Ou se retornar insucesso, ele mostra mensagem para cadastrar em alguma matéria.
 function pegaMateriasComAjax(idUsuario) {
     // console.log("entrou pegaMateriasComAjax")
     var loading = $(".lista-materias");
@@ -121,7 +143,7 @@ function pegaMateriasComAjax(idUsuario) {
             })
             .fail(function (jqXHR, textStatus, materia) {
                 loading.empty();
-                materias.push("Você ainda não tem nenhuma matéria cadastrada!");
+                materias.push("Verifique sua conexão!");
                 preencheAListaDeMateriasDoMenu();
             });
 }
@@ -417,6 +439,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Preencher matérias a partir do select de período na pag de gerenciar matérias
+// SE VIRA COM ESSE AJAX AQUI GABRIEL VIADO
 $('select[data-class=slCadPeriodo]').change(function () {
 
     var qualPeriodo = $("#periodo-select option:selected").val();
