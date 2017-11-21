@@ -70,7 +70,7 @@ $("ul.para-scroll > li").click(function () {
 //  Estamos com variável global aqui e ainda não pensei numa solução, visto que queremos q carregue junto com a página.
 
 var materias = [];
-pegaMaterias($("#id-usuario").text());
+pegaMateriasComAjax($("#id-usuario").text());
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
 
@@ -89,7 +89,8 @@ function preencheAListaDeMateriasDoMenu() {
 
 
 //Função que pega as matérias do usuário e armazena em um array
-function pegaMaterias(idUsuario) {
+function pegaMateriasComAjax(idUsuario) {
+    // console.log("entrou pegaMateriasComAjax")
     var loading = $(".lista-materias");
     var li = document.createElement("li");
     var progress = document.createElement("div");
@@ -98,7 +99,6 @@ function pegaMaterias(idUsuario) {
     indeterminate.setAttribute("class", "indeterminate");
     progress.append(indeterminate);
     li.append(progress);
-    loading.append(li);
 
     $.ajax({
         url: "RecuperaMaterias",
@@ -107,6 +107,7 @@ function pegaMaterias(idUsuario) {
             idUsuario: idUsuario
         },
         beforeSend: function () {
+            loading.append(li);
             // console.log("CARREGANDO MATERIAS");
         }
     })
@@ -119,7 +120,9 @@ function pegaMaterias(idUsuario) {
                 preencheAListaDeMateriasDoMenu();
             })
             .fail(function (jqXHR, textStatus, materia) {
+                loading.empty();
                 materias.push("Você ainda não tem nenhuma matéria cadastrada!");
+                preencheAListaDeMateriasDoMenu();
             });
 }
 
@@ -244,14 +247,15 @@ $("#modal-de-escrever-codigo").click(function () {
     }
     $('.modal-content').append('<pre contenteditable class="line-numbers language-markup" data-linenumber="0"><code>select * from as aa where</code></pre>');
     //prismHighlight ();
-    Prism.fileHighlight();
+
 
 
     // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
-    $('#formDoModal').on('change', 'select', function (e) {
-        // console.log("entrou no change");
+    $('#formDoModal select').change(function (e) {
+        console.log("entrou no change");
         var val = $(e.target).val();
         var text = $(e.target).find("option:selected").text();
+        console.log(text);
         adicionaOsTextAreaModal(text);
     });
 });
@@ -260,13 +264,13 @@ function adicionaOsTextAreaModal(text) {
 
     if (text == "Texto normal") {
         $('.modal-content').children().remove();
-        // console.log("entrou no click do botao pra abrir modal de texto");
+        console.log("entrou no click do botao pra abrir modal de texto");
         var textarea = document.createElement("textarea");
         $('.modal-content').append(textarea);
 
     } else {
         $('.modal-content').children().remove();
-        // console.log("entrou no tipo diferente de texto normal");
+        console.log("entrou no tipo diferente de texto normal");
         var textarea = document.createElement("textarea");
         textarea.setAttribute("name", "codesnippet_editable");
         textarea.setAttribute("id", "codesnippet_editable");
@@ -274,31 +278,9 @@ function adicionaOsTextAreaModal(text) {
         textarea.setAttribute("cols", "50");
         $('.modal-content').append(textarea);
         qualLinguagem(text);
-        // Habilita o codemirror na textarea
-        function qualLinguagem(text) {
-            // console.log("hahaha" + text);
-            if (text == "Java") {
-                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-                    mode: "java",
-                    theme: "default",
-                    lineNumbers: true
-                });
-            } else if (text == "Javascript") {
-                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-                    mode: "javascript",
-                    theme: "default",
-                    lineNumbers: true
-                });
-            } else if (text == "html") {
-                var editableCodeMirror = CodeMirror.fromTextArea(document.getElementById('codesnippet_editable'), {
-                    mode: "html",
-                    theme: "default",
-                    lineNumbers: true
-                });
-            }
-        }
     }
 }
+
 ;
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                  Postagens colapsadas                   */
@@ -357,7 +339,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
                 montaPostagens(materia);
             })
             .fail(function (jqXHR, textStatus, postagem) {
-                console.log("ERRO AO RECUPERAR AS POSTAGENS");
+                console.log("Erro, cheque sua conexão");
             });
 }
 
@@ -435,7 +417,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Preencher matérias a partir do select de período na pag de gerenciar matérias
-jQuery('select[data-class=slCadPeriodo]').change(function () {
+$('select[data-class=slCadPeriodo]').change(function () {
 
     var qualPeriodo = $("#periodo-select option:selected").val();
     console.log(qualPeriodo);
@@ -470,7 +452,7 @@ jQuery('select[data-class=slCadPeriodo]').change(function () {
                 });
             })
             .fail(function (jqXHR, textStatus, materia) {
-                
+
             });
 });
 
@@ -495,3 +477,17 @@ $("#li-deslogar").on('click', function (e) {
     e.preventDefault();
     deslogar();
 });
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+//            Prism js
+
+

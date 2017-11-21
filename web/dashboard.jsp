@@ -33,7 +33,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <!-- Import Codemirror -->
+        <!-- Import prism -->
         <link href="css/prism.css" rel="stylesheet" />
 
         <link rel="stylesheet" type="text/css" href="css/result-light.css">
@@ -236,7 +236,7 @@
                         </div>
                         <div id="qual-linguagem-modal" class="input-field col s6">
                             <i class="material-icons prefix small">code</i>
-                            <select required="required">
+                            <select name="qual-linguagem" required="required">
                                 <option value="" disabled selected>Selecione</option>
                                 <option value="1">Javascript</option>
                                 <option value="2">Java</option>
@@ -265,7 +265,7 @@
         <!-- Import Materialize JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
-        <!-- Import Codemirror JS -->      
+        <!-- Import Prism JS -->      
         <script src="js/prism.js"></script>
         <script type="text/javascript" src="js/dummy.js"></script>
         <script type="text/javascript" src="js/prism-sql.min.js"></script>
