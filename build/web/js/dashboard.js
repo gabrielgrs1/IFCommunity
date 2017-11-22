@@ -18,6 +18,14 @@ if ($("section").hasClass("section-aparece")) {
     $(this).show();
 }
 ;
+
+/*------------------------------------------------------------------------*/
+//Função que mostra o "carregando" na tela.
+$(".preloader-wrapper").hide();
+function carregando() {
+    // console.log("preloader-wrapper");
+    $(".preloader-wrapper").show();
+}
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*     DROP DOWN DAS MATERIAS     */
 
@@ -42,10 +50,18 @@ $("ul.para-scroll > li").click(function () {
     // console.log($(this).text());
     // 
     //fecha o menu de minhas materias
-    if ($(this).children("span").text() !== 'Minhas matérias') {
+    var textoDoClique = $(this).children("span").text();
+    // console.log(textoDoClique);
+    if (textoDoClique !== 'Minhas matérias') {
         //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
         $('.aviso-minhas-materias').hide();
+        
+        // se for gerenciar materias, monta o gerenciar materias.
+        if (textoDoClique == "Gerenciar matérias") {
+            console.log("entrou no clique");
+            gerenciarMateriasConteudo();
+        }
     } else {
         $('.aviso-minhas-materias').show();
     }
@@ -90,7 +106,7 @@ function preencheAListaDeMateriasDoMenu() {
             // Enfim, caso o array materias chegue aqui com a mensagem de não tem matérias, ele remove essa mensage antes de gerar a lista de materias cadastradas.
             var a = materias.indexOf("Você ainda não tem nenhuma matéria cadastrada!");
             // console.log(a)
-            if (a == 0){
+            if (a == 0) {
                 materias.splice(i, 0);
             }
 
@@ -309,12 +325,25 @@ function adicionaOsTextAreaModal(text) {
 function collapsible() {
     $('.collapsible').collapsible();
 }
+
+// Muda a sentinha conforme o clique
+
+// NAO ESTA FUNCIONANDO AINDA
+
+$("ul.collapsible").click(function () {
+    console.log("entrou na rotação da setinha");
+    $(this).html("\2191");
+});
+
+
+
+
 /*---------------------------------------------------------*/
 //Função que pega as postagems e armazena em um array
 /*---------------------------------------------------------*/
 
 
-// Seguinte.
+// Seguinte:
 // Mudei o fluxo pra acabar com aquelas requisições que só aconteciam da segunda vez.
 // Agora essa primeira função aqui com o SetTimeout, que tem esse setTimeout por causa da primeira requisição 
 // que trás a lista de matérias, que chama a requisição ajax.
@@ -329,8 +358,8 @@ function collapsible() {
 var postagens = [];
 setTimeout(function () {
     $("input[name='materias-radio']").click(function () {
-        //  console.log("Fluxo 1");
-        //  console.log("entrou no que pega a materia para postagem");
+        // console.log("Fluxo 1");
+        // console.log("entrou no que pega a materia para postagem");
         var materia;
         materia = $(".fundo-checked").children().text();
         pegaPostagens(materia);
@@ -349,7 +378,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         },
         beforeSend: function () {
             carregando();
-            // console.log("CARREGANDO POSTAGENS");
+            console.log("CARREGANDO POSTAGENS");
         }
     })
             .done(function (postagem) {
@@ -365,13 +394,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
             });
 }
 
-/*------------------------------------------------------------------------*/
-//Função que mostra o "carregando" na tela.
-$(".preloader-wrapper").hide();
-function carregando() {
-    // console.log("preloader-wrapper");
-    $(".preloader-wrapper").show();
-}
+
 /*------------------------------------------------------------------------*/
 //Função que prepara o texto da postagem e chama a fução que cria e adiciona na tela
 function montaPostagens(materia) {
@@ -410,22 +433,25 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     var criaLiHead2 = document.createElement("li");
     var criaH4Titulo = document.createElement("h4");
     var criaPNome = document.createElement("p");
+    var criaPSeta = document.createElement("p");
     var criaDivBody = document.createElement("div");
     var criaSpanBody = document.createElement("span");
 
-    criaDivHead.className = "collapsible-header";
-    criaH4Titulo.className = "center";
+    criaDivHead.setAttribute("class", "collapsible-header");
+    criaH4Titulo.setAttribute("class", "center");
     criaH4Titulo.innerHTML = tituloPostagem;
     criaPNome.innerHTML = autorPostagem;
-    criaPNome.className = "right-align";
+    criaPNome.setAttribute("class", "right-align");
+    criaPSeta.setAttribute("class", "setinha-indicadora center");
     criaUlHead.setAttribute("class", "container");
-    criaDivBody.className = "collapsible-body";
+    criaDivBody.setAttribute("class", "collapsible-body");
     criaSpanBody.innerHTML = textoPostagem;
-    criaUl.className = "collapsible content-topic z-depth-2 container row";
+    criaUl.setAttribute("class", "collapsible content-topic z-depth-2 container row");
     criaUl.setAttribute('data-collapsible', "accordion");
 
     criaLiHead1.append(criaH4Titulo);
     criaLiHead2.append(criaPNome);
+    criaLiHead2.append(criaPSeta);
     criaUlHead.append(criaLiHead1);
     criaUlHead.append(criaLiHead2);
     criaDivHead.append(criaUlHead);
@@ -438,7 +464,78 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-//Preencher matérias a partir do select de período na pag de gerenciar matérias
+//          GERENCIAR MATERIAS    
+
+// Primeiro, do vetor com as matérias que ele já tem e os períodos delas.
+// O vetor das materias, ja temos, agora falta o dos períodos.
+
+
+// Por enquando está estático esse vetor, precisa do Ajax.
+var PeriodoDaMateria = ["1° Período"];
+
+function gerenciarMateriasConteudo() {
+    
+    
+    // POR CAUSA DISSO AQUI O SELECT ESTÁTICO N APARECE, TIRA PRA TESTAR O AJAX, DEPOIS EU COLOCO APPEND NELE.
+    $(".adicionar-materias div.box-padrao .row > form").empty();
+    // console.log("entrou na gera materias");
+    // console.log(materias.length);
+    for (var x = 0; x < materias.length; x++) {
+        var periodo = PeriodoDaMateria[0];
+        var materia = materias[x];
+        console.log(periodo);
+        console.log(materia);
+        adicionaMateriasCadastradas(periodo, materia);
+    }
+}
+;
+
+function adicionaMateriasCadastradas(periodo, materia) {
+    var criaTextoDaDivi1 = document.createElement("p");
+    var criaDiv1 = document.createElement("div");
+    var criaInput1 = document.createElement("input");
+    var criaLabel1 = document.createElement("label");
+    criaLabel1.setAttribute("for", "disabled");
+    criaLabel1.appendChild(document.createTextNode("Período"));
+    criaInput1.setAttribute("disabled", "disabled");
+    criaInput1.setAttribute("id", "disabled");
+    criaInput1.setAttribute("type", "text");
+    criaInput1.setAttribute("class", "validate");
+    criaDiv1.setAttribute("class", "input-field col s6");
+    criaDiv1.append(criaInput1);
+    criaDiv1.append(criaLabel1);
+
+    var criaDiv2 = document.createElement("div");
+    var criaInput2 = document.createElement("input");
+    var criaLabel2 = document.createElement("label");
+    criaLabel2.setAttribute("for", "disabled");
+    criaLabel2.appendChild(document.createTextNode("Matéria"));
+    criaInput2.setAttribute("disabled", "disabled");
+    criaInput2.setAttribute("type", "text");
+    criaInput2.setAttribute("id", "disabled");
+    criaInput2.setAttribute("class", "validate");
+    criaDiv2.setAttribute("class", "input-field col s6");
+    criaDiv2.append(criaInput2);
+    criaDiv2.append(criaLabel2);
+
+    for (var x = 0; x < 2; x++) {
+
+        if (x == 1) {
+            criaInput1.setAttribute("value", periodo);
+            $(".adicionar-materias div.box-padrao .row > form").prepend(criaDiv1);
+        } else {
+            criaInput2.setAttribute("value", materia);
+            $(".adicionar-materias div.box-padrao .row > form").prepend(criaDiv2);
+        }
+    }
+
+}
+;
+
+// Preencher matérias a partir do select de período na pag de gerenciar matérias
+// O select por enquanto tá estático, mas tem que passar ele pra append pra inserir dinamicamente conforme o ajax funfa.
+//
+//
 // SE VIRA COM ESSE AJAX AQUI GABRIEL VIADO
 $('select[data-class=slCadPeriodo]').change(function () {
 
@@ -463,6 +560,7 @@ $('select[data-class=slCadPeriodo]').change(function () {
             RecuperaMateriasPeriodo: qualPeriodo
         },
         beforeSend: function () {
+            carregando();
             // console.log("CARREGANDO MATERIAS");
         }
     })

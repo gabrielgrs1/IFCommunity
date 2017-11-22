@@ -138,8 +138,6 @@
                     <div class="row">
                         <form class="col s12">
                             <div class="input-field col s6">
-                                <i class="material-icons prefix">face</i>
-
                                 <select id="periodo-select" data-class="slCadPeriodo" required>
                                     <option value="" disabled selected>Selecione</option>
                                     <option value="1">1° Período</option>
@@ -151,7 +149,6 @@
                                 <label>Período</label>
                             </div>
                             <div class="input-field col s6">
-                                <i class="material-icons prefix">face</i>
                                 <select id="materia-select" data-class="slCadMateria">
                                     <option value="" disabled selected>Selecione</option>
                                     <option value="1">1° Período</option>
@@ -188,8 +185,7 @@
                         </div>
                     </div>
                     <div class="footer-copyright row">
-                        <div class="col s6 grey-text"></div>
-                        <div class="col s6 grey-text"></div>
+                        <div class="col s12 grey-text center-align"><strong> <> Keep coding </strong></div>
                     </div>
                 </div>
             </div>

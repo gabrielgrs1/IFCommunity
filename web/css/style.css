@@ -292,6 +292,12 @@ h4 {
 #body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container{
     padding: 0!important;
     margin: 0!important;
+    width: 100%;
+}
+
+#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container > li h4, p {
+    padding: 0.1em!important;
+    margin: 0!important;
 }
 
 #body-principal .modal-content {
@@ -312,6 +318,15 @@ h4 {
     padding: 2%;
     width: 40%;
 }
+
+
+#body-principal main > section.minhas-materias .setinha-indicadora:before {
+    content: "\2193"!important;
+    font-weight: 600;
+    color: black;
+    line-height: 40px;
+}
+
 
 /* FIM DA CORREÇÃO */
 
