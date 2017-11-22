@@ -59,7 +59,7 @@ $("ul.para-scroll > li").click(function () {
         
         // se for gerenciar materias, monta o gerenciar materias.
         if (textoDoClique == "Gerenciar matérias") {
-            console.log("entrou no clique");
+            // console.log("entrou no clique");
             gerenciarMateriasConteudo();
         }
     } else {
@@ -483,8 +483,8 @@ function gerenciarMateriasConteudo() {
     for (var x = 0; x < materias.length; x++) {
         var periodo = PeriodoDaMateria[0];
         var materia = materias[x];
-        console.log(periodo);
-        console.log(materia);
+        // console.log(periodo);
+        // console.log(materia);
         adicionaMateriasCadastradas(periodo, materia);
     }
 }
