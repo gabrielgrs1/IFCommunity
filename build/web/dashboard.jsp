@@ -136,7 +136,9 @@
                 <div class="box-padrao">
                     <h3>Gerenciar matérias</h3>
                     <div class="row">
-
+                        <ul class="collapsible" data-collapsible="accordion">
+                            
+                        </ul>
                     </div>
                 </div>
             </section>

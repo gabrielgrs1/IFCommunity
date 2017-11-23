@@ -315,7 +315,7 @@ function collapsible() {
 
 // NAO ESTA FUNCIONANDO AINDA
 
-$("ul.collapsible").click(function () {
+$("section.minhas-materias ul.collapsible").click(function () {
     console.log("entrou na rotação da setinha");
     $(this).html("\2191");
 });
@@ -457,112 +457,102 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 // O vetor das materias, ja temos, agora falta o dos períodos.
 
 
-// Por enquando está estático esse vetor, precisa do Ajax.
-var PeriodoDaMateria = ["1° Período"];
+// Por enquando está estático o vetor matéria/periodo, precisa do Ajax.
+// GABRIEL GABRIEL GABRIEL
+// VOCE TEM QUE ENCHER SÓ ESSE VETOR POR ENQUANTO, SÓ ISSO.
+// periodoMateria
 
 function gerenciarMateriasConteudo() {
 
+    // o ajax deve preencher esse vetor nesse formato.
+    var periodoMateria = ["FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
+    // console.log(periodoMateria.length);
 
-    // POR CAUSA DISSO AQUI O SELECT ESTÁTICO N APARECE, TIRA PRA TESTAR O AJAX, DEPOIS EU COLOCO APPEND NELE.
-    $(".adicionar-materias div.box-padrao .row > form").empty();
-    // console.log("entrou na gera materias");
-    // console.log(materias.length);
-    for (var x = 0; x < materias.length; x++) {
-        var periodo = PeriodoDaMateria[0];
-        var materia = materias[x];
-        // console.log(periodo);
-        // console.log(materia);
-        adicionaMateriasCadastradas(periodo, materia);
+    var todosOsPeriodosRecebidos = [];
+    for (var x = 0; x < periodoMateria.length; x++) {
+        var periodoMateriaSplit = periodoMateria[x].split(";");
+        todosOsPeriodosRecebidos.push(periodoMateriaSplit[1]);
     }
-}
-;
+    ;
+    // console.log(todosOsPeriodosRecebidos);
 
-function adicionaMateriasCadastradas(periodo, materia) {
-    var criaTextoDaDivi1 = document.createElement("p");
-    var criaDiv1 = document.createElement("div");
-    var criaInput1 = document.createElement("input");
-    var criaLabel1 = document.createElement("label");
-    criaLabel1.setAttribute("for", "disabled");
-    criaLabel1.appendChild(document.createTextNode("Período"));
-    criaInput1.setAttribute("disabled", "disabled");
-    criaInput1.setAttribute("id", "disabled");
-    criaInput1.setAttribute("type", "text");
-    criaInput1.setAttribute("class", "validate");
-    criaDiv1.setAttribute("class", "input-field col s6");
-    criaDiv1.append(criaInput1);
-    criaDiv1.append(criaLabel1);
-
-    var criaDiv2 = document.createElement("div");
-    var criaInput2 = document.createElement("input");
-    var criaLabel2 = document.createElement("label");
-    criaLabel2.setAttribute("for", "disabled");
-    criaLabel2.appendChild(document.createTextNode("Matéria"));
-    criaInput2.setAttribute("disabled", "disabled");
-    criaInput2.setAttribute("type", "text");
-    criaInput2.setAttribute("id", "disabled");
-    criaInput2.setAttribute("class", "validate");
-    criaDiv2.setAttribute("class", "input-field col s6");
-    criaDiv2.append(criaInput2);
-    criaDiv2.append(criaLabel2);
-
-    for (var x = 0; x < 2; x++) {
-
-        if (x == 1) {
-            criaInput1.setAttribute("value", periodo);
-            $(".adicionar-materias div.box-padrao .row > form").prepend(criaDiv1);
-        } else {
-            criaInput2.setAttribute("value", materia);
-            $(".adicionar-materias div.box-padrao .row > form").prepend(criaDiv2);
-        }
-    }
-
-}
-;
-
-// Preencher matérias a partir do select de período na pag de gerenciar matérias
-// O select por enquanto tá estático, mas tem que passar ele pra append pra inserir dinamicamente conforme o ajax funfa.
-//
-//
-// SE VIRA COM ESSE AJAX AQUI GABRIEL VIADO
-$('select[data-class=slCadPeriodo]').change(function () {
-
-    var qualPeriodo = $("#periodo-select option:selected").val();
-    console.log(qualPeriodo);
-
-    var $select = jQuery('select[data-class=slCadMateria]').empty();
-    var loading1 = $("select[data-class=slCadPeriodo]");
-    var option = document.createElement("option");
-    var progress = document.createElement("div");
-    progress.setAttribute("class", "progress");
-    var indeterminate = document.createElement("div");
-    indeterminate.setAttribute("class", "indeterminate");
-    progress.append(indeterminate);
-    option.append(progress);
-    loading1.append(option);
-
-    $.ajax({
-        url: "RecuperaMaterias",
-        type: 'get',
-        data: {
-            RecuperaMateriasPeriodo: qualPeriodo
-        },
-        beforeSend: function () {
-            carregando();
-            // console.log("CARREGANDO MATERIAS");
-        }
+    // tirar os duplicados pra ver os períodos que tem
+    var periodosQueTem = todosOsPeriodosRecebidos.filter(function (este, i) {
+        return todosOsPeriodosRecebidos.indexOf(este) == i;
     })
-            .done(function () {
-                loading1.empty();
-                // console.log(materia);
-                jQuery.each(json.list, function (i, value) {
-                    var optionHTML = new Option(value.descricao, value.id);
-                    $select.append(optionHTML);
-                });
-            })
-            .fail(function (jqXHR, textStatus, materia) {
+    // console.log(periodosQueTem);
+
+    adicionaPeriodos(periodosQueTem);
+    function adicionaPeriodos(periodosQueTem) {
+
+        for (var x = 0; x < periodosQueTem.length; x++) {
+            // console.log(periodosQueTem);
+            var criaTextoDoBody = document.createElement("p");
+            var criaDivBody = document.createElement("div");
+            var criaDivHeader = document.createElement("div");
+            var nomeDoCriaLi = ("criaLi" + periodosQueTem[x]);
+            // console.log(nomeDoCriaLi);
+            nomeDoCriaLi = document.createElement("li");
+
+            criaDivBody.setAttribute("class", "collapsible-body");
+            criaDivBody.setAttribute("id", x + 1);
+
+            criaDivHeader.setAttribute("class", "collapsible-header");
+            criaDivHeader.appendChild(document.createTextNode(periodosQueTem[x] + "° Período"));
+
+            nomeDoCriaLi.append(criaDivHeader);
+            nomeDoCriaLi.append(criaDivBody);
+
+            $(".adicionar-materias div.box-padrao .row > ul.collapsible").append(nomeDoCriaLi);
+        }
+    }
+
+
+    criaLinhasDeMaterias(periodosQueTem, periodoMateria);
+    function criaLinhasDeMaterias(periodosQueTem, periodoMateria) {
+        // console.log(periodosQueTem);
+        // console.log(periodoMateria);
+        for (var x = 0; x < periodoMateria.length; x++) {
+            // Pegar nome da matéria
+            var periodoMateriaSplit = periodoMateria[x].split(";");
+            var materia = periodoMateriaSplit[0];
+            var periodo = periodoMateriaSplit[1];
+
+            var criaNomeMateria = document.createElement("span");
+            var criaLi = document.createElement("li");
+            var nomeDoCriaLabel = ("criaLabel" + [x]);
+            // console.log(nomeDoCriaLabel);
+            nomeDoCriaLabel = document.createElement("label");
+            var nomeDoCriaInput = ("criaInput" + [x]);
+            // console.log(nomeDoCriaInput);
+            nomeDoCriaInput = document.createElement("input");
+
+            criaNomeMateria.appendChild(document.createTextNode(materia));
+
+            criaLi.append(criaNomeMateria);
+
+            nomeDoCriaLabel.setAttribute("for", materia);
+            nomeDoCriaLabel.setAttribute("class", "col s12");
+            nomeDoCriaLabel.append(criaLi);
+
+            nomeDoCriaInput.setAttribute("type", "checkbox");
+            nomeDoCriaInput.setAttribute("id", "test5");
+
+
+            $(".adicionar-materias div.box-padrao .row > ul.collapsible  li").find("div.collapsible-body").each(function () {
+                if (this.id == periodo) {
+                    this.append(nomeDoCriaInput);
+                    this.append(nomeDoCriaLabel);
+                }
 
             });
-});
+        }
+    }
+}
+;
+
+// SE VIRA COM ESSE AJAX AQUI GABRIEL VIADO
+
 
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -584,14 +574,8 @@ function deslogar() {
 $("#li-deslogar").on('click', function (e) {
     e.preventDefault();
     deslogar();
-});
-
-
-
-
-
-
-
+}
+);
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 

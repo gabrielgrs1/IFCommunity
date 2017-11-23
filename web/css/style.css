@@ -336,6 +336,19 @@ h4 {
     line-height: 40px;
 }
 
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible  {
+    color: black;
+    margin: 0;
+}
+
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body {
+    padding: 0;
+}
+
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label {
+    padding-top: 1em!important;
+    padding-bottom: 1em!important;
+}
 
 /* FIM DA CORREÇÃO */
 
