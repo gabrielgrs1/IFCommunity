@@ -181,7 +181,15 @@ h4 {
 #body-login #form-esqueci-senha,
 #body-login #erro-cadastro-proximo, 
 #body-login #erro-cadastro-final,
-#body-login .campo-erro {
+#body-login .campo-erro,
+#body-principal .aviso-minhas-materias,
+#body-principal .botao-modal,
+#body-principal section,
+#body-principal .minhas-materias-adicionadas,
+#body-principal .botao-modal,
+#body-principal .preloader-wrapper,
+#body-principal .botao-modal,
+#body-principal .preloader-wrapper {
     display: none;
 }
 

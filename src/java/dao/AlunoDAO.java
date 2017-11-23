@@ -61,7 +61,7 @@ public class AlunoDAO {
         Connection con = ConnectionFactory.getConnection();
 
         //Insere na tabela aluno
-        String sql = "INSERT INTO TB_ALUNO (NOME, PERIODO, MATRICULA, TELEFONE) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_ALUNO (NOME, PERIODO, MATRICULA, TELEFONE, MATERIAS_CADASTRADAS) VALUES (?, ?, ?, ?, ?)";
 
         // Prepara o comando com o preparestat pstm =
         pstm = con.prepareStatement(sql);
@@ -71,6 +71,7 @@ public class AlunoDAO {
         pstm.setString(2, periodo);
         pstm.setString(3, matricula);
         pstm.setString(4, telefone);
+        pstm.setString(5, "0");
 
         // Executa o comando retornando no result a quantidade de linhas afetadas int
         result = pstm.executeUpdate();

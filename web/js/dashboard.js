@@ -1,27 +1,10 @@
-$('.aviso-minhas-materias').hide();
-$(".botao-modal").hide();
-$("section").hide();
-$('.minhas-materias-adicionadas').hide();
-$(".botao-modal").hide();
-$(".preloader-wrapper").hide();
-
 /*-----------------------------------------------------------------------------*/
 /* Adiciona a imagem */
 
 $(".avatar .container").append('<img src="http://www.alemdaimaginacao.com/Obituario%20da%20Fama/Ruben_Aguirre/ruben_aguirre1.jpg" />');
 
-
-/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*    De início, mostra a página perfil apenas      */
-
-if ($("section").hasClass("section-aparece")) {
-    $(this).show();
-}
-;
-
 /*------------------------------------------------------------------------*/
 //Função que mostra o "carregando" na tela.
-$(".preloader-wrapper").hide();
 function carregando() {
     // console.log("preloader-wrapper");
     $(".preloader-wrapper").show();
@@ -56,7 +39,7 @@ $("ul.para-scroll > li").click(function () {
         //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
         $('.aviso-minhas-materias').hide();
-        
+
         // se for gerenciar materias, monta o gerenciar materias.
         if (textoDoClique == "Gerenciar matérias") {
             // console.log("entrou no clique");
@@ -96,7 +79,7 @@ var minhasMaterias = lista.parent();
 function preencheAListaDeMateriasDoMenu() {
     lista.detach().empty().each(function (i) {
 
-        if (materias.length == 0) {
+        if (materias.length === 0) {
             materias.push("Você ainda não tem nenhuma matéria cadastrada!");
         }
 
@@ -146,12 +129,11 @@ function pegaMateriasComAjax(idUsuario) {
         },
         beforeSend: function () {
             loading.append(li);
-            // console.log("CARREGANDO MATERIAS");
         }
     })
             .done(function (materia) {
                 loading.empty();
-                // console.log(materia);
+
                 for (var i = 0; i < materia.length; i++) {
                     materias.push(materia[i]);
                 }
@@ -159,7 +141,11 @@ function pegaMateriasComAjax(idUsuario) {
             })
             .fail(function (jqXHR, textStatus, materia) {
                 loading.empty();
-                materias.push("Verifique sua conexão!");
+                if (jqXHR["status"] === 500) {
+                    materias.push("Não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    materias.push("Não foi possível estabelecer conexão!");
+                }
                 preencheAListaDeMateriasDoMenu();
             });
 }
@@ -229,7 +215,6 @@ function MontaCondicoesBotaoModal(TextoValidacao) {
     apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao);
 }
 
-$(".botao-modal").hide();
 function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao) {
     // console.log(TextoValidacao + " 1");
     // console.log(StringQueNãoEscondemOBotaoDePublicacao);
@@ -383,9 +368,11 @@ function pegaPostagens(materia, dataUltimaPostagem) {
     })
             .done(function (postagem) {
                 postagens = [];
+
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }
+
                 $(".preloader-wrapper").hide();
                 montaPostagens(materia);
             })
@@ -474,8 +461,8 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 var PeriodoDaMateria = ["1° Período"];
 
 function gerenciarMateriasConteudo() {
-    
-    
+
+
     // POR CAUSA DISSO AQUI O SELECT ESTÁTICO N APARECE, TIRA PRA TESTAR O AJAX, DEPOIS EU COLOCO APPEND NELE.
     $(".adicionar-materias div.box-padrao .row > form").empty();
     // console.log("entrou na gera materias");
