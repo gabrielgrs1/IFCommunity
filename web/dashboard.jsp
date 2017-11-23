@@ -132,36 +132,12 @@
 
             </section>
 
-            <section class="postagens adicionar-materias row">
+            <section class="postagens adicionar-materias">
                 <div class="box-padrao">
                     <h3>Gerenciar matérias</h3>
                     <div class="row">
-                        <form class="col s12">
-                            <div class="input-field col s6">
-                                <select id="periodo-select" data-class="slCadPeriodo" required>
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="1">1° Período</option>
-                                    <option value="2">2° Período</option>
-                                    <option value="3">3° Período</option>
-                                    <option value="4">4° Período</option>
-                                    <option value="5">5° Período</option>
-                                </select>
-                                <label>Período</label>
-                            </div>
-                            <div class="input-field col s6">
-                                <select id="materia-select" data-class="slCadMateria">
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option value="1">1° Período</option>
-                                    <option value="2">2° Período</option>
-                                    <option value="3">3° Período</option>
-                                    <option value="4">4° Período</option>
-                                    <option value="5">5° Período</option>
-                                </select>
-                                <label>Matéria</label>
-                            </div>
-                        </form>
+
                     </div>
-                </div>
                 </div>
             </section>
 

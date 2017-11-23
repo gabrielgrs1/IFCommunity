@@ -189,7 +189,8 @@ h4 {
 #body-principal .botao-modal,
 #body-principal .preloader-wrapper,
 #body-principal .botao-modal,
-#body-principal .preloader-wrapper {
+#body-principal .preloader-wrapper,
+#body-principal .adicionar-materias {
     display: none;
 }
 
@@ -748,8 +749,6 @@ h4 {
 #body-principal .postagens {
     padding-top: 80px;
     z-index: 0;
-    display: -moz-box;
-    display: -webkit-box;
     display: box;
     -webkit-box-orient: vertical;
     box-orient: vertical;
