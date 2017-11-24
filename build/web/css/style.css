@@ -249,6 +249,8 @@ h4 {
 [type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
     height: auto!important;
     line-height: inherit!important;
+    padding-left: 0!important;
+    cursor: pointer;
 }
 
 #body-principal li, 
@@ -268,11 +270,6 @@ h4 {
 #body-principal nav ul li {
     float: none!important;
     color: white;
-}
-
-[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
-    padding-left: 0!important;
-    cursor: pointer;
 }
 
 #body-principal label {
@@ -336,19 +333,44 @@ h4 {
     line-height: 40px;
 }
 
+#body-principal main > section.minhas-materias .active .setinha-indicadora:before {
+    content: "\2191"!important;
+}
+
+[type="checkbox"]:not(:checked)+label, [type="checkbox"]:checked+label {
+    height: auto!important;
+    line-height: inherit!important;
+    padding-left: 0!important;
+    cursor: pointer;
+}
+
 #body-principal .adicionar-materias div.box-padrao .row > ul.collapsible  {
     color: black;
     margin: 0;
+    float: none!important;
 }
 
 #body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body {
     padding: 0;
+    margin: 0;
+    line-height: inherit!important;
 }
 
-#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label {
-    padding-top: 1em!important;
-    padding-bottom: 1em!important;
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body input {
+    display: none!important;
 }
+
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label::before,
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label::after{
+    margin: 1vmin;
+}
+
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label li {
+    width: 100%;
+    padding: 0.5em 1em 0.5em 3em;
+    line-height: inherit!important;
+}
+
 
 /* FIM DA CORREÇÃO */
 
@@ -594,6 +616,7 @@ h4 {
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     }
     #body-principal .nav-toggle {
+        z-index: 6!important;
         position: absolute;
         right: -40px;
         top: 0;
@@ -646,7 +669,7 @@ h4 {
 }
 
 #body-principal .content-header {
-    z-index: 6!important;
+    z-index: 5!important;
     text-align: center;
     white-space: nowrap;
     width: 100%;
@@ -739,7 +762,7 @@ h4 {
     box-shadow: .5vmin .5vmin 0 rgba(0, 0, 0, .30)!important;
 }
 
-#body-principal .box-padrao h3 {
+#body-principal .box-padrao h3, h4 {
     background: #03A9F4;
     padding: .1em;
     font-weight: 300;
@@ -766,8 +789,11 @@ h4 {
     -webkit-box-orient: vertical;
     box-orient: vertical;
     left: 0px;
-    padding-right: 100px!important;
     bottom: 0px;
+}
+
+#body-principal .padding-right {
+    padding-right: 100px!important;
 }
 
 #body-principal .content-topic {

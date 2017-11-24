@@ -116,7 +116,7 @@
                                 <button class="btn waves-effect waves-light" type="submit" name="action">Ok, tudo certo!
                                     <i class="material-icons right">send</i>
                                 </button>
-                                <button class="btn waves-effect red darken-3 waves-light" type="reset" name="action">Ops, limpar campos.
+                                <button class="btn waves-effect red darken-3 waves-light" type="reset" name="action">Oops, reverter.
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -126,7 +126,7 @@
             </section>
 
             <!-- Sessão de postagens !--> 
-            <section class="postagens minhas-materias row">
+            <section class="postagens minhas-materias row padding-right">
 
                 <!-- aqui vão as postagens adicionadas dinamicamente !--> 
 
