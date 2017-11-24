@@ -563,20 +563,24 @@ function gerenciarMateriasConteudo() {
 $(document).on("change", "input[type='checkbox']", function () {
     novoVetorDeMaterias = materias.slice(0);
     // console.log(novoVetorDeMaterias);
-    if (novoVetorDeMaterias.length >= 7) {
-        alert("Você não pode adicionar mais matérias, por favor, remova alguma.");
-        $(this).prop("checked", false);
-        return;
-    }
     if (this.checked) {
-        console.log($(this).attr('name'));
+        // console.log($(this).attr('name'));
         // verifica se já tem a matéria no array de matérias, se não tiver, adiciona ela com ajax.
         var temNoArrayDeMateriasOuNao = materias.indexOf($(this).attr('name'));
         // console.log(temNoArrayDeMateriasOuNao);
         if (temNoArrayDeMateriasOuNao == -1) {
-// console.log("não tem");
+            // console.log("não tem");
+
+            // Limite de matérias
+            if (novoVetorDeMaterias.length >= 7) {
+                alert("Você não pode adicionar mais matérias, por favor, remova alguma.");
+                $(this).prop("checked", false);
+                return;
+            }
+            
+            
             novoVetorDeMaterias.push($(this).attr('name'));
-            console.log(novoVetorDeMaterias);
+            // console.log(novoVetorDeMaterias);
             materias = novoVetorDeMaterias.slice(0);
             materias.sort();
             preencheAListaDeMateriasDoMenu();
@@ -584,11 +588,11 @@ $(document).on("change", "input[type='checkbox']", function () {
             pegaPostagensDaMateriaSelecionada();
         }
     } else {
-        console.log($(this).attr('name'));
+        //  console.log($(this).attr('name'));
         var index = novoVetorDeMaterias.indexOf($(this).attr('name'));
-        console.log(index);
+        //  console.log(index);
         novoVetorDeMaterias.splice(index, 1);
-        console.log(novoVetorDeMaterias);
+        //  console.log(novoVetorDeMaterias);
         materias = novoVetorDeMaterias.slice(0);
         materias.sort();
         preencheAListaDeMateriasDoMenu();
