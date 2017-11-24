@@ -305,6 +305,12 @@ h4 {
     padding: 0.1em!important;
     margin: 0!important;
 }
+#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container > li h4{
+    background: #00bfa5!important;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+}
 
 #body-principal .modal-content {
     position: relative!important;
@@ -331,6 +337,8 @@ h4 {
     font-weight: 600;
     color: black;
     line-height: 40px;
+    webkit-transition: width 2s; 
+    transition: width 2s;
 }
 
 #body-principal main > section.minhas-materias .active .setinha-indicadora:before {
@@ -762,7 +770,7 @@ h4 {
     box-shadow: .5vmin .5vmin 0 rgba(0, 0, 0, .30)!important;
 }
 
-#body-principal .box-padrao h3, h4 {
+#body-principal .box-padrao h3, body-principal .box-padrao h4 {
     background: #03A9F4;
     padding: .1em;
     font-weight: 300;
@@ -770,6 +778,7 @@ h4 {
     color: #fff;
     margin: 0!important;
 }
+
 
 #body-principal div.box-padrao .sc-container {
     display: table;
