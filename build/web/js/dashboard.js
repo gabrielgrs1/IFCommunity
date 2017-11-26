@@ -510,9 +510,6 @@ function gerenciarMateriasConteudo() {
         // console.log(periodoMateria);
         periodoMateria.sort();
         // console.log(periodoMateria);
-        
-        
-        
         for (var x = 0; x < periodoMateria.length; x++) {
             // Pegar nome da matéria
             var periodoMateriaSplit = periodoMateria[x].split(";");
@@ -562,10 +559,9 @@ function gerenciarMateriasConteudo() {
             }
         }
     });
-}
-;
-// PEGAR TODOS OS CHECKED BOX CHECADOS PRA VER AS MATÉRIAS QUE O CARA TÁ CADASTRADO
+};
 
+// PEGAR TODOS OS CHECKED BOX CHECADOS PRA VER AS MATÉRIAS QUE O CARA TÁ CADASTRANDO EM TEMPO REAL
 $(document).on("change", "input[type='checkbox']", function () {
     novoVetorDeMaterias = materias.slice(0);
     // console.log(novoVetorDeMaterias);
