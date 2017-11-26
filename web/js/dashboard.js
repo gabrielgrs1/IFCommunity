@@ -463,7 +463,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 function gerenciarMateriasConteudo() {
 
 // o ajax deve preencher esse vetor nesse formato.
-    var periodoMateria = ["FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
+    var periodoMateria = ["BUNDA;6","FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
     // console.log(periodoMateria.length);
 
     var todosOsPeriodosRecebidos = [];
@@ -507,6 +507,12 @@ function gerenciarMateriasConteudo() {
     function criaLinhasDeMaterias(periodosQueTem, periodoMateria) {
         // console.log(periodosQueTem);
         // console.log(periodoMateria);
+        // console.log(periodoMateria);
+        periodoMateria.sort();
+        // console.log(periodoMateria);
+        
+        
+        
         for (var x = 0; x < periodoMateria.length; x++) {
             // Pegar nome da matéria
             var periodoMateriaSplit = periodoMateria[x].split(";");

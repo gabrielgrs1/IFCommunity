@@ -677,7 +677,7 @@ h4 {
 }
 
 #body-principal .content-header {
-    z-index: 5!important;
+    z-index: 4!important;
     text-align: center;
     white-space: nowrap;
     width: 100%;
