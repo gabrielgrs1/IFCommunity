@@ -395,7 +395,8 @@ function montaPostagens(materia) {
         var tituloPostagem = postagens[x]["titulo"];
         var dataPostagem = postagens[x]["data"];
         var materiaPostagem = postagens[x][materia];
-        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem);
+        var IDPostagem = postagens[x]["ID"];
+        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
         collapsible();
     }
 
@@ -407,7 +408,7 @@ function montaPostagens(materia) {
 }
 
 //Função que adiciona a estrutura de postagem
-function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem) {
+function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem) {
 //FALTA COLOCAR DATA DA POSTAGEM E MATERIA
 // console.log("Fluxo 4");
     $("main > section.minhas-materias").empty();
@@ -441,6 +442,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUlHead.append(criaLiHead2);
     criaDivHead.append(criaUlHead);
     criaDivBody.append(criaSpanBody);
+    criaLi.setAttribute("id", "1");
     criaLi.append(criaDivHead);
     criaLi.append(criaDivBody);
     criaUl.append(criaLi);
