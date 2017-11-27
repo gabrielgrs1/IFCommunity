@@ -649,6 +649,9 @@ h4 {
     #body-principal .menu-mensagens {
         display: none;
     }
+    #body-principal .perfil > div.box-padrao form.col div.col.s6{
+        width: 100%!important;
+    }
 }
 
 /*---------------------------------------------------*/
