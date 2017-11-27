@@ -395,9 +395,9 @@ function montaPostagens(materia) {
         var tituloPostagem = postagens[x]["titulo"];
         var dataPostagem = postagens[x]["data"];
         var materiaPostagem = postagens[x][materia];
-        var IDPostagem = postagens[x][x];
-        console.log(x);
-        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
+        var IDPostagem = postagens[x]["IDPostagem"];
+        // console.log(x);
+        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, x + 1);
         collapsible();
     }
 
@@ -411,7 +411,8 @@ function montaPostagens(materia) {
 //Função que adiciona a estrutura de postagem
 function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem) {
 //FALTA COLOCAR DATA DA POSTAGEM E MATERIA
-    console.log("Fluxo 4");
+    // console.log("Fluxo 4");
+    // console.log(IDPostagem);
     var secaoDePostagens = $("main > section.minhas-materias");
     var criaUl = document.createElement("ul");
     var criaLi = document.createElement("li");
@@ -424,6 +425,11 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     var criaPSeta = document.createElement("p");
     var criaDivBody = document.createElement("div");
     var criaSpanBody = document.createElement("span");
+    var criaDivBotões = document.createElement("div");
+    var criaALike = document.createElement("a");
+    var criaILike = document.createElement("i");
+    var criaADislike = document.createElement("a");
+    var criaIDislike = document.createElement("i");
     criaDivHead.setAttribute("class", "collapsible-header");
     criaH4Titulo.setAttribute("class", "center");
     criaH4Titulo.innerHTML = tituloPostagem;
@@ -433,6 +439,17 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUlHead.setAttribute("class", "container");
     criaDivBody.setAttribute("class", "collapsible-body");
     criaSpanBody.innerHTML = textoPostagem;
+    criaDivBotões.setAttribute("class", "botoes-das-postagens right-align");
+    criaALike.setAttribute("class", "waves-effect waves-light btn right-align");
+    criaILike.setAttribute("class", "material-icons left");
+    criaILike.innerHTML = "thumb_up";
+    criaALike.innerHTML = "Curtir";
+    criaDivBotões.setAttribute("class", "botoes-das-postagens right-align");
+    criaADislike.setAttribute("class", "waves-effect waves-light btn right-align  red darken-2");
+    criaIDislike.setAttribute("class", "material-icons left");
+    criaIDislike.innerHTML = "thumb_down";
+    criaADislike.innerHTML = "Descurtir";
+    criaDivBotões.setAttribute("id", IDPostagem);
     criaUl.setAttribute("class", "collapsible content-topic z-depth-2 container row");
     criaUl.setAttribute('data-collapsible', "accordion");
     criaLiHead1.append(criaH4Titulo);
@@ -442,6 +459,11 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUlHead.append(criaLiHead2);
     criaDivHead.append(criaUlHead);
     criaDivBody.append(criaSpanBody);
+    criaALike.append(criaILike);
+    criaADislike.append(criaIDislike);
+    criaDivBotões.append(criaALike);
+    criaDivBotões.append(criaADislike);
+    criaDivBody.append(criaDivBotões);
     criaLi.setAttribute("id", IDPostagem);
     criaLi.append(criaDivHead);
     criaLi.append(criaDivBody);

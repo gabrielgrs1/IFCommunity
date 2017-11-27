@@ -306,7 +306,7 @@ h4 {
     margin: 0!important;
 }
 #body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container > li h4{
-    background: #00bfa5!important;
+    background:#2196f3!important;
     font-weight: 300;
     text-align: center;
     color: #fff;
@@ -826,6 +826,16 @@ h4 {
 
 #body-principal .para-scroll li span{
     color: white;
+}
+
+#body-principal section.minhas-materias  div.collapsible-body {
+    padding: 0!important;
+    margin: 0!important;
+}
+
+#body-principal .content-topic .botoes-das-postagens{
+    width: 100%!important;
+    float: right;
 }
 
 /*---------------------------------------------------*/
