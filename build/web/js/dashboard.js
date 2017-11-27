@@ -373,7 +373,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }
-                console.log(postagens);
+                // console.log(postagens);
                 $(".preloader-wrapper").hide();
                 montaPostagens(materia);
             })
