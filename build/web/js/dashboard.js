@@ -373,7 +373,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }
-
+                console.log(postagens);
                 $(".preloader-wrapper").hide();
                 montaPostagens(materia);
             })
@@ -395,7 +395,8 @@ function montaPostagens(materia) {
         var tituloPostagem = postagens[x]["titulo"];
         var dataPostagem = postagens[x]["data"];
         var materiaPostagem = postagens[x][materia];
-        var IDPostagem = postagens[x]["ID"];
+        var IDPostagem = postagens[x][x];
+        console.log(x);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
         collapsible();
     }
@@ -410,8 +411,7 @@ function montaPostagens(materia) {
 //Função que adiciona a estrutura de postagem
 function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem) {
 //FALTA COLOCAR DATA DA POSTAGEM E MATERIA
-// console.log("Fluxo 4");
-    $("main > section.minhas-materias").empty();
+    console.log("Fluxo 4");
     var secaoDePostagens = $("main > section.minhas-materias");
     var criaUl = document.createElement("ul");
     var criaLi = document.createElement("li");
@@ -442,12 +442,13 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUlHead.append(criaLiHead2);
     criaDivHead.append(criaUlHead);
     criaDivBody.append(criaSpanBody);
-    criaLi.setAttribute("id", "1");
+    criaLi.setAttribute("id", IDPostagem);
     criaLi.append(criaDivHead);
     criaLi.append(criaDivBody);
     criaUl.append(criaLi);
+    criaUl.setAttribute("id", IDPostagem);
     // quando criar a regra de retorno do banco decide o prepend ou append.
-    secaoDePostagens.prepend(criaUl);
+    secaoDePostagens.append(criaUl);
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -465,7 +466,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 function gerenciarMateriasConteudo() {
 
 // o ajax deve preencher esse vetor nesse formato.
-    var periodoMateria = ["BUNDA;6","FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
+    var periodoMateria = ["BUNDA;6", "FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
     // console.log(periodoMateria.length);
 
     var todosOsPeriodosRecebidos = [];
@@ -561,7 +562,8 @@ function gerenciarMateriasConteudo() {
             }
         }
     });
-};
+}
+;
 
 // PEGAR TODOS OS CHECKED BOX CHECADOS PRA VER AS MATÉRIAS QUE O CARA TÁ CADASTRANDO EM TEMPO REAL
 $(document).on("change", "input[type='checkbox']", function () {
@@ -581,8 +583,8 @@ $(document).on("change", "input[type='checkbox']", function () {
                 $(this).prop("checked", false);
                 return;
             }
-            
-            
+
+
             novoVetorDeMaterias.push($(this).attr('name'));
             // console.log(novoVetorDeMaterias);
             materias = novoVetorDeMaterias.slice(0);
