@@ -47,7 +47,7 @@ $("ul.para-scroll > li").click(function () {
         if (textoDoClique == "Gerenciar matérias") {
             // console.log("entrou no clique");
             $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
-            gerenciarMateriasConteudo();
+            retornaMaterias();
         }
     } else {
         $('.aviso-minhas-materias').show();
@@ -73,6 +73,7 @@ $("ul.para-scroll > li").click(function () {
 //  Estamos com variável global aqui e ainda não pensei numa solução, visto que queremos q carregue junto com a página.
 
 var materias = [];
+var periodoMateria = [];
 pegaMateriasComAjax($("#id-usuario").text());
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
@@ -483,23 +484,47 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 // O vetor das materias, ja temos, agora falta o dos períodos.
 
 
-// Por enquando está estático o vetor matéria/periodo, precisa do Ajax.
-// GABRIEL GABRIEL GABRIEL
-// VOCE TEM QUE ENCHER SÓ ESSE VETOR POR ENQUANTO, SÓ ISSO.
-// periodoMateria
+function retornaMaterias() {
+    $.ajax({
+        url: "RecuperaMateriasTelaAdicionar",
+        type: 'post',
+        beforeSend: function () {
+            console.log("Recuperando as matérias");
+        }
+    })
+            .done(function (materiasJSON) {
+                console.log(materiasJSON);
+                periodoMateria = [];
+                for (var i = 0; i < materiasJSON.length; i++) {
+                    periodoMateria.push(materiasJSON[i]);
+                }
+                
+                gerenciarMateriasConteudo();
+
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                console.log(jqXHR);
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+
+            });
+}
+
+
+
 
 function gerenciarMateriasConteudo() {
-
-// o ajax deve preencher esse vetor nesse formato.
-    var periodoMateria = ["FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
-    // console.log(periodoMateria.length);
-
     var todosOsPeriodosRecebidos = [];
+
     for (var x = 0; x < periodoMateria.length; x++) {
         var periodoMateriaSplit = periodoMateria[x].split(";");
         todosOsPeriodosRecebidos.push(periodoMateriaSplit[1]);
     }
-    ;
     // console.log(todosOsPeriodosRecebidos);
 
     // tirar os duplicados pra ver os períodos que tem
@@ -533,9 +558,6 @@ function gerenciarMateriasConteudo() {
 
     criaLinhasDeMaterias(periodosQueTem, periodoMateria);
     function criaLinhasDeMaterias(periodosQueTem, periodoMateria) {
-        // console.log(periodosQueTem);
-        // console.log(periodoMateria);
-        // console.log(periodoMateria);
         periodoMateria.sort();
         // console.log(periodoMateria);
         for (var x = 0; x < periodoMateria.length; x++) {
@@ -659,18 +681,22 @@ $("#li-deslogar").on('click', function (e) {
     deslogar();
 });
 
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+//ATUALIZAÇÃO DE PERFIL
 $("#btn-atualizar-perfil").click(function () {
     var aluno = [];
     atualizaPerfilAJAX($("#id-usuario").text(), $(".nome-perfil").val(), $(".telefone-perfil").val(), $(".email-perfil").val());
     $("#nome-usuario").text(aluno[0]);
 });
 
+//Limpa os campos do perfil
 $("#btn-limpar-perfil").click(function () {
     $(".nome-perfil").val("");
     $(".telefone-perfil").val("");
     $(".email-perfil").val("");
 });
 
+//Função que atualiza os dados do usuario e retorna os novos dados inseridos no banco
 function atualizaPerfilAJAX(id, nome, telefone, email) {
     $.ajax({
         url: "AtualizaPerfil",
@@ -712,12 +738,14 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
                 $("#resultado-atualiza-perfil").show();
                 $("#resultado-atualiza-perfil").text("Erro ao atualizar o perfil! Informe a um administrador!");
                 $("#resultado-atualiza-perfil").css("color", "red");
-                
+
                 setTimeout(function () {
                     $("#resultado-atualiza-perfil").fadeOut(3000);
                 }, 3000);
             });
 }
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+//$(" input")
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 

@@ -14,6 +14,28 @@ public class MateriaDAO {
     public MateriaDAO() {
     }
 
+    public static ArrayList<String> recuperaMateriaTelaAdicionar() throws SQLException {
+        ArrayList<String> materias = new ArrayList<>();
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+        
+        /* Comando SQL que será enviado ao banco */
+        String sql = "SELECT * FROM TB_MATERIA";
+
+        /* Prepara a consulta e passa os parametros */
+        pstm = con.prepareStatement(sql);
+        
+        /* Executa a query e armazena o resultado na variavel rs */
+        rs = pstm.executeQuery();
+        
+        while (rs.next()) {            
+            materias.add(rs.getString("NOME_MATERIA") + ";" + rs.getString("PERIODO"));
+        }
+
+        return materias;
+    }
+
     public static ArrayList<Postagem> recuperaPostagens(String materia, String data) throws SQLException {
         ArrayList<Postagem> postagens = new ArrayList<>();
         PreparedStatement pstm;
@@ -138,6 +160,8 @@ public class MateriaDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(recuperaPostagens("TODAS", "2017-11-16 21:33:50").get(1).getAutor());
+        ArrayList<String> testeMaterias = recuperaMateriaTelaAdicionar();
+        
+        System.out.println(testeMaterias.get(0) + "\n" + testeMaterias.get(1) + "\n" + testeMaterias.get(2) + "\n" + testeMaterias.get(3));
     }
 }
