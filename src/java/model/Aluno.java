@@ -10,6 +10,7 @@ public class Aluno {
     private int permissao;
     private String telefone;
     private String materias;
+    private String matricula;
 
     // Construtor
     public Aluno() {
@@ -47,6 +48,10 @@ public class Aluno {
     public String getMaterias() {
         return materias;
     }
+
+    public String getMatricula() {
+        return matricula;
+    }
     
     // Setters
     public void setId(int id) {
@@ -79,5 +84,9 @@ public class Aluno {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 }

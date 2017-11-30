@@ -14,6 +14,71 @@ public class AlunoDAO {
     public AlunoDAO() {
     }
 
+    public static ArrayList<String> recuperaPerfil(int id) throws SQLException {
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+        ArrayList<String> aluno = new ArrayList<>();
+
+        String sql = "SELECT * FROM TB_USUARIO"
+                + " INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE ID_ALUNO = ?";
+
+        pstm = con.prepareStatement(sql);
+        pstm.setInt(1, id);
+        rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            aluno.add(rs.getString("NOME"));
+            aluno.add(rs.getString("TELEFONE"));
+            aluno.add(rs.getString("EMAIL"));
+            aluno.add(rs.getString("MATRICULA"));
+        }
+
+        con.close();
+
+        return aluno;
+    }
+
+    public static ArrayList<String> atualizaPerfil(String id, String nome, String telefone, String email) throws SQLException {
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+        ArrayList<String> aluno = new ArrayList<>();
+
+        String sql = "UPDATE TB_ALUNO AS TB_A"
+                + " INNER JOIN TB_USUARIO AS TB_U ON (TB_A.ID = TB_U.ID_ALUNO)"
+                + " SET TB_A.NOME = ?,"
+                + " TB_A.TELEFONE = ?,"
+                + " TB_U.EMAIL = ?"
+                + " WHERE TB_A.ID = ?";
+
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, nome);
+        pstm.setString(2, telefone);
+        pstm.setString(3, email);
+        pstm.setString(4, id);
+
+        pstm.executeUpdate();
+
+        /* Consulta o novo Aluno */
+        sql = "SELECT * FROM TB_USUARIO"
+                + " INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE ID_ALUNO = ?";
+
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, id);
+        rs = pstm.executeQuery();
+
+        while (rs.next()) {
+            aluno.add(rs.getString("NOME"));
+            aluno.add(rs.getString("TELEFONE"));
+            aluno.add(rs.getString("EMAIL"));
+        }
+
+        con.close();
+
+        return aluno;
+    }
+
     public static String podeCadastrar(String nome, String telefone, String matricula, String periodo, String login, String senha, String email) throws SQLException {
         PreparedStatement pstm;
         ResultSet rs;
@@ -123,7 +188,8 @@ public class AlunoDAO {
         Connection con = ConnectionFactory.getConnection();
 
         /* Comando SQL que será enviado ao banco */
-        String sql = "SELECT * FROM TB_USUARIO INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE USUARIO = ? AND SENHA = ?";
+        String sql = "SELECT * FROM TB_USUARIO"
+                + " INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE USUARIO = ? AND SENHA = ?";
 
         /* Prepara a consulta e passa os parametros */
         pstm = con.prepareStatement(sql);
@@ -144,6 +210,7 @@ public class AlunoDAO {
             aluno.setPermissao(rs.getInt("PERMISSAO"));
             aluno.setPeriodo(rs.getInt("PERIODO"));
             aluno.setMaterias(rs.getString("MATERIAS_CADASTRADAS"));
+            aluno.setMatricula(rs.getString("MATRICULA"));
         }
 
         /* Fecha a conexão */
@@ -161,7 +228,8 @@ public class AlunoDAO {
         Connection con = ConnectionFactory.getConnection();
 
         /* Comando SQL que será enviado ao banco */
-        String sql = "SELECT * FROM TB_USUARIO INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE ID_ALUNO = ?";
+        String sql = "SELECT * FROM TB_USUARIO"
+                + " INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE ID_ALUNO = ?";
 
         /* Prepara a consulta e passa os parametros */
         pstm = con.prepareStatement(sql);
@@ -245,21 +313,34 @@ public class AlunoDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        /*int rs = cadastro("Administrador", "(034) 99894-8551", "01858618657-1", "2", "admin", "admin", "gabriel_guilherme2006@hotmail.com");
-        System.out.println("Foram alterados: " + rs + " registros");*/
-
-        Aluno a = login("gabrielgrs", "Gabriel@10");
-        if (a.getLogin() != null) {
-            System.out.println("Aluno " + a.getLogin() + " logado com sucesso!");
-        } else {
-            System.out.println("Erro ao realizar login!");
-        }
-
         /*
-		 * try { Aluno a = alunodao.getAlunoByMatricula("01858618657-1");
-		 * System.out.println(a.getNome()); } catch (SQLException e) {
-		 * 
-		 * System.out.println("Erro ao buscar aluno"); }
+        ArrayList<String> aluno = atualizaPerfil(1, "Gabriel Guilher Rodrigues Silva", "034998948551", "gabriel_guilherme2006@hotmail.com");
+        System.out.println(aluno.get(0));
+         */
+ /*
+            ArrayList<String> aluno = recuperaDadosAlunoPerfil(1);
+            System.out.println(aluno.get(3));
+         */
+ /*
+            int rs = cadastro("Administrador", "(034) 99894-8551", "01858618657-1", "2", "admin", "admin", "gabriel_guilherme2006@hotmail.com");
+            System.out.println("Foram alterados: " + rs + " registros");
+         */
+ /*
+            Aluno a = login("gabrielgrs", "Gabriel@10");
+            if (a.getLogin() != null) {
+                System.out.println("Aluno " + a.getLogin() + " logado com sucesso!");
+            } else {
+                System.out.println("Erro ao realizar login!");
+            }
+         */
+ /*
+            try { 
+                Aluno a = alunodao.getAlunoByMatricula("01858618657-1");
+                System.out.println(a.getNome()); 
+            } catch (SQLException e) {
+                System.out.println("Erro ao buscar aluno"); 
+            }
+        
          */
     }
 }

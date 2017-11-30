@@ -51,7 +51,7 @@
             <header class="avatar">
                 <div class="container">
                 </div>
-                <h2><%out.print(nome);%></h2>
+                <h2 id="nome-usuario"><%out.print(nome);%></h2>
             </header>
             <ul class="para-scroll">
                 <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
@@ -72,53 +72,38 @@
                 <div class="box-padrao">
                     <h3>Perfil</h3>
                     <div class="row">
-                        <form class="col s12">
-                            <div class="row">
+                        <form class="col s12" id="form-perfil-div">
+                            <div class="row" id="form-perfil">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="icon_prefix" type="text" class="validate">
-                                    <label for="icon_prefix">Primeiro nome</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <i class="material-icons prefix">account_circle</i>
-                                    <input id="icon_prefix" type="text" class="validate">
-                                    <label for="icon_prefix">Sobrenome</label>
+                                    <input id="icon_prefix" type="text" class="validate nome-perfil" value="${nome}">
+                                    <label for="icon_prefix">Nome completo</label>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">phone</i>
-                                    <input id="icon_telephone" type="tel" class="validate">
+                                    <input id="icon_telephone" type="tel" class="validate telefone-perfil" value="${telefone}">
                                     <label for="icon_telephone">Celular</label>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">mail</i>
-                                    <input id="email" type="email" class="validate">
+                                    <input id="email" type="email" class="validate email-perfil" value="${email}">
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <i class="material-icons prefix">face</i>
-                                    <select>
-                                        <option value="" disabled selected>Selecione</option>
-                                        <option value="1">1° Período</option>
-                                        <option value="2">2° Período</option>
-                                        <option value="3">3° Período</option>
-                                        <option value="4">4° Período</option>
-                                        <option value="5">5° Período</option>
-                                    </select>
-                                    <label>Período</label>
-                                </div>
-                                <div class="input-field col s6">
                                     <i class="material-icons prefix">school</i>
-                                    <input id="icon_prefix" type="text" class="validate">
+                                    <input disabled id="icon_prefix" type="text" class="validate" value="${matricula}">
                                     <label for="icon_prefix">Matrícula</label>
                                 </div>
                             </div>
+
                             <div class="row center-align">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">Ok, tudo certo!
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                <button class="btn waves-effect red darken-3 waves-light" type="reset" name="action">Oops, reverter.
-                                    <i class="material-icons right">send</i>
-                                </button>
+                                <div class="col s12">
+                                    <p id="resultado-atualiza-perfil" class="center-align"></p>
+                                </div>
+                            </div>
+                            <div class="row center-align">
+                                <button class="btn btn-large waves-effect waves-light green" id="btn-atualizar-perfil" type="button" name="action">Enviar<i class="material-icons right">send</i></button>
+                                <button class="btn btn-large waves-effect waves-light red" type="button" id="btn-limpar-perfil" name="action">Limpar Campos<i class="material-icons right">cancel</i></button>
                             </div>
                         </form>
                     </div>
@@ -137,7 +122,7 @@
                     <h3>Gerenciar matérias</h3>
                     <div class="row">
                         <ul class="collapsible" data-collapsible="accordion">
-                            
+
                         </ul>
                     </div>
                 </div>

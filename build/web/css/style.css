@@ -271,14 +271,16 @@ h4 {
     float: none!important;
     color: white;
 }
+/*MARAFELLI COMENTEI ISSO PRA SEGUIR O PADRÃO DO MATERIALIZE
 
 #body-principal label {
     font-size: 0.8em!important;
     color: grey;
 }
+
+*/
 #body-principal input {
-    color: grey;
-    font-size: 1em!important;
+    color: black;
 }
 
 #body-principal site-content .postagens {
@@ -869,6 +871,15 @@ h4 {
 
 #body-principal .input-field, option {
     font-size: 0.8em!important;
+}
+
+#body-principal #form-perfil {
+    margin-top: 4%;
+}
+
+#body-principal #resultado-atualiza-perfil {
+    display: none;
+    color: green;
 }
 
 

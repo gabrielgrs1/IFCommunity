@@ -1,4 +1,7 @@
 /*-----------------------------------------------------------------------------*/
+$('.telefone-perfil').mask('(00) 00009-0000');
+
+
 /* Adiciona a imagem */
 
 $(".avatar .container").append('<img src="http://www.alemdaimaginacao.com/Obituario%20da%20Fama/Ruben_Aguirre/ruben_aguirre1.jpg" />');
@@ -488,7 +491,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
 function gerenciarMateriasConteudo() {
 
 // o ajax deve preencher esse vetor nesse formato.
-    var periodoMateria = ["BUNDA;6", "FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
+    var periodoMateria = ["FUNDAMENTOS DE WEB DESIGN I;1", "LÓGICA DE PROGRAMAÇÃO;1", "PROJETO INTEGRADOR 1;1", "ALGORITMOS E PROGRAMAÇÃO;2", "FUNDAMENTOS DE WEB DESIGN II;2", "PROJETO INTEGRADOR 2;2", "PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET;2", "BANCO DE DADOS 1;3", "ENGENHARIA DE SOFTWARE 1;3", "INTERFACE HUMANO-COMPUTADOR;3", "PROGRAMAÇÃO ORIENTADA A OBJETOS;3"];
     // console.log(periodoMateria.length);
 
     var todosOsPeriodosRecebidos = [];
@@ -654,10 +657,72 @@ function deslogar() {
 $("#li-deslogar").on('click', function (e) {
     e.preventDefault();
     deslogar();
+});
+
+$("#btn-atualizar-perfil").click(function () {
+    var aluno = [];
+    atualizaPerfilAJAX($("#id-usuario").text(), $(".nome-perfil").val(), $(".telefone-perfil").val(), $(".email-perfil").val());
+    $("#nome-usuario").text(aluno[0]);
+});
+
+$("#btn-limpar-perfil").click(function () {
+    $(".nome-perfil").val("");
+    $(".telefone-perfil").val("");
+    $(".email-perfil").val("");
+});
+
+function atualizaPerfilAJAX(id, nome, telefone, email) {
+    $.ajax({
+        url: "AtualizaPerfil",
+        type: 'post',
+        data: {
+            id: id,
+            nome: nome,
+            telefone: telefone,
+            email: email
+        },
+        beforeSend: function () {
+            console.log("Atualizando dados do perfil");
+        }
+    })
+            .done(function (alunoJSON) {
+                console.log(alunoJSON);
+
+                aluno = [];
+                for (var i = 0; i < alunoJSON.length; i++) {
+                    aluno.push(alunoJSON[i]);
+                }
+
+                $("#resultado-atualiza-perfil").fadeIn(1500);
+                $("#resultado-atualiza-perfil").text("Perfil atualizado com sucesso!");
+                setTimeout(function () {
+                    $("#resultado-atualiza-perfil").fadeOut(3000);
+                }, 6000);
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                console.log(jqXHR);
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+
+                $("#resultado-atualiza-perfil").show();
+                $("#resultado-atualiza-perfil").text("Erro ao atualizar o perfil! Informe a um administrador!");
+                $("#resultado-atualiza-perfil").css("color", "red");
+                
+                setTimeout(function () {
+                    $("#resultado-atualiza-perfil").fadeOut(3000);
+                }, 3000);
+            });
 }
-);
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
 
 
 //            Prism js
