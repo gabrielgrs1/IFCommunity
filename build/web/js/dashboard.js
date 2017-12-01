@@ -498,7 +498,7 @@ function retornaMaterias() {
                 for (var i = 0; i < materiasJSON.length; i++) {
                     periodoMateria.push(materiasJSON[i]);
                 }
-                
+
                 gerenciarMateriasConteudo();
 
             })
@@ -511,12 +511,8 @@ function retornaMaterias() {
                 } else if (jqXHR["status"] === 404) {
                     console.log("Erro 404, não foi encontrado o diretório solicitado!");
                 }
-
             });
 }
-
-
-
 
 function gerenciarMateriasConteudo() {
     var todosOsPeriodosRecebidos = [];
@@ -653,12 +649,40 @@ $(document).on("change", "input[type='checkbox']", function () {
         pegaPostagensDaMateriaSelecionada();
     }
 
-// SE VIRA COM ESSE AJAX AQUI GABRIEL VIADO
-// faz um ajax dentro de uma função, pode por o nome dela de algo como gravaMaterias, dae c passa o argumento gravaMaterias(materias), bem aqui.
-// Esse arumento materias é o array com as matérias q o cara tá cadastrado atualizado na hr q ele cadastra ou remove o cadastro.
-// Bem aqui neste lugar vc faz a chamada.
-
-
+    atualizaMateriasTelaAdicionar(materias);
+    
+    function atualizaMateriasTelaAdicionar(materias) {
+        $.ajax({
+            url: "AtualizaMateriaTelaAdicionar",
+            type: 'get',
+            data: {
+                materia1: materias[0],
+                materia2: materias[1],
+                materia3: materias[2],
+                materia4: materias[3],
+                materia5: materias[4],
+                materia6: materias[5],
+                materia7: materias[6]
+            },
+            beforeSend: function () {
+                console.log("Atualizando as matérias");
+                window.console.log(JSON.stringify(materias));
+            }
+        })
+                .done(function () {
+                    console.log("Materias atualizadas com sucesso!");
+                })
+                .fail(function (jqXHR, textStatus, resultado) {
+                    console.log(jqXHR);
+                    if (jqXHR["status"] === 500) {
+                        console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                    } else if (jqXHR["status"] === 502) {
+                        console.log("Erro 502, não foi possível estabelecer conexão!");
+                    } else if (jqXHR["status"] === 404) {
+                        console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                    }
+                });
+    }
 });
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Função que desloga o usuário

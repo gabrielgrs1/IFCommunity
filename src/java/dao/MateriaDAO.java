@@ -14,22 +14,53 @@ public class MateriaDAO {
     public MateriaDAO() {
     }
 
+    public static void atualizaMateriaTelaAdicionar(String materias) throws SQLException {
+        String materiasID = "";
+        PreparedStatement pstm;
+        ResultSet rs;
+        Connection con = ConnectionFactory.getConnection();
+
+        System.out.println(materias);
+
+        for (int i = 0; i < materias.length(); i++) {
+            /* Comando SQL que será enviado ao banco */
+            String sql = "SELECT * FROM TB_MATERIA WHERE NOME_MATERIA = ?";
+
+            /* Prepara a consulta e passa os parametros */
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, materias);
+
+            /* Executa a query e armazena o resultado na variavel rs */
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                if (materiasID.length() == 0) {
+                    materiasID = (rs.getString("PERIODO"));
+                } else {
+                    materiasID = ("," + rs.getString("PERIODO"));
+                }
+            }
+            
+            System.out.println(materiasID);
+        }
+    }
+
     public static ArrayList<String> recuperaMateriaTelaAdicionar() throws SQLException {
         ArrayList<String> materias = new ArrayList<>();
         PreparedStatement pstm;
         ResultSet rs;
         Connection con = ConnectionFactory.getConnection();
-        
+
         /* Comando SQL que será enviado ao banco */
         String sql = "SELECT * FROM TB_MATERIA";
 
         /* Prepara a consulta e passa os parametros */
         pstm = con.prepareStatement(sql);
-        
+
         /* Executa a query e armazena o resultado na variavel rs */
         rs = pstm.executeQuery();
-        
-        while (rs.next()) {            
+
+        while (rs.next()) {
             materias.add(rs.getString("NOME_MATERIA") + ";" + rs.getString("PERIODO"));
         }
 
@@ -160,8 +191,6 @@ public class MateriaDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        ArrayList<String> testeMaterias = recuperaMateriaTelaAdicionar();
-        
-        System.out.println(testeMaterias.get(0) + "\n" + testeMaterias.get(1) + "\n" + testeMaterias.get(2) + "\n" + testeMaterias.get(3));
+        atualizaMateriaTelaAdicionar("[\"BANCO DE DADOS 1\",\"FUNDAMENTOS DE WEB DESIGN I\",\"LÓGICA DE PROGRAMAÇÃO\",\"PROJETO INTEGRADOR 1\"]");
     }
 }
