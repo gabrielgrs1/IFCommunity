@@ -166,6 +166,30 @@ function exibeRequisitosSenha() {
     $("#senha-cadastro").focus(function () {
         $(".requisitos-senha").show();
         $("#btn-cadastrar").addClass("btn-requisito-senha");
+
+        $("#senha-cadastro").keyup(function () {
+            // Valida primeiro requisito de senha
+            if ($("#senha-cadastro").val().length >= 8 && /[A-Z]/.test($("#senha-cadastro").val())) {
+                $("#requisito-senha-1").addClass("cor-verde");
+            } else {
+                $("#requisito-senha-1").removeClass("cor-verde");
+            }
+
+            // Valida segundo requisito de senha
+            if (/[$@$!%*?&]/.test($("#senha-cadastro").val())) {
+                $("#requisito-senha-2").addClass("cor-verde");
+            } else {
+                $("#requisito-senha-2").removeClass("cor-verde");
+            }
+
+            // Valida terceiro requisito de senha
+            if (/[0-9]/.test($("#senha-cadastro").val())) {
+                $("#requisito-senha-3").addClass("cor-verde");
+            } else {
+                $("#requisito-senha-3").removeClass("cor-verde");
+            }
+
+        });
     });
 
     $("#senha-cadastro").blur(function () {
