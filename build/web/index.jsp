@@ -74,7 +74,7 @@
                             <div class="row">
                                 <div class='input-field col s12'>
                                     <input class='validate' type='text' name='login' id='login' />
-                                    <label for='login'>Login ou email</label>
+                                    <label for='login'>Login</label>
                                     <span id="erro-login" class="erro-span"></span>
                                 </div>
                             </div>
@@ -167,6 +167,11 @@
 
                                 <div class="row">
                                     <div class='input-field col s12'>
+                                        <input class='validate' type='email' name='email' id='email' maxlength="60" required/>
+                                        <label for='email'>Email</label>
+                                        <span id="erro-email" class="erro-span"></span>
+                                    </div>
+                                    <div class='input-field col s12'>
                                         <input class='validate' type='text' name='login-cadastro' id='login-cadastro' minlength="6" maxlength="20" required/>
                                         <label for='login-cadastro'>Usuário</label>
                                         <span id="erro-usuario" class="erro-span"></span>
@@ -176,11 +181,9 @@
                                         <button type="button" id="mostrar-senha-cadastro" class="btn-mostrar-senha"><i class="material-icons">remove_red_eye</i></button>
                                         <label for='senha-cadastro'>Senha</label>
                                         <span id="erro-senha" class="erro-span"></span>
-                                    </div>
-                                    <div class='input-field col s12'>
-                                        <input class='validate' type='email' name='email' id='email' maxlength="60" required/>
-                                        <label for='email'>Email</label>
-                                        <span id="erro-email" class="erro-span"></span>
+                                        <span id="requisito-senha-1" class="requisitos-senha">- No minímo 8 caractéres sendo 1 maiúsculo</span>
+                                        <span id="requisito-senha-2" class="requisitos-senha">- No minímo 1 caractere especial (!@#%) </span>
+                                        <span id="requisito-senha-3" class="requisitos-senha">- No minímo 1 número</span>
                                     </div>
                                 </div>
 

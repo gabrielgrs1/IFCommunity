@@ -228,6 +228,28 @@ h4 {
     font-weight: bold;
 }
 
+#body-login .requisitos-senha {
+    display: none;
+    font-size: 14px;
+    position: absolute;
+    color: #78909c;
+}
+
+#body-login #requisito-senha-1 {
+
+}
+
+#body-login #requisito-senha-2 {
+    top: 115%;
+}
+
+#body-login #requisito-senha-3 {
+    top: 138%;
+}
+
+#body-login .btn-requisito-senha {
+    margin-top: 10% !important;
+}
 
 /*-----------------------------------------------------*/
 

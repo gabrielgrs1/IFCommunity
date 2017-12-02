@@ -144,7 +144,7 @@ function validacaoFormulario(campo, span, regex, mensagem) {
             $(campo).addClass("erro-label-input");
             $(campo).removeClass("sucesso-label-input");
         }
-        
+
         if (verificaCPF() && campo === "#matricula") {
             $(span).fadeOut(2000);
             $(campo).addClass("sucesso-label-input");
@@ -162,12 +162,25 @@ function validacaoFormulario(campo, span, regex, mensagem) {
     });
 }
 
+function exibeRequisitosSenha() {
+    $("#senha-cadastro").focus(function () {
+        $(".requisitos-senha").show();
+        $("#btn-cadastrar").addClass("btn-requisito-senha");
+    });
+
+    $("#senha-cadastro").blur(function () {
+        $(".requisitos-senha").hide();
+        $("#btn-cadastrar").removeClass("btn-requisito-senha");
+    });
+}
+
 //Call functions
 $(function () {
     mascarasDosInputs();
     erroLogin();
     erroCadastro();
     mensagemEmailEnviado();
+    exibeRequisitosSenha();
 });
 
 trocaTela("#btn-esqueci-senha", "#form-login", "#form-esqueci-senha");
