@@ -152,7 +152,7 @@ function validacaoFormulario(campo, span, regex, mensagem) {
         }
 
         if (/^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]*$/i.test($("#nome").val())
-                && /^\(0?[1-9]{2}\)\s9?[1-9]{4}\-[1-9]{4}$/.test($("#telefone").val())
+                && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($("#telefone").val())
                 && /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())
                 && verificaCPF()) {
             $("#btn-cadastrar-proximo").removeClass("disabled");
@@ -178,7 +178,7 @@ trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 
 validacaoFormulario("#nome", "#erro-nome", /^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]*$/i, "Informe apenas letras. Campo obrigatório.");
-validacaoFormulario("#telefone", "#erro-telefone", /^\(0?[1-9]{2}\)\s9?[1-9]{4}\-[1-9]{4}$/, "Informe apenas números. Campo obrigatório.");
+validacaoFormulario("#telefone", "#erro-telefone", /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/, "Informe apenas números. Campo obrigatório.");
 validacaoFormulario("#matricula", "#erro-matricula", /^[0-9]{11}-[1-9]{1,}$ /, "Informe uma matrícula válida. Campo obrigatório.");
 validacaoFormulario("#login-cadastro", "#erro-usuario", /^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){3,}[a-zA-Z0-9]$/, "Informe um usuário válido. Campo obrigatório.");
 validacaoFormulario("#senha-cadastro", "#erro-senha", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/, "Informe uma senha válida exemplo: Teste@10.");
