@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
         }
 
         Aluno conta = null;
-        if (erros == "") {
+        if ("".equals(erros)) {
             try {
                 conta = AlunoDAO.login(login, senha);
             } catch (SQLException ex) {

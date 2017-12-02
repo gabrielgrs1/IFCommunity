@@ -121,7 +121,7 @@ public class AlunoDAO {
     public static Aluno cadastro(String nome, String telefone, String matricula, String periodo, String login, String senha, String email) throws SQLException {
         Aluno conta = null;
         PreparedStatement pstm;
-        ResultSet rs;
+        ResultSet rs = null;
         int result = 0;
         Connection con = ConnectionFactory.getConnection();
 
@@ -168,11 +168,31 @@ public class AlunoDAO {
         result = pstm.executeUpdate();
 
         if (result == 1) {
-            conta = new Aluno();
-            conta.setNome(nome);
-            conta.setId(idTabela);
-            conta.setLogin(login);
-            conta.setEmail(email);
+            /* Comando SQL que será enviado ao banco */
+            sql = "SELECT * FROM TB_USUARIO"
+                    + " INNER JOIN TB_ALUNO ON (tb_aluno.ID = tb_usuario.ID_ALUNO) WHERE USUARIO = ? AND SENHA = ?";
+
+            /* Prepara a consulta e passa os parametros */
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, login);
+            pstm.setString(2, senha);
+
+            /* Executa a query e armazena o resultado na variavel rs */
+            rs = pstm.executeQuery();
+
+            /* Instancia um novo aluno para dar de retorno da função */
+            while (rs.next()) {
+                conta = new Aluno();
+                conta.setId(rs.getInt("ID_ALUNO"));
+                conta.setLogin(rs.getString("USUARIO"));
+                conta.setEmail(rs.getString("EMAIL"));
+                conta.setNome(rs.getString("NOME"));
+                conta.setTelefone(rs.getString("TELEFONE"));
+                conta.setPermissao(rs.getInt("PERMISSAO"));
+                conta.setPeriodo(rs.getInt("PERIODO"));
+                conta.setMaterias(rs.getString("MATERIAS_CADASTRADAS"));
+                conta.setMatricula(rs.getString("MATRICULA"));
+            }
         }
 
         // Fecha conexao con.close(); 
