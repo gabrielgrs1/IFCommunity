@@ -180,6 +180,8 @@
                 </div>
             </div>
 
+            
+            
             <div id="modal1" class="modal modal-fixed-footer">
                 <form id="formDoModal">
                     <div class="modal-head center">
@@ -208,6 +210,14 @@
                     </div>
 
                     <div class="modal-content">   
+                        <textarea class="paraTextoNormal"></textarea>
+                        
+                        <pre id="editor" class="paraCodigo">function foo(items) {
+    var i;
+    for (i = 0; i &lt; items.length; i++) {
+        alert("Ace Rocks " + items[i]);
+    }
+}</pre>
                     </div>
 
                     <div class="modal-footer">
@@ -224,11 +234,8 @@
         <!-- Import Materialize JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
-        <!-- Import Prism JS -->      
-        <script src="js/prism.js"></script>
-        <script type="text/javascript" src="js/dummy.js"></script>
-        <script type="text/javascript" src="js/prism-sql.min.js"></script>
-        <script src="//unpkg.com/prismjs/components/prism-ruby.js"></script>
+        <!-- Import Ace  JS -->      
+        <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Dashboard JS -->

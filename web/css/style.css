@@ -895,7 +895,7 @@ h4 {
     padding: 0!important;
 }
 
-#body-principal .input-field, option {
+#body-principal .input-field, #body-principal option {
     font-size: 0.8em!important;
 }
 
@@ -908,28 +908,24 @@ h4 {
     color: green;
 }
 
+#body-principal #formDoModal{
+    height: 91%!important;
+    overflow: hidden;
+}
 
-/* for line numbers */
-[class*="language-"] {
-    counter-reset: linenumber!important;
+#body-principal #editor {
+    margin: 0!important;
+    position: relative!important;
+    top: 0!important;
+    bottom: 0!important;
+    left: 0!important;
+    right: 0!important;
 }
-span.line{
-    display: inline-block!important;
-    width: 100%!important;
-    counter-increment: linenumber!important;
+#body-principal textarea  {
+    background-color: white!important;
 }
-span.line:nth-child(odd){
-    background: #f0f0f0!important;
-}
-span.line:before{
-    content: counter(linenumber)!important;
-    font-size: 100%!important;
-    width: 2em!important;
-    display: inline-block!important;
-    font-weight: normal!important;
-    color: black!important;
-    border-right: 1px solid black!important;
-    margin-right: 5px!important;
-    padding-right: 5px!important;
-    text-align: right!important;
+
+#body-principal .paraTextoNormal,#body-principal .paraCodigo  {
+    display: none;
+    height: 100%!important;
 }

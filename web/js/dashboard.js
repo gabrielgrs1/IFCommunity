@@ -266,28 +266,9 @@ $('.modal1').modal({
     } // Callback for Modal close
 }
 );
-
-$('#textarea1').val('New Text');
-$('#textarea1').trigger('autoresize');
 /*-----------------------------------------------------------------------------*/
 
-/*                Highlight dos escritos dos códigos                     */
-
-
 $("#modal-de-escrever-codigo").click(function () {
-
-// Ajusta o tamanho do modal com o hightlight
-    if (window.parent && window.parent.parent) {
-        window.parent.parent.postMessage(["resultsFrame", {
-                height: document.body.getBoundingClientRect().height,
-                slug: "2azkLnad"
-            }], "*");
-    }
-    $('.modal-content').append('<pre contenteditable class="line-numbers language-markup" data-linenumber="0"><code>select * from as aa where</code></pre>');
-    //prismHighlight ();
-
-
-
     // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
     $('#formDoModal select').change(function (e) {
         console.log("entrou no change");
@@ -301,25 +282,39 @@ $("#modal-de-escrever-codigo").click(function () {
 function adicionaOsTextAreaModal(text) {
 
     if (text == "Texto normal") {
-        $('.modal-content').children().remove();
+        // $('.modal-content').children().remove();
         console.log("entrou no click do botao pra abrir modal de texto");
-        var textarea = document.createElement("textarea");
-        $('.modal-content').append(textarea);
+        $('.paraTextoNormal').show();
+        $('.paraCodigo').hide();
 
     } else {
-        $('.modal-content').children().remove();
+        $('.paraTextoNormal').hide();
+        $('.paraCodigo').show();
+        // $('.modal-content').children().remove();
         console.log("entrou no tipo diferente de texto normal");
-        var textarea = document.createElement("textarea");
-        textarea.setAttribute("name", "codesnippet_editable");
-        textarea.setAttribute("id", "codesnippet_editable");
-        textarea.setAttribute("rows", "4");
-        textarea.setAttribute("cols", "50");
-        $('.modal-content').append(textarea);
         qualLinguagem(text);
+
     }
+};
+/*-----------------------------------------------------------------------------*/
+/*                Highlight dos escritos dos códigos   Ace js                   */
+
+$('.modal').modal();
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/twilight");
+editor.session.setMode("ace/mode/javascript");
+
+function qualLinguagem (text) {
+    var novoModo = text.toLowerCase()
+    console.log(novoModo);
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setMode("ace/mode/sql");
+    editor.session.setMode("ace/mode/" + novoModo);
 }
 
-;
+/*-----------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                  Postagens colapsadas                   */
 function collapsible() {
@@ -650,7 +645,7 @@ $(document).on("change", "input[type='checkbox']", function () {
     }
 
     atualizaMateriasTelaAdicionar(materias);
-    
+
     function atualizaMateriasTelaAdicionar(materias) {
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
@@ -769,14 +764,8 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
             });
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-//$(" input")
-
-/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 
-
-
-//            Prism js
 
 
