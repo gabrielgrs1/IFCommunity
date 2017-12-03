@@ -65,7 +65,8 @@
             </ul>
         </nav>
 
-        <main class="site-content cor-fundo">
+        <main class="site-content">
+
 
             <!-- Sessão do perfil !--> 
             <section class="postagens perfil section-aparece">

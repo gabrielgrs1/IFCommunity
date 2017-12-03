@@ -293,9 +293,9 @@ function adicionaOsTextAreaModal(text) {
         // $('.modal-content').children().remove();
         console.log("entrou no tipo diferente de texto normal");
         qualLinguagem(text);
-
     }
-};
+}
+;
 /*-----------------------------------------------------------------------------*/
 /*                Highlight dos escritos dos códigos   Ace js                   */
 
@@ -305,13 +305,22 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/javascript");
 
-function qualLinguagem (text) {
+function qualLinguagem(text) {
     var novoModo = text.toLowerCase()
     console.log(novoModo);
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
-    editor.getSession().setMode("ace/mode/sql");
     editor.session.setMode("ace/mode/" + novoModo);
+}
+
+function qualLinguagemParaPostagem(text, IDPostagem) {
+    // precisa mudar o modo de acordo com o modo que retornar do banco.
+    var novoModo = text.toLowerCase()
+    console.log(novoModo);
+    var editor = ace.edit("editorLeitura" + IDPostagem);
+    editor.setTheme("ace/theme/twilight");
+    editor.session.setMode("ace/mode/" + novoModo);
+    editor.setReadOnly(true);
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -368,6 +377,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         }
     })
             .done(function (postagem) {
+                // console.log(postagem);
                 postagens = [];
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
@@ -393,11 +403,14 @@ function montaPostagens(materia) {
         var autorPostagem = postagens[x]["autor"];
         var tituloPostagem = postagens[x]["titulo"];
         var dataPostagem = postagens[x]["data"];
-        var materiaPostagem = postagens[x][materia];
-        var IDPostagem = postagens[x]["IDPostagem"];
-        // console.log(x);
+        var materiaPostagem = postagens[x]["materia"];
+        console.log(materiaPostagem);
+        // TEM Q RETORNAR ISSO AQUI GABRIEL SAFADO
+        var IDPostagem = postagens[x]["id"];
+        console.log(IDPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, x + 1);
         collapsible();
+        qualLinguagemParaPostagem("javascript", x + 1);
     }
 
     if (postagens.length === 0) {
@@ -423,7 +436,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     var criaPNome = document.createElement("p");
     var criaPSeta = document.createElement("p");
     var criaDivBody = document.createElement("div");
-    var criaSpanBody = document.createElement("span");
+    var criaPreBody = document.createElement("pre");
     var criaDivBotões = document.createElement("div");
     var criaALike = document.createElement("a");
     var criaILike = document.createElement("i");
@@ -437,7 +450,9 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaPSeta.setAttribute("class", "setinha-indicadora center");
     criaUlHead.setAttribute("class", "container");
     criaDivBody.setAttribute("class", "collapsible-body");
-    criaSpanBody.innerHTML = textoPostagem;
+    criaPreBody.setAttribute("id", "editorLeitura" + IDPostagem);
+    criaPreBody.setAttribute("class", "paraCodigoPostagens");
+    criaPreBody.innerHTML = textoPostagem;
     criaDivBotões.setAttribute("class", "botoes-das-postagens right-align");
     criaALike.setAttribute("class", "waves-effect waves-light btn right-align");
     criaILike.setAttribute("class", "material-icons left");
@@ -457,7 +472,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUlHead.append(criaLiHead1);
     criaUlHead.append(criaLiHead2);
     criaDivHead.append(criaUlHead);
-    criaDivBody.append(criaSpanBody);
+    criaDivBody.append(criaPreBody);
     criaALike.append(criaILike);
     criaADislike.append(criaIDislike);
     criaDivBotões.append(criaALike);
