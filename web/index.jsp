@@ -137,7 +137,7 @@
 
                                     <div class='input-field col s12'>
                                         <input class='validate telefone-mask' type='text' name='telefone' id='telefone' maxlength="18" required/>
-                                        <label id="telefone-cadastro" for='telefone'>Telefone</label>
+                                        <label id="telefone-cadastro" for='telefone'>Celular</label>
                                         <span id="erro-telefone" class="erro-span"></span>
 
                                     </div>
