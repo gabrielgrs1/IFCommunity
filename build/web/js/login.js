@@ -133,32 +133,39 @@ function verificaCPF(span) {
 
 function validacaoFormulario(campo, span, regex, mensagem) {
     $(campo).on("blur", function () {
-        if (regex.test(this.value) && campo !== "#matricula") {
-            $(span).fadeOut(2000);
-            $(campo).addClass("sucesso-label-input");
-            $(campo).removeClass("erro-label-input");
-        } else {
-            $(span).text(mensagem);
-            $(span).hide();
-            $(span).fadeIn(500);
-            $(campo).addClass("erro-label-input");
-            $(campo).removeClass("sucesso-label-input");
-        }
+		if($(campo).val().length === 0){
+			$(span).text("Campo obrigatório!");
+			$(campo).addClass("erro-label-input");
+			$(span).fadeIn(500);
+		} else {
+			$(campo).addClass("erro-label-input");
+			if (regex.test(this.value) && campo !== "#matricula") {
+				$(span).fadeOut(2000);
+				$(campo).addClass("sucesso-label-input");
+				$(campo).removeClass("erro-label-input");
+			} else {
+				$(span).text(mensagem);
+				$(span).hide();
+				$(span).fadeIn(500);
+				$(campo).addClass("erro-label-input");
+				$(campo).removeClass("sucesso-label-input");
+			}
 
-        if (verificaCPF() && campo === "#matricula") {
-            $(span).fadeOut(2000);
-            $(campo).addClass("sucesso-label-input");
-            $(campo).removeClass("erro-label-input");
-        }
+			if (verificaCPF() && campo === "#matricula") {
+				$(span).fadeOut(2000);
+				$(campo).addClass("sucesso-label-input");
+				$(campo).removeClass("erro-label-input");
+			}
 
-        if (/^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]*$/i.test($("#nome").val())
-                && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($("#telefone").val())
-                && /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())
-                && verificaCPF()) {
-            $("#btn-cadastrar-proximo").removeClass("disabled");
-        } else {
-            $("#btn-cadastrar-proximo").addClass("disabled");
-        }
+			if (/^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]*$/i.test($("#nome").val())
+					&& /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($("#telefone").val())
+					&& /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())
+					&& verificaCPF()) {
+				$("#btn-cadastrar-proximo").removeClass("disabled");
+			} else {
+				$("#btn-cadastrar-proximo").addClass("disabled");
+			}
+		}
     });
 }
 
@@ -214,12 +221,12 @@ trocaTela("#btn-voltar", "#form-cadastrar", "#form-login");
 trocaTela("#btn-cadastrar-proximo", "#form-cadastro", null, "#form-cadastro-2");
 trocaTela("#btn-voltar-tela-2", "#form-cadastro-2", "#form-cadastro");
 
-validacaoFormulario("#nome", "#erro-nome", /^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]*$/i, "Informe apenas letras. Campo obrigatório.");
-validacaoFormulario("#telefone", "#erro-telefone", /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/, "Informe apenas números. Campo obrigatório.");
-validacaoFormulario("#matricula", "#erro-matricula", /^[0-9]{11}-[1-9]{1,}$ /, "Informe uma matrícula válida. Campo obrigatório.");
-validacaoFormulario("#login-cadastro", "#erro-usuario", /^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){3,}[a-zA-Z0-9]$/, "Informe um usuário válido. Campo obrigatório.");
-validacaoFormulario("#senha-cadastro", "#erro-senha", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/, "Informe uma senha válida exemplo: Teste@10.");
-validacaoFormulario("#email", "#erro-email", /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/, "Informe um email válido. Campo obrigatório.");
+validacaoFormulario("#nome", "#erro-nome", /^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]*$/i, "Informe apenas letras!");
+validacaoFormulario("#telefone", "#erro-telefone", /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/, "Informe um celular válido!");
+validacaoFormulario("#matricula", "#erro-matricula", /^[0-9]{11}-[1-9]{1,}$ /, "Informe uma matrícula válida!");
+validacaoFormulario("#login-cadastro", "#erro-usuario", /^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){3,}[a-zA-Z0-9]$/, "Informe um usuário válido!");
+validacaoFormulario("#senha-cadastro", "#erro-senha", /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/, "Informe uma senha válida!");
+validacaoFormulario("#email", "#erro-email", /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/, "Informe um email válido!");
 
 mostrarSenha("#senha-login", "#mostrar-senha-login");
 mostrarSenha("#senha-cadastro", "#mostrar-senha-cadastro");

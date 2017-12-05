@@ -12,25 +12,26 @@
 
 /*-----------------------------------------------------*/
 
-
 /*---------------------------------------------------*/
 
 /*      Media queries para fonte e tamanho de div    */
 
 /*---------------------------------------------------*/
+
 @media screen and (max-width: 900px) {
     #body-login #div-titulo {
         display: none !important;
     }
 
-    #body-login #form-login, 
-    #body-login #form-cadastrar, 
+    #body-login #form-login,
+    #body-login #form-cadastrar,
     #body-login #form-esqueci-senha {
         width: 200%;
         margin: 15% auto;
     }
 
-    #body-login #form-login, #body-login #form-cadastrar {
+    #body-login #form-login,
+    #body-login #form-cadastrar {
         padding: 11% 25% !important;
     }
 }
@@ -42,14 +43,14 @@
 }
 
 @media screen and (max-width: 414px) and (min-width: 319px) {
-	#body-login #form-cadastro-2 h3 {
-		font-size: 1.40em !important;
-		margin: 1.46rem 0 -1em -0.4em !important;
-	}
-	
-	#body-login #form-login h3 {
-		font-size: 1.70rem !important;
-	}
+    #body-login #form-cadastro-2 h3 {
+        font-size: 1.40em !important;
+        margin: 1.46rem 0 -1em -0.4em !important;
+    }
+
+    #body-login #form-login h3 {
+        font-size: 1.70rem !important;
+    }
 }
 
 @media screen and (max-width: 660px) and (min-width: 900px) {
@@ -65,7 +66,8 @@
 }
 
 @media screen and (max-width: 1111px) {
-    #body-login #form-cadastrar h3, #body-login #form-login h3 {
+    #body-login #form-cadastrar h3,
+    #body-login #form-login h3 {
         font-size: 2.45rem;
     }
 }
@@ -99,7 +101,7 @@ body {
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.95)), to(rgba(0, 0, 0, 0.83))), url('../img/fundoTelaLogin.jpg');
     background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(0, 0, 0, 0.83)), url('../img/fundoTelaLogin.jpg');
     background-size: cover;
-	overflow: hidden;
+    overflow: hidden;
 }
 
 #body-login h3 {
@@ -136,7 +138,7 @@ h4 {
     border: 1px solid #EEE;
 }
 
-#body-login #div-titulo{
+#body-login #div-titulo {
     display: block;
 }
 
@@ -146,7 +148,8 @@ h4 {
 }
 
 /* Cores do input e label caso tenha sucesso */
-#body-login .row .input-field .sucesso-label-input{
+
+#body-login .row .input-field .sucesso-label-input {
     border-bottom: 1.3px solid #4caf50 !important;
     -webkit-box-shadow: 0 1px 0 0 #4caf50 !important;
     box-shadow: 0 1px 0 0 #4caf50 !important;
@@ -157,6 +160,7 @@ h4 {
 }
 
 /* Cores do input e label caso tenha erro */
+
 #body-login .row .input-field .erro-label-input {
     border-bottom: 1.3px solid red !important;
     -webkit-box-shadow: 0 1px 0 0 red !important;
@@ -168,6 +172,7 @@ h4 {
 }
 
 /* Cores do input e label caso não tenha erro nem sucesso */
+
 #body-login .input-field input:focus + label {
     color: #3f51b5 !important;
 }
@@ -191,7 +196,7 @@ h4 {
 #body-login #form-cadastro,
 #body-login #form-cadastro-2,
 #body-login #form-esqueci-senha,
-#body-login #erro-cadastro-proximo, 
+#body-login #erro-cadastro-proximo,
 #body-login #erro-cadastro-final,
 #body-login .campo-erro,
 #body-principal .aviso-minhas-materias,
@@ -230,7 +235,7 @@ h4 {
     left: 87%;
 }
 
-#body-login #form-esqueci-senha h3{
+#body-login #form-esqueci-senha h3 {
     letter-spacing: 0;
 }
 
@@ -247,9 +252,7 @@ h4 {
     color: #78909c;
 }
 
-#body-login #requisito-senha-1 {
-
-}
+#body-login #requisito-senha-1 {}
 
 #body-login #requisito-senha-2 {
     top: 115%;
@@ -269,11 +272,11 @@ h4 {
 
 #body-login #form-cadastro-2 h3,
 #body-login #form-cadastro h3 {
-	margin: 1.46rem 0 0 0;
+    margin: 1.46rem 0 0 0;
 }
 
 #body-login #form-cadastro-2 h3 {
-	font-size: 2.35em;
+    font-size: 2.35em;
 }
 
 /*-----------------------------------------------------*/
@@ -290,17 +293,17 @@ h4 {
 
 /*-----------------------------------------------------*/
 
-
 /* Correção da dashboard.jsp pra quando colocou o Materialize.css */
 
-[type="radio"]:not(:checked)+label, [type="radio"]:checked+label {
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
     height: auto!important;
     line-height: inherit!important;
     padding-left: 0!important;
     cursor: pointer;
 }
 
-#body-principal li, 
+#body-principal li,
 #body-principal .lista-materias label {
     width: 100%;
 }
@@ -318,6 +321,7 @@ h4 {
     float: none!important;
     color: white;
 }
+
 /*MARAFELLI COMENTEI ISSO PRA SEGUIR O PADRÃO DO MATERIALIZE
 
 #body-principal label {
@@ -326,6 +330,7 @@ h4 {
 }
 
 */
+
 #body-principal input {
     color: black;
 }
@@ -334,28 +339,28 @@ h4 {
     padding: 0!important;
 }
 
-#body-principal section.minhas-materias 
-
-#body-principal section.minhas-materias > ul.collapsible {
+#body-principal section.minhas-materias #body-principal section.minhas-materias > ul.collapsible {
     padding: 0!important;
 }
 
-#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header{
+#body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header {
     padding: 0!important;
 }
 
-#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container{
+#body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header > ul.container {
     padding: 0!important;
     margin: 0!important;
     width: 100%;
 }
 
-#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container > li h4, p {
+#body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header > ul.container > li h4,
+p {
     padding: 0.1em!important;
     margin: 0!important;
 }
-#body-principal section.minhas-materias > ul.collapsible >li > div.collapsible-header > ul.container > li h4{
-    background:#2196f3!important;
+
+#body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header > ul.container > li h4 {
+    background: #2196f3!important;
     font-weight: 300;
     text-align: center;
     color: #fff;
@@ -375,7 +380,7 @@ h4 {
     color: black!important;
 }
 
-#body-principal .aviso-minhas-materias  #img-code {
+#body-principal .aviso-minhas-materias #img-code {
     padding: 2%;
     width: 40%;
 }
@@ -386,7 +391,8 @@ h4 {
     font-weight: 600;
     color: black;
     line-height: 40px;
-    webkit-transition: width 2s; 
+    webkit-transition: width 2s;
+    -webkit-transition: width 2s;
     transition: width 2s;
 }
 
@@ -394,14 +400,15 @@ h4 {
     content: "\2191"!important;
 }
 
-[type="checkbox"]:not(:checked)+label, [type="checkbox"]:checked+label {
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
     height: auto!important;
     line-height: inherit!important;
     padding-left: 0!important;
     cursor: pointer;
 }
 
-#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible  {
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible {
     color: black;
     margin: 0;
     float: none!important;
@@ -418,7 +425,7 @@ h4 {
 }
 
 #body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label::before,
-#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label::after{
+#body-principal .adicionar-materias div.box-padrao .row > ul.collapsible div.collapsible-body label::after {
     margin: 1vmin;
 }
 
@@ -436,7 +443,8 @@ h4 {
 /*             Definições para colunas               */
 
 /*---------------------------------------------------*/
-/* 
+
+/*
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -475,6 +483,7 @@ h4 {
     left: 0;
     z-index: 5;
     outline: none;
+    -webkit-box-shadow: .5vmin 0 0 rgba(0, 0, 0, .30);
     box-shadow: .5vmin 0 0 rgba(0, 0, 0, .30);
 }
 
@@ -698,7 +707,7 @@ h4 {
     #body-principal .menu-mensagens {
         display: none;
     }
-    #body-principal .perfil > div.box-padrao form.col div.col.s6{
+    #body-principal .perfil > div.box-padrao form.col div.col.s6 {
         width: 100%!important;
     }
 }
@@ -723,7 +732,8 @@ h4 {
     height: 100%;
 }
 
-#body-principal .menu .smartphone-menu-trigger, .content-header {
+#body-principal .menu .smartphone-menu-trigger,
+.content-header {
     display: block;
     position: fixed;
 }
@@ -765,7 +775,7 @@ h4 {
     position: relative!important;
 }
 
-#body-principal #btn-deslogar{
+#body-principal #btn-deslogar {
     border: none;
     background: none;
     color: white;
@@ -776,6 +786,7 @@ h4 {
 /*--------------Corpo do site------------------------*/
 
 /*---------------------------------------------------*/
+
 #body-principal {
     background-image: url("../img/Programming-Code-l.jpg");
     background-repeat: no-repeat;
@@ -789,7 +800,7 @@ h4 {
 
 #body-principal .cor-fundo {
     z-index: 2;
-    height: 100%;
+    height: 100%!important;
     background-color: rgba(207, 216, 220, 0.7);
     background-size: cover!important;
     background-repeat: no-repeat!important;
@@ -798,7 +809,7 @@ h4 {
 
 #body-principal .site-content {
     z-index: 0;
-    height: 100%;
+    height: 100%!important;
 }
 
 #body-principal .section-aparece {
@@ -822,7 +833,8 @@ h4 {
     box-shadow: .5vmin .5vmin 0 rgba(0, 0, 0, .30)!important;
 }
 
-#body-principal .box-padrao h3, body-principal .box-padrao h4 {
+#body-principal .box-padrao h3,
+body-principal .box-padrao h4 {
     background: #03A9F4;
     padding: .1em;
     font-weight: 300;
@@ -876,16 +888,16 @@ h4 {
     text-align: justify!important;
 }
 
-#body-principal .para-scroll li span{
+#body-principal .para-scroll li span {
     color: white;
 }
 
-#body-principal section.minhas-materias  div.collapsible-body {
+#body-principal section.minhas-materias div.collapsible-body {
     padding: 0!important;
     margin: 0!important;
 }
 
-#body-principal .content-topic .botoes-das-postagens{
+#body-principal .content-topic .botoes-das-postagens {
     width: 100%!important;
     float: right;
 }
@@ -908,15 +920,16 @@ h4 {
 
 /*---------------------------------------------------*/
 
-#body-principal .modal{
+#body-principal .modal {
     color: #000!important;
 }
 
-#body-principal .modal-content{
+#body-principal .modal-content {
     padding: 0!important;
 }
 
-#body-principal .input-field, option {
+#body-principal .input-field,
+#body-principal option {
     font-size: 0.8em!important;
 }
 
@@ -930,27 +943,31 @@ h4 {
 }
 
 
-/* for line numbers */
-[class*="language-"] {
-    counter-reset: linenumber!important;
+#body-principal #formDoModal {
+    height: 91%!important;
+    overflow: hidden;
 }
-span.line{
-    display: inline-block!important;
-    width: 100%!important;
-    counter-increment: linenumber!important;
+
+#body-principal #editor {
+    margin: 0!important;
+    position: relative!important;
+    top: 0!important;
+    bottom: 0!important;
+    left: 0!important;
+    right: 0!important;
 }
-span.line:nth-child(odd){
-    background: #f0f0f0!important;
+
+#body-principal textarea {
+    background-color: white!important;
 }
-span.line:before{
-    content: counter(linenumber)!important;
-    font-size: 100%!important;
-    width: 2em!important;
-    display: inline-block!important;
-    font-weight: normal!important;
-    color: black!important;
-    border-right: 1px solid black!important;
-    margin-right: 5px!important;
-    padding-right: 5px!important;
-    text-align: right!important;
+
+#body-principal .paraTextoNormal,
+#body-principal .paraCodigo {
+    display: none;
+    height: 100%!important;
+}
+
+#body-principal .paraTextoNormalPostagens,
+#body-principal .paraCodigoPostagens {
+    height: 30vmin!important;
 }
