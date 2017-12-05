@@ -788,10 +788,11 @@ p {
 /*---------------------------------------------------*/
 
 #body-principal {
-    background-image: url("../img/Programming-Code-l.jpg");
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: cover;
+    /*background-image: url("../img/Programming-Code-l.jpg");*/
+	background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0.58)), url(../img/Programming-Code-l.jpg);
+    background-repeat: repeat;
+    /*background-position: left;
+    background-size: cover;*/
     background-clip: padding-box;
     background-attachment: fixed!important;
     z-index: 0;
