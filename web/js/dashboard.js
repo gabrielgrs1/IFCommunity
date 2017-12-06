@@ -404,13 +404,11 @@ function montaPostagens(materia) {
         var tituloPostagem = postagens[x]["titulo"];
         var dataPostagem = postagens[x]["data"];
         var materiaPostagem = postagens[x]["materia"];
-        console.log(materiaPostagem);
-        // TEM Q RETORNAR ISSO AQUI GABRIEL SAFADO
         var IDPostagem = postagens[x]["id"];
         console.log(IDPostagem);
-        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, x + 1);
+        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
         collapsible();
-        qualLinguagemParaPostagem("javascript", x + 1);
+        qualLinguagemParaPostagem("javascript", IDPostagem);
     }
 
     if (postagens.length === 0) {

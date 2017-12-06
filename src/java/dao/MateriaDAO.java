@@ -141,6 +141,7 @@ public class MateriaDAO {
             post.setTitulo(rs.getString("TITULO"));
             post.setPostagens(rs.getString("POSTAGENS"));
             post.setData(rs.getString("TB_POSTAGEM.DT_REGISTRO"));
+            post.setId(rs.getInt("TB_POSTAGEM.ID"));
             postagens.add(post);
         }
 
