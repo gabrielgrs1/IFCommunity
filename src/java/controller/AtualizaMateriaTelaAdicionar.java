@@ -31,14 +31,15 @@ public class AtualizaMateriaTelaAdicionar extends HttpServlet {
             throws ServletException, IOException, SQLException {
 
         ArrayList<String> materias = new ArrayList<>();
-
-        for (int i = 0; i < 7; i++) {
+        String idUsuario = request.getParameter("idUsuario");
+        
+        
+        for (int i = 1; i < 8; i++) {
             materias.add(request.getParameter("materia" + i));
         }
         
-        System.out.println(materias.get(0));
-
-//        MateriaDAO.atualizaMateriaTelaAdicionar(materiaString);
+        
+        MateriaDAO.atualizaMateriaTelaAdicionar(materias, idUsuario);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,5 +78,4 @@ public class AtualizaMateriaTelaAdicionar extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

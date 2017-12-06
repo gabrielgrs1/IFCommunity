@@ -446,7 +446,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaH4Titulo.setAttribute("class", "center");
     criaH4Titulo.innerHTML = tituloPostagem;
     criaPNome.innerHTML = autorPostagem;
-    criaPNome.setAttribute("class", "right-align");
+    criaPNome.setAttribute("class", "right-align autor-postagem");
     criaPSeta.setAttribute("class", "setinha-indicadora center");
     criaUlHead.setAttribute("class", "container");
     criaDivBody.setAttribute("class", "collapsible-body");
@@ -454,15 +454,13 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaPreBody.setAttribute("class", "paraCodigoPostagens");
     criaPreBody.innerHTML = textoPostagem;
     criaDivBotões.setAttribute("class", "botoes-das-postagens right-align");
-    criaALike.setAttribute("class", "waves-effect waves-light btn right-align");
+    criaALike.setAttribute("class", "waves-effect waves-light btn right-align botao-curtida");
     criaILike.setAttribute("class", "material-icons left");
     criaILike.innerHTML = "thumb_up";
-    criaALike.innerHTML = "Curtir";
     criaDivBotões.setAttribute("class", "botoes-das-postagens right-align");
-    criaADislike.setAttribute("class", "waves-effect waves-light btn right-align  red darken-2");
+    criaADislike.setAttribute("class", "waves-effect waves-light btn right-align botao-curtida");
     criaIDislike.setAttribute("class", "material-icons left");
     criaIDislike.innerHTML = "thumb_down";
-    criaADislike.innerHTML = "Descurtir";
     criaDivBotões.setAttribute("id", IDPostagem);
     criaUl.setAttribute("class", "collapsible content-topic z-depth-2 container row");
     criaUl.setAttribute('data-collapsible', "accordion");
@@ -484,7 +482,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUl.append(criaLi);
     criaUl.setAttribute("id", IDPostagem);
     // quando criar a regra de retorno do banco decide o prepend ou append.
-    secaoDePostagens.append(criaUl);
+    secaoDePostagens.prepend(criaUl);
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -619,7 +617,8 @@ function gerenciarMateriasConteudo() {
 ;
 
 // PEGAR TODOS OS CHECKED BOX CHECADOS PRA VER AS MATÉRIAS QUE O CARA TÁ CADASTRANDO EM TEMPO REAL
-$(document).on("change", "input[type='checkbox']", function () {
+$(document).on("change", "input[type='checkbox']", atualizaMaterias())
+function atualizaMaterias() {
     novoVetorDeMaterias = materias.slice(0);
     // console.log(novoVetorDeMaterias);
     if (this.checked) {
@@ -659,9 +658,9 @@ $(document).on("change", "input[type='checkbox']", function () {
         pegaPostagensDaMateriaSelecionada();
     }
 
-    atualizaMateriasTelaAdicionar(materias);
+    atualizaMateriasTelaAdicionar(materias, $("#id-usuario").text());
 
-    function atualizaMateriasTelaAdicionar(materias) {
+    function atualizaMateriasTelaAdicionar(materias, id) {
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
             type: 'get',
@@ -672,11 +671,11 @@ $(document).on("change", "input[type='checkbox']", function () {
                 materia4: materias[3],
                 materia5: materias[4],
                 materia6: materias[5],
-                materia7: materias[6]
+                materia7: materias[6],
+                idUsuario: id
             },
             beforeSend: function () {
                 console.log("Atualizando as matérias");
-                window.console.log(JSON.stringify(materias));
             }
         })
                 .done(function () {
@@ -693,7 +692,7 @@ $(document).on("change", "input[type='checkbox']", function () {
                     }
                 });
     }
-});
+}
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Função que desloga o usuário
 function deslogar() {

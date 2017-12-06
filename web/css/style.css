@@ -345,7 +345,7 @@ h4 {
 
 #body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header {
     padding: 0!important;
-	border: none;
+    border: none;
 }
 
 #body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header > ul.container {
@@ -792,7 +792,7 @@ p {
 
 #body-principal {
     /*background-image: url("../img/Programming-Code-l.jpg");*/
-	background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0.58)), url(../img/Programming-Code-l.jpg);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0.58)), url(../img/Programming-Code-l.jpg);
     background-repeat: repeat;
     /*background-position: left;
     background-size: cover;*/
@@ -899,7 +899,7 @@ body-principal .box-padrao h4 {
 #body-principal section.minhas-materias div.collapsible-body {
     padding: 0!important;
     margin: 0!important;
-	border: none;
+    border: none;
 }
 
 #body-principal .content-topic .botoes-das-postagens {
@@ -920,31 +920,31 @@ body-principal .box-padrao h4 {
 }
 
 #body-principal .botao-curtida {
-	background: none;
+    background: none;
     border: none;
     box-shadow: none;
     color: #000;
-	padding-bottom: 5.5%;
-	padding-right: 0.5%;
-	padding-left: 0.9%;
+    padding-bottom: 5.5%;
+    padding-right: 0.5%;
+    padding-left: 0.9%;
 }
 
 #body-principal .autor-postagem {
-	padding-top: 1.5%!important;
+    padding-top: 1.5%!important;
     padding-right: 1.5%!important;
 }
 
 #body-principal::-webkit-scrollbar-track {
-	background-color: #F4F4F4;
+    background-color: #F4F4F4;
 }
 
 #body-principal::-webkit-scrollbar {
-	width: 0.6em;
+    width: 0.6em;
     background: #F4F4F4;
 }
 
 #body-principal::-webkit-scrollbar-thumb {
-	background: #dad7d7;
+    background: #dad7d7;
 }
 
 /*---------------------------------------------------*/

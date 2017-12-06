@@ -617,7 +617,8 @@ function gerenciarMateriasConteudo() {
 ;
 
 // PEGAR TODOS OS CHECKED BOX CHECADOS PRA VER AS MATÉRIAS QUE O CARA TÁ CADASTRANDO EM TEMPO REAL
-$(document).on("change", "input[type='checkbox']", function () {
+$(document).on("change", "input[type='checkbox']", atualizaMaterias())
+function atualizaMaterias() {
     novoVetorDeMaterias = materias.slice(0);
     // console.log(novoVetorDeMaterias);
     if (this.checked) {
@@ -657,9 +658,9 @@ $(document).on("change", "input[type='checkbox']", function () {
         pegaPostagensDaMateriaSelecionada();
     }
 
-    atualizaMateriasTelaAdicionar(materias);
+    atualizaMateriasTelaAdicionar(materias, $("#id-usuario").text());
 
-    function atualizaMateriasTelaAdicionar(materias) {
+    function atualizaMateriasTelaAdicionar(materias, id) {
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
             type: 'get',
@@ -670,11 +671,11 @@ $(document).on("change", "input[type='checkbox']", function () {
                 materia4: materias[3],
                 materia5: materias[4],
                 materia6: materias[5],
-                materia7: materias[6]
+                materia7: materias[6],
+                idUsuario: id
             },
             beforeSend: function () {
                 console.log("Atualizando as matérias");
-                window.console.log(JSON.stringify(materias));
             }
         })
                 .done(function () {
@@ -691,7 +692,7 @@ $(document).on("change", "input[type='checkbox']", function () {
                     }
                 });
     }
-});
+}
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Função que desloga o usuário
 function deslogar() {

@@ -14,35 +14,43 @@ public class MateriaDAO {
     public MateriaDAO() {
     }
 
-    public static void atualizaMateriaTelaAdicionar(String materias) throws SQLException {
+    public static void atualizaMateriaTelaAdicionar(ArrayList<String> materias, String idUsuario) throws SQLException {
         String materiasID = "";
         PreparedStatement pstm;
         ResultSet rs;
         Connection con = ConnectionFactory.getConnection();
 
-        System.out.println(materias);
-
-        for (int i = 0; i < materias.length(); i++) {
+        for (int i = 0; i < materias.size(); i++) {
             /* Comando SQL que será enviado ao banco */
             String sql = "SELECT * FROM TB_MATERIA WHERE NOME_MATERIA = ?";
 
             /* Prepara a consulta e passa os parametros */
             pstm = con.prepareStatement(sql);
-            pstm.setString(1, materias);
+            pstm.setString(1, materias.get(i));
 
             /* Executa a query e armazena o resultado na variavel rs */
             rs = pstm.executeQuery();
 
             while (rs.next()) {
                 if (materiasID.length() == 0) {
-                    materiasID = (rs.getString("PERIODO"));
+                    materiasID = (rs.getString("ID"));
                 } else {
-                    materiasID = ("," + rs.getString("PERIODO"));
+                    materiasID += ("," + rs.getString("ID"));
                 }
             }
-            
-            System.out.println(materiasID);
         }
+        
+        if (materiasID.length() == 0) {
+            materiasID = "0";
+        }
+        
+        String sql = "UPDATE TB_ALUNO SET MATERIAS_CADASTRADAS = ? WHERE ID = ?";
+
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, materiasID);
+        pstm.setString(2, idUsuario);
+
+        pstm.executeUpdate();
     }
 
     public static ArrayList<String> recuperaMateriaTelaAdicionar() throws SQLException {
@@ -191,6 +199,16 @@ public class MateriaDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        atualizaMateriaTelaAdicionar("[\"BANCO DE DADOS 1\",\"FUNDAMENTOS DE WEB DESIGN I\",\"LÓGICA DE PROGRAMAÇÃO\",\"PROJETO INTEGRADOR 1\"]");
+        ArrayList<String> materias = new ArrayList<>();
+
+        materias.add("FUNDAMENTOS DE WEB DESIGN I");
+        materias.add("LÓGICA DE PROGRAMAÇÃO");
+        materias.add("PROJETO INTEGRADOR 1");
+        materias.add("ALGORITMOS E PROGRAMAÇÃO");
+        materias.add("FUNDAMENTOS DE WEB DESIGN II");
+        materias.add("PROJETO INTEGRADOR 2");
+        materias.add("PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET");
+
+        atualizaMateriaTelaAdicionar(materias, "1");
     }
 }
