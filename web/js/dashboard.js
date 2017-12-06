@@ -617,7 +617,8 @@ function gerenciarMateriasConteudo() {
 ;
 
 // PEGAR TODOS OS CHECKED BOX CHECADOS PRA VER AS MATÉRIAS QUE O CARA TÁ CADASTRANDO EM TEMPO REAL
-$(document).on("change", "input[type='checkbox']", atualizaMaterias())
+$(document).on("change", "input[type='checkbox']", atualizaMaterias);
+
 function atualizaMaterias() {
     novoVetorDeMaterias = materias.slice(0);
     // console.log(novoVetorDeMaterias);
@@ -635,7 +636,6 @@ function atualizaMaterias() {
                 $(this).prop("checked", false);
                 return;
             }
-
 
             novoVetorDeMaterias.push($(this).attr('name'));
             // console.log(novoVetorDeMaterias);
