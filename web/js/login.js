@@ -121,7 +121,7 @@ function verificaCPF(span) {
     }
 
     if (digitoGerado !== digitoDigitado) {
-        $("#erro-matricula").text("Informe uma matrícula válida. Campo obrigatório.");
+        $("#erro-matricula").text("Informe uma matrícula válida.");
         $("#erro-matricula").show();
         return false;
     } else {
