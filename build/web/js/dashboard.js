@@ -405,7 +405,9 @@ function montaPostagens(materia) {
         var dataPostagem = postagens[x]["data"];
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
-        console.log(IDPostagem);
+        var linguagemPostagem = postagens[x]["linguagem"];
+        
+//        console.log(IDPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
         collapsible();
         qualLinguagemParaPostagem("javascript", IDPostagem);

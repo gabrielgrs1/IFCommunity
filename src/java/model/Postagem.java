@@ -10,6 +10,7 @@ public class Postagem {
     private int like;
     private int deslikes;
     private String data;
+    private String linguagem;
 
     public Postagem() {
     }
@@ -47,6 +48,10 @@ public class Postagem {
         return data;
     }
 
+    public String getLinguagem() {
+        return linguagem;
+    }
+
 // Setters
     public void setId(int id) {
         this.id = id;
@@ -78,6 +83,10 @@ public class Postagem {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public void setLinguagem(String linguagem) {
+        this.linguagem = linguagem;
     }
 
 }

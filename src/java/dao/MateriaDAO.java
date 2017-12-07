@@ -142,6 +142,7 @@ public class MateriaDAO {
             post.setPostagens(rs.getString("POSTAGENS"));
             post.setData(rs.getString("TB_POSTAGEM.DT_REGISTRO"));
             post.setId(rs.getInt("TB_POSTAGEM.ID"));
+            post.setLinguagem(rs.getString("LINGUAGEM_POSTAGEM"));
             postagens.add(post);
         }
 
