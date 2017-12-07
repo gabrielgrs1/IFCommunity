@@ -1004,3 +1004,8 @@ body-principal .box-padrao h4 {
 #body-principal .paraCodigoPostagens {
     height: 30vmin!important;
 }
+
+#body-principal .data-postagem {
+    font-size: 0.7em;
+    color: grey;
+}

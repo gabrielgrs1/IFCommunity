@@ -406,7 +406,7 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-        
+
 //        console.log(IDPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
         collapsible();
@@ -422,9 +422,26 @@ function montaPostagens(materia) {
 
 //Função que adiciona a estrutura de postagem
 function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem) {
-//FALTA COLOCAR DATA DA POSTAGEM E MATERIA
     // console.log("Fluxo 4");
     // console.log(IDPostagem);
+
+    //Manipulação da data da postagem
+    var temporarioData = dataPostagem.split(" ");
+    var temporarioHora = temporarioData[1].split(".");
+
+    //Manipulação da hora da postagem
+    var horaPostagem = temporarioHora[0];
+    horaPostagem = horaPostagem.split(":");
+    horaPostagem = horaPostagem[0] + ":" + horaPostagem[1];
+
+    //Manipulação do dia da postagem
+    var dataPostagemTemp = temporarioData[0];
+    dataPostagemTemp = dataPostagemTemp.split("-");
+    dataPostagemTemp = dataPostagemTemp[2] + "/" + dataPostagemTemp[1] + "/" + dataPostagemTemp[0];
+
+    //Concatenação da data e hora manipulada
+    dataPostagem = "às " + horaPostagem + " " + dataPostagemTemp;
+
     var secaoDePostagens = $("main > section.minhas-materias");
     var criaUl = document.createElement("ul");
     var criaLi = document.createElement("li");
@@ -442,10 +459,13 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     var criaILike = document.createElement("i");
     var criaADislike = document.createElement("a");
     var criaIDislike = document.createElement("i");
+    var criaPDataPostagem = document.createElement("p");
+
+
     criaDivHead.setAttribute("class", "collapsible-header");
     criaH4Titulo.setAttribute("class", "center");
     criaH4Titulo.innerHTML = tituloPostagem;
-    criaPNome.innerHTML = autorPostagem;
+    criaPNome.innerHTML = autorPostagem + "<br><span class='data-postagem' id='data-hora-postagem-'" + IDPostagem + ">" + dataPostagem;
     criaPNome.setAttribute("class", "right-align autor-postagem");
     criaPSeta.setAttribute("class", "setinha-indicadora center");
     criaUlHead.setAttribute("class", "container");
