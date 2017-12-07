@@ -137,11 +137,11 @@
                     <div class="container">
                         <div class="row">
                             <div class="col l6 s12 center-align">
-                                <h5 class="white-text">Bem vindo ao dashboard de postagens!</h5>
+                                <h5 class="black-text">Bem vindo ao dashboard de postagens!</h5>
                                 <img id="img-code" src="https://www.happycodeclub.com/wp-content/uploads/2017/07/cropped-HappyCodeRedLogo_SmileOnlyCuout-300x300.png">
                             </div>
                             <div class="col l4 offset-l2 s12">
-                                <h5 class="white-text">Tips</h5>
+                                <h5 class="black-text">Tips</h5>
                                 <ul>
                                     <li>Clique em uma das matérias em que você está cadastrado no menu ao lado.</li>
                                 </ul>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="footer-copyright row">
-                        <div class="col s12 grey-text center-align"><strong> <> Keep coding </strong></div>
+                        <div class="col s12 grey-text darken-1 center-align"><strong> <> Keep coding </strong></div>
                     </div>
                 </div>
             </div>

@@ -1009,3 +1009,12 @@ body-principal .box-padrao h4 {
     font-size: 0.7em;
     color: grey;
 }
+
+#body-principal .page-footer {
+    color: #000!important;
+    background-color: #cccece!important;
+}
+
+#body-principal .grey-text {
+    color: #716f6f!important;
+}
