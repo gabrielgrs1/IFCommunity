@@ -695,6 +695,7 @@ function atualizaMaterias() {
                 idUsuario: id
             },
             beforeSend: function () {
+                Materialize.toast('Matéria atualizada com sucesso!', 2500);
                 console.log("Atualizando as matérias");
             }
         })
