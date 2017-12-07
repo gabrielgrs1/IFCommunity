@@ -739,7 +739,6 @@ $("#li-deslogar").on('click', function (e) {
 $("#btn-atualizar-perfil").click(function () {
     var aluno = [];
     atualizaPerfilAJAX($("#id-usuario").text(), $(".nome-perfil").val(), $(".telefone-perfil").val(), $(".email-perfil").val());
-    $("#nome-usuario").text(aluno[0]);
 });
 
 //Limpa os campos do perfil
@@ -748,6 +747,19 @@ $("#btn-limpar-perfil").click(function () {
     $(".telefone-perfil").val("");
     $(".email-perfil").val("");
 });
+
+//Função que muda nome do perfil após atualizar perfil
+function atualizaNomePerfil() {
+    var nomePerfil = aluno[0];
+    nomePerfil = nomePerfil.split(" ");
+    if (nomePerfil.length > 1) {
+        nomePerfil = nomePerfil[0] + " " + nomePerfil[1];
+    } else {
+        nomePerfil = nomePerfil[0];
+    }
+    
+    $("#nome-usuario").text(nomePerfil);
+}
 
 //Função que atualiza os dados do usuario e retorna os novos dados inseridos no banco
 function atualizaPerfilAJAX(id, nome, telefone, email) {
@@ -772,8 +784,12 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
                     aluno.push(alunoJSON[i]);
                 }
 
+                atualizaNomePerfil();
+
                 $("#resultado-atualiza-perfil").fadeIn(1500);
+                $("#resultado-atualiza-perfil").css("color", "green");
                 $("#resultado-atualiza-perfil").text("Perfil atualizado com sucesso!");
+                
                 setTimeout(function () {
                     $("#resultado-atualiza-perfil").fadeOut(3000);
                 }, 6000);
@@ -794,7 +810,7 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
 
                 setTimeout(function () {
                     $("#resultado-atualiza-perfil").fadeOut(3000);
-                }, 3000);
+                }, 6000);
             });
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
