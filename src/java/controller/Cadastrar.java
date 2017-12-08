@@ -54,6 +54,7 @@ public class Cadastrar extends HttpServlet {
         }
 
         if (conta != null) {
+            response.setContentType("text/html;charset=UTF-8");
             request.getSession().setAttribute("id", conta.getId());
             request.getSession().setAttribute("nome", conta.getNome());
             request.getSession().setAttribute("login", conta.getLogin());
