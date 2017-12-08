@@ -4,7 +4,7 @@ $('.telefone-perfil').mask('(00) 00009-0000');
 
 /* Adiciona a imagem */
 
-$(".avatar .container").append('<img src="http://www.alemdaimaginacao.com/Obituario%20da%20Fama/Ruben_Aguirre/ruben_aguirre1.jpg" />');
+$(".avatar .container").append('<img src="http://www.amigoviajante.com.br/img/usuario-sem-foto.png" />');
 
 /*------------------------------------------------------------------------*/
 //Função que mostra o "carregando" na tela.

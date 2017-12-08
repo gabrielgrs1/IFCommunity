@@ -501,7 +501,7 @@ p {
     height: 7em;
     border-radius: 50%;
     overflow: hidden!important;
-    border: 4px solid #ffea92;
+    border: 4px solid #656565;
     -webkit-box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
