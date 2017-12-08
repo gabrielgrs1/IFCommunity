@@ -1024,3 +1024,9 @@ body-principal .box-padrao h4 {
     width: 50%!important;
     margin: 0 auto;
 }
+
+#body-principal #section-perfil #div-loading {
+    display: none;
+    width: 50%!important;
+    margin: 0 auto;
+}

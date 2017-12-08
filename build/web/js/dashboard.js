@@ -375,16 +375,19 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         },
         beforeSend: function () {
             carregando();
+            setTimeout(function(){
+                Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
+            },20000);
             // console.log("CARREGANDO POSTAGENS");
         }
     })
             .done(function (postagem) {
-                // console.log(postagem);
                 postagens = [];
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }
-                // console.log(postagens);
+
                 $(".preloader-wrapper").hide();
                 montaPostagens(materia);
             })
@@ -525,12 +528,12 @@ function retornaMaterias() {
         url: "RecuperaMateriasTelaAdicionar",
         type: 'post',
         beforeSend: function () {
-            $("#div-loading").show();
+            $("#section-materias #div-loading").slideDown(500);
             console.log("Recuperando as matérias");
         }
     })
             .done(function (materiasJSON) {
-                $("#div-loading").hide();
+                $("#section-materias #div-loading").hide();
                 console.log(materiasJSON);
                 periodoMateria = [];
                 for (var i = 0; i < materiasJSON.length; i++) {
@@ -538,7 +541,7 @@ function retornaMaterias() {
                 }
 
                 gerenciarMateriasConteudo();
-                
+
             })
             .fail(function (jqXHR, textStatus, postagem) {
                 $("#div-loading").hide();
@@ -789,10 +792,12 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
             email: email
         },
         beforeSend: function () {
+            $("#section-perfil #div-loading").slideDown(500);
             console.log("Atualizando dados do perfil");
         }
     })
             .done(function (alunoJSON) {
+                $("#section-perfil #div-loading").slideUp(500);
                 console.log(alunoJSON);
 
                 aluno = [];
@@ -802,9 +807,10 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
 
                 atualizaNomePerfil();
                 Materialize.toast('Perfil atualizado com sucesso!', 2500, 'green');
-                
+
             })
             .fail(function (jqXHR, textStatus, postagem) {
+                $("#section-perfil #div-loading").slideUp(500);
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {

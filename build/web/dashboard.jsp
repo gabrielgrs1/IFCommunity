@@ -70,7 +70,7 @@
 
             <!-- Sessão do perfil !--> 
             <section class="postagens perfil section-aparece">
-                <div class="box-padrao">
+                <div id="section-perfil" class="box-padrao">
                     <h3>Perfil</h3>
                     <div class="row">
                         <form class="col s12" id="form-perfil-div">
@@ -97,9 +97,9 @@
                                 </div>
                             </div>
 
-                            <div class="row center-align">
-                                <div class="col s12">
-                                    <p id="resultado-atualiza-perfil" class="center-align"></p>
+                            <div id="div-loading">
+                                <div class="progress">
+                                    <div class="indeterminate"></div>
                                 </div>
                             </div>
                             <div class="row center-align">
@@ -119,7 +119,7 @@
             </section>
 
             <section class="postagens adicionar-materias">
-                <div class="box-padrao">
+                <div id="section-materias" class="box-padrao">
                     <h3>Gerenciar matérias</h3>
                     <div id="div-loading">
                         <div class="progress">
@@ -208,8 +208,8 @@
                                 <option value="" disabled selected>Selecione</option>
                                 <option value="1">Javascript</option>
                                 <option value="2">Java</option>
-                                <option value="3">html</option>
-                                <option value="4">Texto normal</option>
+                                <option value="3">HTML</option>
+                                <option value="4">Texto</option>
                             </select>
                             <label>Linguagem</label>
                         </div>
@@ -220,11 +220,11 @@
                         <textarea class="paraTextoNormal"></textarea>
 
                         <pre id="editor" class="paraCodigo">function foo(items) {
-    var i;
-    for (i = 0; i &lt; items.length; i++) {
-        alert("Ace Rocks " + items[i]);
-    }
-}</pre>
+                        var i;
+                        for (i = 0; i &lt; items.length; i++) {
+                            alert("Ace Rocks " + items[i]);
+                        }
+                    }</pre>
                     </div>
 
                     <div class="modal-footer">
@@ -239,7 +239,6 @@
         <!-- Import jQuery -->
         <script src="js/jquery-3.2.1.min.js"></script>
         <!-- Import Materialize JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <!-- Import Ace  JS -->      
         <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
