@@ -148,9 +148,11 @@ function pegaMateriasComAjax(idUsuario) {
             .fail(function (jqXHR, textStatus, materia) {
                 loading.empty();
                 if (jqXHR["status"] === 500) {
-                    materias.push("Não foi possível estabelecer conexão com o servidor!");
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
-                    materias.push("Não foi possível estabelecer conexão!");
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
                 }
                 preencheAListaDeMateriasDoMenu();
             });
@@ -387,7 +389,13 @@ function pegaPostagens(materia, dataUltimaPostagem) {
                 montaPostagens(materia);
             })
             .fail(function (jqXHR, textStatus, postagem) {
-                console.log("Erro, cheque sua conexão");
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
             });
 }
 
@@ -531,7 +539,6 @@ function retornaMaterias() {
 
             })
             .fail(function (jqXHR, textStatus, postagem) {
-                console.log(jqXHR);
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
@@ -652,7 +659,7 @@ function atualizaMaterias() {
 
             // Limite de matérias
             if (novoVetorDeMaterias.length >= 7) {
-                alert("Você não pode adicionar mais matérias, por favor, remova alguma.");
+                Materialize.toast('Você já atingiu o máximo de matérias, remova alguma antes!', 2500, 'red');
                 $(this).prop("checked", false);
                 return;
             }
@@ -695,7 +702,7 @@ function atualizaMaterias() {
                 idUsuario: id
             },
             beforeSend: function () {
-                Materialize.toast('Matéria atualizada com sucesso!', 2500);
+                Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
                 console.log("Atualizando as matérias");
             }
         })
@@ -703,7 +710,6 @@ function atualizaMaterias() {
                     console.log("Materias atualizadas com sucesso!");
                 })
                 .fail(function (jqXHR, textStatus, resultado) {
-                    console.log(jqXHR);
                     if (jqXHR["status"] === 500) {
                         console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                     } else if (jqXHR["status"] === 502) {
@@ -725,7 +731,13 @@ function deslogar() {
                 window.location.href = "index.jsp";
             })
             .fail(function (jqXHR, status, data) {
-                console.log("ERRO: " + status);
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
             });
 }
 
@@ -758,7 +770,7 @@ function atualizaNomePerfil() {
     } else {
         nomePerfil = nomePerfil[0];
     }
-    
+
     $("#nome-usuario").text(nomePerfil);
 }
 
@@ -790,13 +802,12 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
                 $("#resultado-atualiza-perfil").fadeIn(1500);
                 $("#resultado-atualiza-perfil").css("color", "green");
                 $("#resultado-atualiza-perfil").text("Perfil atualizado com sucesso!");
-                
+
                 setTimeout(function () {
                     $("#resultado-atualiza-perfil").fadeOut(3000);
                 }, 6000);
             })
             .fail(function (jqXHR, textStatus, postagem) {
-                console.log(jqXHR);
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
