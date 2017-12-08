@@ -375,10 +375,15 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         },
         beforeSend: function () {
             carregando();
-            setTimeout(function(){
-                Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
-                $(".preloader-wrapper").hide();
-            },20000);
+
+            setTimeout(function () {
+                if (postagens.length === 0) {
+
+                    Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
+                    $(".preloader-wrapper").hide();
+                }
+
+            }, 10000);
             // console.log("CARREGANDO POSTAGENS");
         }
     })
