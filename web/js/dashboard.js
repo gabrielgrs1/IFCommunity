@@ -525,10 +525,12 @@ function retornaMaterias() {
         url: "RecuperaMateriasTelaAdicionar",
         type: 'post',
         beforeSend: function () {
+            $("#div-loading").show();
             console.log("Recuperando as matérias");
         }
     })
             .done(function (materiasJSON) {
+                $("#div-loading").hide();
                 console.log(materiasJSON);
                 periodoMateria = [];
                 for (var i = 0; i < materiasJSON.length; i++) {
@@ -536,9 +538,10 @@ function retornaMaterias() {
                 }
 
                 gerenciarMateriasConteudo();
-
+                
             })
             .fail(function (jqXHR, textStatus, postagem) {
+                $("#div-loading").hide();
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
@@ -798,14 +801,8 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
                 }
 
                 atualizaNomePerfil();
-
-                $("#resultado-atualiza-perfil").fadeIn(1500);
-                $("#resultado-atualiza-perfil").css("color", "green");
-                $("#resultado-atualiza-perfil").text("Perfil atualizado com sucesso!");
-
-                setTimeout(function () {
-                    $("#resultado-atualiza-perfil").fadeOut(3000);
-                }, 6000);
+                Materialize.toast('Perfil atualizado com sucesso!', 2500, 'green');
+                
             })
             .fail(function (jqXHR, textStatus, postagem) {
                 if (jqXHR["status"] === 500) {
@@ -816,13 +813,7 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
                     console.log("Erro 404, não foi encontrado o diretório solicitado!");
                 }
 
-                $("#resultado-atualiza-perfil").show();
-                $("#resultado-atualiza-perfil").text("Erro ao atualizar o perfil! Informe a um administrador!");
-                $("#resultado-atualiza-perfil").css("color", "red");
-
-                setTimeout(function () {
-                    $("#resultado-atualiza-perfil").fadeOut(3000);
-                }, 6000);
+                Materialize.toast('Erro ao atualizar o perfil, contate um administrador!', 2500, 'red');
             });
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/

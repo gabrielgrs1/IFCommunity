@@ -121,6 +121,12 @@
             <section class="postagens adicionar-materias">
                 <div class="box-padrao">
                     <h3>Gerenciar matérias</h3>
+                    <div id="div-loading">
+                        <div class="progress">
+                            <div class="indeterminate"></div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <ul class="collapsible" data-collapsible="accordion">
 
@@ -181,8 +187,8 @@
                 </div>
             </div>
 
-            
-            
+
+
             <div id="modal1" class="modal modal-fixed-footer">
                 <form id="formDoModal">
                     <div class="modal-head center">
@@ -212,7 +218,7 @@
 
                     <div class="modal-content">   
                         <textarea class="paraTextoNormal"></textarea>
-                        
+
                         <pre id="editor" class="paraCodigo">function foo(items) {
     var i;
     for (i = 0; i &lt; items.length; i++) {

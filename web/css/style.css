@@ -1018,3 +1018,9 @@ body-principal .box-padrao h4 {
 #body-principal .grey-text {
     color: #716f6f!important;
 }
+
+#body-principal #div-loading {
+    display: none;
+    width: 50%!important;
+    margin: 0 auto;
+}
