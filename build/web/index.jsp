@@ -131,7 +131,7 @@
                                 <div class="row">
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='nome' id='nome' minlength="3" maxlength="60" required/>
-                                        <label id="nome-cadastro" for='nome'>Nome *</label>
+                                        <label id="nome-cadastro" for='nome'>Nome Completo*</label>
                                         <span id="erro-nome" class="erro-span"></span>
                                     </div>
 

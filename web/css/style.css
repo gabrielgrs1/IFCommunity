@@ -149,35 +149,35 @@ h4 {
 
 /* Cores do input e label caso tenha sucesso */
 
-#body-login .row .input-field .sucesso-label-input {
+.row .input-field .sucesso-label-input {
     border-bottom: 1.3px solid #4caf50 !important;
     -webkit-box-shadow: 0 1px 0 0 #4caf50 !important;
     box-shadow: 0 1px 0 0 #4caf50 !important;
 }
 
-#body-login .sucesso-label-input + label {
+.sucesso-label-input + label {
     color: #4caf50 !important;
 }
 
 /* Cores do input e label caso tenha erro */
 
-#body-login .row .input-field .erro-label-input {
+.row .input-field .erro-label-input {
     border-bottom: 1.3px solid red !important;
     -webkit-box-shadow: 0 1px 0 0 red !important;
     box-shadow: 0 1px 0 0 red !important;
 }
 
-#body-login .input-field .erro-label-input + label {
+.input-field .erro-label-input + label {
     color: red !important;
 }
 
 /* Cores do input e label caso não tenha erro nem sucesso */
 
-#body-login .input-field input:focus + label {
+.input-field input:focus + label {
     color: #3f51b5 !important;
 }
 
-#body-login .row .input-field input:focus {
+.row .input-field input:focus {
     border-bottom: 1.3px solid #3f51b5 !important;
     -webkit-box-shadow: 0 1px 0 0 #3f51b5 !important;
     box-shadow: 0 1px 0 0 #3f51b5 !important;
@@ -216,7 +216,7 @@ h4 {
     margin-bottom: 0;
 }
 
-#body-login .erro-span {
+.erro-span {
     font-size: 12px;
     color: red;
     font-weight: 800;
@@ -225,6 +225,10 @@ h4 {
     top: 74%;
     position: absolute;
 }
+#body-principal .erro-span {
+    left: 13%;
+}
+
 
 #body-login .btn-mostrar-senha {
     border: 0px;

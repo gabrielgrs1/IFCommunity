@@ -77,18 +77,21 @@
                             <div class="row" id="form-perfil">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="icon_prefix" type="text" class="validate nome-perfil" value="${nome}">
+                                    <input id="icon_prefix" type="text" class="validate nome-perfil-dashboard" value="${nome}">
                                     <label for="icon_prefix">Nome completo</label>
+                                    <span id="erro-nome-perfil-dashboard" class="erro-span"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">phone</i>
-                                    <input id="icon_telephone" type="tel" class="validate telefone-perfil" value="${telefone}">
+                                    <input id="icon_telephone" type="tel" class="validate telefone-perfil-dashboard" value="${telefone}">
                                     <label for="icon_telephone">Celular</label>
+                                    <span id="erro-telefone-perfil-dashboard" class="erro-span"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">mail</i>
-                                    <input id="email" type="email" class="validate email-perfil" value="${email}">
+                                    <input id="email" type="email" class="validate email-perfil-dashboard" value="${email}">
                                     <label for="email">Email</label>
+                                    <span id="erro-email-perfil-dashboard" class="erro-span"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">school</i>
