@@ -369,6 +369,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
     $.ajax({
         url: "RecuperaPostagens",
         type: 'get',
+        timeout: 8000,
         data: {
             materia: materia,
             dataUltimaPostagem: dataUltimaPostagem
@@ -376,14 +377,6 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         beforeSend: function () {
             carregando();
 
-            setTimeout(function () {
-                if (postagens.length === 0) {
-
-                    Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
-                    $(".preloader-wrapper").hide();
-                }
-
-            }, 10000);
             // console.log("CARREGANDO POSTAGENS");
         }
     })
@@ -397,6 +390,8 @@ function pegaPostagens(materia, dataUltimaPostagem) {
                 montaPostagens(materia);
             })
             .fail(function (jqXHR, textStatus, postagem) {
+                Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
@@ -790,6 +785,7 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
     $.ajax({
         url: "AtualizaPerfil",
         type: 'post',
+        timeout: 12000,
         data: {
             id: id,
             nome: nome,
