@@ -432,7 +432,7 @@ function montaPostagens(materia) {
     if (postagens.length === 0) {
 // console.log("entrou se postagens estiver vazio");
         $(".minhas-materias").empty();
-        $(".minhas-materias").prepend("<h2 class='align-center'>NÃO HÁ NENHUMA POSTAGEM NESSA MATÉRIA<h2>");
+        $(".minhas-materias").prepend("<div class='aviso-falta-postagens container box-padrao'><h3>Não foram encontradas postagens dessa matéria</h3><div class='page-footer'><div class='container'><div class='row'><div class='col l6 s12 center-align'><h5 class='black-text'>Ainda não foi postado nada dessa matéria!</h5></div><div class='col l4 offset-l2 s12'><h5>Seja o primeiro a compartilhar algo da disciplina!</h5></div></div></div></div></div>");
     }
 }
 

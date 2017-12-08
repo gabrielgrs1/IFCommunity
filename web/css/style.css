@@ -1030,3 +1030,16 @@ body-principal .box-padrao h4 {
     width: 50%!important;
     margin: 0 auto;
 }
+
+#body-principal .aviso-falta-postagens h3{
+    font-size: 1.7em!important;
+    padding: 0.3em!important;
+}
+
+#body-principal .aviso-falta-postagens .container{
+    margin: 0 auto!important;
+}    
+
+#body-principal .aviso-falta-postagens .page-footer{
+    padding-bottom: 1%;
+} 

@@ -112,11 +112,7 @@
             </section>
 
             <!-- Sessão de postagens !--> 
-            <section class="postagens minhas-materias row padding-right">
-
-                <!-- aqui vão as postagens adicionadas dinamicamente !--> 
-
-            </section>
+            <section class="postagens minhas-materias row padding-right"></section>
 
             <section class="postagens adicionar-materias">
                 <div id="section-materias" class="box-padrao">
