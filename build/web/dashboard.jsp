@@ -207,7 +207,7 @@
                     <div class="row col s12">
                         <div class="input-field col s6">
                             <i class= "material-icons prefix small">subject</i>
-                            <input id="icon_prefix" type="text" class="validate" required="required">
+                            <input id="icon_prefix" name="assunto" type="text" class="validate" required="required">
                             <label for="icon_prefix">Assunto</label>
                         </div>
                         <div id="qual-linguagem-modal" class="input-field col s6">
@@ -236,7 +236,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Submeter</a>
+                       <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat modal-close" id="btn-submeter-postagem" name="action">Submeter</button>
                     </div>
                 </form>
             </div>

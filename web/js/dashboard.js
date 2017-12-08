@@ -62,7 +62,6 @@ $("ul.para-scroll > li").click(function () {
         $(this).show();
     }
     ;
-    trocaCorFundo();
     MontaCondicoesBotaoModal($(this).children("span").text());
 });
 
@@ -249,9 +248,8 @@ function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePub
 /*                Modal de publicação                     */
 
 // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-$('.modal').modal();
 
-$('.modal1').modal({
+$('#modal1').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
     opacity: .5, // Opacity of modal background
     inDuration: 300, // Transition in duration
@@ -259,11 +257,8 @@ $('.modal1').modal({
     startingTop: '4%', // Starting top style attribute
     endingTop: '10%', // Ending top style attribute
     ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        alert("Ready");
-        // console.log(modal, trigger);
     },
     complete: function () {
-        //  alert('Closed');
     } // Callback for Modal close
 }
 );
@@ -272,10 +267,10 @@ $('.modal1').modal({
 $("#modal-de-escrever-codigo").click(function () {
     // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
     $('#formDoModal select').change(function (e) {
-        console.log("entrou no change");
+        // console.log("entrou no change");
         var val = $(e.target).val();
         var text = $(e.target).find("option:selected").text();
-        console.log(text);
+        // console.log(text);
         adicionaOsTextAreaModal(text);
     });
 });
@@ -284,7 +279,7 @@ function adicionaOsTextAreaModal(text) {
 
     if (text == "Texto normal") {
         // $('.modal-content').children().remove();
-        console.log("entrou no click do botao pra abrir modal de texto");
+        //  console.log("entrou no click do botao pra abrir modal de texto");
         $('.paraTextoNormal').show();
         $('.paraCodigo').hide();
 
@@ -292,7 +287,7 @@ function adicionaOsTextAreaModal(text) {
         $('.paraTextoNormal').hide();
         $('.paraCodigo').show();
         // $('.modal-content').children().remove();
-        console.log("entrou no tipo diferente de texto normal");
+        // console.log("entrou no tipo diferente de texto normal");
         qualLinguagem(text);
     }
 }
@@ -300,15 +295,13 @@ function adicionaOsTextAreaModal(text) {
 /*-----------------------------------------------------------------------------*/
 /*                Highlight dos escritos dos códigos   Ace js                   */
 
-$('.modal').modal();
-
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/javascript");
 
 function qualLinguagem(text) {
     var novoModo = text.toLowerCase()
-    console.log(novoModo);
+    //console.log(novoModo);
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -317,7 +310,7 @@ function qualLinguagem(text) {
 function qualLinguagemParaPostagem(text, IDPostagem) {
     // precisa mudar o modo de acordo com o modo que retornar do banco.
     var novoModo = text.toLowerCase()
-    console.log(novoModo);
+    //console.log(novoModo);
     var editor = ace.edit("editorLeitura" + IDPostagem);
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -528,12 +521,12 @@ function retornaMaterias() {
         type: 'post',
         beforeSend: function () {
             $("#section-materias #div-loading").slideDown(500);
-            console.log("Recuperando as matérias");
+            // console.log("Recuperando as matérias");
         }
     })
             .done(function (materiasJSON) {
                 $("#section-materias #div-loading").hide();
-                console.log(materiasJSON);
+                // console.log(materiasJSON);
                 periodoMateria = [];
                 for (var i = 0; i < materiasJSON.length; i++) {
                     periodoMateria.push(materiasJSON[i]);
@@ -769,7 +762,7 @@ $("#btn-limpar-perfil").click(function () {
 //Função que muda nome do perfil após atualizar perfil
 function atualizaNomePerfil() {
     var nomePerfil = aluno[0];
-    
+
     nomePerfil = nomePerfil.split(" ");
     if (nomePerfil.length > 1) {
         nomePerfil = nomePerfil[0] + " " + nomePerfil[1];
@@ -863,6 +856,18 @@ function validacaoFormulario(campo, span, regex, mensagem) {
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
+//Submissão de postagens
+$("#btn-submeter-postagem").click(function () {
+    console.log("entrou no submit");
+    console.log($('#formDoModal select').find("option:selected").text().toLowerCase());
+    console.log(editor.getValue());
+    console.log($(".fundo-checked").children().text());
+    console.log($("#nome-usuario").text());
+    
+    var assunto = $("[name='assunto']").val();
+    var linguagem = $('#formDoModal select').find("option:selected").text().toLowerCase();
+    var contaudoDaPostagem = editor.getValue();
+    var qualMateria = $(".fundo-checked").children().text();
+    var nomeDoUsuario = $("#nome-usuario").text();
+});
 
