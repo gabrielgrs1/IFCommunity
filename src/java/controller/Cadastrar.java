@@ -35,6 +35,8 @@ public class Cadastrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String nome = request.getParameter("nome"),
                 telefone = request.getParameter("telefone"),
                 matricula = request.getParameter("matricula"),
@@ -48,13 +50,12 @@ public class Cadastrar extends HttpServlet {
             erros = AlunoDAO.podeCadastrar(nome, telefone, matricula, periodo, login, senha, email);
             if (erros.equals("")) {
                 conta = AlunoDAO.cadastro(nome, telefone, matricula, periodo, login, senha, email);
-            } 
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (conta != null) {
-            response.setContentType("text/html;charset=UTF-8");
             request.getSession().setAttribute("id", conta.getId());
             request.getSession().setAttribute("nome", conta.getNome());
             request.getSession().setAttribute("login", conta.getLogin());
