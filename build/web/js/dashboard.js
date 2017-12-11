@@ -91,11 +91,13 @@ function preencheAListaDeMateriasDoMenu() {
             // Isso aqui é um remédio caso ocorra, acho que não tem situação em que possa occorer, mas... É mais um cuidado.
             // Enfim, caso o array materias chegue aqui com a mensagem de não tem matérias, ele remove essa mensage antes de gerar a lista de materias cadastradas.
             var a = materias.indexOf("Você ainda não tem nenhuma matéria cadastrada!");
-            // console.log(a)
-            if (a == 0) {
-                materias.splice(i, 0);
+            if (a != 0) {
+                for (var i = materias.length - 1; i >= 0; i--) {
+                    if (materias[i] === "Você ainda não tem nenhuma matéria cadastrada!") {
+                        materias.splice(i, 1);
+                    }
+                }
             }
-
             // console.log("entrou");
             // Aqui preenche a lista de materias com as matérias que o cara tem cadastradas.
             $(this).append('<input type="radio" name="materias-radio" id="materia' + x + '" style="display:none!important" /><label for="materia' + x + '"><li><span>' + materias[x] + '</span></li></label>');
@@ -675,7 +677,8 @@ function atualizaMaterias() {
         var index = novoVetorDeMaterias.indexOf($(this).attr('name'));
         //  console.log(index);
         novoVetorDeMaterias.splice(index, 1);
-        //  console.log(novoVetorDeMaterias);
+        // console.log(novoVetorDeMaterias);
+        // console.log("se dois");
         materias = novoVetorDeMaterias.slice(0);
         materias.sort();
         preencheAListaDeMateriasDoMenu();
@@ -701,11 +704,11 @@ function atualizaMaterias() {
             },
             beforeSend: function () {
                 Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
-                console.log("Atualizando as matérias");
+                // console.log("Atualizando as matérias");
             }
         })
                 .done(function () {
-                    console.log("Materias atualizadas com sucesso!");
+                    //    console.log("Materias atualizadas com sucesso!");
                 })
                 .fail(function (jqXHR, textStatus, resultado) {
                     if (jqXHR["status"] === 500) {
@@ -863,7 +866,7 @@ $("#btn-submeter-postagem").click(function () {
     console.log(editor.getValue());
     console.log($(".fundo-checked").children().text());
     console.log($("#nome-usuario").text());
-    
+
     var assunto = $("[name='assunto']").val();
     var linguagem = $('#formDoModal select').find("option:selected").text().toLowerCase();
     var contaudoDaPostagem = editor.getValue();
