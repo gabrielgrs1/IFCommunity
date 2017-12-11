@@ -665,11 +665,11 @@ function atualizaMaterias() {
             }
 
             novoVetorDeMaterias.push($(this).attr('name'));
-            console.log(novoVetorDeMaterias);
-            console.log("se um");
+            // console.log(novoVetorDeMaterias);
+            // console.log("se um");
             materias = novoVetorDeMaterias.slice(0);
             materias.sort();
-            console.log(materias);
+            // console.log(materias);
             preencheAListaDeMateriasDoMenu();
             checkedNasMateriasDoMenu();
             pegaPostagensDaMateriaSelecionada();
@@ -679,11 +679,11 @@ function atualizaMaterias() {
         var index = novoVetorDeMaterias.indexOf($(this).attr('name'));
         //  console.log(index);
         novoVetorDeMaterias.splice(index, 1);
-        console.log(novoVetorDeMaterias);
-        console.log("se dois");
+        // console.log(novoVetorDeMaterias);
+        // console.log("se dois");
         materias = novoVetorDeMaterias.slice(0);
         materias.sort();
-        console.log(materias);
+        // console.log(materias);
         preencheAListaDeMateriasDoMenu();
         checkedNasMateriasDoMenu();
         pegaPostagensDaMateriaSelecionada();
@@ -707,11 +707,11 @@ function atualizaMaterias() {
             },
             beforeSend: function () {
                 Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
-                console.log("Atualizando as matérias");
+                // console.log("Atualizando as matérias");
             }
         })
                 .done(function () {
-                    console.log("Materias atualizadas com sucesso!");
+                    //    console.log("Materias atualizadas com sucesso!");
                 })
                 .fail(function (jqXHR, textStatus, resultado) {
                     if (jqXHR["status"] === 500) {
