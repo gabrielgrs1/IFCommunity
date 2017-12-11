@@ -666,8 +666,10 @@ function atualizaMaterias() {
 
             novoVetorDeMaterias.push($(this).attr('name'));
             // console.log(novoVetorDeMaterias);
+            // console.log("se um");
             materias = novoVetorDeMaterias.slice(0);
             materias.sort();
+            // console.log(materias);
             preencheAListaDeMateriasDoMenu();
             checkedNasMateriasDoMenu();
             pegaPostagensDaMateriaSelecionada();
@@ -681,6 +683,7 @@ function atualizaMaterias() {
         // console.log("se dois");
         materias = novoVetorDeMaterias.slice(0);
         materias.sort();
+        // console.log(materias);
         preencheAListaDeMateriasDoMenu();
         checkedNasMateriasDoMenu();
         pegaPostagensDaMateriaSelecionada();
