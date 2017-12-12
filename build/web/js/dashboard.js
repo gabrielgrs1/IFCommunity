@@ -41,7 +41,7 @@ $("ul.para-scroll > li").click(function () {
         //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
         $('.aviso-minhas-materias').hide();
-
+        abreComBotaoCelular();
         // se for gerenciar materias, monta o gerenciar materias.
         if (textoDoClique == "Gerenciar matérias") {
             // console.log("entrou no clique");
@@ -180,6 +180,7 @@ function checkedNasMateriasDoMenu() {
         }
         // console.log(qualMateria);
         MontaCondicoesBotaoModal(qualMateria);
+        abreComBotaoCelular()
     });
 }
 
@@ -190,12 +191,15 @@ function checkedNasMateriasDoMenu() {
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*    Botão para abrir menu do celular   */
+function abreComBotaoCelular() {
+    $(".nav-side .nav-toggle").parent().toggleClass("nav-open");
+}
+;
 
 $(".nav-side .nav-toggle").on("click", function (e) {
     e.preventDefault();
     $(this).parent().toggleClass("nav-open");
 });
-
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*              Plugin dos selects                          */
 
@@ -509,8 +513,8 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUl.setAttribute("id", IDPostagem);
     // quando criar a regra de retorno do banco decide o prepend ou append.
     secaoDePostagens.prepend(criaUl);
-    
-    if(x == (postagens.length - 1)){
+
+    if (x == (postagens.length - 1)) {
         console.log("entrou no append");
         secaoDePostagens.append("<div class='rodape'></div>");
     }
