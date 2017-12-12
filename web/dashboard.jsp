@@ -33,10 +33,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <!-- Import prism -->
-        <link href="css/prism.css" rel="stylesheet" />
-
-        <link rel="stylesheet" type="text/css" href="css/result-light.css">
 
     </head>
 
@@ -53,16 +49,18 @@
                 </div>
                 <h2 id="nome-usuario"><%out.print(nome);%></h2>
             </header>
-            <ul class="para-scroll">
-                <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
-                <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span></li>
-                <div class="minhas-materias-adicionadas">
-                    <ul class="lista-materias"></ul>
-                </div>
-                <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Gerenciar matérias</span></li>
-                <li tabindex="0" class="icon-help"><span id="ajuda">Ajuda</span></li>
-                <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
-            </ul>
+            <div class="scroll-do-menu">
+                <ul class="para-scroll">
+                    <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
+                    <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span></li>
+                    <div class="minhas-materias-adicionadas">
+                        <ul class="lista-materias"></ul>
+                    </div>
+                    <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Gerenciar matérias</span></li>
+                    <li tabindex="0" class="icon-help"><span id="ajuda">Ajuda</span></li>
+                    <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
+                </ul>
+            </div>
         </nav>
 
         <main class="site-content">
@@ -115,7 +113,9 @@
             </section>
 
             <!-- Sessão de postagens !--> 
-            <section class="postagens minhas-materias row padding-right"></section>
+            <section class="postagens minhas-materias row padding-right">
+               
+            </section>
 
             <section class="postagens adicionar-materias">
                 <div id="section-materias" class="box-padrao">
@@ -236,7 +236,7 @@
                     </div>
 
                     <div class="modal-footer">
-                       <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat modal-close" id="btn-submeter-postagem" name="action">Submeter</button>
+                        <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat modal-close" id="btn-submeter-postagem" name="action">Submeter</button>
                     </div>
                 </form>
             </div>

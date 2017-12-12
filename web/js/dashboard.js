@@ -360,7 +360,7 @@ function pegaPostagensDaMateriaSelecionada() {
 function pegaPostagens(materia, dataUltimaPostagem) {
 // console.log("Fluxo 2");
 // console.log(materia);
-	Materialize.Toast.removeAll();
+    Materialize.Toast.removeAll();
 
     $.ajax({
         url: "RecuperaPostagens",
@@ -413,9 +413,8 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-
 //        console.log(IDPostagem);
-        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
+        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
         qualLinguagemParaPostagem("javascript", IDPostagem);
     }
@@ -428,7 +427,7 @@ function montaPostagens(materia) {
 }
 
 //Função que adiciona a estrutura de postagem
-function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem) {
+function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x) {
     // console.log("Fluxo 4");
     // console.log(IDPostagem);
 
@@ -510,6 +509,11 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUl.setAttribute("id", IDPostagem);
     // quando criar a regra de retorno do banco decide o prepend ou append.
     secaoDePostagens.prepend(criaUl);
+    
+    if(x == (postagens.length - 1)){
+        console.log("entrou no append");
+        secaoDePostagens.append("<div class='rodape'></div>");
+    }
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -661,7 +665,7 @@ function atualizaMaterias() {
 
             // Limite de matérias
             if (novoVetorDeMaterias.length >= 7) {
-				Materialize.Toast.removeAll();
+                Materialize.Toast.removeAll();
                 Materialize.toast('Você já atingiu o máximo de matérias, remova alguma antes!', 2500, 'red');
                 $(this).prop("checked", false);
                 return;
@@ -695,8 +699,8 @@ function atualizaMaterias() {
     atualizaMateriasTelaAdicionar(materias, $("#id-usuario").text());
 
     function atualizaMateriasTelaAdicionar(materias, id) {
-		Materialize.Toast.removeAll();
-		
+        Materialize.Toast.removeAll();
+
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
             type: 'get',
@@ -715,7 +719,7 @@ function atualizaMaterias() {
             }
         })
                 .done(function () {
-					Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
+                    Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
                     //    console.log("Materias atualizadas com sucesso!");
                 })
                 .fail(function (jqXHR, textStatus, resultado) {
@@ -787,8 +791,8 @@ function atualizaNomePerfil() {
 //Função que atualiza os dados do usuario e retorna os novos dados inseridos no banco
 function atualizaPerfilAJAX(id, nome, telefone, email) {
     Materialize.Toast.removeAll();
-	
-	$.ajax({
+
+    $.ajax({
         url: "AtualizaPerfil",
         type: 'post',
         timeout: 12000,
