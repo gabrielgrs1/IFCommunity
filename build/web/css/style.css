@@ -339,8 +339,9 @@ h4 {
     color: black;
 }
 
-#body-principal section.minhas-materias #body-principal section.minhas-materias > ul.collapsible {
+#body-principal section.minhas-materias > ul.collapsible {
     padding: 0!important;
+    border: 0!important;
 }
 
 #body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header {
@@ -905,11 +906,8 @@ body-principal .box-padrao h4 {
     bottom: 0px;
 }
 
-#body-principal .padding-right {
-    padding-right: 100px!important;
-}
-
 #body-principal .content-topic {
+    max-width: 80%;
     color: black!important;
     z-index: 2;
     background: #fff;
@@ -919,6 +917,7 @@ body-principal .box-padrao h4 {
     margin: 10vmin!important;
     margin-bottom: 15px!important;
     margin-top: 0!important;
+     
 }
 
 #body-principal .content-topic h1 {
@@ -1038,7 +1037,7 @@ body-principal .box-padrao h4 {
 
 #body-principal .paraTextoNormalPostagens,
 #body-principal .paraCodigoPostagens {
-    height: 30vmin!important;
+    height: 400px;
 }
 
 #body-principal .data-postagem {

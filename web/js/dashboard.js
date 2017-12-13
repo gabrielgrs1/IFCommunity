@@ -143,6 +143,7 @@ function pegaMateriasComAjax(idUsuario) {
                     materias.push(materia[i]);
                 }
                 preencheAListaDeMateriasDoMenu();
+                checkedNasMateriasDoMenu();
 
             })
             .fail(function (jqXHR, textStatus, materia) {
@@ -162,10 +163,6 @@ function pegaMateriasComAjax(idUsuario) {
 
 /*           Checked img na matéria (submenu) que está selecionada         */
 /* ela tem que carregar após as matérias serem carregadas para funcionar   */
-
-setTimeout(function () {
-    checkedNasMateriasDoMenu();
-}, 400);
 
 function checkedNasMateriasDoMenu() {
     $("input[name='materias-radio']").click(function () {
@@ -417,10 +414,10 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-//        console.log(IDPostagem);
+        console.log( linguagemPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
-        qualLinguagemParaPostagem("javascript", IDPostagem);
+        qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
     }
 
     if (postagens.length === 0) {
