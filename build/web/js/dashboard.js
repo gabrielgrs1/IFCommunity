@@ -55,15 +55,24 @@ $("ul.para-scroll > li").click(function () {
     // Aplica a classe para aparecer alguma section
     var classe = '.' + $(this).children("span").attr("id");
     // console.log(classe);
+    qualApareceNaTela(classe);
+});
+
+function qualApareceNaTela(classe) {
+    // console.log(classe);
     $("section").hide();
     $(".site-content").find(classe).addClass("section-aparece");
     //Se tiver a section-aparece, ele exibe ela na tela.
     if ($("section").hasClass("section-aparece")) {
         $(this).show();
     }
-    ;
     MontaCondicoesBotaoModal($(this).children("span").text());
-});
+}
+;
+
+
+
+
 
 /*-----------------------------------------------------------------------------*/
 /*    Adiciona as materias   */
@@ -177,7 +186,8 @@ function checkedNasMateriasDoMenu() {
         }
         // console.log(qualMateria);
         MontaCondicoesBotaoModal(qualMateria);
-        abreComBotaoCelular()
+        abreComBotaoCelular();
+        pegaPostagensDaMateriaSelecionada();
     });
 }
 
@@ -345,23 +355,31 @@ function collapsible() {
 
 
 var postagens = [];
-setTimeout(function () {
-    pegaPostagensDaMateriaSelecionada();
-}, 400);
 function pegaPostagensDaMateriaSelecionada() {
-    $("input[name='materias-radio']").click(function () {
-        // console.log("Fluxo 1");
-        // console.log("entrou no que pega a materia para postagem");
-        var materia;
-        materia = $(".fundo-checked").children().text();
+    // console.log("Fluxo 1");
+    // console.log("entrou no que pega a materia para postagem");
+    var materia;
+    materia = $(".fundo-checked").children().text();
+    // console.log(materia);
+    if (materia == "Você ainda não tem nenhuma matéria cadastrada!") {
+        // console.log("entrou no clique");
+        $('.minhas-materias-adicionadas').slideUp();
+        $("main > section.minhas-materias").empty();
+        $('ul label li').removeClass('fundo-checked');
+        $("section").removeClass("section-aparece");
+        $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
+        retornaMaterias();
+        qualApareceNaTela(".adicionar-materias");
+    } else {
+        // console.log("entrou no clique 2");
         pegaPostagens(materia);
-    });
+    }
 }
 
 function pegaPostagens(materia, dataUltimaPostagem) {
 // console.log("Fluxo 2");
 // console.log(materia);
-    Materialize.Toast.removeAll();
+   // Materialize.Toast.removeAll();
 
     $.ajax({
         url: "RecuperaPostagens",
@@ -414,7 +432,7 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-        console.log( linguagemPostagem);
+        // console.log(linguagemPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
         qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
@@ -512,7 +530,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     secaoDePostagens.prepend(criaUl);
 
     if (x == (postagens.length - 1)) {
-        console.log("entrou no append");
+        // console.log("entrou no append");
         secaoDePostagens.append("<div class='rodape'></div>");
     }
 }
@@ -666,7 +684,7 @@ function atualizaMaterias() {
 
             // Limite de matérias
             if (novoVetorDeMaterias.length >= 7) {
-                Materialize.Toast.removeAll();
+            //    Materialize.Toast.removeAll();
                 Materialize.toast('Você já atingiu o máximo de matérias, remova alguma antes!', 2500, 'red');
                 $(this).prop("checked", false);
                 return;
@@ -680,7 +698,6 @@ function atualizaMaterias() {
             // console.log(materias);
             preencheAListaDeMateriasDoMenu();
             checkedNasMateriasDoMenu();
-            pegaPostagensDaMateriaSelecionada();
         }
     } else {
         //  console.log($(this).attr('name'));
@@ -694,14 +711,13 @@ function atualizaMaterias() {
         // console.log(materias);
         preencheAListaDeMateriasDoMenu();
         checkedNasMateriasDoMenu();
-        pegaPostagensDaMateriaSelecionada();
     }
 
     atualizaMateriasTelaAdicionar(materias, $("#id-usuario").text());
 
     function atualizaMateriasTelaAdicionar(materias, id) {
-        Materialize.Toast.removeAll();
-
+      //  Materialize.Toast.removeAll();
+        console.log(materias);
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
             type: 'get',
@@ -770,9 +786,9 @@ $("#btn-atualizar-perfil").click(function () {
 
 //Limpa os campos do perfil
 $("#btn-limpar-perfil").click(function () {
-    $(".nome-perfil").val("");
-    $(".telefone-perfil").val("");
-    $(".email-perfil").val("");
+    $(".nome-perfil-dashboard").val("");
+    $(".telefone-perfil-dashboard").val("");
+    $(".email-perfil-dashboard").val("");
 });
 
 //Função que muda nome do perfil após atualizar perfil
@@ -791,7 +807,7 @@ function atualizaNomePerfil() {
 
 //Função que atualiza os dados do usuario e retorna os novos dados inseridos no banco
 function atualizaPerfilAJAX(id, nome, telefone, email) {
-    Materialize.Toast.removeAll();
+   // Materialize.Toast.removeAll();
 
     $.ajax({
         url: "AtualizaPerfil",
