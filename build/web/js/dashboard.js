@@ -286,7 +286,7 @@ $("#modal-de-escrever-codigo").click(function () {
 
 function adicionaOsTextAreaModal(text) {
 
-    if (text == "Texto normal") {
+    if (text === "Texto") {
         // $('.modal-content').children().remove();
         //  console.log("entrou no click do botao pra abrir modal de texto");
         $('.paraTextoNormal').show();
@@ -942,3 +942,6 @@ $("#btn-submeter-postagem").click(function () {
             });
 });
 
+$(document).ready(function(){
+    $('.scrollspy').scrollSpy();
+  });

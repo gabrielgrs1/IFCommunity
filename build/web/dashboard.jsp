@@ -218,7 +218,7 @@
                                 <option value="3">HTML</option>
                                 <option value="2">Java</option>
                                 <option value="1">Javascript</option>
-                                <!--<option value="4">Texto</option> COMENTEI PORQUE NÃO ESTA IMPLEMENTADO-->
+                                <option value="4">Texto</option>
                             </select>
                             <label>Linguagem</label>
                         </div>
