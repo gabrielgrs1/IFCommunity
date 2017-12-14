@@ -1,4 +1,6 @@
 /*-----------------------------------------------------------------------------*/
+/* global Materialize, aluno */
+
 $('.telefone-perfil-dashboard').mask('(00) 00009-0000');
 
 /*------------------------------------------------------------------------*/
@@ -357,7 +359,7 @@ function pegaPostagensDaMateriaSelecionada() {
     var materia;
     materia = $(".fundo-checked").children().text();
     // console.log(materia);
-    if (materia == "Você ainda não tem nenhuma matéria cadastrada!") {
+    if (materia === "Você ainda não tem nenhuma matéria cadastrada!") {
         // console.log("entrou no clique");
         $('.minhas-materias-adicionadas').slideUp();
         $("main > section.minhas-materias").empty();
@@ -525,7 +527,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     // quando criar a regra de retorno do banco decide o prepend ou append.
     secaoDePostagens.prepend(criaUl);
 
-    if (x == (postagens.length - 1)) {
+    if (x === (postagens.length - 1)) {
         // console.log("entrou no append");
         secaoDePostagens.append("<div class='rodape'></div>");
     }
@@ -581,8 +583,8 @@ function gerenciarMateriasConteudo() {
 
     // tirar os duplicados pra ver os períodos que tem
     var periodosQueTem = todosOsPeriodosRecebidos.filter(function (este, i) {
-        return todosOsPeriodosRecebidos.indexOf(este) == i;
-    })
+        return todosOsPeriodosRecebidos.indexOf(este) === i;
+    });
     // console.log(periodosQueTem);
 
     adicionaPeriodos(periodosQueTem);
@@ -636,7 +638,7 @@ function gerenciarMateriasConteudo() {
             nomeDoCriaInput.setAttribute("id", "test" + x);
             nomeDoCriaInput.setAttribute("name", materia);
             $(".adicionar-materias div.box-padrao .row > ul.collapsible  li").find("div.collapsible-body").each(function () {
-                if (this.id == periodo) {
+                if (this.id === periodo) {
                     // console.log(this.id);
                     this.append(nomeDoCriaInput);
                     this.append(nomeDoCriaLabel);
@@ -651,7 +653,7 @@ function gerenciarMateriasConteudo() {
         // console.log($(this).attr('name'));
         var temNoArrayDeMateriasOuNao = materias.indexOf($(this).attr('name'));
         // console.log(temNoArrayDeMateriasOuNao);
-        if (temNoArrayDeMateriasOuNao == -1) {
+        if (temNoArrayDeMateriasOuNao === -1) {
             // console.log("se entrou aqui é pq n tem a materia cadastrada");
         } else {
             // console.log("se entrou aqui é pq tem a materia cadastrada");
@@ -675,7 +677,7 @@ function atualizaMaterias() {
         // verifica se já tem a matéria no array de matérias, se não tiver, adiciona ela com ajax.
         var temNoArrayDeMateriasOuNao = materias.indexOf($(this).attr('name'));
         // console.log(temNoArrayDeMateriasOuNao);
-        if (temNoArrayDeMateriasOuNao == -1) {
+        if (temNoArrayDeMateriasOuNao === -1) {
             // console.log("não tem");
 
             // Limite de matérias
