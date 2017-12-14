@@ -125,8 +125,9 @@ public class MateriaDAO {
                 /* Comando SQL que será enviado ao banco */
                 sql = "SELECT * FROM TB_POSTAGEM"
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
-                        + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID) LIMIT 10"
-                        + " ORDER BY TB.POSTAGEM.DT_REGISTRO DESC";
+                        + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
                 pstm = con.prepareStatement(sql);
@@ -136,8 +137,9 @@ public class MateriaDAO {
                 sql = "SELECT * FROM TB_POSTAGEM"
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
-                        + " WHERE TB_POSTAGEM.DT_REGISTRO > ? LIMIT 10"
-                        + " ORDER BY TB.POSTAGEM.DT_REGISTRO DESC";
+                        + " WHERE TB_POSTAGEM.DT_REGISTRO > ?"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
                 pstm = con.prepareStatement(sql);
@@ -149,8 +151,9 @@ public class MateriaDAO {
                 sql = "SELECT * FROM TB_POSTAGEM"
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
-                        + " WHERE NOME_MATERIA = ? LIMIT 10"
-                        + " ORDER BY TB.POSTAGEM.DT_REGISTRO DESC";
+                        + " WHERE NOME_MATERIA = ?"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
                 pstm = con.prepareStatement(sql);
@@ -160,8 +163,9 @@ public class MateriaDAO {
                 sql = "SELECT * FROM TB_POSTAGEM"
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
-                        + " WHERE NOME_MATERIA = ? AND TB_POSTAGEM.DT_REGISTRO > ? LIMIT 10"
-                        + " ORDER BY TB.POSTAGEM.DT_REGISTRO DESC";
+                        + " WHERE NOME_MATERIA = ? AND TB_POSTAGEM.DT_REGISTRO > ?"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
                 pstm = con.prepareStatement(sql);
