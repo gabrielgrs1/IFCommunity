@@ -1,10 +1,6 @@
 /*-----------------------------------------------------------------------------*/
 $('.telefone-perfil-dashboard').mask('(00) 00009-0000');
 
-/* Adiciona a imagem */
-
-$(".avatar .container").append('<img src="http://www.amigoviajante.com.br/img/usuario-sem-foto.png" />');
-
 /*------------------------------------------------------------------------*/
 //Função que mostra o "carregando" na tela.
 function carregando() {

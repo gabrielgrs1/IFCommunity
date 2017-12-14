@@ -46,6 +46,7 @@
             <a href="#" class="nav-toggle"></a>
             <header class="avatar">
                 <div class="container">
+                    <img src="../img/img-usuario.png" />
                 </div>
                 <h2 id="nome-usuario"><%out.print(nome);%></h2>
             </header>
@@ -114,7 +115,7 @@
 
             <!-- Sessão de postagens !--> 
             <section class="postagens minhas-materias row padding-right">
-               
+
             </section>
 
             <section class="postagens adicionar-materias">
@@ -143,7 +144,7 @@
                         <div class="row">
                             <div class="col l6 s12 center-align">
                                 <h5 class="black-text">Bem vindo ao dashboard de postagens!</h5>
-                                <img id="img-code" src="https://www.happycodeclub.com/wp-content/uploads/2017/07/cropped-HappyCodeRedLogo_SmileOnlyCuout-300x300.png">
+                                <img id="img-code" src="../img/img-coding-section.png">
                             </div>
                             <div class="col l4 offset-l2 s12">
                                 <h5 class="black-text">Tips</h5>
