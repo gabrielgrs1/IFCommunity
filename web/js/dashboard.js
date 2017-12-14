@@ -262,17 +262,22 @@ function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePub
 
 $('#modal1').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
-    opacity: .5, // Opacity of modal background
-    inDuration: 300, // Transition in duration
-    outDuration: 200, // Transition out duration
-    startingTop: '4%', // Starting top style attribute
-    endingTop: '10%', // Ending top style attribute
-    ready: function (modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-    },
-    complete: function () {
-    } // Callback for Modal close
-}
-);
+    opacity: .8, // Opacity of modal background
+    inDuration: 400, // Transition in duration
+    outDuration: 250, // Transition out duration
+    startingTop: '90%', // Starting top style attribute
+    endingTop: '15%' // Ending top style attribute
+});
+
+$('#modal-buscar').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .8, // Opacity of modal background
+    inDuration: 400, // Transition in duration
+    outDuration: 250, // Transition out duration
+    startingTop: '90%', // Starting top style attribute
+    endingTop: '25%' // Ending top style attribute
+});
+
 /*-----------------------------------------------------------------------------*/
 
 $("#modal-de-escrever-codigo").click(function () {
@@ -440,7 +445,11 @@ function montaPostagens(materia) {
 // console.log("entrou se postagens estiver vazio");
         $(".minhas-materias").empty();
         $(".minhas-materias").prepend("<div class='aviso-falta-postagens container box-padrao'><h3>Não foram encontradas postagens dessa matéria</h3><div class='page-footer'><div class='container'><div class='row'><div class='col l6 s12 center-align'><h5 class='black-text'>Ainda não foi postado nada dessa matéria!</h5></div><div class='col l4 offset-l2 s12'><h5>Seja o primeiro a compartilhar algo da disciplina!</h5></div></div></div></div></div>");
+    } else {
+        $(".minhas-materias").append("<button class='btn btn-wave' type='button' id='pega-mais-postagens'>Carregar mais...</button>");
     }
+
+
 }
 
 //Função que adiciona a estrutura de postagem
@@ -945,5 +954,7 @@ $("#btn-submeter-postagem").click(function () {
 });
 
 $(document).ready(function () {
-    $('.scrollspy').scrollSpy();
+    $('.scrollspy').scrollSpy(function () {
+        console.log("teste");
+    });
 });

@@ -115,7 +115,7 @@
 
             <!-- Sessão de postagens !--> 
             <section class="postagens minhas-materias row padding-right">
-
+                
             </section>
 
             <section class="postagens adicionar-materias">
@@ -181,7 +181,7 @@
                         <i class="large material-icons">code</i>
                     </a>
                     <ul>
-                        <li ><a href="#modal1" id="modal-de-escrever-codigo" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
+                        <li><a href="#modal1" id="modal-de-escrever-codigo" class="btn-floating green lighten-2 waves-effect waves-light btn modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="Adicionar código"><i class="material-icons">add</i></a></li>
                         <li><a href="#modal-buscar" class="btn-floating grey tooltipped modal-trigger" data-position="left" data-delay="50" data-tooltip="Buscar"><i class="material-icons">search</i></a></li>
                     </ul>
                 </div>
