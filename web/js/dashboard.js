@@ -377,7 +377,7 @@ function pegaPostagensDaMateriaSelecionada() {
 function pegaPostagens(materia, dataUltimaPostagem) {
 // console.log("Fluxo 2");
 // console.log(materia);
-    // Materialize.Toast.removeAll();
+    Materialize.Toast.removeAll();
 
     $.ajax({
         url: "RecuperaPostagens",
@@ -682,7 +682,7 @@ function atualizaMaterias() {
 
             // Limite de matérias
             if (novoVetorDeMaterias.length >= 7) {
-                //    Materialize.Toast.removeAll();
+                Materialize.Toast.removeAll();
                 Materialize.toast('Você já atingiu o máximo de matérias, remova alguma antes!', 2500, 'red');
                 $(this).prop("checked", false);
                 return;
@@ -714,7 +714,7 @@ function atualizaMaterias() {
     atualizaMateriasTelaAdicionar(materias, $("#id-usuario").text());
 
     function atualizaMateriasTelaAdicionar(materias, id) {
-        //  Materialize.Toast.removeAll();
+        Materialize.Toast.removeAll();
         console.log(materias);
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
@@ -808,7 +808,7 @@ function atualizaNomePerfil() {
 
 //Função que atualiza os dados do usuario e retorna os novos dados inseridos no banco
 function atualizaPerfilAJAX(id, nome, telefone, email) {
-    // Materialize.Toast.removeAll();
+    Materialize.Toast.removeAll();
 
     $.ajax({
         url: "AtualizaPerfil",
@@ -944,6 +944,6 @@ $("#btn-submeter-postagem").click(function () {
             });
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('.scrollspy').scrollSpy();
-  });
+});
