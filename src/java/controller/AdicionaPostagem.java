@@ -30,13 +30,13 @@ public class AdicionaPostagem extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-        String assunto = request.getParameter("assunto"),
-                linguagem = request.getParameter("linguagem"),
-                conteudoDaPostagem = request.getParameter("conteudoDaPostagem"),
-                qualMateria = request.getParameter("qualMateria"),
-                nomeDoUsuario = request.getParameter("nomeDoUsuario");
+        String tituloPostagem = request.getParameter("assunto"),
+                linguagemPostagem = request.getParameter("linguagem"),
+                conteudoPostagem = request.getParameter("conteudoDaPostagem"),
+                materiaPostagem = request.getParameter("qualMateria"),
+                idAutorPostagem = request.getParameter("nomeDoUsuario");
 
-        MateriaDAO.adicionaPostagem(assunto, linguagem, conteudoDaPostagem, qualMateria, nomeDoUsuario);
+        MateriaDAO.adicionaPostagem(tituloPostagem ,linguagemPostagem, conteudoPostagem, materiaPostagem, idAutorPostagem);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
