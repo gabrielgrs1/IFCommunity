@@ -126,7 +126,7 @@ public class MateriaDAO {
                 sql = "SELECT * FROM TB_POSTAGEM"
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
-                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO ASC"
                         + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
@@ -138,7 +138,7 @@ public class MateriaDAO {
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
                         + " WHERE TB_POSTAGEM.DT_REGISTRO > ?"
-                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO ASC"
                         + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
@@ -152,7 +152,7 @@ public class MateriaDAO {
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
                         + " WHERE NOME_MATERIA = ?"
-                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO ASC"
                         + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
@@ -164,7 +164,7 @@ public class MateriaDAO {
                         + " INNER JOIN TB_ALUNO ON (TB_ALUNO.ID = TB_POSTAGEM.ID_ALUNO)"
                         + " INNER JOIN TB_MATERIA ON (TB_POSTAGEM.ID_MATERIA = TB_MATERIA.ID)"
                         + " WHERE NOME_MATERIA = ? AND TB_POSTAGEM.DT_REGISTRO > ?"
-                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO DESC"
+                        + " ORDER BY TB_POSTAGEM.DT_REGISTRO ASC"
                         + " LIMIT 10";
 
                 /* Prepara a consulta e passa os parametros */
