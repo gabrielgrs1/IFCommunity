@@ -14,6 +14,43 @@ public class MateriaDAO {
     public MateriaDAO() {
     }
 
+    public static void adicionaPostagem(String tituloPostagem, String linguagemPostagem, String conteudoPostagem, String materiaPostagem, String idAutorPostagem) throws SQLException {
+        PreparedStatement pstm;
+        int rsu, idMateria = 0;
+        Connection con = ConnectionFactory.getConnection();
+        ResultSet rs;
+
+        String sql = "SELECT * FROM TB_MATERIA WHERE NOME_MATERIA = ?";
+
+        /* Prepara a consulta e passa os parametros */
+        pstm = con.prepareStatement(sql);
+        pstm.setString(1, materiaPostagem);
+
+        /* Executa a query e armazena o resultado na variavel rs */
+        rs = pstm.executeQuery();
+
+        /* Instancia um novo aluno para dar de retorno da função */
+        while (rs.next()) {
+            idMateria = rs.getInt("ID");
+        }
+
+        //Insere na tabela aluno
+        sql = "INSERT INTO TB_POSTAGEM (TITULO, LINGUAGEM_POSTAGEM, POSTAGENS, ID_MATERIA, ID_ALUNO) VALUES (?, ?, ?, ?, ?)";
+
+        // Prepara o comando com o preparestat pstm =
+        pstm = con.prepareStatement(sql);
+
+        // Passa os parametros da consulta pra cada ? dentro da String sql
+        pstm.setString(1, tituloPostagem);
+        pstm.setString(2, linguagemPostagem);
+        pstm.setString(3, conteudoPostagem);
+        pstm.setInt(4, idMateria);
+        pstm.setInt(5, Integer.parseInt(idAutorPostagem));
+
+        // Executa o comando retornando no result a quantidade de linhas afetadas int
+        rsu = pstm.executeUpdate();
+    }
+
     public static void atualizaMateriaTelaAdicionar(ArrayList<String> materias, String idUsuario) throws SQLException {
         String materiasID = "";
         PreparedStatement pstm;
@@ -39,11 +76,11 @@ public class MateriaDAO {
                 }
             }
         }
-        
+
         if (materiasID.length() == 0) {
             materiasID = "0";
         }
-        
+
         String sql = "UPDATE TB_ALUNO SET MATERIAS_CADASTRADAS = ? WHERE ID = ?";
 
         pstm = con.prepareStatement(sql);
@@ -201,16 +238,18 @@ public class MateriaDAO {
     }
 
     public static void main(String[] args) throws SQLException {
-        ArrayList<String> materias = new ArrayList<>();
+//        ArrayList<String> materias = new ArrayList<>();
+//
+//        materias.add("FUNDAMENTOS DE WEB DESIGN I");
+//        materias.add("LÓGICA DE PROGRAMAÇÃO");
+//        materias.add("PROJETO INTEGRADOR 1");
+//        materias.add("ALGORITMOS E PROGRAMAÇÃO");
+//        materias.add("FUNDAMENTOS DE WEB DESIGN II");
+//        materias.add("PROJETO INTEGRADOR 2");
+//        materias.add("PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET");
+//
+//        atualizaMateriaTelaAdicionar(materias, "1");
 
-        materias.add("FUNDAMENTOS DE WEB DESIGN I");
-        materias.add("LÓGICA DE PROGRAMAÇÃO");
-        materias.add("PROJETO INTEGRADOR 1");
-        materias.add("ALGORITMOS E PROGRAMAÇÃO");
-        materias.add("FUNDAMENTOS DE WEB DESIGN II");
-        materias.add("PROJETO INTEGRADOR 2");
-        materias.add("PROTOCOLOS E PROGRAMAÇÃO PARA INTERNET");
-
-        atualizaMateriaTelaAdicionar(materias, "1");
+        adicionaPostagem("Teste", "JavaScript", "TESTE TESTE", "FUNDAMENTOS DE WEB DESIGN I", "GABRIEL GUILHERME");
     }
 }

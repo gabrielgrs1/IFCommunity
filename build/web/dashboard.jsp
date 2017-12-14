@@ -33,10 +33,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <!-- Import prism -->
-        <link href="css/prism.css" rel="stylesheet" />
-
-        <link rel="stylesheet" type="text/css" href="css/result-light.css">
 
     </head>
 
@@ -53,16 +49,18 @@
                 </div>
                 <h2 id="nome-usuario"><%out.print(nome);%></h2>
             </header>
-            <ul class="para-scroll">
-                <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
-                <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span></li>
-                <div class="minhas-materias-adicionadas">
-                    <ul class="lista-materias"></ul>
-                </div>
-                <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Gerenciar matérias</span></li>
-                <li tabindex="0" class="icon-help"><span id="ajuda">Ajuda</span></li>
-                <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
-            </ul>
+            <div class="scroll-do-menu">
+                <ul class="para-scroll">
+                    <li tabindex="0" class="icon-users"><span id="perfil">Perfil</span></li>
+                    <li tabindex="0" class="icon-materias"><span id="minhas-materias">Minhas matérias</span></li>
+                    <div class="minhas-materias-adicionadas">
+                        <ul class="lista-materias"></ul>
+                    </div>
+                    <li tabindex="0" class="icon-dashboard"><span id="adicionar-materias">Gerenciar matérias</span></li>
+                    <li tabindex="0" class="icon-help"><span id="ajuda">Ajuda</span></li>
+                    <li tabindex="0" id="li-deslogar" class="icon-sair"><span id="btn-deslogar">Sair</span></li>
+                </ul>
+            </div>
         </nav>
 
         <main class="site-content">
@@ -115,7 +113,9 @@
             </section>
 
             <!-- Sessão de postagens !--> 
-            <section class="postagens minhas-materias row padding-right"></section>
+            <section class="postagens minhas-materias row padding-right">
+               
+            </section>
 
             <section class="postagens adicionar-materias">
                 <div id="section-materias" class="box-padrao">
@@ -208,16 +208,16 @@
                         <div class="input-field col s6">
                             <i class= "material-icons prefix small">subject</i>
                             <input id="icon_prefix" name="assunto" type="text" class="validate" required="required">
-                            <label for="icon_prefix">Assunto</label>
+                            <label for="icon_prefix">Titulo da postagem</label>
                         </div>
                         <div id="qual-linguagem-modal" class="input-field col s6">
                             <i class="material-icons prefix small">code</i>
                             <select name="qual-linguagem" required="required">
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="1">Javascript</option>
-                                <option value="2">Java</option>
+                                <option value="" disabled selected>Selecione a linguagem</option>
                                 <option value="3">HTML</option>
-                                <option value="4">Texto</option>
+                                <option value="2">Java</option>
+                                <option value="1">Javascript</option>
+                                <!--<option value="4">Texto</option> COMENTEI PORQUE NÃO ESTA IMPLEMENTADO-->
                             </select>
                             <label>Linguagem</label>
                         </div>
@@ -227,16 +227,11 @@
                     <div class="modal-content">   
                         <textarea class="paraTextoNormal"></textarea>
 
-                        <pre id="editor" class="paraCodigo">function foo(items) {
-                        var i;
-                        for (i = 0; i &lt; items.length; i++) {
-                            alert("Ace Rocks " + items[i]);
-                        }
-                    }</pre>
+                        <pre id="editor" class="paraCodigo"></pre>
                     </div>
 
                     <div class="modal-footer">
-                       <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat modal-close" id="btn-submeter-postagem" name="action">Submeter</button>
+                        <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat modal-close" id="btn-submeter-postagem" name="action">Submeter</button>
                     </div>
                 </form>
             </div>

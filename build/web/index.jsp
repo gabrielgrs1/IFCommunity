@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>IFCommunity | Login</title>
         <!-- Import Materialize CSS -->
@@ -131,7 +131,7 @@
                                 <div class="row">
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='nome' id='nome' minlength="3" maxlength="60" required/>
-                                        <label id="nome-cadastro" for='nome'>Nome Completo *</label>
+                                        <label id="nome-cadastro" for='nome'>Nome Completo*</label>
                                         <span id="erro-nome" class="erro-span"></span>
                                     </div>
 

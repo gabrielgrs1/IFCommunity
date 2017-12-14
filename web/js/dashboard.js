@@ -41,9 +41,9 @@ $("ul.para-scroll > li").click(function () {
         //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
         $('.aviso-minhas-materias').hide();
-
+        abreComBotaoCelular();
         // se for gerenciar materias, monta o gerenciar materias.
-        if (textoDoClique == "Gerenciar matérias") {
+        if (textoDoClique === "Gerenciar matérias") {
             // console.log("entrou no clique");
             $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
             retornaMaterias();
@@ -55,15 +55,24 @@ $("ul.para-scroll > li").click(function () {
     // Aplica a classe para aparecer alguma section
     var classe = '.' + $(this).children("span").attr("id");
     // console.log(classe);
+    qualApareceNaTela(classe);
+});
+
+function qualApareceNaTela(classe) {
+    // console.log(classe);
     $("section").hide();
     $(".site-content").find(classe).addClass("section-aparece");
     //Se tiver a section-aparece, ele exibe ela na tela.
     if ($("section").hasClass("section-aparece")) {
         $(this).show();
     }
-    ;
     MontaCondicoesBotaoModal($(this).children("span").text());
-});
+}
+;
+
+
+
+
 
 /*-----------------------------------------------------------------------------*/
 /*    Adiciona as materias   */
@@ -91,7 +100,7 @@ function preencheAListaDeMateriasDoMenu() {
             // Isso aqui é um remédio caso ocorra, acho que não tem situação em que possa occorer, mas... É mais um cuidado.
             // Enfim, caso o array materias chegue aqui com a mensagem de não tem matérias, ele remove essa mensage antes de gerar a lista de materias cadastradas.
             var a = materias.indexOf("Você ainda não tem nenhuma matéria cadastrada!");
-            if (a != 0) {
+            if (a !== 0) {
                 for (var i = materias.length - 1; i >= 0; i--) {
                     if (materias[i] === "Você ainda não tem nenhuma matéria cadastrada!") {
                         materias.splice(i, 1);
@@ -143,6 +152,7 @@ function pegaMateriasComAjax(idUsuario) {
                     materias.push(materia[i]);
                 }
                 preencheAListaDeMateriasDoMenu();
+                checkedNasMateriasDoMenu();
 
             })
             .fail(function (jqXHR, textStatus, materia) {
@@ -163,10 +173,6 @@ function pegaMateriasComAjax(idUsuario) {
 /*           Checked img na matéria (submenu) que está selecionada         */
 /* ela tem que carregar após as matérias serem carregadas para funcionar   */
 
-setTimeout(function () {
-    checkedNasMateriasDoMenu();
-}, 400);
-
 function checkedNasMateriasDoMenu() {
     $("input[name='materias-radio']").click(function () {
         $('.aviso-minhas-materias').hide();
@@ -180,6 +186,8 @@ function checkedNasMateriasDoMenu() {
         }
         // console.log(qualMateria);
         MontaCondicoesBotaoModal(qualMateria);
+        abreComBotaoCelular();
+        pegaPostagensDaMateriaSelecionada();
     });
 }
 
@@ -190,12 +198,15 @@ function checkedNasMateriasDoMenu() {
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*    Botão para abrir menu do celular   */
+function abreComBotaoCelular() {
+    $(".nav-side .nav-toggle").parent().toggleClass("nav-open");
+}
+;
 
 $(".nav-side .nav-toggle").on("click", function (e) {
     e.preventDefault();
     $(this).parent().toggleClass("nav-open");
 });
-
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*              Plugin dos selects                          */
 
@@ -251,7 +262,7 @@ function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePub
 
 // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
 
-$('.modal').modal({
+$('#modal1').modal({
     dismissible: true, // Modal can be dismissed by clicking outside of the modal
     opacity: .5, // Opacity of modal background
     inDuration: 300, // Transition in duration
@@ -302,7 +313,7 @@ editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/javascript");
 
 function qualLinguagem(text) {
-    var novoModo = text.toLowerCase()
+    var novoModo = text.toLowerCase();
     //console.log(novoModo);
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
@@ -311,7 +322,7 @@ function qualLinguagem(text) {
 
 function qualLinguagemParaPostagem(text, IDPostagem) {
     // precisa mudar o modo de acordo com o modo que retornar do banco.
-    var novoModo = text.toLowerCase()
+    var novoModo = text.toLowerCase();
     //console.log(novoModo);
     var editor = ace.edit("editorLeitura" + IDPostagem);
     editor.setTheme("ace/theme/twilight");
@@ -344,22 +355,32 @@ function collapsible() {
 
 
 var postagens = [];
-setTimeout(function () {
-    pegaPostagensDaMateriaSelecionada();
-}, 400);
 function pegaPostagensDaMateriaSelecionada() {
-    $("input[name='materias-radio']").click(function () {
-        // console.log("Fluxo 1");
-        // console.log("entrou no que pega a materia para postagem");
-        var materia;
-        materia = $(".fundo-checked").children().text();
+    // console.log("Fluxo 1");
+    // console.log("entrou no que pega a materia para postagem");
+    var materia;
+    materia = $(".fundo-checked").children().text();
+    // console.log(materia);
+    if (materia == "Você ainda não tem nenhuma matéria cadastrada!") {
+        // console.log("entrou no clique");
+        $('.minhas-materias-adicionadas').slideUp();
+        $("main > section.minhas-materias").empty();
+        $('ul label li').removeClass('fundo-checked');
+        $("section").removeClass("section-aparece");
+        $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
+        retornaMaterias();
+        qualApareceNaTela(".adicionar-materias");
+    } else {
+        // console.log("entrou no clique 2");
         pegaPostagens(materia);
-    });
+    }
 }
 
 function pegaPostagens(materia, dataUltimaPostagem) {
 // console.log("Fluxo 2");
 // console.log(materia);
+    // Materialize.Toast.removeAll();
+
     $.ajax({
         url: "RecuperaPostagens",
         type: 'get',
@@ -411,11 +432,10 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-
-//        console.log(IDPostagem);
-        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem);
+        // console.log(linguagemPostagem);
+        adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
-        qualLinguagemParaPostagem("javascript", IDPostagem);
+        qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
     }
 
     if (postagens.length === 0) {
@@ -426,7 +446,7 @@ function montaPostagens(materia) {
 }
 
 //Função que adiciona a estrutura de postagem
-function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem) {
+function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x) {
     // console.log("Fluxo 4");
     // console.log(IDPostagem);
 
@@ -508,6 +528,11 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaUl.setAttribute("id", IDPostagem);
     // quando criar a regra de retorno do banco decide o prepend ou append.
     secaoDePostagens.prepend(criaUl);
+
+    if (x == (postagens.length - 1)) {
+        // console.log("entrou no append");
+        secaoDePostagens.append("<div class='rodape'></div>");
+    }
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -659,6 +684,7 @@ function atualizaMaterias() {
 
             // Limite de matérias
             if (novoVetorDeMaterias.length >= 7) {
+                //    Materialize.Toast.removeAll();
                 Materialize.toast('Você já atingiu o máximo de matérias, remova alguma antes!', 2500, 'red');
                 $(this).prop("checked", false);
                 return;
@@ -672,7 +698,6 @@ function atualizaMaterias() {
             // console.log(materias);
             preencheAListaDeMateriasDoMenu();
             checkedNasMateriasDoMenu();
-            pegaPostagensDaMateriaSelecionada();
         }
     } else {
         //  console.log($(this).attr('name'));
@@ -686,12 +711,13 @@ function atualizaMaterias() {
         // console.log(materias);
         preencheAListaDeMateriasDoMenu();
         checkedNasMateriasDoMenu();
-        pegaPostagensDaMateriaSelecionada();
     }
 
     atualizaMateriasTelaAdicionar(materias, $("#id-usuario").text());
 
     function atualizaMateriasTelaAdicionar(materias, id) {
+        //  Materialize.Toast.removeAll();
+        console.log(materias);
         $.ajax({
             url: "AtualizaMateriaTelaAdicionar",
             type: 'get',
@@ -706,11 +732,11 @@ function atualizaMaterias() {
                 idUsuario: id
             },
             beforeSend: function () {
-                Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
                 // console.log("Atualizando as matérias");
             }
         })
                 .done(function () {
+                    Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
                     //    console.log("Materias atualizadas com sucesso!");
                 })
                 .fail(function (jqXHR, textStatus, resultado) {
@@ -760,9 +786,12 @@ $("#btn-atualizar-perfil").click(function () {
 
 //Limpa os campos do perfil
 $("#btn-limpar-perfil").click(function () {
-    $(".nome-perfil").val("");
-    $(".telefone-perfil").val("");
-    $(".email-perfil").val("");
+    if (confirm("Tem certeza que deseja limpar todos os campos?")) {
+        $(".nome-perfil-dashboard").val("");
+        $(".telefone-perfil-dashboard").val("");
+        $(".email-perfil-dashboard").val("");
+        $("#btn-atualizar-perfil").addClass("disabled");
+    }
 });
 
 //Função que muda nome do perfil após atualizar perfil
@@ -781,6 +810,8 @@ function atualizaNomePerfil() {
 
 //Função que atualiza os dados do usuario e retorna os novos dados inseridos no banco
 function atualizaPerfilAJAX(id, nome, telefone, email) {
+    // Materialize.Toast.removeAll();
+
     $.ajax({
         url: "AtualizaPerfil",
         type: 'post',
@@ -864,16 +895,54 @@ function validacaoFormulario(campo, span, regex, mensagem) {
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Submissão de postagens
 $("#btn-submeter-postagem").click(function () {
-    console.log("entrou no submit");
-    console.log($('#formDoModal select').find("option:selected").text().toLowerCase());
-    console.log(editor.getValue());
-    console.log($(".fundo-checked").children().text());
-    console.log($("#nome-usuario").text());
+//    console.log("entrou no submit");
+//    console.log($('#formDoModal select').find("option:selected").text().toLowerCase());
+//    console.log(editor.getValue());
+//    console.log($(".fundo-checked").children().text());
+//    console.log($("#nome-usuario").text());
 
     var assunto = $("[name='assunto']").val();
     var linguagem = $('#formDoModal select').find("option:selected").text().toLowerCase();
-    var contaudoDaPostagem = editor.getValue();
+    var conteudoDaPostagem = editor.getValue();
     var qualMateria = $(".fundo-checked").children().text();
-    var nomeDoUsuario = $("#nome-usuario").text();
+    var nomeDoUsuario = $("#id-usuario").text();
+
+    function limpaCamposPostagem() {
+        $("[name='assunto']").val("");
+        $("#formDoModal select").text("Selecione a linguagem");
+        $("#editor").text("");
+    }
+
+    $.ajax({
+        url: "AdicionaPostagem",
+        type: 'get',
+        timeout: 8000,
+        data: {
+            assunto: assunto,
+            linguagem: linguagem,
+            conteudoDaPostagem: conteudoDaPostagem,
+            qualMateria: qualMateria,
+            nomeDoUsuario: nomeDoUsuario
+        },
+        beforeSend: function () {
+            carregando();
+        }
+    })
+            .done(function (postagem) {
+                pegaPostagens(qualMateria);
+                limpaCamposPostagem();
+                Materialize.toast('Postagem enviada com sucesso!', 6000, 'green');
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                Materialize.toast('Erro ao adicionar postagem, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 });
 
