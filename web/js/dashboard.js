@@ -925,7 +925,7 @@ $("#btn-submeter-postagem").click(function () {
         $("[name='assunto']").val("");
         console.log(linguagem);
         $('#formDoModal select').find("option:disabled").attr('selected', 'selected');
-        editor.setValue("the new text here");
+        editor.setValue("");
     }
     // escreverCodigo();
 
