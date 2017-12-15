@@ -189,11 +189,6 @@ function checkedNasMateriasDoMenu() {
     });
 }
 
-
-
-
-
-
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*    Botão para abrir menu do celular   */
 function abreComBotaoCelular() {
@@ -279,33 +274,34 @@ $('#modal-buscar').modal({
 });
 
 /*-----------------------------------------------------------------------------*/
+// Eventos para escrever o código.
 
-$("#modal-de-escrever-codigo").click(function () {
-    // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
-    $('#formDoModal select').change(function (e) {
-        // console.log("entrou no change");
-        var val = $(e.target).val();
-        var text = $(e.target).find("option:selected").text();
-        // console.log(text);
-        adicionaOsTextAreaModal(text);
+escreverCodigo();
+function escreverCodigo() {
+    $("#modal-de-escrever-codigo").click(function () {
+        // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
+        $('#formDoModal select').change(function (e) {
+            // console.log("entrou no change");
+            var val = $(e.target).val();
+            var text = $(e.target).find("option:selected").text();
+            // console.log(text);
+            var linguagem = text.toLowerCase();
+            if (linguagem == 'selecione a linguagem') {
+            //    console.log("entrou no selecione a linguagem");
+            } else {
+                adicionaOsTextAreaModal(linguagem);
+            }
+
+        });
     });
-});
+}
+;
 
 function adicionaOsTextAreaModal(text) {
-
-    if (text === "Texto") {
-        // $('.modal-content').children().remove();
-        //  console.log("entrou no click do botao pra abrir modal de texto");
-        $('.paraTextoNormal').show();
-        $('.paraCodigo').hide();
-
-    } else {
-        $('.paraTextoNormal').hide();
-        $('.paraCodigo').show();
-        // $('.modal-content').children().remove();
-        // console.log("entrou no tipo diferente de texto normal");
-        qualLinguagem(text);
-    }
+    $('.paraCodigo').show();
+    // $('.modal-content').children().remove();
+    // console.log("entrou no tipo diferente de texto normal");
+    qualLinguagem(text);
 }
 ;
 /*-----------------------------------------------------------------------------*/
@@ -316,8 +312,11 @@ editor.setTheme("ace/theme/twilight");
 editor.session.setMode("ace/mode/javascript");
 
 function qualLinguagem(text) {
+    if (text == 'texto') {
+        text = 'text';
+    }
     var novoModo = text.toLowerCase();
-    //console.log(novoModo);
+    console.log(novoModo);
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -325,8 +324,11 @@ function qualLinguagem(text) {
 
 function qualLinguagemParaPostagem(text, IDPostagem) {
     // precisa mudar o modo de acordo com o modo que retornar do banco.
+    if (text == 'texto') {
+        text = 'text';
+    }
     var novoModo = text.toLowerCase();
-    //console.log(novoModo);
+    console.log(novoModo);
     var editor = ace.edit("editorLeitura" + IDPostagem);
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -427,6 +429,7 @@ function montaPostagens(materia) {
 // console.log("Fluxo 3");
     $(".minhas-materias").empty();
     // console.log(postagens);
+    postagens.reverse();
     for (var x = 0; x < postagens.length; x++) {
         var textoPostagem = postagens[x]["postagens"];
         var autorPostagem = postagens[x]["autor"];
@@ -435,10 +438,14 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-        // console.log(linguagemPostagem);
+        console.log(linguagemPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
-        qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
+        if (linguagemPostagem == 'selecione a linguagem') {
+        //    console.log("entrou no selecione a linguagem");
+        } else {
+            qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
+        }  
     }
 
     if (postagens.length === 0) {
@@ -916,9 +923,11 @@ $("#btn-submeter-postagem").click(function () {
 
     function limpaCamposPostagem() {
         $("[name='assunto']").val("");
-        $("#formDoModal select").text("Selecione a linguagem");
-        $("#editor").text("");
+        console.log(linguagem);
+        $('#formDoModal select').find("option:disabled").attr('selected', 'selected');
+        editor.setValue("the new text here");
     }
+    // escreverCodigo();
 
     $.ajax({
         url: "AdicionaPostagem",

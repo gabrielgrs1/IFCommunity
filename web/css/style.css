@@ -326,15 +326,6 @@ h4 {
     color: white;
 }
 
-/*MARAFELLI COMENTEI ISSO PRA SEGUIR O PADRÃO DO MATERIALIZE
-
-#body-principal label {
-    font-size: 0.8em!important;
-    color: grey;
-}
-
-*/
-
 #body-principal input {
     color: black;
 }
@@ -681,6 +672,12 @@ p {
     #body-principal .menu-mensagens {
         display: none;
     }
+    #body-principal .content-topic {
+        margin-left: 25px!important;
+        margin-right: 25px!important;
+        margin-bottom: 15px!important;
+        margin-top: 0!important;   
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -737,6 +734,12 @@ p {
     }
     #body-principal .perfil > div.box-padrao form.col div.col.s6 {
         width: 100%!important;
+    }
+    #body-principal .content-topic {
+        margin-left: 25px!important;
+        margin-right: 25px!important;
+        margin-bottom: 15px!important;
+        margin-top: 0!important;   
     }
 }
 
@@ -914,10 +917,10 @@ body-principal .box-padrao h4 {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    margin: 10vmin!important;
+    margin-left: 25px!important;
+    margin-right: 100px!important;
     margin-bottom: 15px!important;
-    margin-top: 0!important;
-     
+    margin-top: 0!important;   
 }
 
 #body-principal .content-topic h1 {
