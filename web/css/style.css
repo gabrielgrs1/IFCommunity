@@ -386,9 +386,8 @@ p {
 
 
 #body-principal main > section.minhas-materias .setinha-indicadora:before {
-    content: "\2193"!important;
-    font-weight: 600;
-    color: black;
+    content: "\25B2 "!important;
+    color: #486a86;
     line-height: 40px;
     webkit-transition: width 2s;
     -webkit-transition: width 2s;
@@ -396,7 +395,7 @@ p {
 }
 
 #body-principal main > section.minhas-materias .active .setinha-indicadora:before {
-    content: "\2191"!important;
+    content: "\25BC"!important;
 }
 
 [type="checkbox"]:not(:checked) + label,
