@@ -401,7 +401,6 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         }
     })
             .done(function (postagem) {
-                postagens = [];
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }

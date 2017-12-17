@@ -496,7 +496,7 @@ p {
     height: auto;
     bottom: 0px;
     left: 0px;
-    z-index: 5;
+    z-index: 4;
     outline: none;
     -webkit-box-shadow: .5vmin 0 0 rgba(0, 0, 0, .30);
     box-shadow: .5vmin 0 0 rgba(0, 0, 0, .30);
@@ -744,6 +744,9 @@ p {
         margin-bottom: 15px!important;
         margin-top: 0!important;   
     }
+    #body-principal .menu {
+        z-index: 6!important;
+    }
 }
 
 /*---------------------------------------------------*/
@@ -773,7 +776,7 @@ p {
 }
 
 #body-principal .content-header {
-    z-index: 4!important;
+    z-index: 5!important;
     text-align: center;
     white-space: nowrap;
     width: 100%;
