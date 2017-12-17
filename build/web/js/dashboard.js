@@ -287,7 +287,7 @@ function escreverCodigo() {
             // console.log(text);
             var linguagem = text.toLowerCase();
             if (linguagem == 'selecione a linguagem') {
-            //    console.log("entrou no selecione a linguagem");
+                //    console.log("entrou no selecione a linguagem");
             } else {
                 adicionaOsTextAreaModal(linguagem);
             }
@@ -316,7 +316,7 @@ function qualLinguagem(text) {
         text = 'text';
     }
     var novoModo = text.toLowerCase();
-    console.log(novoModo);
+    // console.log(novoModo);
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -328,7 +328,7 @@ function qualLinguagemParaPostagem(text, IDPostagem) {
         text = 'text';
     }
     var novoModo = text.toLowerCase();
-    console.log(novoModo);
+    // console.log(novoModo);
     var editor = ace.edit("editorLeitura" + IDPostagem);
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -438,14 +438,14 @@ function montaPostagens(materia) {
         var materiaPostagem = postagens[x]["materia"];
         var IDPostagem = postagens[x]["id"];
         var linguagemPostagem = postagens[x]["linguagem"];
-        console.log(linguagemPostagem);
+        // console.log(linguagemPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
         if (linguagemPostagem == 'selecione a linguagem') {
-        //    console.log("entrou no selecione a linguagem");
+            //    console.log("entrou no selecione a linguagem");
         } else {
             qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
-        }  
+        }
     }
 
     if (postagens.length === 0) {
@@ -908,7 +908,9 @@ function validacaoFormulario(campo, span, regex, mensagem) {
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 //Submissão de postagens
-$("#btn-submeter-postagem").click(function () {
+
+$("#btn-submeter-postagem").click(function (evento) {
+    evento.stopPropagation();
 //    console.log("entrou no submit");
 //    console.log($('#formDoModal select').find("option:selected").text().toLowerCase());
 //    console.log(editor.getValue());
@@ -921,14 +923,45 @@ $("#btn-submeter-postagem").click(function () {
     var qualMateria = $(".fundo-checked").children().text();
     var nomeDoUsuario = $("#id-usuario").text();
 
-    function limpaCamposPostagem() {
-        $("[name='assunto']").val("");
-        console.log(linguagem);
-        $('#formDoModal select').find("option:disabled").attr('selected', 'selected');
-        editor.setValue("the new text here");
+    var quantasLinhas = editor.session.getLength();
+    var testaAssunto = testaPost(assunto);
+    var form_changed = false;
+    if (testaAssunto && linguagem != 'selecione a linguagem' && quantasLinhas >= 3) {
+        form_changed = false;
+        adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMateria, nomeDoUsuario);
+        $('#modal1').modal('close');
+    } else {
+        if (testaAssunto == false) {
+            Materialize.toast('Preencha o assunto da postagem corretamente', 6000, 'red');
+        } else if (linguagem == 'selecione a linguagem') {
+            Materialize.toast('Selecione a linguagem do código', 6000, 'red');
+        } else if (quantasLinhas < 3) {
+            Materialize.toast('Você não pode postar um código tão pequeno, aproveite o espaço!', 6000, 'red');
+        } else {
+            Materialize.toast('Erro ao adicionar postagem, contate um adiministrador', 6000, 'red');
+        }
     }
-    // escreverCodigo();
+});
 
+function testaPost(texto) {
+    var regex = /^[a-záàâãéèêíïóôõöúçñ0-9 ]+$/i;
+    var teste = regex.test(texto);
+    if (teste) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function limpaCamposPostagem() {
+    $("[name='assunto']").val("");
+    $('#formDoModal select').prop('selectedIndex', 0);
+    $('#formDoModal select').material_select();
+    editor.setValue("");
+    $('.paraCodigo').hide();
+}
+
+function adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMateria, nomeDoUsuario) {
     $.ajax({
         url: "AdicionaPostagem",
         type: 'get',
@@ -960,7 +993,7 @@ $("#btn-submeter-postagem").click(function () {
                     console.log("Erro 404, não foi encontrado o diretório solicitado!");
                 }
             });
-});
+}
 
 $(document).ready(function () {
     $('.scrollspy').scrollSpy(function () {
