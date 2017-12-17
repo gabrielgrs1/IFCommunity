@@ -6,7 +6,6 @@ $('.telefone-perfil-dashboard').mask('(00) 00009-0000');
 /*------------------------------------------------------------------------*/
 //Função que mostra o "carregando" na tela.
 function carregando() {
-    // console.log("preloader-wrapper");
     $(".preloader-wrapper").show();
 }
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -24,40 +23,29 @@ $('li.icon-materias').click(function () {
 $("ul.para-scroll > li").click(function () {
     $("main > section.minhas-materias").empty();
     $('ul label li').removeClass('fundo-checked');
-    // console.log($("section").find("section-aparece"));
-    // console.log("entrou no click do li");
-    // console.log($(this).children("span").text());
     //remove a tela que está aparecendo
     $("section").removeClass("section-aparece");
 
-    // console.log($(this).text());
-    // 
     //fecha o menu de minhas materias
     var textoDoClique = $(this).children("span").text();
-    // console.log(textoDoClique);
     if (textoDoClique !== 'Minhas matérias') {
-        //  console.log("entrou aqui");
         $('.minhas-materias-adicionadas').slideUp();
         $('.aviso-minhas-materias').hide();
         abreComBotaoCelular();
         // se for gerenciar materias, monta o gerenciar materias.
         if (textoDoClique === "Gerenciar matérias") {
-            // console.log("entrou no clique");
             $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
             retornaMaterias();
         }
     } else {
         $('.aviso-minhas-materias').show();
     }
-
     // Aplica a classe para aparecer alguma section
     var classe = '.' + $(this).children("span").attr("id");
-    // console.log(classe);
     qualApareceNaTela(classe);
 });
 
 function qualApareceNaTela(classe) {
-    // console.log(classe);
     $("section").hide();
     $(".site-content").find(classe).addClass("section-aparece");
     //Se tiver a section-aparece, ele exibe ela na tela.
@@ -67,10 +55,6 @@ function qualApareceNaTela(classe) {
     MontaCondicoesBotaoModal($(this).children("span").text());
 }
 ;
-
-
-
-
 
 /*-----------------------------------------------------------------------------*/
 /*    Adiciona as materias   */
@@ -82,7 +66,6 @@ var periodoMateria = [];
 pegaMateriasComAjax($("#id-usuario").text());
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
-
 
 //  Essa função preenche o vetor matérias de acordo com o retorno do ajax que busca as mastérias cadastradas pelo usuário.
 // Caso esse vetor esteja vazio, ele retorna uma mensagem pro cara cadastrar nas materias.
@@ -105,7 +88,6 @@ function preencheAListaDeMateriasDoMenu() {
                     }
                 }
             }
-            // console.log("entrou");
             // Aqui preenche a lista de materias com as matérias que o cara tem cadastradas.
             $(this).append('<input type="radio" name="materias-radio" id="materia' + x + '" style="display:none!important" /><label for="materia' + x + '"><li><span>' + materias[x] + '</span></li></label>');
             if (x === materias.length - 1) {
@@ -116,14 +98,11 @@ function preencheAListaDeMateriasDoMenu() {
 }
 ;
 
-
 //Função que pega as matérias do usuário e armazena em um array
-
 // Aqui, quando ele faz a requisição das materias cadastradas, ele fica exibindo uma barrinha de loading.
 // Quando retorna com sucesso as materias, ele troca o loading pelas materias q o cara tem cadastradas.
 // Ou se retornar insucesso, ele mostra mensagem para cadastrar em alguma matéria.
 function pegaMateriasComAjax(idUsuario) {
-    // console.log("entrou pegaMateriasComAjax")
     var loading = $(".lista-materias");
     var li = document.createElement("li");
     var progress = document.createElement("div");
@@ -170,19 +149,18 @@ function pegaMateriasComAjax(idUsuario) {
 
 /*           Checked img na matéria (submenu) que está selecionada         */
 /* ela tem que carregar após as matérias serem carregadas para funcionar   */
+/* NESSE PONTO QUE PEGA QUAL MATÉRIA ESTAMOS QUERENDO POSTAR               */
 
 function checkedNasMateriasDoMenu() {
     $("input[name='materias-radio']").click(function () {
         $('.aviso-minhas-materias').hide();
-        // console.log("entrou no click do input");
-        // alert($(this).attr('id'));
         var qualMateria;
         if ($(this).is(':checked')) {
             $('ul label li').removeClass('fundo-checked');
             $(this).next('label').children('li').addClass('fundo-checked');
             qualMateria = $(this).next('label').children('li').children("span").text();
         }
-        // console.log(qualMateria);
+        limpaCamposPostagem();
         MontaCondicoesBotaoModal(qualMateria);
         abreComBotaoCelular();
         pegaPostagensDaMateriaSelecionada();
@@ -191,6 +169,7 @@ function checkedNasMateriasDoMenu() {
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*    Botão para abrir menu do celular   */
+// É em toggle pra não precisar identificar se tá aberto ou não, ele faz o switch da class sozinho.
 function abreComBotaoCelular() {
     $(".nav-side .nav-toggle").parent().toggleClass("nav-open");
 }
@@ -209,15 +188,6 @@ $(document).ready(function () {
 $('select').material_select('destroy');
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-/*              Fundo com cor randomica                          */
-
-function trocaCorFundo() {
-    // console.log("entrou troca cor fundo");
-    var array = ["rgba(207, 216, 220, 0.7)", "rgba(187, 222, 251, 0.7)", "rgba(178, 223, 219, 0.7)", "rgba(238, 238, 238, 0.7)", "rgba(215, 204, 200, 0.7)", "rgba(207, 216, 220, 0.7)"];
-    var colorNumber = Math.round((Math.random() * (array.length - 1)));
-    $(".cor-fundo").css('background-color', array[colorNumber]);
-}
-/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                Sidebar para postar os codigos, ou seja, aquele botão com <> que clica e abre o modal.                    */
 
 /*  esconde e mostra a opção de publicação dependendo da página que está  */
@@ -225,8 +195,6 @@ function trocaCorFundo() {
 // O botão de postagem não some se o click for em "minhas matérias ou em qualquer submenu do mesmo.
 
 function MontaCondicoesBotaoModal(TextoValidacao) {
-    // console.log(" entrou em MontaCondicoesBotaoModal");
-    // console.log(TextoValidacao);
     // Esta variável TextoValidacao é uma flag, pra saber se deixa ou nao visivel o botao do modal
     //Monta Array com "Minhas matérias e com as matérias em que o usuário está inscrito.
     var StringQueNãoEscondemOBotaoDePublicacao = [];
@@ -237,16 +205,10 @@ function MontaCondicoesBotaoModal(TextoValidacao) {
 }
 
 function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao) {
-    // console.log(TextoValidacao + " 1");
-    // console.log(StringQueNãoEscondemOBotaoDePublicacao);
-    // console.log(textoDoMenu);
-
     // Verifica se o array tem a String do botão clicado.
     if (StringQueNãoEscondemOBotaoDePublicacao.includes(TextoValidacao)) {
-        // console.log("entrou no show do menu");
         $(".botao-modal").show();
     } else {
-        // console.log("entrou aqui");
         $(".botao-modal").hide();
     }
 }
@@ -281,13 +243,10 @@ function escreverCodigo() {
     $("#modal-de-escrever-codigo").click(function () {
         // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
         $('#formDoModal select').change(function (e) {
-            // console.log("entrou no change");
             var val = $(e.target).val();
             var text = $(e.target).find("option:selected").text();
-            // console.log(text);
             var linguagem = text.toLowerCase();
             if (linguagem == 'selecione a linguagem') {
-                //    console.log("entrou no selecione a linguagem");
             } else {
                 adicionaOsTextAreaModal(linguagem);
             }
@@ -299,8 +258,6 @@ function escreverCodigo() {
 
 function adicionaOsTextAreaModal(text) {
     $('.paraCodigo').show();
-    // $('.modal-content').children().remove();
-    // console.log("entrou no tipo diferente de texto normal");
     qualLinguagem(text);
 }
 ;
@@ -316,7 +273,6 @@ function qualLinguagem(text) {
         text = 'text';
     }
     var novoModo = text.toLowerCase();
-    // console.log(novoModo);
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -328,7 +284,6 @@ function qualLinguagemParaPostagem(text, IDPostagem) {
         text = 'text';
     }
     var novoModo = text.toLowerCase();
-    // console.log(novoModo);
     var editor = ace.edit("editorLeitura" + IDPostagem);
     editor.setTheme("ace/theme/twilight");
     editor.session.setMode("ace/mode/" + novoModo);
@@ -361,14 +316,11 @@ function collapsible() {
 
 var postagens = [];
 function pegaPostagensDaMateriaSelecionada() {
-    // console.log("Fluxo 1");
-    // console.log("entrou no que pega a materia para postagem");
     var materia;
     materia = $(".fundo-checked").children().text();
-    // console.log(materia);
     if (materia === "Você ainda não tem nenhuma matéria cadastrada!") {
-        // console.log("entrou no clique");
         $('.minhas-materias-adicionadas').slideUp();
+        console.log($("main > section.minhas-materias"))
         $("main > section.minhas-materias").empty();
         $('ul label li').removeClass('fundo-checked');
         $("section").removeClass("section-aparece");
@@ -376,14 +328,13 @@ function pegaPostagensDaMateriaSelecionada() {
         retornaMaterias();
         qualApareceNaTela(".adicionar-materias");
     } else {
-        // console.log("entrou no clique 2");
+        console.log($("main > section.minhas-materias"))
+        $("main > section.minhas-materias").empty();
         pegaPostagens(materia);
     }
 }
 
 function pegaPostagens(materia, dataUltimaPostagem) {
-// console.log("Fluxo 2");
-// console.log(materia);
     Materialize.Toast.removeAll();
 
     $.ajax({
@@ -396,11 +347,12 @@ function pegaPostagens(materia, dataUltimaPostagem) {
         },
         beforeSend: function () {
             carregando();
-
-            // console.log("CARREGANDO POSTAGENS");
         }
     })
             .done(function (postagem) {
+                postagens = [];
+                $("main > section.minhas-materias").empty();
+
                 for (var i = 0; i < postagem.length; i++) {
                     postagens.push(postagem[i]);
                 }
@@ -425,9 +377,7 @@ function pegaPostagens(materia, dataUltimaPostagem) {
 /*------------------------------------------------------------------------*/
 //Função que prepara o texto da postagem e chama a fução que cria e adiciona na tela
 function montaPostagens(materia) {
-// console.log("Fluxo 3");
     $(".minhas-materias").empty();
-    // console.log(postagens);
     postagens.reverse();
     for (var x = 0; x < postagens.length; x++) {
         var textoPostagem = postagens[x]["postagens"];
@@ -441,27 +391,21 @@ function montaPostagens(materia) {
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
         if (linguagemPostagem == 'selecione a linguagem') {
-            //    console.log("entrou no selecione a linguagem");
         } else {
             qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
         }
     }
 
     if (postagens.length === 0) {
-// console.log("entrou se postagens estiver vazio");
         $(".minhas-materias").empty();
         $(".minhas-materias").prepend("<div class='aviso-falta-postagens container box-padrao'><h3>Não foram encontradas postagens dessa matéria</h3><div class='page-footer'><div class='container'><div class='row'><div class='col l6 s12 center-align'><h5 class='black-text'>Ainda não foi postado nada dessa matéria!</h5></div><div class='col l4 offset-l2 s12'><h5>Seja o primeiro a compartilhar algo da disciplina!</h5></div></div></div></div></div>");
     } else {
         $(".minhas-materias").append("<button class='btn btn-wave' type='button' id='pega-mais-postagens'>Carregar mais...</button>");
     }
-
-
 }
 
 //Função que adiciona a estrutura de postagem
 function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x) {
-    // console.log("Fluxo 4");
-    // console.log(IDPostagem);
 
     //Manipulação da data da postagem
     var temporarioData = dataPostagem.split(" ");
@@ -543,7 +487,6 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     secaoDePostagens.prepend(criaUl);
 
     if (x === (postagens.length - 1)) {
-        // console.log("entrou no append");
         secaoDePostagens.append("<div class='rodape'></div>");
     }
 }
@@ -561,12 +504,10 @@ function retornaMaterias() {
         type: 'post',
         beforeSend: function () {
             $("#section-materias #div-loading").slideDown(500);
-            // console.log("Recuperando as matérias");
         }
     })
             .done(function (materiasJSON) {
                 $("#section-materias #div-loading").hide();
-                // console.log(materiasJSON);
                 periodoMateria = [];
                 for (var i = 0; i < materiasJSON.length; i++) {
                     periodoMateria.push(materiasJSON[i]);
@@ -594,25 +535,19 @@ function gerenciarMateriasConteudo() {
         var periodoMateriaSplit = periodoMateria[x].split(";");
         todosOsPeriodosRecebidos.push(periodoMateriaSplit[1]);
     }
-    // console.log(todosOsPeriodosRecebidos);
-
     // tirar os duplicados pra ver os períodos que tem
     var periodosQueTem = todosOsPeriodosRecebidos.filter(function (este, i) {
         return todosOsPeriodosRecebidos.indexOf(este) === i;
     });
-    // console.log(periodosQueTem);
-
     adicionaPeriodos(periodosQueTem);
     function adicionaPeriodos(periodosQueTem) {
         var periodosQueTemOrdenados = periodosQueTem.sort();
 
         for (var x = 0; x < periodosQueTem.length; x++) {
-            // console.log(periodosQueTem);
             var criaTextoDoBody = document.createElement("p");
             var criaDivBody = document.createElement("div");
             var criaDivHeader = document.createElement("div");
             var nomeDoCriaLi = ("criaLi" + periodosQueTemOrdenados[x]);
-            // console.log(nomeDoCriaLi);
             nomeDoCriaLi = document.createElement("li");
             criaDivBody.setAttribute("class", "collapsible-body row");
             criaDivBody.setAttribute("id", periodosQueTemOrdenados[x]);
@@ -628,21 +563,17 @@ function gerenciarMateriasConteudo() {
     criaLinhasDeMaterias(periodosQueTem, periodoMateria);
     function criaLinhasDeMaterias(periodosQueTem, periodoMateria) {
         periodoMateria.sort();
-        // console.log(periodoMateria);
         for (var x = 0; x < periodoMateria.length; x++) {
             // Pegar nome da matéria
             var periodoMateriaSplit = periodoMateria[x].split(";");
             var materia = periodoMateriaSplit[0];
             var periodo = periodoMateriaSplit[1];
-            // console.log(materia);
 
             var criaNomeMateria = document.createElement("span");
             var criaLi = document.createElement("li");
             var nomeDoCriaLabel = ("criaLabel" + [x]);
-            // console.log(nomeDoCriaLabel);
             nomeDoCriaLabel = document.createElement("label");
             var nomeDoCriaInput = ("criaInput" + [x]);
-            // console.log(nomeDoCriaInput);
             nomeDoCriaInput = document.createElement("input");
             criaNomeMateria.appendChild(document.createTextNode(materia));
             criaLi.append(criaNomeMateria);
@@ -654,7 +585,6 @@ function gerenciarMateriasConteudo() {
             nomeDoCriaInput.setAttribute("name", materia);
             $(".adicionar-materias div.box-padrao .row > ul.collapsible  li").find("div.collapsible-body").each(function () {
                 if (this.id === periodo) {
-                    // console.log(this.id);
                     this.append(nomeDoCriaInput);
                     this.append(nomeDoCriaLabel);
                 }
@@ -665,9 +595,7 @@ function gerenciarMateriasConteudo() {
 
     var todosOsCheckBox = $("input[type='checkbox']");
     todosOsCheckBox.each(function () {
-        // console.log($(this).attr('name'));
         var temNoArrayDeMateriasOuNao = materias.indexOf($(this).attr('name'));
-        // console.log(temNoArrayDeMateriasOuNao);
         if (temNoArrayDeMateriasOuNao === -1) {
             // console.log("se entrou aqui é pq n tem a materia cadastrada");
         } else {
@@ -685,8 +613,9 @@ function gerenciarMateriasConteudo() {
 $(document).on("change", "input[type='checkbox']", atualizaMaterias);
 
 function atualizaMaterias() {
+    // clona o vetor de materias.
     novoVetorDeMaterias = materias.slice(0);
-    // console.log(novoVetorDeMaterias);
+
     if (this.checked) {
         // console.log($(this).attr('name'));
         // verifica se já tem a matéria no array de matérias, se não tiver, adiciona ela com ajax.
@@ -921,18 +850,29 @@ $("#btn-submeter-postagem").click(function (evento) {
     var conteudoDaPostagem = editor.getValue();
     var qualMateria = $(".fundo-checked").children().text();
     var nomeDoUsuario = $("#id-usuario").text();
-    var quantosCaracteres = conteudoDaPostagem.split("");
-    
+
+    var quantosCaracteresPostagem = conteudoDaPostagem.split("");
+    var quantosCaracteresAssunto = assunto.split("");
+
+    var assuntoTamanho = quantosCaracteresAssunto.length;
+    console.log(assuntoTamanho);
+    var postagemTamanho = quantosCaracteresPostagem.length;
+    console.log(postagemTamanho);
+
     var testaAssunto = testaPost(assunto);
-    if (testaAssunto && linguagem != 'selecione a linguagem' && quantosCaracteres.length >= 50) {
+    if (testaAssunto && linguagem != 'selecione a linguagem' && postagemTamanho >= 50 && (assuntoTamanho <= 20 && assuntoTamanho >= 5)) {
         adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMateria, nomeDoUsuario);
         $('#modal1').modal('close');
     } else {
         if (testaAssunto == false) {
             Materialize.toast('Preencha o assunto da postagem corretamente', 6000, 'red');
+        } else if (assuntoTamanho > 20) {
+            Materialize.toast('Você não pode postar um assunto tão extenso, resuma o mesmo!', 6000, 'red');
+        } else if (assuntoTamanho < 5) {
+            Materialize.toast('Você não pode postar um assunto tão pequeno, explique mais!', 6000, 'red');
         } else if (linguagem == 'selecione a linguagem') {
             Materialize.toast('Selecione a linguagem do código', 6000, 'red');
-        } else if (quantosCaracteres.length < 50) {
+        } else if (postagemTamanho < 50) {
             Materialize.toast('Você não pode postar um código tão pequeno, aproveite o espaço!', 6000, 'red');
         } else {
             Materialize.toast('Erro ao adicionar postagem, contate um adiministrador', 6000, 'red');
