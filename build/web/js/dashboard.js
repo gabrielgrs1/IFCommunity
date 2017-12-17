@@ -197,16 +197,16 @@ $('select').material_select('destroy');
 function MontaCondicoesBotaoModal(TextoValidacao) {
     // Esta variável TextoValidacao é uma flag, pra saber se deixa ou nao visivel o botao do modal
     //Monta Array com "Minhas matérias e com as matérias em que o usuário está inscrito.
-    var StringQueNãoEscondemOBotaoDePublicacao = [];
+    var StringQueNaoEscondemOBotaoDePublicacao = [];
     // Clona o vetor que tem a lista de matérias cadastradas
-    StringQueNãoEscondemOBotaoDePublicacao = materias.slice(0);
+    StringQueNaoEscondemOBotaoDePublicacao = materias.slice(0);
     //Agora chama a função do botão passando como argumento o array de nomes.
-    apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao);
+    apareceBotaoAbrirModal(TextoValidacao, StringQueNaoEscondemOBotaoDePublicacao);
 }
 
-function apareceBotaoAbrirModal(TextoValidacao, StringQueNãoEscondemOBotaoDePublicacao) {
+function apareceBotaoAbrirModal(TextoValidacao, StringQueNaoEscondemOBotaoDePublicacao) {
     // Verifica se o array tem a String do botão clicado.
-    if (StringQueNãoEscondemOBotaoDePublicacao.includes(TextoValidacao)) {
+    if (StringQueNaoEscondemOBotaoDePublicacao.includes(TextoValidacao)) {
         $(".botao-modal").show();
     } else {
         $(".botao-modal").hide();
@@ -931,9 +931,3 @@ function adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMat
                 }
             });
 }
-
-$(document).ready(function () {
-    $('.scrollspy').scrollSpy(function () {
-        console.log("teste");
-    });
-});
