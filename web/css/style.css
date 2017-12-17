@@ -361,6 +361,10 @@ p {
     color: #fff;
 }
 
+#body-principal section.minhas-materias > ul.collapsible li div.collapsible-header > ul.container {
+    max-width: 100%!important;
+}
+
 #body-principal .modal-content {
     position: relative!important;
 }
