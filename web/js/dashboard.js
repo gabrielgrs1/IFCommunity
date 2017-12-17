@@ -922,12 +922,10 @@ $("#btn-submeter-postagem").click(function (evento) {
     var conteudoDaPostagem = editor.getValue();
     var qualMateria = $(".fundo-checked").children().text();
     var nomeDoUsuario = $("#id-usuario").text();
-
-    var quantasLinhas = editor.session.getLength();
+    var quantosCaracteres = conteudoDaPostagem.split("");
+    
     var testaAssunto = testaPost(assunto);
-    var form_changed = false;
-    if (testaAssunto && linguagem != 'selecione a linguagem' && quantasLinhas >= 3) {
-        form_changed = false;
+    if (testaAssunto && linguagem != 'selecione a linguagem' && quantosCaracteres.length >= 50) {
         adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMateria, nomeDoUsuario);
         $('#modal1').modal('close');
     } else {
@@ -935,7 +933,7 @@ $("#btn-submeter-postagem").click(function (evento) {
             Materialize.toast('Preencha o assunto da postagem corretamente', 6000, 'red');
         } else if (linguagem == 'selecione a linguagem') {
             Materialize.toast('Selecione a linguagem do código', 6000, 'red');
-        } else if (quantasLinhas < 3) {
+        } else if (quantosCaracteres.length < 50) {
             Materialize.toast('Você não pode postar um código tão pequeno, aproveite o espaço!', 6000, 'red');
         } else {
             Materialize.toast('Erro ao adicionar postagem, contate um adiministrador', 6000, 'red');
