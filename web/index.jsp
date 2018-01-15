@@ -131,7 +131,7 @@
                                 <div class="row">
                                     <div class='input-field col s12'>
                                         <input class='validate' type='text' name='nome' id='nome' minlength="3" maxlength="60" required/>
-                                        <label id="nome-cadastro" for='nome'>Nome Completo*</label>
+                                        <label id="nome-cadastro" for='nome'>Nome Completo *</label>
                                         <span id="erro-nome" class="erro-span"></span>
                                     </div>
 
@@ -205,6 +205,6 @@
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Login JS -->
-        <script src="js/login.js"></script>
+        <script src="js/login.min.js"></script>
     </body>
 </html>

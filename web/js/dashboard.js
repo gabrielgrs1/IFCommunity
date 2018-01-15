@@ -502,13 +502,16 @@ function retornaMaterias() {
     $.ajax({
         url: "RecuperaMateriasTelaAdicionar",
         type: 'post',
+		timeout: 6000,
         beforeSend: function () {
             $("#section-materias #div-loading").slideDown(500);
         }
     })
             .done(function (materiasJSON) {
-                $("#section-materias #div-loading").hide();
+                $("#section-materias #div-loading").slideUp(500);
                 periodoMateria = [];
+				
+				$(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
                 for (var i = 0; i < materiasJSON.length; i++) {
                     periodoMateria.push(materiasJSON[i]);
                 }
@@ -517,7 +520,9 @@ function retornaMaterias() {
 
             })
             .fail(function (jqXHR, textStatus, postagem) {
-                $("#div-loading").hide();
+                $("#section-materias #div-loading").slideUp(500);
+				Materialize.Toast.removeAll();
+                Materialize.toast('Erro ao recuperar matérias, contate um administrador!', 6500, 'red');
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
@@ -931,3 +936,7 @@ function adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMat
                 }
             });
 }
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+// Página de ajuda
+
+$('ul.tabs').tabs();

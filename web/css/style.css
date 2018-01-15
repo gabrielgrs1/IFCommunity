@@ -110,16 +110,16 @@ body {
     letter-spacing: 0.1em;
 }
 
+#body-login #form-cadastro h3 {
+    letter-spacing: 0.05em;
+}
+
 #body-login #form-cadastro-2 h3 {
     line-height: 100%;
     text-transform: uppercase;
     white-space: nowrap;
-    font-size: 2.55em;
+    font-size: 2.35em;
     letter-spacing: 0;
-}
-
-#body-login #form-cadastro h3 {
-    letter-spacing: 0.05em;
 }
 
 #body-login h2 {
@@ -254,6 +254,7 @@ h4 {
     font-size: 14px;
     position: absolute;
     color: #78909c;
+	left: 2%!important;
 }
 
 #body-login #requisito-senha-1 {}
@@ -277,10 +278,6 @@ h4 {
 #body-login #form-cadastro-2 h3,
 #body-login #form-cadastro h3 {
     margin: 1.46rem 0 0 0;
-}
-
-#body-login #form-cadastro-2 h3 {
-    font-size: 2.35em;
 }
 
 /*-----------------------------------------------------*/
@@ -386,7 +383,7 @@ p {
 
 
 #body-principal main > section.minhas-materias .setinha-indicadora:before {
-    content: "\25B2 "!important;
+    content: "\25BC"!important;
     color: #486a86;
     line-height: 40px;
     webkit-transition: width 2s;
@@ -395,7 +392,7 @@ p {
 }
 
 #body-principal main > section.minhas-materias .active .setinha-indicadora:before {
-    content: "\25BC"!important;
+    content: "\25B2"!important;
 }
 
 [type="checkbox"]:not(:checked) + label,
@@ -1055,8 +1052,8 @@ body-principal .box-padrao h4 {
 }
 
 #body-principal .page-footer {
-    color: #000!important;
-    background-color: #cccece!important;
+    color: #444!important;
+    background-color: #e0e4e4 !important
 }
 
 #body-principal .grey-text {
@@ -1099,3 +1096,77 @@ body-principal .box-padrao h4 {
 #body-principal #modal-buscar a i{
     font-size: 2.3rem;
 }
+
+#body-principal #pega-mais-postagens{
+	display: none;
+}
+
+#body-principal .ajuda {
+    color: #000!important;
+}
+
+#body-principal .ajuda #section-ajuda > ul {
+    margin: 0px!important;
+    padding: 0px!important;
+}
+
+#body-principal .ajuda #section-ajuda > ul li {
+    width: auto;
+}
+
+#body-principal .ajuda #section-ajuda > ul > li > div.collapsible-body{
+    margin: 0px!important;
+    padding: 0px!important;
+}
+
+#body-principal .ajuda #section-ajuda > ul > li > div.collapsible-body div.col {
+    /*min-height: 200px!important;
+    text-align: justify;
+    text-justify: inter-word;*/
+	padding: 20px!important;
+    font-size: 0.7em;
+    background-color: #f5f5f5;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+/*
+#body-principal .ajuda .tabs {
+	overflow-x: hidden!important;
+}*/
+
+#body-principal .ajuda #section-ajuda > ul > li > div.collapsible-body  ul::-webkit-scrollbar { 
+height: 4px;
+}
+
+
+#body-principal .tabs .tab a:hover, .tabs .tab a.active{
+	color: #486a86!important;
+}
+
+.tabs .tab a.active {
+	font-weight: bold;
+}
+
+#body-principal .tabs .tab a {
+	color: #486a868a;
+}
+
+#body-principal .tabs .indicator {
+	background-color: #5384ad!important;
+}
+
+#body-principal .collapsible-header {
+	line-height: 1;
+    padding: 1rem;
+    background-color: #fff;
+    border-bottom: 0.1px solid #ddd;
+	text-transform: uppercase;
+    font-size: 0.9em;
+}	
+
+#body-principal #form-perfil {
+	margin-bottom: 0!important;
+	margin-top: 0!important;
+}
+
+@media only screen and (min-width: 993px){.row .col.offset-l2 {margin-left: 8.666667%;}}

@@ -86,6 +86,8 @@
                                     <label for="icon_telephone">Celular</label>
                                     <span id="erro-telefone-perfil-dashboard" class="erro-span"></span>
                                 </div>
+							</div>
+							<div class="row" id="form-perfil">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">mail</i>
                                     <input id="email" type="email" class="validate email-perfil-dashboard" value="${email}">
@@ -159,6 +161,48 @@
                     </div>
                 </div>
             </div>
+			
+			<section class="postagens ajuda">
+                <div id="section-ajuda" class="box-padrao">
+                    <h3>Ajuda</h3>
+                    <ul class="collapsible col s12" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Perfil</div>
+                            <div class="collapsible-body">
+                                <ul id="tabs-perfil" class="tabs">
+                                    <li class="tab col s3"><a class="active" href="#perfil-1">O que posso editar no meu perfil</a></li>
+                                </ul>
+                                <div id="perfil-1" class="col s12">&bull; Existem campos editáveis no perfil e outros não. <br><br>&bull; Os campos editáveis podem ser atualizados, os não editáveis só podem ser atualizados com o contato direto com os administradores.</div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Menu minhas matérias</div>
+                            <div class="collapsible-body">
+                                <ul id="tabs-cadastrar" class="tabs">
+                                    <li class="tab col s3"><a class="active" href="#cadastrar-1">Como cadastrar nos murais</a></li>
+                                    <li class="tab col s3"><a href="#cadastrar-2">Como visualizar postagens</a></li>
+                                    <li class="tab col s3"><a href="#cadastrar-3">Como contribuir com o mural</a></li>
+                                </ul>
+                                <div id="cadastrar-1" class="col s12">&bull; Todo novo usuário começa sem matéria cadastrada.<br><br>&bull; Para cadastrar se cadastrar em alguma matéria deve-se clicar no menu "Gerenciar matérias" ou no sub-menu do menu de "Minhas matérias" onde aparece "Você ainda não tem nenhuma matérias cadastrada".</div>
+                                <div id="cadastrar-2" class="col s12">&bull; A partir do momento em que o usuário está cadastrado em uma matéria, ele tem acesso ao mural de postagens com as contribuições dos outros usuários.<br><br>&bull; Basta procurar um tema de interesse e clicar sobre a postagem que ela se expandirá. <strong>As postagens não são editáveis</strong>.</div>
+                                <div id="cadastrar-3" class="col s12">&bull; Todo usuário que está cadastrado na matéria pode contribuir com o mural da matéria. <br><br>&bull; É necessário que o aluno acesse a matéria em que deseja postar algo e clique no botão localizado no canto inferior direito de cada mural. <br><br>&bull; É importante lembrar que celulares e tablets só tem permissão para acessar o sistema como leitores, assim não podendo postar nada. <strong>Essa decisão foi tomada por questão de usabilidade</strong>.</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Menu gerenciar matérias</div>
+                            <div class="collapsible-body">
+                                <ul id="tabs-gerenciar" class="tabs">
+                                    <li class="tab col s3"><a class="active" href="#gerenciar-1">Cadastrando nas matérias</a></li>
+                                    <li class="tab col s3"><a href="#gerenciar-2">Limite de matérias cadastradas</a></li>
+                                    <li class="tab col s3"><a href="#gerenciar-3">Inclusão e exclusão de matérias</a></li>
+                                </ul>
+                                <div id="gerenciar-1" class="col s12">&bull; Todo novo usuário começa com nenhuma matéria cadastrada por padrão.<br><br> &bull; Ao acessar o menu "Gerenciar matérias", o usuário encontrará um menu com os períodos disponíveis no curso do mesmo e as respectivas matérias de cada período.<br><br> &bull; O usuário é livre para cadastrar em qualquer matéria disponível no menu, com um limite de sete cadastros simultâneos.</div>
+                                <div id="gerenciar-2" class="col s12">&bull; Cada usuário pode estar cadastrado simultaneamente em até sete murais de matérias.</div>
+                                <div id="gerenciar-3" class="col s12">&bull; As matérias em que o usuário estiver cadastrado estarão com um checked neste menu, o contrário significa o não cadastro. <br><br> &bull; O mesmo é livre para cadastrar e remover algum mural a qualquer momento, perdendo apendas, enquanto não estiver cadastrado, o privilégio de postar e ter acesso à matéria não cadastrada.</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
 
             <!-- aqui é o loader que exibe enquanto carrega algo !--> 
             <div class="preloader-wrapper big active">
@@ -249,7 +293,7 @@
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Dashboard JS -->
-        <script src="js/dashboard.js"></script>
+        <script src="js/dashboard.min.js"></script>
 
     </body>
 
