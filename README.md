@@ -8,3 +8,4 @@ Solução criada pensando em uma rede universitária onde os alunos podem compar
 # Autores
 * **Gabriel Guilherme** - *Back-End/DBA/Front-end(Login)/Requests(Dashboard)* - [gabrielgrs1](https://github.com/gabrielgrs1)
 * **Matheus Alexander** - *Front-End(Dashboard)* - [MMarafelli](https://github.com/MMarafelli)
+* **Felipe Augusto** - *Front-End* - [Felipears](https://github.com/Felipears)
