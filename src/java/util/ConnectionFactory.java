@@ -11,7 +11,6 @@ public class ConnectionFactory {
     public static Connection getConnection() {
     System.out.println("Conectando ao banco");
     try {
-            //Class.forName("com.mysql.jdbc.Driver");
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             return DriverManager.getConnection("jdbc:mysql://localhost/integrador2", "root", "");
             } catch(SQLException e) {
