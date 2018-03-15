@@ -289,11 +289,11 @@
         <!-- Import Materialize JS -->
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <!-- Import Ace  JS -->      
-        <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/editor/ace.js" type="text/javascript" charset="utf-8"></script>
         <!-- Import jQuery Mask JS -->
         <script src="js/jquery.mask.min.js"></script>
         <!-- Import Dashboard JS -->
-        <script src="js/dashboard.min.js"></script>
+        <script src="js/dashboard.js"></script>
 
     </body>
 
