@@ -28,7 +28,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>IFCommunity | Dashboard</title>
         <!-- Import Materialize CSS -->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
         <!-- Import Material Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Import Style CSS -->
@@ -285,16 +285,15 @@
 
 
         <!-- Import jQuery -->
-        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <!-- Import Materialize JS -->
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <!-- Import Ace  JS -->      
         <script src="js/editor/ace.js" type="text/javascript" charset="utf-8"></script>
         <!-- Import jQuery Mask JS -->
-        <script src="js/jquery.mask.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
         <!-- Import Dashboard JS -->
         <script src="js/dashboard.js"></script>
-
     </body>
 
 </html>
