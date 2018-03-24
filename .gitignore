@@ -210,3 +210,4 @@ nbactions.xml
 
 
 # End of https://www.gitignore.io/api/eclipse,netbeans,intellij,intellij+all,intellij+iml
+/src/java/Criptografia/

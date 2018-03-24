@@ -1,7 +1,11 @@
 package model;
 // classe principal
+
+import Criptografia.Cript;
+import Criptografia.Desencrip;
+
 public class Usuario {
-    
+
     private int id;
     private int idAluno;
     private String usuario;
@@ -12,7 +16,7 @@ public class Usuario {
 
     public Usuario() {
     }
-    
+
 // Getters
     public int getId() {
         return id;
@@ -27,6 +31,9 @@ public class Usuario {
     }
 
     public String getSenha() {
+        Desencrip desencrip = new Desencrip(senha);
+        senha = desencrip.desencript();
+        System.out.println(senha + " volta");
         return senha;
     }
 
@@ -41,7 +48,7 @@ public class Usuario {
     public int getPremissao() {
         return premissao;
     }
-    
+
 // Setters    
     public void setId(int id) {
         this.id = id;
@@ -56,7 +63,9 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        Cript crip = new Cript(senha);
+        this.senha = crip.montaEncrip();
+        System.out.println(senha + " ida");
     }
 
     public void setEmail(String email) {
@@ -70,5 +79,5 @@ public class Usuario {
     public void setPremissao(int premissao) {
         this.premissao = premissao;
     }
-    
+
 }

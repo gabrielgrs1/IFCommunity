@@ -1,5 +1,6 @@
 package controller;
 
+import Criptografia.Desencrip;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +20,17 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-
         String erros = "";
+        String Senha = "";
+        String concat = "";
         try {
-            erros = AlunoDAO.verificaLoginSenha(login, senha);
+            // Aqui é passado a senha da tela e retornado erro de senha e senha do banco concatenadas.
+            concat = AlunoDAO.verificaLoginSenha(login, senha);
+            String splitado[] = new String[3];
+            splitado = concat.split("®");
+            erros = splitado[0];
+            senha = splitado[1];
+            
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
