@@ -31,9 +31,6 @@ public class Usuario {
     }
 
     public String getSenha() {
-        Desencrip desencrip = new Desencrip(senha);
-        senha = desencrip.desencript();
-        System.out.println(senha + " volta");
         return senha;
     }
 
@@ -63,9 +60,6 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        Cript crip = new Cript(senha);
-        this.senha = crip.montaEncrip();
-        System.out.println(senha + " ida");
     }
 
     public void setEmail(String email) {

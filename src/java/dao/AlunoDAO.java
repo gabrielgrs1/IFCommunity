@@ -8,9 +8,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.*;
 
 import util.ConnectionFactory;
 import model.Aluno;
+import regex.Regex;
 
 public class AlunoDAO {
 
@@ -114,14 +116,12 @@ public class AlunoDAO {
         if (rs.next()) {
             erros += "Matricula já cadastrada!";
         }
-        
-        // Verifica se a senha tem no máximo 25 caracteres.
-        char [] Senha = senha.toCharArray();
-        if(Senha.length > 25){
-            erros += "Senha excede o tamanho máximo!";
-        }
-        
 
+        // Verifica erros de regex na senha.
+        Regex regex = new Regex();
+        regex.setSenha(senha);
+        erros += regex.getErrosSenha();
+                
         // Fecha conexao con.close(); 
         con.close();
 
