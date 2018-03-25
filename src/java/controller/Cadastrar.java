@@ -35,6 +35,8 @@ public class Cadastrar extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // O comando abaixo ajusta os caracteres especiais.
+        request.setCharacterEncoding("UTF-8");
         String nome = request.getParameter("nome"),
                 telefone = request.getParameter("telefone"),
                 matricula = request.getParameter("matricula"),

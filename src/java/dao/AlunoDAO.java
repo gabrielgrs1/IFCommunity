@@ -1,8 +1,11 @@
 package dao;
 
+import Criptografia.Cript;
+import Criptografia.Desencrip;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -111,6 +114,13 @@ public class AlunoDAO {
         if (rs.next()) {
             erros += "Matricula já cadastrada!";
         }
+        
+        // Verifica se a senha tem no máximo 25 caracteres.
+        char [] Senha = senha.toCharArray();
+        if(Senha.length > 25){
+            erros += "Senha excede o tamanho máximo!";
+        }
+        
 
         // Fecha conexao con.close(); 
         con.close();
@@ -160,6 +170,9 @@ public class AlunoDAO {
         // Passa os parametros da consulta pra cada ? dentro da String sql
         pstm.setInt(1, idTabela);
         pstm.setString(2, login);
+        // Tratamento da senha para criptografia
+        Cript cript = new Cript(senha);
+        senha = cript.montaEncrip();
         pstm.setString(3, senha);
         pstm.setString(4, email);
         pstm.setInt(5, 0);
@@ -293,6 +306,7 @@ public class AlunoDAO {
         ResultSet rs;
         Connection con = ConnectionFactory.getConnection();
         String erros = "";
+        String Senha = "";
 
         /* Comando SQL que será enviado ao banco */
         String sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ?";
@@ -303,33 +317,31 @@ public class AlunoDAO {
 
         /* Executa a query e armazena o resultado na variavel rs */
         rs = pstm.executeQuery();
-
+        ResultSetMetaData rsmd = rs.getMetaData();
         if (!rs.next()) {
             erros = "Usuário incorreto!";
+            String concat = erros + "®" + " ";
+            con.close();
+            return concat;
         }
 
         if (erros.isEmpty()) {
-            /* Comando SQL que será enviado ao banco */
-            sql = "SELECT * FROM TB_USUARIO WHERE USUARIO = ? AND SENHA = ?";
 
-            /* Prepara a consulta e passa os parametros */
-            pstm = con.prepareStatement(sql);
-            pstm.setString(1, login);
-            pstm.setString(2, senha);
+            String columnValue = rs.getString("SENHA");
+            Desencrip desencrip = new Desencrip(columnValue);
+            String SenhaDoBanco = desencrip.desencript();
 
-            /* Executa a query e armazena o resultado na variavel rs */
-            rs = pstm.executeQuery();
-
-            /* Instancia um novo aluno para dar de retorno da função */
-            if (!rs.next()) {
+            if (!senha.equals(SenhaDoBanco)) {
                 erros = "Senha incorreta!";
             }
         }
 
+        Senha = rs.getString("SENHA");
+        String concat = erros + "®" + Senha;
         /* Fecha a conexão */
         con.close();
 
-        return erros;
+        return concat;
     }
 
     public static void main(String[] args) throws SQLException {

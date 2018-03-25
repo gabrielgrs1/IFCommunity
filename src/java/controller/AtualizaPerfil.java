@@ -29,7 +29,6 @@ public class AtualizaPerfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String id = request.getParameter("id");
-        System.out.println(id);
         
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");

@@ -189,7 +189,7 @@ function exibeRequisitosSenha() {
             }
 
             // Valida segundo requisito de senha
-            if (/[$@$!%*?&]/.test($("#senha-cadastro").val())) {
+            if (/[$@$!%*?&+-]/.test($("#senha-cadastro").val())) {
                 $("#requisito-senha-2").addClass("cor-verde");
             } else {
                 $("#requisito-senha-2").removeClass("cor-verde");

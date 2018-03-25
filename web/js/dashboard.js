@@ -765,7 +765,7 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
         timeout: 12000,
         data: {
             id: id,
-            nome: nome,
+            nome:  nome,
             telefone: telefone,
             email: email
         },
@@ -804,7 +804,7 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
 
 // Parte que valida o formulário de perfil
 
-validacaoFormulario(".nome-perfil-dashboard", "#erro-nome-perfil-dashboard", /^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]+$/i, "Informe um nome válido!");
+validacaoFormulario(".nome-perfil-dashboard", "#erro-nome-perfil-dashboard", /^[a-záàâãéèêíïóôõöúçñ ]{3,}[a-záàâãéèêíïóôõöúçñ \s]+$/i, "Informe um nome válido!");
 validacaoFormulario(".telefone-perfil-dashboard", "#erro-telefone-perfil-dashboard", /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/, "Informe um celular válido!");
 validacaoFormulario(".email-perfil-dashboard", "#erro-email-perfil-dashboard", /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/, "Informe um email válido!");
 
@@ -817,10 +817,13 @@ function validacaoFormulario(campo, span, regex, mensagem) {
         } else {
             $(campo).addClass("erro-label-input");
             if (regex.test(this.value) && campo !== "#matricula") {
+                // console.log(this.value);
+                // console.log(regex.test(this.value));
                 $(span).fadeOut(2000);
                 $(campo).addClass("sucesso-label-input");
                 $(campo).removeClass("erro-label-input");
             } else {
+                // console.log(this.value);
                 $(span).text(mensagem);
                 $(span).hide();
                 $(span).fadeIn(500);

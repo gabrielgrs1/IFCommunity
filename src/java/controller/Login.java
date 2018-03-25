@@ -21,7 +21,6 @@ public class Login extends HttpServlet {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String erros = "";
-        String Senha = "";
         String concat = "";
         try {
             // Aqui é passado a senha da tela e retornado erro de senha e senha do banco concatenadas.
