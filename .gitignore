@@ -210,4 +210,7 @@ nbactions.xml
 
 
 # End of https://www.gitignore.io/api/eclipse,netbeans,intellij,intellij+all,intellij+iml
+
+
+# Ignore Cripto
 /src/java/Criptografia/
