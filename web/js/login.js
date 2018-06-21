@@ -7,16 +7,16 @@ function mascarasDosInputs() {
 //Função para exibir animações nos formulários
 function trocaTela(botao, formularioOut, formularioIn, formularioIn2) {
     $(botao).click(
-            function (e) {
-                e.preventDefault();
-                $(formularioOut).fadeOut(300);
-                setTimeout(function () {
+        function (e) {
+            e.preventDefault();
+            $(formularioOut).fadeOut(300);
+            setTimeout(function () {
                     $(formularioIn).fadeIn(300);
                     $(formularioIn2).fadeIn(300);
                 },
-                        300
-                        );
-            }
+                300
+            );
+        }
     );
 }
 
@@ -112,9 +112,9 @@ function verificaCPF(span) {
     soma2 = (((soma2 + (2 * soma1)) * 10) % 11);
 
     if (cpf === "11111111111" || cpf === "22222222222" || cpf ===
-            "33333333333" || cpf === "44444444444" || cpf === "55555555555" || cpf ===
-            "66666666666" || cpf === "77777777777" || cpf === "88888888888" || cpf ===
-            "99999999999" || cpf === "00000000000") {
+        "33333333333" || cpf === "44444444444" || cpf === "55555555555" || cpf ===
+        "66666666666" || cpf === "77777777777" || cpf === "88888888888" || cpf ===
+        "99999999999" || cpf === "00000000000") {
         var digitoGerado = null;
     } else {
         var digitoGerado = (soma1 * 10) + soma2;
@@ -134,44 +134,44 @@ function verificaCPF(span) {
 
 function validacaoFormulario(campo, span, regex, mensagem) {
     $(campo).on("blur", function () {
-		if($(campo).val().length === 0){
-			$(span).text("Campo obrigatório!");
-			$(campo).addClass("erro-label-input");
-			$(span).fadeIn(500);
-		} else {
-			if (regex.test(this.value) && campo !== "#matricula") {
-				$(span).fadeOut(2000);
-				$(campo).addClass("sucesso-label-input");
-				$(campo).removeClass("erro-label-input");
-			} else {
-				$(span).text(mensagem);
-				$(span).hide();
-				$(span).fadeIn(500);
-				$(campo).addClass("erro-label-input");
-				$(campo).removeClass("sucesso-label-input");
-			}
-			
-			if(campo === "#matricula"){
-				if(!verificaCPF() || $(campo).val().length < 11 || !(/^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val()))){
-					$(span).text("Insira uma matrícula valida");
-					$(campo).addClass("erro-label-input");
-					$(campo).removeClass("sucesso-label-input");
-				} else if(verificaCPF() && /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())) {
-					$(span).fadeOut(2000);	
-					$(campo).addClass("sucesso-label-input");
-					$(campo).removeClass("erro-label-input");
-				}					
-			}
+        if ($(campo).val().length === 0) {
+            $(span).text("Campo obrigatório!");
+            $(campo).addClass("erro-label-input");
+            $(span).fadeIn(500);
+        } else {
+            if (regex.test(this.value) && campo !== "#matricula") {
+                $(span).fadeOut(2000);
+                $(campo).addClass("sucesso-label-input");
+                $(campo).removeClass("erro-label-input");
+            } else {
+                $(span).text(mensagem);
+                $(span).hide();
+                $(span).fadeIn(500);
+                $(campo).addClass("erro-label-input");
+                $(campo).removeClass("sucesso-label-input");
+            }
 
-			if (/^[a-záàâãéèêíïóôõöúçñ]{3,}\s[a-záàâãéèêíïóôõöúçñ\s]+$/i.test($("#nome").val())
-					&& /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($("#telefone").val())
-					&& /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())
-					&& verificaCPF()) {
-				$("#btn-cadastrar-proximo").removeClass("disabled");
-			} else {
-				$("#btn-cadastrar-proximo").addClass("disabled");
-			}
-		}
+            if (campo === "#matricula") {
+                if (!verificaCPF() || $(campo).val().length < 11 || !(/^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val()))) {
+                    $(span).text("Insira uma matrícula valida");
+                    $(campo).addClass("erro-label-input");
+                    $(campo).removeClass("sucesso-label-input");
+                } else if (verificaCPF() && /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())) {
+                    $(span).fadeOut(2000);
+                    $(campo).addClass("sucesso-label-input");
+                    $(campo).removeClass("erro-label-input");
+                }
+            }
+
+            if (/^[a-záàâãéèêíïóôõöúçñ]{3,}\s[a-záàâãéèêíïóôõöúçñ\s]+$/i.test($("#nome").val())
+                && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($("#telefone").val())
+                && /^[0-9]{11}-[1-9]{1,}$/.test($("#matricula").val())
+                && verificaCPF()) {
+                $("#btn-cadastrar-proximo").removeClass("disabled");
+            } else {
+                $("#btn-cadastrar-proximo").addClass("disabled");
+            }
+        }
     });
 }
 
@@ -210,6 +210,36 @@ function exibeRequisitosSenha() {
         $("#btn-cadastrar").removeClass("btn-requisito-senha");
     });
 }
+
+
+$("#btn-login").click(function () {
+    const login = $("#login").val();
+    const senha = $("#senha-login").val();
+    $.ajax({
+        url: "https://ifcommunity.herokuapp.com/user/login",
+        type: "POST",
+        contentType: "application/json",
+        crossDomain: true,
+        data: JSON.stringify({
+            "user": login,
+            "password": senha
+        })
+    })
+        .done(function (usuario) {
+            $.session.set("usuario", JSON.stringify(usuario));
+            location.replace("/dashboard.jsp")
+        })
+        .fail(function (jqXHR, textStatus, materia) {
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
+})
+
 
 //Call functions
 $(function () {

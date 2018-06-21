@@ -4,16 +4,37 @@
 $('.telefone-perfil-dashboard').mask('(00) 00009-0000');
 
 /*------------------------------------------------------------------------*/
+
 //Função que mostra o "carregando" na tela.
 function carregando() {
     $(".preloader-wrapper").show();
 }
+
 /*---------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*     DROP DOWN DAS MATERIAS     */
 
 $('li.icon-materias').click(function () {
     $('.minhas-materias-adicionadas').slideToggle(500);
+    closeImgChangeButton();
 });
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*     RECUPERA ÍNDICES     */
+var flagOpenIndices = true;
+$('.perfil .collapsible-header').click(function () {
+    mapDeLinguagens.clear();
+    $('section').scrollTo('.wrapper1');
+    var idGlobal = $('#id-usuario').html();
+    if (flagOpenIndices === true) {
+        $('.pie-chart__legend').empty();
+        pegaIndicesAJAX(idGlobal);
+        flagOpenIndices = false;
+    } else {
+        $('.pie-chart__legend').empty();
+        flagOpenIndices = true;
+    }
+});
+
 
 /*-----------------------------------------------------------------------------*/
 /*    Na escolha da opção no menu substitui a pagina inicial      */
@@ -21,6 +42,7 @@ $('li.icon-materias').click(function () {
 /*    Na escolha da opção no menu substitui a pagina inicial      */
 /*    Esses sinais chevron significam diretamente filhos, para que n pegue o sub-menu como função click tbm */
 $("ul.para-scroll > li").click(function () {
+    closeImgChangeButton();
     $("main > section.minhas-materias").empty();
     $('ul label li').removeClass('fundo-checked');
     //remove a tela que está aparecendo
@@ -36,7 +58,14 @@ $("ul.para-scroll > li").click(function () {
         if (textoDoClique === "Gerenciar matérias") {
             $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
             retornaMaterias();
+        } else if (textoDoClique === "Perfil") {
+            $('.pie-chart__legend').empty();
+            var idGlobal = $('#id-usuario').html();
+            mapDeLinguagens.clear();
+            pegaIndicesAJAX(idGlobal);
         }
+
+
     } else {
         $('.aviso-minhas-materias').show();
     }
@@ -122,33 +151,34 @@ function pegaMateriasComAjax(idUsuario) {
             loading.append(li);
         }
     })
-            .done(function (materia) {
-                loading.empty();
+        .done(function (materia) {
+            loading.empty();
 
-                for (var i = 0; i < materia.length; i++) {
-                    materias.push(materia[i]);
-                }
-                preencheAListaDeMateriasDoMenu();
-                checkedNasMateriasDoMenu();
+            for (var i = 0; i < materia.length; i++) {
+                materias.push(materia[i]);
+            }
+            preencheAListaDeMateriasDoMenu();
+            checkedNasMateriasDoMenu();
 
-            })
-            .fail(function (jqXHR, textStatus, materia) {
-                loading.empty();
-                if (jqXHR["status"] === 500) {
-                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                } else if (jqXHR["status"] === 502) {
-                    console.log("Erro 502, não foi possível estabelecer conexão!");
-                } else if (jqXHR["status"] === 404) {
-                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                }
-                preencheAListaDeMateriasDoMenu();
-            });
+        })
+        .fail(function (jqXHR, textStatus, materia) {
+            loading.empty();
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+            preencheAListaDeMateriasDoMenu();
+        });
 }
 
 /*-----------------------------------------------------------------------------*/
 
 /*           Checked img na matéria (submenu) que está selecionada         */
 /* ela tem que carregar após as matérias serem carregadas para funcionar   */
+
 /* NESSE PONTO QUE PEGA QUAL MATÉRIA ESTAMOS QUERENDO POSTAR               */
 
 function checkedNasMateriasDoMenu() {
@@ -160,6 +190,7 @@ function checkedNasMateriasDoMenu() {
             $(this).next('label').children('li').addClass('fundo-checked');
             qualMateria = $(this).next('label').children('li').children("span").text();
         }
+        closeImgChangeButton();
         limpaCamposPostagem();
         MontaCondicoesBotaoModal(qualMateria);
         abreComBotaoCelular();
@@ -169,15 +200,18 @@ function checkedNasMateriasDoMenu() {
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*    Botão para abrir menu do celular   */
+
 // É em toggle pra não precisar identificar se tá aberto ou não, ele faz o switch da class sozinho.
 function abreComBotaoCelular() {
     $(".nav-side .nav-toggle").parent().toggleClass("nav-open");
+    closeImgChangeButton();
 }
 ;
 
 $(".nav-side .nav-toggle").on("click", function (e) {
     e.preventDefault();
     $(this).parent().toggleClass("nav-open");
+    closeImgChangeButton();
 });
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*              Plugin dos selects                          */
@@ -212,6 +246,7 @@ function apareceBotaoAbrirModal(TextoValidacao, StringQueNaoEscondemOBotaoDePubl
         $(".botao-modal").hide();
     }
 }
+
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*                Modal de publicação                     */
 
@@ -235,10 +270,20 @@ $('#modal-buscar').modal({
     endingTop: '25%' // Ending top style attribute
 });
 
+$('#modal-foto').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .8, // Opacity of modal background
+    inDuration: 400, // Transition in duration
+    outDuration: 250, // Transition out duration
+    startingTop: '90%', // Starting top style attribute
+    endingTop: '25%' // Ending top style attribute
+});
+
 /*-----------------------------------------------------------------------------*/
 // Eventos para escrever o código.
 
 escreverCodigo();
+
 function escreverCodigo() {
     $("#modal-de-escrever-codigo").click(function () {
         // Quando muda o select do modal, adiciona o textarea de acordo com a linguagem escolhida
@@ -265,8 +310,9 @@ function adicionaOsTextAreaModal(text) {
 /*                Highlight dos escritos dos códigos   Ace js                   */
 
 var editor = ace.edit("editor");
-editor.setTheme("ace/theme/twilight");
+editor.setTheme("ace/theme/xcode");
 editor.session.setMode("ace/mode/javascript");
+editor.setShowPrintMargin(false);
 
 function qualLinguagem(text) {
     if (text == 'texto') {
@@ -274,8 +320,9 @@ function qualLinguagem(text) {
     }
     var novoModo = text.toLowerCase();
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/twilight");
+    editor.setTheme("ace/theme/xcode");
     editor.session.setMode("ace/mode/" + novoModo);
+    editor.setShowPrintMargin(false);
 }
 
 function qualLinguagemParaPostagem(text, IDPostagem) {
@@ -285,17 +332,29 @@ function qualLinguagemParaPostagem(text, IDPostagem) {
     }
     var novoModo = text.toLowerCase();
     var editor = ace.edit("editorLeitura" + IDPostagem);
-    editor.setTheme("ace/theme/twilight");
+    editor.setTheme("ace/theme/xcode");
     editor.session.setMode("ace/mode/" + novoModo);
     editor.setReadOnly(true);
+    editor.setShowPrintMargin(false);
 }
 
 /*-----------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 /*                  Postagens colapsadas                   */
 function collapsible() {
     $('.collapsible').collapsible();
 }
+
+function trocaMaxMinBoxPostagens() {
+    $('#body-principal section.minhas-materias > ul.collapsible > li > div.collapsible-header').click(function () {
+        if ($(this).find(".btns > div").is('.max')) {
+            $(this).find(".btns > div").removeClass("max").addClass("min");
+        } else {
+            $(this).find(".btns > div").removeClass("min").addClass("max");
+        }
+    });
+};
 
 /*---------------------------------------------------------*/
 //Função que pega as postagems e armazena em um array
@@ -315,6 +374,7 @@ function collapsible() {
 
 
 var postagens = [];
+
 function pegaPostagensDaMateriaSelecionada() {
     var materia;
     materia = $(".fundo-checked").children().text();
@@ -328,7 +388,6 @@ function pegaPostagensDaMateriaSelecionada() {
         retornaMaterias();
         qualApareceNaTela(".adicionar-materias");
     } else {
-        console.log($("main > section.minhas-materias"))
         $("main > section.minhas-materias").empty();
         pegaPostagens(materia);
     }
@@ -349,32 +408,33 @@ function pegaPostagens(materia, dataUltimaPostagem) {
             carregando();
         }
     })
-            .done(function (postagem) {
-                postagens = [];
-                $("main > section.minhas-materias").empty();
+        .done(function (postagem) {
+            postagens = [];
+            $("main > section.minhas-materias").empty();
 
-                for (var i = 0; i < postagem.length; i++) {
-                    postagens.push(postagem[i]);
-                }
+            for (var i = 0; i < postagem.length; i++) {
+                postagens.push(postagem[i]);
+            }
 
-                $(".preloader-wrapper").hide();
-                montaPostagens(materia);
-            })
-            .fail(function (jqXHR, textStatus, postagem) {
-                Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
-                $(".preloader-wrapper").hide();
-                if (jqXHR["status"] === 500) {
-                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                } else if (jqXHR["status"] === 502) {
-                    console.log("Erro 502, não foi possível estabelecer conexão!");
-                } else if (jqXHR["status"] === 404) {
-                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                }
-            });
+            $(".preloader-wrapper").hide();
+            montaPostagens(materia);
+        })
+        .fail(function (jqXHR, textStatus, postagem) {
+            Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
+            $(".preloader-wrapper").hide();
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
 }
 
 
 /*------------------------------------------------------------------------*/
+
 //Função que prepara o texto da postagem e chama a fução que cria e adiciona na tela
 function montaPostagens(materia) {
     $(".minhas-materias").empty();
@@ -402,6 +462,8 @@ function montaPostagens(materia) {
     } else {
         $(".minhas-materias").append("<button class='btn btn-wave' type='button' id='pega-mais-postagens'>Carregar mais...</button>");
     }
+
+    trocaMaxMinBoxPostagens();
 }
 
 //Função que adiciona a estrutura de postagem
@@ -429,6 +491,7 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     var criaLi = document.createElement("li");
     var criaDivHead = document.createElement("div");
     var criaUlHead = document.createElement("ul");
+    var criaLiBrowse = document.createElement("li");
     var criaLiHead1 = document.createElement("li");
     var criaLiHead2 = document.createElement("li");
     var criaH4Titulo = document.createElement("h4");
@@ -442,8 +505,6 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     var criaADislike = document.createElement("a");
     var criaIDislike = document.createElement("i");
     var criaPDataPostagem = document.createElement("p");
-
-
     criaDivHead.setAttribute("class", "collapsible-header");
     criaH4Titulo.setAttribute("class", "center");
     criaH4Titulo.innerHTML = tituloPostagem;
@@ -466,9 +527,13 @@ function adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPos
     criaDivBotões.setAttribute("id", IDPostagem);
     criaUl.setAttribute("class", "collapsible content-topic z-depth-2 container row");
     criaUl.setAttribute('data-collapsible', "accordion");
+    criaLiBrowse.innerHTML = "<div class='browser'><div class='btns'><div class='max'></div></div></div>";
+
+
     criaLiHead1.append(criaH4Titulo);
     criaLiHead2.append(criaPNome);
     criaLiHead2.append(criaPSeta);
+    criaUlHead.append(criaLiBrowse);
     criaUlHead.append(criaLiHead1);
     criaUlHead.append(criaLiHead2);
     criaDivHead.append(criaUlHead);
@@ -502,35 +567,35 @@ function retornaMaterias() {
     $.ajax({
         url: "RecuperaMateriasTelaAdicionar",
         type: 'post',
-		timeout: 6000,
+        timeout: 6000,
         beforeSend: function () {
-            $("#section-materias #div-loading").slideDown(500);
+            $("#section-materias #div-loading").show();
         }
     })
-            .done(function (materiasJSON) {
-                $("#section-materias #div-loading").slideUp(500);
-                periodoMateria = [];
-				
-				$(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
-                for (var i = 0; i < materiasJSON.length; i++) {
-                    periodoMateria.push(materiasJSON[i]);
-                }
+        .done(function (materiasJSON) {
+            $("#section-materias #div-loading").hide();
+            periodoMateria = [];
 
-                gerenciarMateriasConteudo();
+            $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
+            for (var i = 0; i < materiasJSON.length; i++) {
+                periodoMateria.push(materiasJSON[i]);
+            }
 
-            })
-            .fail(function (jqXHR, textStatus, postagem) {
-                $("#section-materias #div-loading").slideUp(500);
-				Materialize.Toast.removeAll();
-                Materialize.toast('Erro ao recuperar matérias, contate um administrador!', 6500, 'red');
-                if (jqXHR["status"] === 500) {
-                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                } else if (jqXHR["status"] === 502) {
-                    console.log("Erro 502, não foi possível estabelecer conexão!");
-                } else if (jqXHR["status"] === 404) {
-                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                }
-            });
+            gerenciarMateriasConteudo();
+
+        })
+        .fail(function (jqXHR, textStatus, postagem) {
+            $("#section-materias #div-loading").slideUp(500);
+            Materialize.Toast.removeAll();
+            Materialize.toast('Erro ao recuperar matérias, contate um administrador!', 6500, 'red');
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
 }
 
 function gerenciarMateriasConteudo() {
@@ -545,6 +610,7 @@ function gerenciarMateriasConteudo() {
         return todosOsPeriodosRecebidos.indexOf(este) === i;
     });
     adicionaPeriodos(periodosQueTem);
+
     function adicionaPeriodos(periodosQueTem) {
         var periodosQueTemOrdenados = periodosQueTem.sort();
 
@@ -566,6 +632,7 @@ function gerenciarMateriasConteudo() {
 
 
     criaLinhasDeMaterias(periodosQueTem, periodoMateria);
+
     function criaLinhasDeMaterias(periodosQueTem, periodoMateria) {
         periodoMateria.sort();
         for (var x = 0; x < periodoMateria.length; x++) {
@@ -682,32 +749,11 @@ function atualizaMaterias() {
                 // console.log("Atualizando as matérias");
             }
         })
-                .done(function () {
-                    Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
-                    //    console.log("Materias atualizadas com sucesso!");
-                })
-                .fail(function (jqXHR, textStatus, resultado) {
-                    if (jqXHR["status"] === 500) {
-                        console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                    } else if (jqXHR["status"] === 502) {
-                        console.log("Erro 502, não foi possível estabelecer conexão!");
-                    } else if (jqXHR["status"] === 404) {
-                        console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                    }
-                });
-    }
-}
-/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
-//Função que desloga o usuário
-function deslogar() {
-    $.ajax({
-        url: "Deslogar",
-        type: 'get'
-    })
             .done(function () {
-                window.location.href = "index.jsp";
+                Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
+                //    console.log("Materias atualizadas com sucesso!");
             })
-            .fail(function (jqXHR, status, data) {
+            .fail(function (jqXHR, textStatus, resultado) {
                 if (jqXHR["status"] === 500) {
                     console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
                 } else if (jqXHR["status"] === 502) {
@@ -716,6 +762,29 @@ function deslogar() {
                     console.log("Erro 404, não foi encontrado o diretório solicitado!");
                 }
             });
+    }
+}
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+//Função que desloga o usuário
+function deslogar() {
+    $.ajax({
+        url: "Deslogar",
+        type: 'get'
+    })
+        .done(function () {
+            window.location.href = "index.jsp";
+        })
+        .fail(function (jqXHR, status, data) {
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
 }
 
 //Chama a função de deslogar quando clica dentro do item
@@ -765,41 +834,40 @@ function atualizaPerfilAJAX(id, nome, telefone, email) {
         timeout: 12000,
         data: {
             id: id,
-            nome:  nome,
+            nome: nome,
             telefone: telefone,
             email: email
         },
         beforeSend: function () {
             $("#section-perfil #div-loading").slideDown(500);
-            console.log("Atualizando dados do perfil");
         }
     })
-            .done(function (alunoJSON) {
-                $("#section-perfil #div-loading").slideUp(500);
-                console.log(alunoJSON);
+        .done(function (alunoJSON) {
+            $("#section-perfil #div-loading").slideUp(500);
 
-                aluno = [];
-                for (var i = 0; i < alunoJSON.length; i++) {
-                    aluno.push(alunoJSON[i]);
-                }
+            aluno = [];
+            for (var i = 0; i < alunoJSON.length; i++) {
+                aluno.push(alunoJSON[i]);
+            }
 
-                atualizaNomePerfil();
-                Materialize.toast('Perfil atualizado com sucesso!', 2500, 'green');
+            atualizaNomePerfil();
+            Materialize.toast('Perfil atualizado com sucesso!', 2500, 'green');
 
-            })
-            .fail(function (jqXHR, textStatus, postagem) {
-                $("#section-perfil #div-loading").slideUp(500);
-                if (jqXHR["status"] === 500) {
-                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                } else if (jqXHR["status"] === 502) {
-                    console.log("Erro 502, não foi possível estabelecer conexão!");
-                } else if (jqXHR["status"] === 404) {
-                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                }
+        })
+        .fail(function (jqXHR, textStatus, postagem) {
+            $("#section-perfil #div-loading").slideUp(500);
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
 
-                Materialize.toast('Erro ao atualizar o perfil, contate um administrador!', 2500, 'red');
-            });
+            Materialize.toast('Erro ao atualizar o perfil, contate um administrador!', 2500, 'red');
+        });
 }
+
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 // Parte que valida o formulário de perfil
@@ -832,8 +900,8 @@ function validacaoFormulario(campo, span, regex, mensagem) {
             }
 
             if (/^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]+$/i.test($(".nome-perfil-dashboard").val())
-                    && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($(".telefone-perfil-dashboard").val())
-                    && /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test($(".email-perfil-dashboard").val())) {
+                && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($(".telefone-perfil-dashboard").val())
+                && /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test($(".email-perfil-dashboard").val())) {
                 $("#btn-atualizar-perfil").removeClass("disabled");
             } else {
                 $("#btn-atualizar-perfil").addClass("disabled");
@@ -863,9 +931,7 @@ $("#btn-submeter-postagem").click(function (evento) {
     var quantosCaracteresAssunto = assunto.split("");
 
     var assuntoTamanho = quantosCaracteresAssunto.length;
-    console.log(assuntoTamanho);
     var postagemTamanho = quantosCaracteresPostagem.length;
-    console.log(postagemTamanho);
 
     var testaAssunto = testaPost(assunto);
     if (testaAssunto && linguagem != 'selecione a linguagem' && postagemTamanho >= 50 && (assuntoTamanho <= 20 && assuntoTamanho >= 5)) {
@@ -922,24 +988,467 @@ function adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMat
             carregando();
         }
     })
-            .done(function (postagem) {
-                pegaPostagens(qualMateria);
-                limpaCamposPostagem();
-                Materialize.toast('Postagem enviada com sucesso!', 6000, 'green');
-            })
-            .fail(function (jqXHR, textStatus, postagem) {
-                Materialize.toast('Erro ao adicionar postagem, contate um administrador!', 6000, 'red');
-                $(".preloader-wrapper").hide();
-                if (jqXHR["status"] === 500) {
-                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                } else if (jqXHR["status"] === 502) {
-                    console.log("Erro 502, não foi possível estabelecer conexão!");
-                } else if (jqXHR["status"] === 404) {
-                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                }
-            });
+        .done(function (postagem) {
+            pegaPostagens(qualMateria);
+            limpaCamposPostagem();
+            Materialize.toast('Postagem enviada com sucesso!', 6000, 'green');
+        })
+        .fail(function (jqXHR, textStatus, postagem) {
+            Materialize.toast('Erro ao adicionar postagem, contate um administrador!', 6000, 'red');
+            $(".preloader-wrapper").hide();
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
 }
+
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 // Página de ajuda
 
 $('ul.tabs').tabs();
+/*---------------------------------------------------------------------------------------------------------------------------------------------------*/
+// Tratamento de imagem.
+var numFiles = 0;
+var ImageURL = '';
+var landscape = $('.my-image');
+
+$('.avatar').hover(function (e) {
+    e.preventDefault();
+    if (numFiles === 0 && ImageURL === '') {
+        $('#imgChangeButton').show();
+        $('#imgChangeButton').css('visibility', 'visible');
+        $('#btn-save-cncl').hide();
+    }
+});
+
+$('#profileImg').click(function (e) {
+    e.preventDefault();
+    if (numFiles === 0 && ImageURL === '') {
+        $('#imgChangeButton').show();
+        $('#imgChangeButton').css('visibility', 'visible');
+        $('#btn-save-cncl').hide();
+    }
+});
+
+$('#fileUpload').click(function (event) {
+    var target = event.target || event.srcElement;
+    $('#imgChangeButton').text("Escolha a imagem");
+    if (target.value.length === 0) {
+    } else {
+        numFiles = target.files.length;
+    }
+});
+
+$('#fileUpload').change(function (event) {
+    var target = event.target || event.srcElement;
+    if (target.value.length === 0) {
+        if (numFiles === target.files.length) {
+        }
+    } else {
+        var ext = this.value.match(/\.([^\.]+)$/)[1];
+        switch (ext) {
+            case 'jpg':
+            case 'jpeg':
+            case 'bmp':
+            case 'png':
+                imgFormatAccepted(ext);
+                break;
+            default:
+                Materialize.toast('Formato ' + ext + ' de imagem inválido!', 6000, 'red');
+                this.value = '';
+        }
+    }
+
+    function imgFormatAccepted(ext) {
+        numFiles = target.files.length;
+
+        // Trata o nome que a imagem será salva.
+        var userName = $('#login-usuario').html();
+        var imgName = userName + '.' + ext;
+        var imgAnterior = $('#profileImg').attr('src');
+        var fotoAtual = window.URL.createObjectURL(target.files[0]);
+
+        // Muda imagem do perfil para preview
+        landscape.attr('src', fotoAtual);
+        $('.cr-boundary> img').attr('src', landscape.src);
+
+        createCroppie(ext);
+
+        // Mostra os Save/Cancel e o Zoom Slider;
+        $('#imgChangeButton').hide();
+        $('.cr-slider-wrap').show(500);
+        $('#btn-save-cncl').show();
+
+        // Limpa evendo do click pra não rodar mais vezes.
+        $('#imgSaveButton').unbind('click');
+        $('#imgSaveButton').click(function () {
+            closeImgChangeButton();
+            $('div.cr-slider-wrap').hide(500, function () {
+                $('.avatar > .container').empty().append("<img id='profileImg' class='my-image'/>");
+                $('.my-image').attr('src', ImageURL);
+                landscape.croppie('destroy');
+                landscape = $('.my-image');
+                ImageURL = '';
+            });
+
+            // Split the base64 string in data and contentType
+            var block = ImageURL.split(";");
+            // Get the content type of the image
+            var contentType = block[0].split(":")[1];// In this case "image/gif"
+            // get the real base64 content of the file
+            var realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
+            // Convert it to a blob to upload
+            var blob = b64toBlob(realData, contentType);
+            var fotoProBanco = new File([blob], imgName);
+            // Create a FormData and append the file with "image" as parameter name
+            var formDataToUpload = new FormData(fotoProBanco);
+            formDataToUpload.append("image", fotoProBanco);
+            // Envia a nova imagem para o banco.
+            uploadImg(formDataToUpload);
+            //Limpa o input.
+            $('#fileUpload').val('');
+            numFiles = 0;
+        });
+
+        $("#imgCancelButton").unbind('click');
+        $('#imgCancelButton').click(function () {
+            closeImgChangeButton();
+            $('div.cr-slider-wrap').hide(500, function () {
+                // Muda imagem do perfil para a antiga.
+                $('.avatar > .container').empty().append("<img id='profileImg' class='my-image'/>");
+                $('.my-image').attr('src', imgAnterior);
+                landscape.croppie('destroy');
+                landscape = $('.my-image');
+                $('#fileUpload').val('');
+                numFiles = 0;
+                ImageURL = '';
+            });
+        });
+    }
+});
+
+// Fechar botão de upar img;
+$('.site-content').hover(function (event) {
+    event.preventDefault();
+    if (numFiles === 0 && ImageURL === '') {
+        closeImgChangeButton();
+    }
+});
+
+// Fechar botão de upar img;
+$('html').click(function (e) {
+    if (!$(e.target).hasClass('.avatar')) {
+        if (numFiles === 0 && ImageURL === '') {
+            closeImgChangeButton();
+        }
+    }
+});
+
+function closeImgChangeButton() {
+    $('#imgChangeButton').show();
+    $('#btn-save-cncl').hide();
+    $('#imgChangeButton').css('visibility', 'hidden');
+}
+
+function uploadImg(form) {
+    $.ajax({
+        url: 'UpdateImagem', // Url do lado server que vai receber o arquivo
+        data: form,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 12000,
+        type: 'POST',
+        beforeSend: function () {
+            carregando();
+        }
+    })
+        .done(function () {
+            $(".preloader-wrapper").hide();
+            Materialize.toast('Foto enviada com sucesso!', 6000, 'green');
+        })
+        .fail(function (jqXHR) {
+            Materialize.toast('Erro ao adicionar foto, contate um administrador!', 6000, 'red');
+            $(".preloader-wrapper").hide();
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
+}
+
+function createCroppie(extention) {
+    landscape.croppie({
+        enforceBoundary: false,
+        viewport: {//visible part of the cropped img
+            width: 200,
+            height: 200
+        },
+        boundary: {
+            width: 200,
+            height: 200
+        },
+        update: function (croppie) {
+            // console.log('croppie updated avatar: ', croppie);
+            landscape.croppie('result', {
+                circle: false,
+                format: extention,
+                quality: 1,
+                type: 'canvas'
+            }).then(function (resp) {
+                // console.log("result = ", resp);
+                // landscapeLiveResultbox.attr('src', resp);
+                ImageURL = resp;
+            });
+        }
+    });
+}
+;
+
+
+function b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+}
+;
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------*/
+// Recupera indices
+
+var mapDeLinguagens = new Map();
+var flagLing = false;
+var flagRep = false;
+var flagComPost = false;
+
+
+function pegaIndicesAJAX(id) {
+    Materialize.Toast.removeAll();
+
+    $.ajax({
+        url: "RecuperarIndices",
+        type: 'get',
+        timeout: 8000,
+        data: {
+            id: id
+        },
+        beforeSend: function () {
+            carregando();
+        }
+    })
+        .done(function (resultados) {
+            $(".preloader-wrapper").hide();
+            var resultadoIndices = [];
+
+            for (var i = 0; i < resultados.length; i++) {
+                resultadoIndices.push(resultados[i]);
+            }
+
+            preencheGraficos(resultadoIndices);
+
+        })
+        .fail(function (jqXHR, textStatus, resultados) {
+            Materialize.toast('Erro ao recuperar índices, contate um administrador!', 6000, 'red');
+            $(".preloader-wrapper").hide();
+            if (jqXHR["status"] === 500) {
+                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+            } else if (jqXHR["status"] === 502) {
+                console.log("Erro 502, não foi possível estabelecer conexão!");
+            } else if (jqXHR["status"] === 404) {
+                console.log("Erro 404, não foi encontrado o diretório solicitado!");
+            }
+        });
+}
+
+function preencheGraficos(resultadoIndices) {
+    $('.pieID--linguagens .pie-chart__legend').empty();
+
+    for (var x = 0; x < resultadoIndices.length; x++) {
+        var postouQualLinguagem = resultadoIndices[x]["postouQualLinguagem"];
+        var postouQuantos = resultadoIndices[x]["postouQuantos"];
+        var quantosDeslikes = resultadoIndices[x]["quantosDeslikes"];
+        var quantosLikes = resultadoIndices[x]["quantosLikes"];
+        var reputacao = resultadoIndices[x]["reputacao"];
+        var postouQualMateria = resultadoIndices[x]["postouQualMateria"];
+        montaDadosGrafico(postouQualLinguagem, postouQuantos, quantosLikes, quantosDeslikes, reputacao, postouQualMateria);
+    }
+    montaGraficosTela();
+    createPieCharts();
+}
+
+function montaDadosGrafico(postouQualLinguagem, postouQuantos, quantosLikes, quantosDeslikes, reputacao, postouQualMateria) {
+
+    if (postouQualLinguagem === "none") {
+        $('.pieID--linguagens').hide();
+        flagLing = false;
+    } else {
+        flagLing = true;
+        postouQualLinguagem = postouQualLinguagem.split(",");
+        if (mapDeLinguagens.has(postouQualLinguagem[0])) {
+            var quantos = mapDeLinguagens.get(postouQualLinguagem[0]);
+            mapDeLinguagens.delete(postouQualLinguagem[0]);
+            quantos = parseInt(quantos) + parseInt(postouQualLinguagem[1]);
+            mapDeLinguagens.set(postouQualLinguagem[0], quantos);
+        } else {
+            mapDeLinguagens.set(postouQualLinguagem[0], postouQualLinguagem[1]);
+        }
+    }
+}
+;
+
+function montaGraficosTela() {
+    // Soma de todas as postagens
+    var quantasPostagens = 0;
+    var quantosComentários = 0;
+    var likes = 10;
+    var deslikes = 0;
+
+    mapDeLinguagens.forEach(function (item, key) {
+        quantasPostagens = parseInt(quantasPostagens) + parseInt(item);
+        $('.pieID--linguagens .pie-chart__legend').append("<li><em>" + key.toString() + "</em><span>" + item.toString() + "</span></li>");
+        $('.pieID--linguagens').show();
+    });
+
+    if (quantasPostagens === 0 && quantosComentários === 0) {
+        $('.pieID--micro-contribuicoes').hide();
+        var flagComPost = false;
+    } else {
+        var flagComPost = true;
+        $('.pieID--micro-contribuicoes').show();
+        $('.pieID--micro-contribuicoes .pie-chart__legend').append('<li><em>Publicações</em><span>' + quantasPostagens + '</span></li>');
+        $('.pieID--micro-contribuicoes .pie-chart__legend').append('<li><em>Comentários</em><span>0</span></li>');
+    }
+
+    if (likes === 0 && deslikes === 0) {
+        $('.pieID--reputacao').hide();
+        var flagRep = false;
+    } else {
+        var flagRep = true;
+        $('.pieID--reputacao').show();
+        $('.pieID--reputacao .pie-chart__legend').append('<li><em>Likes</em><span>' + likes + '</span></li>');
+        $('.pieID--reputacao .pie-chart__legend').append('<li><em>Deslikes</em><span>' + deslikes + '</span></li>');
+    }
+
+    if (flagRep === false && flagComPost === false && flagLing === false) {
+        $('#body-principal .wrapper1 #aviso').toggle('show');
+    } else {
+        $('#body-principal .wrapper1 #aviso').hide();
+    }
+
+}
+
+// Plugin graficos;
+
+function sliceSize(dataNum, dataTotal) {
+    return (dataNum / dataTotal) * 360;
+}
+
+function addSlice(id, sliceSize, pieElement, offset, sliceID, color) {
+    $(pieElement).append("<div class='slice " + sliceID + "'><span></span></div>");
+    var offset = offset - 1;
+    var sizeRotation = -179 + sliceSize;
+
+    $(id + " ." + sliceID).css({
+        "transform": "rotate(" + offset + "deg) translate3d(0,0,0)"
+    });
+
+    $(id + " ." + sliceID + " span").css({
+        "transform": "rotate(" + sizeRotation + "deg) translate3d(0,0,0)",
+        "background-color": color
+    });
+}
+
+function iterateSlices(id, sliceSize, pieElement, offset, dataCount, sliceCount, color) {
+    var
+        maxSize = 179,
+        sliceID = "s" + dataCount + "-" + sliceCount;
+
+    if (sliceSize <= maxSize) {
+        addSlice(id, sliceSize, pieElement, offset, sliceID, color);
+    } else {
+        addSlice(id, maxSize, pieElement, offset, sliceID, color);
+        iterateSlices(id, sliceSize - maxSize, pieElement, offset + maxSize, dataCount, sliceCount + 1, color);
+    }
+}
+
+function createPie(id) {
+    var
+        listData = [],
+        listTotal = 0,
+        offset = 0,
+        i = 0,
+        pieElement = id + " .pie-chart__pie"
+    dataElement = id + " .pie-chart__legend"
+
+    color = [
+        "cornflowerblue",
+        "olivedrab",
+        "orange",
+        "tomato",
+        "crimson",
+        "purple",
+        "turquoise",
+        "forestgreen",
+        "navy"
+    ];
+
+    color = shuffle(color);
+
+    $(dataElement + " span").each(function () {
+        listData.push(Number($(this).html()));
+    });
+
+    for (i = 0; i < listData.length; i++) {
+        listTotal += listData[i];
+    }
+
+    for (i = 0; i < listData.length; i++) {
+        var size = sliceSize(listData[i], listTotal);
+        iterateSlices(id, size, pieElement, offset, i, 0, color[i]);
+        $(dataElement + " li:nth-child(" + (i + 1) + ")").css("border-color", color[i]);
+        offset += size;
+    }
+}
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+
+    return a;
+}
+
+function createPieCharts() {
+    createPie('.pieID--micro-contribuicoes');
+    createPie('.pieID--reputacao');
+    createPie('.pieID--linguagens');
+}
