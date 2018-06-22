@@ -1,3 +1,45 @@
+var administratorId;
+var enrolledNumber;
+var mail;
+var name;
+var password;
+var period;
+var permission;
+var phone;
+var studentId;
+var teacherId;
+var typeUser;
+var user;
+var userId;
+var website;
+
+//console.log($.session._cookieCache.usuario);
+
+$(jQuery.parseJSON($.session._cookieCache.usuario)).each(function () {
+
+    administratorId = this.administratorId;
+    enrolledNumber = this.enrolledNumber;
+    mail = this.mail;
+    name = this.name;
+    password = this.password;
+    period = this.period;
+    permission = this.permission;
+    phone = this.phone;
+    studentId = this.studentId;
+    teacherId = this.teacherId;
+    typeUser = this.typeUser;
+    user = this.user;
+    userId = this.userId;
+    website = this.website;
+
+    var nomeParaDashBoard = name.split(" ");
+
+    $("#nome-usuario").text(name);
+    $(".nome-perfil-dashboard").val(nomeParaDashBoard[0] + " " + nomeParaDashBoard[1]);
+    $(".telefone-perfil-dashboard").val(phone);
+    $(".email-perfil-dashboard").val(mail);
+    $(".matricula-perfil-dashboard").val(enrolledNumber);
+});
 /*-----------------------------------------------------------------------------*/
 /* global Materialize, aluno */
 
@@ -92,7 +134,7 @@ function qualApareceNaTela(classe) {
 
 var materias = [];
 var periodoMateria = [];
-pegaMateriasComAjax($("#id-usuario").text());
+pegaMateriasComAjax();
 var lista = $(".lista-materias");
 var minhasMaterias = lista.parent();
 
@@ -131,7 +173,7 @@ function preencheAListaDeMateriasDoMenu() {
 // Aqui, quando ele faz a requisição das materias cadastradas, ele fica exibindo uma barrinha de loading.
 // Quando retorna com sucesso as materias, ele troca o loading pelas materias q o cara tem cadastradas.
 // Ou se retornar insucesso, ele mostra mensagem para cadastrar em alguma matéria.
-function pegaMateriasComAjax(idUsuario) {
+function pegaMateriasComAjax() {
     var loading = $(".lista-materias");
     var li = document.createElement("li");
     var progress = document.createElement("div");
@@ -142,36 +184,40 @@ function pegaMateriasComAjax(idUsuario) {
     li.append(progress);
 
     $.ajax({
-        url: "RecuperaMaterias",
+        url: "https://ifcommunity.herokuapp.com/matter/user?studentId=" + studentId,
         type: 'get',
-        data: {
-            idUsuario: idUsuario
-        },
         beforeSend: function () {
             loading.append(li);
         }
     })
-        .done(function (materia) {
-            loading.empty();
+            .done(function (materia) {
+//                console.log((materia));
+                loading.empty();
 
-            for (var i = 0; i < materia.length; i++) {
-                materias.push(materia[i]);
-            }
-            preencheAListaDeMateriasDoMenu();
-            checkedNasMateriasDoMenu();
+                $(jQuery.parseJSON(JSON.stringify(materia))).each(function () {
+                    var matterId = this.matterId;
+                    var matterName = this.matterName;
+                    var period = this.period;
+//                    materias.push(matterId);
+                    materias.push(matterName);
+//                    materias.push(period);
+                });
 
-        })
-        .fail(function (jqXHR, textStatus, materia) {
-            loading.empty();
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-            preencheAListaDeMateriasDoMenu();
-        });
+                preencheAListaDeMateriasDoMenu();
+                checkedNasMateriasDoMenu();
+
+            })
+            .fail(function (jqXHR, textStatus, materia) {
+                loading.empty();
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+                preencheAListaDeMateriasDoMenu();
+            });
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -354,7 +400,8 @@ function trocaMaxMinBoxPostagens() {
             $(this).find(".btns > div").removeClass("min").addClass("max");
         }
     });
-};
+}
+;
 
 /*---------------------------------------------------------*/
 //Função que pega as postagems e armazena em um array
@@ -393,60 +440,55 @@ function pegaPostagensDaMateriaSelecionada() {
     }
 }
 
-function pegaPostagens(materia, dataUltimaPostagem) {
+function pegaPostagens(materia) {
     Materialize.Toast.removeAll();
 
     $.ajax({
-        url: "RecuperaPostagens",
+        url: "https://ifcommunity.herokuapp.com/post?name=" + materia + "&lastPost=",
         type: 'get',
-        timeout: 8000,
-        data: {
-            materia: materia,
-            dataUltimaPostagem: dataUltimaPostagem
-        },
         beforeSend: function () {
             carregando();
         }
     })
-        .done(function (postagem) {
-            postagens = [];
-            $("main > section.minhas-materias").empty();
+            .done(function (postagem) {
+//                console.log(postagem);
+                postagens = [];
+                $("main > section.minhas-materias").empty();
 
-            for (var i = 0; i < postagem.length; i++) {
-                postagens.push(postagem[i]);
-            }
+                postagens = postagem;
 
-            $(".preloader-wrapper").hide();
-            montaPostagens(materia);
-        })
-        .fail(function (jqXHR, textStatus, postagem) {
-            Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
-            $(".preloader-wrapper").hide();
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-        });
+                $(".preloader-wrapper").hide();
+                montaPostagens(postagens);
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                Materialize.toast('Erro ao recuperar postagens, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 }
 
 
 /*------------------------------------------------------------------------*/
 
 //Função que prepara o texto da postagem e chama a fução que cria e adiciona na tela
-function montaPostagens(materia) {
+function montaPostagens(postagens) {
     $(".minhas-materias").empty();
     postagens.reverse();
-    for (var x = 0; x < postagens.length; x++) {
-        var textoPostagem = postagens[x]["postagens"];
-        var autorPostagem = postagens[x]["autor"];
-        var tituloPostagem = postagens[x]["titulo"];
-        var dataPostagem = postagens[x]["data"];
-        var materiaPostagem = postagens[x]["materia"];
-        var IDPostagem = postagens[x]["id"];
-        var linguagemPostagem = postagens[x]["linguagem"];
+    $(jQuery.parseJSON(JSON.stringify(postagens))).each(function (index) {
+        var x = index;
+        var textoPostagem = this.postText;
+        var autorPostagem = this.authorName;
+        var tituloPostagem = this.title;
+        var dataPostagem = this.registerDate; 
+        var materiaPostagem = this.matterName;
+        var IDPostagem = this.postId;
+        var linguagemPostagem = this.programmingLanguage;
         // console.log(linguagemPostagem);
         adicionaPostagens(textoPostagem, autorPostagem, tituloPostagem, dataPostagem, materiaPostagem, IDPostagem, x);
         collapsible();
@@ -454,7 +496,7 @@ function montaPostagens(materia) {
         } else {
             qualLinguagemParaPostagem(linguagemPostagem, IDPostagem);
         }
-    }
+    });
 
     if (postagens.length === 0) {
         $(".minhas-materias").empty();
@@ -572,30 +614,30 @@ function retornaMaterias() {
             $("#section-materias #div-loading").show();
         }
     })
-        .done(function (materiasJSON) {
-            $("#section-materias #div-loading").hide();
-            periodoMateria = [];
+            .done(function (materiasJSON) {
+                $("#section-materias #div-loading").hide();
+                periodoMateria = [];
 
-            $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
-            for (var i = 0; i < materiasJSON.length; i++) {
-                periodoMateria.push(materiasJSON[i]);
-            }
+                $(".adicionar-materias div.box-padrao .row > ul.collapsible").empty();
+                for (var i = 0; i < materiasJSON.length; i++) {
+                    periodoMateria.push(materiasJSON[i]);
+                }
 
-            gerenciarMateriasConteudo();
+                gerenciarMateriasConteudo();
 
-        })
-        .fail(function (jqXHR, textStatus, postagem) {
-            $("#section-materias #div-loading").slideUp(500);
-            Materialize.Toast.removeAll();
-            Materialize.toast('Erro ao recuperar matérias, contate um administrador!', 6500, 'red');
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-        });
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                $("#section-materias #div-loading").slideUp(500);
+                Materialize.Toast.removeAll();
+                Materialize.toast('Erro ao recuperar matérias, contate um administrador!', 6500, 'red');
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 }
 
 function gerenciarMateriasConteudo() {
@@ -749,19 +791,19 @@ function atualizaMaterias() {
                 // console.log("Atualizando as matérias");
             }
         })
-            .done(function () {
-                Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
-                //    console.log("Materias atualizadas com sucesso!");
-            })
-            .fail(function (jqXHR, textStatus, resultado) {
-                if (jqXHR["status"] === 500) {
-                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-                } else if (jqXHR["status"] === 502) {
-                    console.log("Erro 502, não foi possível estabelecer conexão!");
-                } else if (jqXHR["status"] === 404) {
-                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
-                }
-            });
+                .done(function () {
+                    Materialize.toast('Matéria atualizada com sucesso!', 2500, 'green');
+                    //    console.log("Materias atualizadas com sucesso!");
+                })
+                .fail(function (jqXHR, textStatus, resultado) {
+                    if (jqXHR["status"] === 500) {
+                        console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                    } else if (jqXHR["status"] === 502) {
+                        console.log("Erro 502, não foi possível estabelecer conexão!");
+                    } else if (jqXHR["status"] === 404) {
+                        console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                    }
+                });
     }
 }
 
@@ -773,18 +815,18 @@ function deslogar() {
         url: "Deslogar",
         type: 'get'
     })
-        .done(function () {
-            window.location.href = "index.jsp";
-        })
-        .fail(function (jqXHR, status, data) {
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-        });
+            .done(function () {
+                window.location.href = "index.jsp";
+            })
+            .fail(function (jqXHR, status, data) {
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 }
 
 //Chama a função de deslogar quando clica dentro do item
@@ -797,7 +839,7 @@ $("#li-deslogar").on('click', function (e) {
 //ATUALIZAÇÃO DE PERFIL
 $("#btn-atualizar-perfil").click(function () {
     var aluno = [];
-    atualizaPerfilAJAX($("#id-usuario").text(), $(".nome-perfil-dashboard").val(), $(".telefone-perfil-dashboard").val(), $(".email-perfil-dashboard").val());
+    atualizaPerfilAJAX(userId, $(".nome-perfil-dashboard").val(), $(".telefone-perfil-dashboard").val(), $(".email-perfil-dashboard").val());
 });
 
 //Limpa os campos do perfil
@@ -828,44 +870,59 @@ function atualizaNomePerfil() {
 function atualizaPerfilAJAX(id, nome, telefone, email) {
     Materialize.Toast.removeAll();
 
+    console.log(id);
+    console.log(nome);
+    console.log(telefone);
+    console.log(email);
+
+    telefone = telefone.split("(");
+    telefone = telefone[1].split(")");
+    telefone = telefone[0] + telefone[1];
+    telefone = telefone.split(" ");
+    telefone = telefone[0] + telefone[1];
+    telefone = telefone.split("-");
+    telefone = telefone[0] + telefone[1];
+
     $.ajax({
-        url: "AtualizaPerfil",
+        url: "https://ifcommunity.herokuapp.com/user/update",
         type: 'post',
-        timeout: 12000,
-        data: {
-            id: id,
-            nome: nome,
-            telefone: telefone,
-            email: email
-        },
+        contentType: "application/json",
+        crossDomain: true,
+        data: JSON.stringify({
+            userId: id,
+            name: nome,
+            phone: telefone,
+            mail: email
+        }),
         beforeSend: function () {
             $("#section-perfil #div-loading").slideDown(500);
         }
     })
-        .done(function (alunoJSON) {
-            $("#section-perfil #div-loading").slideUp(500);
+            .done(function (alunoJSON) {
+                $("#section-perfil #div-loading").slideUp(500);
 
-            aluno = [];
-            for (var i = 0; i < alunoJSON.length; i++) {
-                aluno.push(alunoJSON[i]);
-            }
+                aluno = [];
+                $(jQuery.parseJSON(JSON.stringify(alunoJSON))).each(function () {
+                    var name = this.name;
+                    aluno.push(name);
+                });
 
-            atualizaNomePerfil();
-            Materialize.toast('Perfil atualizado com sucesso!', 2500, 'green');
+                atualizaNomePerfil();
+                Materialize.toast('Perfil atualizado com sucesso!', 2500, 'green');
 
-        })
-        .fail(function (jqXHR, textStatus, postagem) {
-            $("#section-perfil #div-loading").slideUp(500);
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                $("#section-perfil #div-loading").slideUp(500);
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
 
-            Materialize.toast('Erro ao atualizar o perfil, contate um administrador!', 2500, 'red');
-        });
+                Materialize.toast('Erro ao atualizar o perfil, contate um administrador!', 2500, 'red');
+            });
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -900,8 +957,8 @@ function validacaoFormulario(campo, span, regex, mensagem) {
             }
 
             if (/^[a-záàâãéèêíïóôõöúçñ]{3,}[a-záàâãéèêíïóôõöúçñ\s]+$/i.test($(".nome-perfil-dashboard").val())
-                && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($(".telefone-perfil-dashboard").val())
-                && /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test($(".email-perfil-dashboard").val())) {
+                    && /^\(0?[1-9]{2}\)\s9?[0-9]{4}\-[0-9]{4}$/.test($(".telefone-perfil-dashboard").val())
+                    && /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test($(".email-perfil-dashboard").val())) {
                 $("#btn-atualizar-perfil").removeClass("disabled");
             } else {
                 $("#btn-atualizar-perfil").addClass("disabled");
@@ -988,22 +1045,22 @@ function adicionaPostagemNoBanco(assunto, linguagem, conteudoDaPostagem, qualMat
             carregando();
         }
     })
-        .done(function (postagem) {
-            pegaPostagens(qualMateria);
-            limpaCamposPostagem();
-            Materialize.toast('Postagem enviada com sucesso!', 6000, 'green');
-        })
-        .fail(function (jqXHR, textStatus, postagem) {
-            Materialize.toast('Erro ao adicionar postagem, contate um administrador!', 6000, 'red');
-            $(".preloader-wrapper").hide();
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-        });
+            .done(function (postagem) {
+                pegaPostagens(qualMateria);
+                limpaCamposPostagem();
+                Materialize.toast('Postagem enviada com sucesso!', 6000, 'green');
+            })
+            .fail(function (jqXHR, textStatus, postagem) {
+                Materialize.toast('Erro ao adicionar postagem, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1167,21 +1224,21 @@ function uploadImg(form) {
             carregando();
         }
     })
-        .done(function () {
-            $(".preloader-wrapper").hide();
-            Materialize.toast('Foto enviada com sucesso!', 6000, 'green');
-        })
-        .fail(function (jqXHR) {
-            Materialize.toast('Erro ao adicionar foto, contate um administrador!', 6000, 'red');
-            $(".preloader-wrapper").hide();
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-        });
+            .done(function () {
+                $(".preloader-wrapper").hide();
+                Materialize.toast('Foto enviada com sucesso!', 6000, 'green');
+            })
+            .fail(function (jqXHR) {
+                Materialize.toast('Erro ao adicionar foto, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 }
 
 function createCroppie(extention) {
@@ -1261,28 +1318,28 @@ function pegaIndicesAJAX(id) {
             carregando();
         }
     })
-        .done(function (resultados) {
-            $(".preloader-wrapper").hide();
-            var resultadoIndices = [];
+            .done(function (resultados) {
+                $(".preloader-wrapper").hide();
+                var resultadoIndices = [];
 
-            for (var i = 0; i < resultados.length; i++) {
-                resultadoIndices.push(resultados[i]);
-            }
+                for (var i = 0; i < resultados.length; i++) {
+                    resultadoIndices.push(resultados[i]);
+                }
 
-            preencheGraficos(resultadoIndices);
+                preencheGraficos(resultadoIndices);
 
-        })
-        .fail(function (jqXHR, textStatus, resultados) {
-            Materialize.toast('Erro ao recuperar índices, contate um administrador!', 6000, 'red');
-            $(".preloader-wrapper").hide();
-            if (jqXHR["status"] === 500) {
-                console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
-            } else if (jqXHR["status"] === 502) {
-                console.log("Erro 502, não foi possível estabelecer conexão!");
-            } else if (jqXHR["status"] === 404) {
-                console.log("Erro 404, não foi encontrado o diretório solicitado!");
-            }
-        });
+            })
+            .fail(function (jqXHR, textStatus, resultados) {
+                Materialize.toast('Erro ao recuperar índices, contate um administrador!', 6000, 'red');
+                $(".preloader-wrapper").hide();
+                if (jqXHR["status"] === 500) {
+                    console.log("Erro 500, não foi possível estabelecer conexão com o servidor!");
+                } else if (jqXHR["status"] === 502) {
+                    console.log("Erro 502, não foi possível estabelecer conexão!");
+                } else if (jqXHR["status"] === 404) {
+                    console.log("Erro 404, não foi encontrado o diretório solicitado!");
+                }
+            });
 }
 
 function preencheGraficos(resultadoIndices) {
@@ -1385,8 +1442,8 @@ function addSlice(id, sliceSize, pieElement, offset, sliceID, color) {
 
 function iterateSlices(id, sliceSize, pieElement, offset, dataCount, sliceCount, color) {
     var
-        maxSize = 179,
-        sliceID = "s" + dataCount + "-" + sliceCount;
+            maxSize = 179,
+            sliceID = "s" + dataCount + "-" + sliceCount;
 
     if (sliceSize <= maxSize) {
         addSlice(id, sliceSize, pieElement, offset, sliceID, color);
@@ -1398,11 +1455,11 @@ function iterateSlices(id, sliceSize, pieElement, offset, dataCount, sliceCount,
 
 function createPie(id) {
     var
-        listData = [],
-        listTotal = 0,
-        offset = 0,
-        i = 0,
-        pieElement = id + " .pie-chart__pie"
+            listData = [],
+            listTotal = 0,
+            offset = 0,
+            i = 0,
+            pieElement = id + " .pie-chart__pie"
     dataElement = id + " .pie-chart__legend"
 
     color = [

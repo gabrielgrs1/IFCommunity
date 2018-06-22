@@ -805,7 +805,8 @@ h4 {
     line-height: 50px;
 }
 
-#body-principal .section-title h1 {
+#body-principal > div.content-header.valign-wrapper > h1 {
+    cursor: pointer;
     margin: 0!important;
 }
 

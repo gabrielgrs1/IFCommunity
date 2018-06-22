@@ -227,7 +227,7 @@ $("#btn-login").click(function () {
     })
         .done(function (usuario) {
             $.session.set("usuario", JSON.stringify(usuario));
-            location.replace("/dashboard.jsp")
+            location.replace("dashboard.jsp")
         })
         .fail(function (jqXHR, textStatus, materia) {
             if (jqXHR["status"] === 500) {

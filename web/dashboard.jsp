@@ -1,25 +1,4 @@
-<%-- 
-    Document   : dashboard
-    Created on : 01/11/2017, 21:27:58
-    Author     : Gabriel Silva
---%>
-
-<%@page import="model.Aluno"%>
-<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    String nome = (String) request.getSession().getAttribute("nome");
-
-    if (nome == null) {
-        request.getSession().setAttribute("nome", null);
-        response.sendRedirect("index.jsp");
-    } else {
-        String[] nomeSplitado = nome.split(" ");
-        if (nomeSplitado.length > 2) {
-            nome = nomeSplitado[0] + " " + nomeSplitado[1];
-        }
-    }
-%>
 <!DOCTYPE html>
 <html>
 
@@ -43,13 +22,12 @@
         <div class="content-header valign-wrapper">
             <h1 class="section-title">IF<span class="section-title-dois">community</span></h1>
         </div>
-        <span id="id-usuario">${id}</span>
-        <span id="login-usuario">${login}</span>
         <nav class="nav-side menu">
-            <a href="#" class="nav-toggle"></a>
+            <a href="#" class="nav-toggle"></a> 
             <header class="avatar">
                 <div class="container">
-                    <img id="profileImg" class="my-image"  src=${foto} /> 
+                    <img id="profileImg" class="my-image"  src="" /> 
+                    <!--preencher foto com js-->
                 </div>
                 <form name="imageUpload" id="imageUpload">
                     <input type="file" id="fileUpload" name="fileUpload"/>
@@ -67,7 +45,7 @@
                         </label>
                     </div>
                 </form>
-                <h2 id="nome-usuario"><%out.print(nome);%></h2>
+                <h2 id="nome-usuario"></h2>
             </header>
             <div class="scroll-do-menu">
                 <ul class="para-scroll">
@@ -95,13 +73,13 @@
                             <div class="row" id="form-perfil">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">account_circle</i>
-                                    <input id="icon_prefix" type="text" class="validate nome-perfil-dashboard" value="${nome}">
+                                    <input id="icon_prefix" type="text" class="validate nome-perfil-dashboard">
                                     <label for="icon_prefix">Nome completo</label>
                                     <span id="erro-nome-perfil-dashboard" class="erro-span"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">phone</i>
-                                    <input id="icon_telephone" type="tel" class="validate telefone-perfil-dashboard" value="${telefone}">
+                                    <input id="icon_telephone" type="tel" class="validate telefone-perfil-dashboard">
                                     <label for="icon_telephone">Celular</label>
                                     <span id="erro-telefone-perfil-dashboard" class="erro-span"></span>
                                 </div>
@@ -109,13 +87,13 @@
                             <div class="row" id="form-perfil">
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">mail</i>
-                                    <input id="email" type="email" class="validate email-perfil-dashboard" value="${email}">
+                                    <input id="email" type="email" class="validate email-perfil-dashboard" value="preencher com js">
                                     <label for="email">Email</label>
                                     <span id="erro-email-perfil-dashboard" class="erro-span"></span>
                                 </div>
                                 <div class="input-field col s6">
                                     <i class="material-icons prefix">school</i>
-                                    <input disabled id="icon_prefix" type="text" class="validate" value="${matricula}">
+                                    <input disabled id="icon_prefix" type="text" class="validate matricula-perfil-dashboard" value="preencher com js">
                                     <label for="icon_prefix">Matrícula</label>
                                 </div>
                             </div>
@@ -366,6 +344,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
         <!-- Import tratamento de imagens -->
         <script src="js/croppie.js"></script>
+        <!-- Import Login JS -->
+        <script src="js/jquery.session.js"></script>
         <!-- Import Dashboard JS -->
         <script src="js/dashboard.js"></script>
     </body>
